@@ -1,0 +1,74 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Resultado Final" %} | Protege+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'atividades/css/quiz_final.css' %}">
+    
+</head>
+<body class="{% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% else %}normal normal{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
+
+
+
+    <main class="rf-main">
+        <h1 class="rf-titulo">{% trans "Parabéns!" %}</h1>
+        
+        <div class="rf-card">
+            <div class="rf-badge-escudo">🛡️</div>
+
+            <p class="rf-label">{% trans "O teu resultado foi:" %}</p>
+            
+            <div class="rf-flex-score">
+                <span class="rf-score-num">{{ pontos }}</span>
+                <span class="rf-score-total">/ {{ total }}</span>
+            </div>
+
+            <div class="rf-feedback">
+                <p>
+                    {% if pontos == total %}
+                        {% trans "És um mestre da Cibersegurança! Estás totalmente protegido." %} 🛡️
+                    {% elif pontos >= 4 %}
+                        {% trans "Muito bem! Tens bons conhecimentos de segurança." %} 👍
+                    {% else %}
+                        {% trans "Bom esforço! Continua a aprender para ficares mais seguro." %} 🔎
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        <div class="rf-btn-group">
+            <a href="{% url 'atividades:quiz' %}" class="rf-btn-repeat">
+                {% trans "Repetir Quiz" %}
+            </a>
+            <a href="{% url 'atividades:home2' %}" class="rf-link-home">
+                {% trans "Voltar ao Início" %}
+            </a>
+        </div>
+    </main>
+
+    {% if subiu %}
+    <div class="overlay">
+        <div class="popup-card">
+            <div class="popup-icon">
+                {% trans "Parabéns!" %}
+            </div>
+            
+            <h2 class="popup-title">
+                {% trans "Subiste para o proximo nivel de dificuldade" %}
+            </h2>
+
+            <button onclick = "fecharpopup()" class = "btn-continue">
+                {% trans "Fechar" %}
+            </button>
+        </div>
+    </div>
+    {% endif %}
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+
+</body>
+</html>
