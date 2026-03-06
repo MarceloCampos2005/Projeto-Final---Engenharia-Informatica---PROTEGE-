@@ -9,55 +9,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'atividades/css/historico.css' %}">
 </head>
-<body class="hist-view {% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% else %}normal normal{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
+<body data-authenticated="{{ user.is_authenticated|lower }}">
 
-    <header class="hist-header">
-        <a href="javascript:history.go(-1)" class="btn-voltar">
-            <span>← </span> {% trans "Voltar" %}
-        </a>
-        <h1 class="hist-titulo">{% trans "Minhas Conquistas" %}</h1>
-    </header>
+    <div id="content-wrapper" class="{% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% else %}normal normal{% endif %}">
 
-    <main class="hist-container">
-        {% if resultados %}
-            <div class="hist-grid">
-                {% for res in resultados %}
-                <div class="hist-card">
-                    <div class="hist-card-topo">
-                        <span class="hist-tag">Nível {{ res.nivel }}</span>
-                        <span class="hist-data">{{ res.data_conclusao|date:"d/m/Y" }}</span>
-                    </div>
-                    
-                    <div class="hist-stats">
-                        <div class="hist-stat-item">
-                            <span class="hist-stat-val">{{ res.pontuacao }}/{{ res.total_perguntas }}</span>
-                            <span class="hist-stat-label">{% trans "Acertos" %}</span>
+        
+        <header class="hist-header">
+            <a href="{% url 'atividades:home2' %}" class="btn-voltar">
+                <span>← </span> {% trans "Voltar" %}
+            </a>
+            <h1 class="hist-titulo">{% trans "Minhas Conquistas" %}</h1>
+        </header>
+
+        <main class="hist-container">
+            {% if resultados %}
+                <div class="hist-grid">
+                    {% for res in resultados %}
+                    <div class="hist-card">
+                        <div class="hist-card-topo">
+                            <span class="hist-tag">Nível {{ res.nivel }}</span>
+                            <span class="hist-data">{{ res.data_conclusao|date:"d/m/Y" }}</span>
                         </div>
-                        <div class="hist-stat-item">
-                            <div class="hist-circulo-progresso" style="--percent: {{ res.percentagem }}">
-                                <span>{{ res.percentagem|floatformat:0 }}%</span>
+                        
+                        <div class="hist-stats">
+                            <div class="hist-stat-item">
+                                <span class="hist-stat-val">{{ res.pontuacao }}/{{ res.total_perguntas }}</span>
+                                <span class="hist-stat-label">{% trans "Acertos" %}</span>
+                            </div>
+                            <div class="hist-stat-item">
+                                <div class="hist-circulo-progresso" style="--percent: {{ res.percentagem }}">
+                                    <span>{{ res.percentagem|floatformat:0 }}%</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="hist-footer">
-                        <p class="hist-feedback">
-                            <a href="{% url 'atividades:detalhe_historico' res.id %}" class="hist-feedback">
-                            {% trans "Rever Questões" %}
+                        <div class="hist-footer">
+                            <a href="{% url 'atividades:detalhe_historico' res.id %}" class="btn-detalhes">
+                                {% trans "Rever Questões" %}
                             </a>
-                        </p>
-                        
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div class="hist-vazio">
-                <p>{% trans "Ainda não completaste nenhum quiz. Começa agora!" %}</p>
-                <a href="{% url 'atividades:quiz' %}" class="btn-jogar">{% trans "Jogar Quiz" %}</a>
-            </div>
-        {% endif %}
-    </main>
+            {% else %}
+                <div class="hist-vazio">
+                    <p>{% trans "Ainda não completaste nenhum quiz. Começa agora!" %}</p>
+                    <a href="{% url 'atividades:quiz' %}" class="btn-jogar">{% trans "Jogar Quiz" %}</a>
+                </div>
+            {% endif %}
+        </main>
+    </div>
 
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>

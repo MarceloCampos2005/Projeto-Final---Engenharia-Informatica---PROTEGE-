@@ -5,142 +5,83 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Protege+ | {% trans "Documentação" %}</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&family=Instrument+Serif&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&family=Instrument+Serif&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'atividades/css/home2.css' %}" />
     <link rel="stylesheet" href="{% static 'atividades/css/sabermais.css' %}" />
   </head>
-  <body
-    class="doc-page {% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}"
-  >
-    <header class="header-main-dashboard">
-      <div class="header-pill-container">
-        <div class="header-pill-dashboard">
-          <a href="{% url 'atividades:home2' %}" class="brand">
-            <div class="brand-icon">🛡️</div>
-            <span class="brand-name">Protege+</span>
-          </a>
+  
+  <body class="doc-page" data-authenticated="{{ user.is_authenticated|lower }}">
+    
+    <div id="content-wrapper" class="{% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}">
+      
+      <header class="header-main-dashboard">
+        <div class="header-pill-container">
+          <div class="header-pill-dashboard">
+            <a href="{% url 'atividades:home2' %}" class="brand">
+              <div class="brand-icon">🛡️</div>
+              <span class="brand-name">Protege+</span>
+            </a>
 
-          <nav class="header-nav">
-            <div class="lang-pill">
-              <a
-                href="{% url 'atividades:mudar_lingua' 'pt' %}"
-                class="lang-btn"
-              >
-                <img src="{% static 'users/images/portugal.png' %}" alt="PT" />
-                PT
-              </a>
-              <span class="lang-divider">|</span>
-              <a
-                href="{% url 'atividades:mudar_lingua' 'en' %}"
-                class="lang-btn"
-              >
-                <img
-                  src="{% static 'users/images/inglaterra.png' %}"
-                  alt="EN"
-                />
-                EN
-              </a>
-            </div>
+            <nav class="header-nav">
+              <div class="lang-pill">
+                <a href="{% url 'atividades:mudar_lingua' 'pt' %}" class="lang-btn">
+                  <img src="{% static 'users/images/portugal.png' %}" alt="PT" /> PT
+                </a>
+                <span class="lang-divider">|</span>
+                <a href="{% url 'atividades:mudar_lingua' 'en' %}" class="lang-btn">
+                  <img src="{% static 'users/images/inglaterra.png' %}" alt="EN" /> EN
+                </a>
+              </div>
 
-            <a href="{% url 'sobrenos' %}" class="nav-link-text"
-              >{% trans "Sobre Nós" %}</a
-            >
+              <a href="{% url 'sobrenos' %}" class="nav-link-text">{% trans "Sobre Nós" %}</a>
 
-            <div class="auth-buttons">
-              <a
-                href="{% url 'atividades:sabermais' %}"
-                class="btn-dashboard active-doc"
-                >{% trans "Quero Aprender!" %}</a
-              >
-              <a href="{% url 'atividades:quiz' %}" class="btn-dashboard"
-                >{% trans "QUIZ" %}</a
-              >
-              <a href="{% url 'atividades:simulador' %}" class="btn-dashboard"
-                >{% trans "SIMULADOR" %}</a
-              >
-            </div>
-          </nav>
+              <div class="auth-buttons">
+                <a href="{% url 'atividades:sabermais' %}" class="btn-dashboard active-doc">{% trans "Quero Aprender!" %}</a>
+                <a href="{% url 'atividades:quiz' %}" class="btn-dashboard">{% trans "QUIZ" %}</a>
+                <a href="{% url 'atividades:simulador' %}" class="btn-dashboard">{% trans "SIMULADOR" %}</a>
+              </div>
+            </nav>
+          </div>
+
+          <div class="profile-area">
+            <a href="{% url 'perfil' %}" class="btn-avatar-trigger">
+              <img src="{% static 'atividades/images/avatar_perfil.png' %}" alt="Perfil" />
+            </a>
+          </div>
         </div>
+      </header>
 
-        <div class="profile-area">
-          <a href="{% url 'perfil' %}" class="btn-avatar-trigger">
-            <img
-              src="{% static 'atividades/images/avatar_perfil.png' %}"
-              alt="Perfil"
-            />
-          </a>
-        </div>
-      </div>
-    </header>
+      <main class="doc-container">
+        <aside class="doc-sidebar">
+          <h3>{% trans "Básico (Nível 1)" %}</h3>
+          <ul>
+            <li><a href="javascript:void(0)" onclick="mostrarTema('phishing')">📩 Phishing</a></li>
+            <li><a href="javascript:void(0)" onclick="mostrarTema('senhas')">🔑 Senhas</a></li>
+            <li><a href="javascript:void(0)" onclick="mostrarTema('mfa')">📱 Autenticação</a></li>
+            <li><a href="javascript:void(0)" onclick="mostrarTema('privacidade')">📍 Privacidade</a></li>
+            <li><a href="javascript:void(0)" onclick="mostrarTema('dispositivos')">💻 Dispositivos</a></li>
+          </ul>
+          <h3>{% trans "Avançado (Nível 2)" %}</h3>
+          <ul>
+            <li><a href="javascript:void(0)" onclick="mostrarTema('malware')">🦠 Malware</a></li>
+            <li><a href="javascript:void(0)" onclick="mostrarTema('redes')">🌐 Redes & Cifra</a></li>
+            <li><a href="javascript:void(0)" onclick="mostrarTema('tecnico')">🛠️ Conceitos TI</a></li>
+          </ul>
+        </aside>
 
-    <main class="doc-container">
-      <aside class="doc-sidebar">
-        <h3>{% trans "Básico (Nível 1)" %}</h3>
-        <ul>
-          <li>
-            <a href="javascript:void(0)" onclick="mostrarTema('phishing')"
-              >📩 Phishing</a
-            >
-          </li>
-          <li>
-            <a href="javascript:void(0)" onclick="mostrarTema('senhas')"
-              >🔑 Senhas</a
-            >
-          </li>
-          <li>
-            <a href="javascript:void(0)" onclick="mostrarTema('mfa')"
-              >📱 Autenticação</a
-            >
-          </li>
-          <li>
-            <a href="javascript:void(0)" onclick="mostrarTema('privacidade')"
-              >📍 Privacidade</a
-            >
-          </li>
-          <li>
-            <a href="javascript:void(0)" onclick="mostrarTema('dispositivos')"
-              >💻 Dispositivos</a
-            >
-          </li>
-        </ul>
-        <h3>{% trans "Avançado (Nível 2)" %}</h3>
-        <ul>
-          <li>
-            <a href="javascript:void(0)" onclick="mostrarTema('malware')"
-              >🦠 Malware</a
-            >
-          </li>
-          <li>
-            <a href="javascript:void(0)" onclick="mostrarTema('redes')"
-              >🌐 Redes & Cifra</a
-            >
-          </li>
-          <li>
-            <a href="javascript:void(0)" onclick="mostrarTema('tecnico')"
-              >🛠️ Conceitos TI</a
-            >
-          </li>
-        </ul>
-      </aside>
+        <section class="doc-content">
+          <header class="doc-header">
+            <h1 class="serif-title">{% trans "Centro de Conhecimento" %}</h1>
+          </header>
+          <div id="conteudo-dinamico"></div>
+        </section>
+      </main>
 
-      <section class="doc-content">
-        <header class="doc-header">
-          <h1 class="serif-title">{% trans "Centro de Conhecimento" %}</h1>
-        </header>
-
-        <div id="conteudo-dinamico"></div>
-      </section>
-    </main>
-    <footer class="footer-protege">
-      <p>
-        &copy; 2024 Protege+ - {% trans "A tua segurança em primeiro lugar." %}
-      </p>
-    </footer>
-
-    <script src="{% url 'javascript-catalog' %}"></script>
+      <footer class="footer-protege">
+        <p>&copy; 2024 Protege+ - {% trans "A tua segurança em primeiro lugar." %}</p>
+      </footer>
+      
+    </div> <script src="{% url 'javascript-catalog' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
   </body>
 </html>

@@ -11,6 +11,7 @@ from .models import QuizPergunta, OpcaoPergunta, ResultadoQuiz, HistoricoQuiz
 from django.utils import translation
 from django.conf import settings
 import json
+from django_otp import user_has_device
 
 #verifica se o utilizador tem login feito, se tiver vai ao perfil dele ver qual a lingua guardada e ativa, senao tenta ler um cookie da sessao
 #o translation.activate(lang) faz com que o django use o ficheiro .po para a lingua
@@ -21,7 +22,11 @@ def home2(request):
     else:
         lang = request.session.get('django_language', 'pt') 
     translation.activate(lang)
-    return render(request, 'atividades/home2.html')
+
+    mfa_ativo = False
+    if request.user.is_authenticated:
+        mfa_ativo = user_has_device(request.user)
+    return render(request, 'atividades/home2.html',{'mfa_ativo': mfa_ativo})
 
 
 @login_required

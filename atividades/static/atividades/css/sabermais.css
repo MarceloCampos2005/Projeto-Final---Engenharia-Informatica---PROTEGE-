@@ -43,11 +43,12 @@
     content: "";
     margin-top: 10px;
 }
+
 .doc-container {
-    margin-top: 140px !important; 
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 30px;
+    display: block;
+    max-width: 1200px;
+    margin: 140px auto 0 auto; 
+    padding: 20px;
 }
 
 
@@ -58,10 +59,9 @@
 }
 
 body.doc-page {
-    background-color: var(--bg-verde-claro);
-    font-family: 'Inter', sans-serif;
     margin: 0;
-    padding-top: 130px; 
+    padding: 0; 
+    background-color: var(--d3-fundo-base); 
 }
 
 
@@ -69,34 +69,33 @@ body.doc-page {
     font-family: 'Instrument Serif', serif;
     font-size: 3rem;
     color: var(--verde-escuro);
-    margin-bottom: 10px;
+    margin: 0; 
+    line-height: 1;
 }
-
 
 .active-doc {
     background: var(--verde-escuro) !important;
 }
 
 
-.doc-container {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+.doc-content {
+    margin-left: 320px; 
+    padding-top: 0;     
 }
 
 .doc-sidebar {
+    position: fixed;
+    top: 160px; 
+    width: 280px;
     background: var(--branco-card);
     backdrop-filter: blur(10px);
     padding: 25px;
     border-radius: 30px;
-    height: fit-content;
     border: 1px solid rgba(255,255,255,0.4);
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 140px; 
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    z-index: 100;
 }
 
 .doc-sidebar h3 {
@@ -148,4 +147,42 @@ body.doc-page {
     color: var(--verde-escuro);
     font-weight: 800;
     opacity: 0.7;
+}
+.doc-header {
+    margin-top: 20px; 
+}
+
+
+body:has(#content-wrapper.tritanopia) { 
+    background-color: #b8c7b5 !important; 
+}
+
+body:has(#content-wrapper.protanopia) { 
+    background-color: #9dbbd1 !important; 
+}
+
+body:has(#content-wrapper.deuteranopia) { 
+    background-color: #b1c2d1 !important; 
+}
+
+body:has(#content-wrapper.achromatopsia) { 
+    background-color: #cccccc !important; 
+}
+
+
+body:has(#content-wrapper.modo-escuro) { 
+    background-color: #121212 !important; 
+}
+
+
+body:has(#content-wrapper.contraste-invertido) { 
+    background-color: #000000 !important; 
+}
+
+#content-wrapper {
+    min-height: 100vh;
+    width: 100%;
+    padding-top: 130px; 
+    display: flex;
+    flex-direction: column;
 }
