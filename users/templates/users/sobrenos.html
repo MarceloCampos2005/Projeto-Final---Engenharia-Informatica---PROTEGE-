@@ -13,7 +13,7 @@
 
     <header class="header-main">
         <div class="header-pill">
-            <a href="{% url 'home' %}" class="brand">
+            <a href="" class="brand">
                 <div class="brand-icon">🛡️</div>
                 <span class="brand-name">Protege+</span>
             </a>
@@ -22,7 +22,7 @@
                 <div class="auth-buttons">
                     <a href="{% url 'login' %}" class="btn-registar">{% trans "Entrar" %}</a>
                     <a href="{% url 'registar' %}" class="btn-registar">{% trans "Registar" %}</a>
-                    <a href="javascript:history.go(-1)«" class="nav-link btn-voltar">← Voltar</a>
+                    <a href="{% url 'home' %}" class="nav-link btn-voltar">← Voltar</a>
                 </div>
                 {% else %}
                 <a href={% url 'atividades:home2' %} class="nav-link btn-voltar">← Voltar</a>

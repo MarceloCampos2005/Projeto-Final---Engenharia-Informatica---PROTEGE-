@@ -8,160 +8,159 @@
     <title>Protege+ | {% trans "Cibersegurança" %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,700;1,900&family=Instrument+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'users/css/home.css' %}">
-    
 </head>
-<body class="bg-home {% if user.is_authenticated %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
 
-    <header class="header-main">
-        <div class="header-pill">
-            <div class="header-left">
-                <a href="{% url 'home' %}" class="brand">
-                    <div class="brand-icon">🛡️</div>
-                    <span class="brand-name">Protege+</span>
-                </a>
-            </div>
+<body class="bg-home" data-authenticated="{{ user.is_authenticated|lower }}">
 
-            <nav class="header-nav">
-                <div class="lang-pill">
-                    <button class="lang-btn active">
-                        <img src="{% static 'users/images/portugal.png' %}" alt="PT"> PT
-                    </button>
-                    <span class="lang-divider">|</span>
-                    <button class="lang-btn">
-                        <img src="{% static 'users/images/inglaterra.png' %}" alt="EN"> EN
-                    </button>
-                </div>
-                
-                <a href="{% url 'sobrenos' %}" class="nav-link-text">{% trans "Sobre Nós" %}</a>
-                
-                <div class="auth-buttons">
-                    
-                    <a href="{% url 'login' %}" class="btn-registar">{% trans "ENTRAR" %}</a>
-                    <a href="{% url 'registar' %}" class="btn-registar">{% trans "REGISTAR" %}</a>
-                    
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <main class="hero">
-        <div class="hero-container">
-            <div class="hero-text">
-                <h1 class="serif-title">{% trans "APRENDE A" %} <br> {% trans "PROTEGER-TE." %}</h1>
-                <p class="hero-subtitle">{% trans "Continua a aprender e melhorar as tuas habilidades de cibersegurança." %}</p>
-                <a href="{% url 'atividades:guia_emergencia' %}" class="btn-cta">{% trans "COMEÇAR AGORA" %}</a>
-            </div>
-
-            <div class="hero-image-box">
-                <div class="image-frame">
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800" alt="Cibersegurança">
-                </div>
-            </div>
-        </div>
-    </main>
-    <div class="section-divider">
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-    </svg>
-    </div>
-    <section class="home-info-section">
-    <div class="container">
-        <h2 class="serif-title" style="text-align: center; margin-bottom: 4rem; color: var(--dark-green); font-size: 4rem;">
-            Ameaças Comuns
-        </h2>
+    <div id="content-wrapper" class="{% if user.is_authenticated %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}">
         
-        <div class="threats-glitch-grid">
-            <div class="threat-item">
-                <div class="threat-alert-tag">❗ ALERTA SISTEMA</div>
-                <div class="threat-content">
-                    <h3 class="threat-title">Phishing</h3>
-                    <p>Emails e mensagens falsas desenhadas para roubar a tua identidade digital.</p>
+        <header class="header-main">
+            <div class="header-pill">
+                <div class="header-left">
+                    <a href="{% url 'home' %}" class="brand">
+                        <div class="brand-icon">🛡️</div>
+                        <span class="brand-name">Protege+</span>
+                    </a>
                 </div>
-                <div class="threat-status">ESTADO: DETETADO</div>
-            </div>
 
-            <div class="threat-item">
-                <div class="threat-alert-tag">❗ CRÍTICO</div>
-                <div class="threat-content">
-                    <h3 class="threat-title">Dados Bancários</h3>
-                    <p>O roubo de cartões e acessos bancários através de clones perfeitos de sites.</p>
-                </div>
-                <div class="threat-status">ALVO: FINANCEIRO</div>
+                <nav class="header-nav">
+                    <div class="lang-pill">
+                        <button class="lang-btn active">
+                            <img src="{% static 'users/images/portugal.png' %}" alt="PT"> PT
+                        </button>
+                        <span class="lang-divider">|</span>
+                        <button class="lang-btn">
+                            <img src="{% static 'users/images/inglaterra.png' %}" alt="EN"> EN
+                        </button>
+                    </div>
+                    
+                    <a href="{% url 'sobrenos' %}" class="nav-link-text">{% trans "Sobre Nós" %}</a>
+                    
+                    <div class="auth-buttons">
+                        <a href="{% url 'login' %}" class="btn-registar">{% trans "ENTRAR" %}</a>
+                        <a href="{% url 'registar' %}" class="btn-registar">{% trans "REGISTAR" %}</a>
+                    </div>
+                </nav>
             </div>
+        </header>
 
-            <div class="threat-item">
-                <div class="threat-alert-tag">❗ VULNERÁVEL</div>
-                <div class="threat-content">
-                    <h3 class="threat-title">Engenharia Social</h3>
-                    <p>A arte de enganar pessoas para que entreguem segredos por livre vontade.</p>
+        <main class="hero">
+            <div class="hero-container">
+                <div class="hero-text">
+                    <h1 class="serif-title">{% trans "APRENDE A" %} <br> {% trans "PROTEGER-TE." %}</h1>
+                    <p class="hero-subtitle">{% trans "Continua a aprender e melhorar as tuas habilidades de cibersegurança." %}</p>
+                    <a href="{% url 'atividades:guia_emergencia' %}" class="btn-cta">{% trans "COMEÇAR AGORA" %}</a>
                 </div>
-                <div class="threat-status">MÉTODO: PSICOLÓGICO</div>
+
+                <div class="hero-image-box">
+                    <div class="image-frame">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800" alt="Cibersegurança">
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="section-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+
+        <section class="home-info-section">
+            <div class="container">
+                <h2 class="serif-title" style="text-align: center; margin-bottom: 4rem; color: var(--dark-green); font-size: 4rem;">
+                    {% trans "Ameaças Comuns" %}
+                </h2>
+                
+                <div class="threats-glitch-grid">
+                    <div class="threat-item">
+                        <div class="threat-alert-tag">❗ {% trans "ALERTA SISTEMA" %}</div>
+                        <div class="threat-content">
+                            <h3 class="threat-title">Phishing</h3>
+                            <p>{% trans "Emails e mensagens falsas desenhadas para roubar a tua identidade digital." %}</p>
+                        </div>
+                        <div class="threat-status">{% trans "ESTADO: DETETADO" %}</div>
+                    </div>
+
+                    <div class="threat-item">
+                        <div class="threat-alert-tag">❗ {% trans "CRÍTICO" %}</div>
+                        <div class="threat-content">
+                            <h3 class="threat-title">{% trans "Dados Bancários" %}</h3>
+                            <p>{% trans "O roubo de cartões e acessos bancários através de clones perfeitos de sites." %}</p>
+                        </div>
+                        <div class="threat-status">{% trans "ALVO: FINANCEIRO" %}</div>
+                    </div>
+
+                    <div class="threat-item">
+                        <div class="threat-alert-tag">❗ {% trans "VULNERÁVEL" %}</div>
+                        <div class="threat-content">
+                            <h3 class="threat-title">{% trans "Engenharia Social" %}</h3>
+                            <p>{% trans "A arte de enganar pessoas para que entreguem segredos por livre vontade." %}</p>
+                        </div>
+                        <div class="threat-status">{% trans "MÉTODO: PSICOLÓGICO" %}</div>
+                    </div>
+                </div>
+
+                <div class="solution-banner">
+                    <h2 class="serif-title" style="color: var(--white); font-size: 3.5rem; margin-bottom: 3rem; text-align: center;">
+                        {% trans "A nossa solução" %}
+                    </h2>
+                    
+                    <div class="solution-grid">
+                        <div class="sol-card">
+                            <div class="sol-icon">🎯</div>
+                            <h3>{% trans "Quizzes" %}</h3>
+                            <p>{% trans "Questões interativas para testares o teu nível de conhecimento atual." %}</p>
+                        </div>
+                        <div class="sol-card">
+                            <div class="sol-icon">🛡️</div>
+                            <h3>{% trans "Simuladores" %}</h3>
+                            <p>{% trans "Cenários reais de phishing para treinares o teu olho clínico sem riscos." %}</p>
+                        </div>
+                        <div class="sol-card">
+                            <div class="sol-icon">🚀</div>
+                            <h3>{% trans "Blindagem" %}</h3>
+                            <p>{% trans "Melhoria contínua das tuas defesas digitais contra novos ataques." %}</p>
+                        </div>
+                    </div>
+
+                    <p class="solution-footer-text">
+                        {% blocktrans %}O <strong>Protege+</strong> prepara-te para identificar ameaças antes que elas se tornem um problema real.{% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div> <footer class="footer-fixed">
+        <div id="daltonismo-menu" class="accessibility-menu hidden">
+            <h3 class="menu-title">{% trans "Acessibilidade" %}</h3>
+            <div class="menu-list">
+                <button onclick="setDaltonismo('normal')" class="menu-btn">{% trans "Padrão" %}</button>
+                <button onclick="setDaltonismo('protanopia')" class="menu-btn">{% trans "Protanopia" %}</button>
+                <button onclick="setDaltonismo('deuteranopia')" class="menu-btn">{% trans "Deuteranopia" %}</button>
+                <button onclick="setDaltonismo('tritanopia')" class="menu-btn">{% trans "Tritanopia" %}</button>
+                <button onclick="setDaltonismo('achromatopsia')" class="menu-btn">{% trans "P&B" %}</button>
             </div>
         </div>
 
-        <div class="solution-banner">
-            <h2 class="serif-title" style="color: var(--white); font-size: 3.5rem; margin-bottom: 3rem; text-align: center;">
-                A nossa solução
-            </h2>
-            
-            <div class="solution-grid">
-                <div class="sol-card">
-                    <div class="sol-icon">🎯</div>
-                    <h3>Quizzes</h3>
-                    <p>Questões interativas para testares o teu nível de conhecimento atual.</p>
-                </div>
-                <div class="sol-card">
-                    <div class="sol-icon">🛡️</div>
-                    <h3>Simuladores</h3>
-                    <p>Cenários reais de phishing para treinares o teu olho clínico sem riscos.</p>
-                </div>
-                <div class="sol-card">
-                    <div class="sol-icon">🚀</div>
-                    <h3>Blindagem</h3>
-                    <p>Melhoria contínua das tuas defesas digitais contra novos ataques.</p>
-                </div>
+        <div id="contraste-menu" class="accessibility-menu hidden">
+            <h3 class="menu-title">{% trans "Contraste" %}</h3>
+            <div class="menu-list">
+                <button onclick="setContraste('normal')" class="menu-btn">{% trans "Padrão" %}</button>
+                <button onclick="setContraste('alto-contraste')" class="menu-btn">{% trans "Alto Contraste" %}</button>
+                <button onclick="setContraste('contraste-invertido')" class="menu-btn">{% trans "Invertido" %}</button>
+                <button onclick="setContraste('modo-escuro')" class="menu-btn">{% trans "Modo Escuro" %}</button>
             </div>
-
-            <p class="solution-footer-text">
-                O <strong>Protege+</strong> prepara-te para identificar ameaças antes que elas se tornem um problema real.
-            </p>
         </div>
-    </div>
-    </section>
 
-    <footer class="footer-fixed">
-    <div id="daltonismo-menu" class="accessibility-menu hidden">
-        <h3 class="menu-title">Acessibilidade</h3>
-        <div class="menu-list">
-            <button onclick="setDaltonismo('normal')" class="menu-btn">Padrão</button>
-            <button onclick="setDaltonismo('protanopia')" class="menu-btn">Protanopia</button>
-            <button onclick="setDaltonismo('deuteranopia')" class="menu-btn">Deuteranopia</button>
-            <button onclick="setDaltonismo('tritanopia')" class="menu-btn">Tritanopia</button>
-            <button onclick="setDaltonismo('achromatopsia')" class="menu-btn">P&B</button>
+        <div class="accessibility-pill">
+            <span class="help-label">{% trans "PRECISAS DE AJUDA?" %}</span>
+            <button onclick="toggleDaltonismoMenu()" class="access-icon">
+                <img src="{% static 'users/images/daltonismo.png' %}" style="width:22px;" alt="Daltonismo">
+            </button>
+            <button onclick="toggleContrasteMenu()" class="access-icon">
+                <img src="{% static 'users/images/contraste.png' %}" style="width:22px;" alt="Contraste">
+            </button>
         </div>
-    </div>
-
-    <div id="contraste-menu" class="accessibility-menu hidden">
-        <h3 class="menu-title">Contraste</h3>
-        <div class="menu-list">
-            <button onclick="setContraste('normal')" class="menu-btn">Padrão</button>
-            <button onclick="setContraste('alto-contraste')" class="menu-btn">Alto Contraste</button>
-            <button onclick="setContraste('contraste-invertido')" class="menu-btn">Invertido</button>
-            <button onclick="setContraste('modo-escuro')" class="menu-btn">Modo Escuro</button>
-        </div>
-    </div>
-
-    <div class="accessibility-pill">
-
-        <span class="help-label">PRECISAS DE AJUDA?</span>
-        <button onclick="toggleDaltonismoMenu()" class="access-icon">
-            <img src="{% static 'users/images/daltonismo.png' %}" style="width:22px;">
-        </button>
-        <button onclick="toggleContrasteMenu()" class="access-icon">
-            <img src="{% static 'users/images/contraste.png' %}" style="width:22px;">
-        </button>
-        
-    </div>
     </footer>
 
     <script src="{% static 'js/scripts.js' %}"></script>

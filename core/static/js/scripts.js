@@ -1,11 +1,14 @@
 //Nesta funcao ao fazer o logout os filtros sao atualizados para o defaul para o proximo utilizador nao entrar com os filtros do outro
 function fazerLogout(logoutUrl) {
-    // Limpar localStorage
+    //Limpar localStorage
     localStorage.removeItem('modoDaltonismo');
     localStorage.removeItem('modoContraste');
     
-    document.body.classList.remove('protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia');
-    document.body.classList.remove('alto-contraste', 'contraste-invertido', 'modo-escuro');
+
+    const wrapper = document.getElementById('content-wrapper');
+    const target = wrapper || document.body; 
+    target.classList.remove('protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia');
+    target.classList.remove('alto-contraste', 'contraste-invertido', 'modo-escuro');
     
     console.log('✓ Filtros limpos. Redirecionando...');
     
@@ -13,12 +16,11 @@ function fazerLogout(logoutUrl) {
         logoutUrl = '/logout/';
     }
     
-    // Redireciona para logout
+    //Redireciona
     setTimeout(() => {
         window.location.href = logoutUrl;
     }, 100);
 }
-
 
 
 
@@ -153,11 +155,14 @@ function getCookie(name) {
 //aplica as mudancas do visual em tempo real
 //depois de carregar no filtro de datonismo ou contraste, vai ser verificado se ta com sessao iniciada, se tiver o filtro e guardado na bd, senao e guardado na localstorage
 function setDaltonismo(tipo) {
-    document.body.classList.remove('protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia');
-    if (tipo !== 'normal') document.body.classList.add(tipo);
+    const wrapper = document.getElementById('content-wrapper');
+    if (!wrapper) return;
+
+    wrapper.classList.remove('protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia');
+    
+    if (tipo !== 'normal') wrapper.classList.add(tipo);
     
     const isAuthenticated = document.body.dataset.authenticated === 'true';
-    
     if (isAuthenticated) {
         guardarFiltroNoServidor('daltonismo', tipo);
     } else {
@@ -165,14 +170,32 @@ function setDaltonismo(tipo) {
     }
     
     document.getElementById('daltonismo-menu').classList.add('hidden');
+    wrapper.style.display = 'none';
+    wrapper.offsetHeight; 
+    wrapper.style.display = 'flex';
 }
 
 function setContraste(tipo) {
-    document.body.classList.remove('alto-contraste', 'contraste-invertido', 'modo-escuro');
-    if (tipo !== 'normal') document.body.classList.add(tipo);
-    
-    const isAuthenticated = document.body.dataset.authenticated === 'true';
+    const wrapper = document.getElementById('content-wrapper');
+    if (!wrapper) return;
 
+    wrapper.classList.remove('alto-contraste', 'contraste-invertido', 'modo-escuro');
+    
+    if (tipo !== 'normal') {
+        wrapper.classList.add(tipo);
+        
+        if (tipo === 'modo-escuro') {
+            document.body.style.backgroundColor = "#121212";
+        } else if (tipo === 'contraste-invertido') {
+            document.body.style.backgroundColor = "#000000";
+        } else {
+            document.body.style.backgroundColor = "#C2E0B1";
+        }
+    } else {
+        document.body.style.backgroundColor = "#C2E0B1";
+    }
+
+    const isAuthenticated = document.body.dataset.authenticated === 'true';
     if (isAuthenticated) {
         guardarFiltroNoServidor('contraste', tipo);
     } else {
@@ -180,44 +203,55 @@ function setContraste(tipo) {
     }
     
     document.getElementById('contraste-menu').classList.add('hidden');
+    wrapper.style.display = 'none';
+    wrapper.offsetHeight; 
+    wrapper.style.display = 'flex';
 }
-
-
-
-
 //aqui vamos ver se o utilizador ta autenticado, se tiver as preferencias dele sao aplicadas, senao vai a localstorage ver
 document.addEventListener('DOMContentLoaded', () => {
-    //ver se ta autenticado
     const isAuthenticated = document.body.dataset.authenticated === 'true';
-    
+    const wrapper = document.getElementById('content-wrapper'); 
+
+    if (!wrapper) return;
+
     if (isAuthenticated) {
+       //limpa a Localstorage
         localStorage.removeItem('modoDaltonismo');
         localStorage.removeItem('modoContraste');
+
+        if (wrapper.classList.contains('modo-escuro')) {
+            document.body.style.backgroundColor = "#121212";
+        } else if (wrapper.classList.contains('contraste-invertido')) {
+            document.body.style.backgroundColor = "#000000";
+        }
     } else {
+        
         const daltSalvo = localStorage.getItem('modoDaltonismo');
         if (daltSalvo && daltSalvo !== 'normal') {
-            document.body.classList.add(daltSalvo);
+            wrapper.classList.add(daltSalvo);
         }
+
         const contSalvo = localStorage.getItem('modoContraste');
         if (contSalvo && contSalvo !== 'normal') {
-            document.body.classList.add(contSalvo);
+            wrapper.classList.add(contSalvo);
+          
+            if (contSalvo === 'modo-escuro') {
+                document.body.style.backgroundColor = "#121212";
+            } else if (contSalvo === 'contraste-invertido') {
+                document.body.style.backgroundColor = "#000000";
+            }
         }
     }
 
-    //liga o botao do avatar ao meno do perfil
+    // Lógica do Avatar
     const avatarBtn = document.getElementById('btn-avatar-trigger');
     if (avatarBtn) {
-        console.log('avatarBtn found, attaching listener');
         avatarBtn.addEventListener('click', function(e) {
             e.stopPropagation();
-            console.log('avatarBtn clicked');
             PerfilMenu();
         });
-    } else {
-        console.log('avatarBtn NOT found on DOMContentLoaded');
     }
 });
-
 //instrucoes que aparecem quando o utilizador precisa de ver os passos para o ajudar me caso de emergencia
 const guias = {
             phishing: {
@@ -247,6 +281,33 @@ const guias = {
                     gettext("Faz queixa na polícia se houver roubo de dinheiro efetivo.")
                 ]
             },
+            mfa: {
+            titulo: gettext("Como configurar a Autenticação de Dois Fatores (MFA):"),
+            passos: [
+                gettext("Instala uma App de autenticação (ex: Google Authenticator ou Bitwarden)."),
+                gettext("Acede às definições de segurança da tua conta (E-mail, Redes Sociais)."),
+                gettext("Escolhe 'Autenticação de 2 Passos' e faz scan do código QR fornecido."),
+                gettext("Guarda os códigos de recuperação num local físico seguro (fora do PC).")
+            ]
+            },
+            gestor: {
+                titulo: gettext("Configurar um Gestor de Passwords:"),
+                passos: [
+                    gettext("Escolhe um gestor fiável (ex: Bitwarden, 1Password ou Keepass)."),
+                    gettext("Cria uma 'Master Password' longa e memorizável."),
+                    gettext("Importa ou guarda as tuas passwords atuais no cofre cifrado."),
+                    gettext("Ativa a extensão do navegador para preenchimento automático seguro.")
+                ]
+            },
+            updates: {
+                titulo: gettext("Manter o Sistema Protegido:"),
+                passos: [
+                    gettext("Ativa as 'Atualizações Automáticas' no Windows ou macOS."),
+                    gettext("Verifica regularmente as atualizações na App Store ou Play Store."),
+                    gettext("Reinicia o dispositivo após grandes atualizações para aplicar os patches."),
+                    gettext("Remove programas que já não usas e que podem ter falhas de segurança.")
+                ]
+            },
             phishing_vazio: {
                 titulo: "🔒" + gettext("Tens alguma dúvida?"),
                 passos: [
@@ -272,7 +333,33 @@ const guias = {
 //para conseguir traduzir as instruçoes tenho que usar o gettext para o django identificar as str e mete las no ficheiro .po de traducoes
 //o ficheiro de msg de traducao para o js é o makemessages -d django -l en
 //o phishing, password e banco _vazio e para quando o utilizador esta sem login, quando tenta ver os passos tem de fazer login para os ver
-    
+function switchMode(modo) {
+    const secEmergencia = document.getElementById('section-emergencia');
+    const secMitigacao = document.getElementById('section-mitigacao');
+    const btnEmergencia = document.getElementById('btn-emergencia');
+    const btnMitigacao = document.getElementById('btn-mitigacao');
+    const instrucoesTexto = document.getElementById('guia-instrucoes');
+    const painelPassos = document.getElementById('painel-passos');
+
+    if (modo === 'emergencia') {
+        secEmergencia.classList.remove('hidden');
+        secMitigacao.classList.add('hidden');
+        btnEmergencia.classList.add('active');
+        btnMitigacao.classList.remove('active');
+        instrucoesTexto.innerText = gettext("Escolhe o incidente que aconteceu para saberes o que fazer agora:");
+    } else {
+        secEmergencia.classList.add('hidden');
+        secMitigacao.classList.remove('hidden');
+        btnEmergencia.classList.remove('active');
+        btnMitigacao.classList.add('active');
+        instrucoesTexto.innerText = gettext("Segue estes conselhos para reforçar a tua segurança preventiva:");
+        
+        // Verifica se o painel existe antes de tentar esconder
+        if (painelPassos) {
+            painelPassos.style.display = 'none';
+        }
+    }
+}
 function mostrarInstrucoes(tipo) {
 
             const painel = document.getElementById('painel-passos');
@@ -316,118 +403,128 @@ const baseConhecimento = {
         titulo: gettext("Phishing e Engenharia Social"),
         icon: '📩',
         texto: gettext(`
-            O Phishing é a tentativa de obter informações sensíveis através de comunicações eletrónicas fraudulentas. 
-            <br><br><b>Como funciona:</b> O atacante utiliza "iscos" (mensagens urgentes, prémios falsos, alertas de segurança) para manipular psicologicamente a vítima.
-            <br><br><b>Tipos Comuns:</b>
+            O Phishing é a espinha dorsal da maioria dos ataques cibernéticos modernos. Trata-se de uma técnica de manipulação que utiliza comunicações fraudulentas (e-mail, SMS, voz) para enganar utilizadores e obter dados sensíveis como credenciais de acesso, números de cartões de crédito ou instalar malware silenciosamente.
+            <br><br><b>A Psicologia da Engenharia Social:</b> Ao contrário de ataques técnicos que tentam forçar a entrada via software, a Engenharia Social foca na "vulnerabilidade humana". Os atacantes criam cenários de extrema urgência (ex: "A sua conta será encerrada em 2 horas") ou medo (ex: "Detetámos uma tentativa de login ilegal") para contornar o pensamento racional da vítima.
+            <br><br><b>Variantes Avançadas:</b>
             <ul>
-                <li><b>Smishing (SMS):</b> Mensagens que parecem vir de bancos ou transportadoras (ex: CTT) com links para sites clonados.</li>
-                <li><b>Vishing (Voz):</b> Chamadas telefónicas onde o burlão finge ser de um suporte técnico (ex: Microsoft) para obter acesso remoto ao PC.</li>
-                <li><b>Spear Phishing:</b> Ataques ultra-personalizados dirigidos a uma pessoa específica, usando o seu nome e cargo.</li>
-                <li><b>Whaling:</b> Ataques de phishing dirigidos a altos executivos (CEOs).</li>
+                <li><b>Smishing (SMS Phishing):</b> Mensagens rápidas, muitas vezes inseridas no mesmo fio de mensagens de bancos reais, contendo links para "atualizar dados" em sites clones perfeitos.</li>
+                <li><b>Vishing (Voice Phishing):</b> Chamadas telefónicas onde o burlão utiliza software de alteração de voz ou "Spoofing" (falsificação do número de origem) para fingir ser de um suporte técnico ou autoridade policial.</li>
+                <li><b>Spear Phishing:</b> Um ataque cirúrgico e personalizado. O atacante estuda as tuas redes sociais e sabe o teu nome, onde trabalhas e quem são os teus amigos para criar uma mensagem personalizada impossível de ignorar.</li>
+                <li><b>Whaling:</b> Foca-se em "peixes grandes" (CEOs e executivos), tentando induzir transferências bancárias de alto valor através de e-mails que parecem ordens internas legítimas.</li>
             </ul>
-            <br><b>Sinais de Alerta:</b> Erros gramaticais, remetentes estranhos (ex: info@banco123.com em vez do oficial) e pedidos de dados que o banco nunca pediria por e-mail.
+            <br><b>Sinais Vermelhos (Red Flags):</b> Saudações impessoais, erros gramaticais subtis, anexos inesperados (mesmo de pessoas conhecidas) e domínios de e-mail ligeiramente alterados (ex: @microsoft-support.com em vez de @microsoft.com).
         `),
-        dica: gettext("Passa o rato sobre qualquer link antes de clicar para ver o destino real no canto do navegador.")
+        dica: gettext("Sempre que receberes uma mensagem urgente, para. Não cliques. Contacta a entidade pelo número oficial que tens no teu cartão físico ou site oficial digitado manualmente no browser.")
     },
 
     'senhas': {
         titulo: gettext("Gestão de Identidade e Senhas"),
         icon: '🔑',
         texto: gettext(`
-            As passwords são a primeira linha de defesa, mas são também o elo mais fraco se forem previsíveis.
-            <br><br><b>O que torna uma password forte?</b>
+            As palavras-passe são as chaves da tua casa digital, mas na era da computação de alta performance, senhas curtas ou previsíveis são vulnerabilidades críticas. Um computador moderno consegue testar mil milhões de combinações por segundo em ataques de "Brute Force" ou "Dictionary Attacks".
+            <br><br><b>Critérios de uma Senha Invencível:</b>
             <ul>
-                <li><b>Comprimento:</b> Mínimo de 12 a 16 caracteres.</li>
-                <li><b>Variedade:</b> Mistura de maiúsculas, minúsculas, números e símbolos (!@#$).</li>
-                <li><b>Imprevisibilidade:</b> Evitar datas de nascimento, nomes de familiares ou sequências como '12345'.</li>
+                <li><b>Comprimento é Rei:</b> Quanto maior a senha, mais exponencialmente difícil é quebrá-la. O ideal é ter entre 14 a 20 caracteres.</li>
+                <li><b>Entropia (Complexidade):</b> Mistura aleatória de caracteres especiais (@, #, $, %), números, maiúsculas e minúsculas.</li>
+                <li><b>Unicidade Absoluta:</b> Nunca, sob circunstância alguma, repitas uma senha. Se um site sofrer um ataque e a tua senha for exposta, os hackers usarão ferramentas automáticas para tentar essa mesma combinação em todos os outros sites (ataque de Credential Stuffing).</li>
             </ul>
-            <br><b>A Solução Moderna:</b> Em vez de memorizar 50 passwords, utiliza um <b>Gestor de Passwords</b> (ex: Bitwarden ou 1Password). Estes programas criam passwords aleatórias e únicas para cada site e guardam-nas num cofre cifrado.
-            <br><br><b>Ataques comuns:</b> <i>Brute Force</i> (tentar milhares de combinações) e <i>Credential Stuffing</i> (usar uma password roubada de um site para tentar entrar em todos os outros).
+            <br><b>O Papel dos Gestores de Senhas (Vaults):</b> No mundo atual, é humanamente impossível memorizar 50 senhas únicas e fortes. Gestores como Bitwarden, 1Password ou Dashlane permitem guardar tudo num cofre cifrado. Tu só precisas de saber uma "Master Password" extremamente forte; o gestor trata de gerar e preencher as restantes automaticamente.
+            <br><br><b>Ameaças Locais:</b> Keyloggers (malware que regista teclas) podem roubar senhas no momento da digitação. Por isso, a utilização de gestores que permitem "copiar e colar" ou preenchimento automático é mais segura do que digitar manualmente.
         `),
-        dica: gettext("Usa 'Passphrases': frases longas com espaços ou símbolos (ex: 'O.Meu.Gato.Gosta.De.Pizza!'). São quase impossíveis de quebrar.")
+        dica: gettext("Adota o método das 'Passphrases': usa quatro ou cinco palavras aleatórias e junta-as com símbolos. Exemplo: 'Cadeira#Elefante%Pizza$Porto'. É fácil de memorizar e levaria séculos para ser quebrada por máquinas.")
     },
 
     'mfa': {
         titulo: gettext("Autenticação Multi-Fator (MFA/2FA)"),
         icon: '📱',
         texto: gettext(`
-            O MFA garante que, mesmo que um hacker descubra a tua password, ele continue sem acesso à tua conta.
+            A Autenticação Multi-Fator é, atualmente, a ferramenta de segurança individual mais eficaz que existe. Ela parte do princípio que a senha (algo que sabes) já não é suficiente. É necessário provar a tua identidade através de um segundo canal independente.
             <br><br><b>As Três Categorias de Autenticação:</b>
             <ol>
-                <li><b>Algo que sabes:</b> Password ou PIN.</li>
-                <li><b>Algo que tens:</b> Telemóvel (App de autenticação) ou chave física (Yubikey).</li>
-                <li><b>Algo que és:</b> Biometria (Impressão digital ou reconhecimento facial).</li>
+                <li><b>Algo que sabes:</b> A tua password tradicional ou um código PIN.</li>
+                <li><b>Algo que tens:</b> O teu telemóvel (recebe uma notificação push), uma App de autenticação (gera códigos temporários) ou uma chave USB física (Yubikey).</li>
+                <li><b>Algo que és (Biometria):</b> A tua impressão digital, reconhecimento facial (FaceID) ou leitura da íris.</li>
             </ol>
-            <br><b>Níveis de Segurança:</b>
+            <br><b>Hierarquia de Segurança do MFA:</b>
             <ul>
-                <li><b>SMS (Menos Seguro):</b> Os códigos podem ser intercetados através de 'SIM Swapping'.</li>
-                <li><b>Apps de Autenticação (Recomendado):</b> Google Authenticator ou Microsoft Authenticator (geram códigos temporários offline).</li>
-                <li><b>Chaves Físicas (Mais Seguro):</b> Dispositivos USB que requerem um toque físico para autorizar o login.</li>
+                <li><b>SMS (Bronze):</b> O método mais comum, mas vulnerável a "SIM Swapping" (onde o hacker convence a operadora a clonar o teu cartão SIM).</li>
+                <li><b>Apps de Autenticação (Ouro):</b> Apps como Google Authenticator ou Authy geram códigos offline (TOTP) que mudam a cada 30 segundos, sendo muito mais difíceis de intercetar.</li>
+                <li><b>Chaves de Segurança Físicas (Platina):</b> Pequenos dispositivos USB/NFC que requerem um toque físico. São imunes a phishing remoto porque o atacante não pode "carregar no botão" fisicamente a partir de outro país.</li>
             </ul>
         `),
-        dica: gettext("Ativa o MFA obrigatoriamente no teu E-mail principal, pois ele é a 'chave mestre' para recuperar todas as outras contas.")
+        dica: gettext("A tua conta de e-mail é a mais importante. Se um hacker entrar no teu e-mail, ele pode fazer 'Reset Password' em todas as tuas outras contas. Ativa o MFA no e-mail hoje mesmo!")
     },
 
     'privacidade': {
         titulo: gettext("Privacidade, Cookies e Pegada Digital"),
         icon: '📍',
         texto: gettext(`
-            A privacidade online trata-se do controlo sobre quem tem acesso aos teus dados e como são usados.
-            <br><br><b>Pegada Digital:</b> Tudo o que publicas (fotos, check-ins, comentários) fica registado permanentemente. Hackers usam isto para ataques de Engenharia Social.
-            <br><br><b>O perigo dos Cookies:</b>
+            A privacidade online não é sobre "não ter nada a esconder", mas sim sobre ter o poder de decidir quem acede aos teus dados. Cada clique, pesquisa e movimento GPS contribui para a tua "Pegada Digital", um rasto permanente que pode ser usado para perfilar o teu comportamento ou facilitar ataques.
+            <br><br><b>O Ecossistema dos Cookies:</b>
             <ul>
-                <li><b>Cookies de Sessão:</b> Úteis para manter o login ativo.</li>
-                <li><b>Cookies de Rastreamento (Terceiros):</b> Usados por redes de publicidade para criar um perfil dos teus hábitos de navegação.</li>
+                <li><b>Cookies de Sessão:</b> Essenciais. Mantêm-te logado num site enquanto navegas entre páginas.</li>
+                <li><b>Cookies de Terceiros (Tracking):</b> Colocados por redes de publicidade para te seguir por toda a Internet. Criam um perfil comercial detalhado sobre os teus gostos, doenças, orientação política e situação financeira.</li>
             </ul>
-            <br><b>Geolocalização:</b> Muitas fotos contêm metadados (EXIF) que revelam as coordenadas GPS exatas de onde foram tiradas. Partilhar a localização em tempo real permite que estranhos saibam quando a tua casa está vazia.
+            <br><b>O Perigo dos Metadados (EXIF):</b> Quando tiras uma foto com o telemóvel e a envias sem proteção, ela contém dados ocultos: o modelo do telemóvel, a hora exata e, mais perigoso, as coordenadas GPS de onde a foto foi tirada. Partilhar uma foto do teu novo setup de gaming pode revelar a localização exata da tua casa a estranhos.
+            <br><br><b>Permissões de Apps:</b> Muitas aplicações gratuitas sobrevivem da venda de dados. Se uma lanterna ou calculadora pedir acesso à tua lista de contactos, microfone e localização, os teus dados são o verdadeiro produto.
         `),
-        dica: gettext("Lê sempre as permissões das Apps: se uma calculadora pede acesso aos teus contactos e localização, desinstala-a imediatamente.")
+        dica: gettext("Utiliza extensões como 'uBlock Origin' e browsers focados em privacidade como o Brave ou Firefox para bloquear rastreadores automáticos que mapeiam a tua navegação.")
     },
 
     'malware': {
         titulo: gettext("Malware: O Software Malicioso"),
         icon: '🦠',
         texto: gettext(`
-            Malware é um termo genérico para qualquer software desenhado para causar danos ou roubar dados.
-            <br><br><b>As Ameaças mais Perigosas:</b>
+            Malware é um termo guarda-chuva para qualquer código desenhado para realizar ações indesejadas num sistema. A evolução do malware passou de simples vírus que "apagavam ficheiros" para indústrias de crime organizado multimilionárias.
+            <br><br><b>As Ameaças de Elite:</b>
             <ul>
-                <li><b>Ransomware:</b> Encripta os teus ficheiros e exige um pagamento (resgate) em Bitcoin. Nunca pagues, pois não há garantia de devolução.</li>
-                <li><b>Spyware & Keyloggers:</b> Software invisível que regista tudo o que escreves (incluindo passwords bancárias) e tira prints do teu ecrã.</li>
-                <li><b>Trojans:</b> Programas que parecem legítimos (ex: um jogo grátis) mas que instalam um 'Backdoor' para o atacante controlar o teu PC.</li>
-                <li><b>Botnets:</b> Uma rede de PCs infetados ('zombies') usados para atacar sites do governo ou empresas (ataques DDoS).</li>
+                <li><b>Ransomware:</b> Talvez o mais perigoso. Encripta todos os teus ficheiros (fotos, documentos, bases de dados) e exige um resgate em Bitcoin. Mesmo pagando, muitas vezes os dados não são devolvidos.</li>
+                <li><b>Spyware e Keyloggers:</b> Software "espião" silencioso. O seu objetivo é permanecer indetetável enquanto envia para o atacante tudo o que escreves no teclado, capturas de ecrã e até acesso à webcam.</li>
+                <li><b>Trojans (Cavalos de Troia):</b> Disfarçam-se de programas úteis (jogos, instaladores piratas). Quando os executas, abrem uma "porta traseira" (Backdoor) para o hacker controlar o teu PC remotamente.</li>
+                <li><b>Botnets:</b> Transformam o teu dispositivo num "zombie". O teu computador passa a fazer parte de um exército global usado para atacar sites do governo ou espalhar spam sem tu saberes.</li>
             </ul>
+            <br><b>Vetores de Infeção:</b> Além dos links, o malware pode vir em pens USB encontradas, ficheiros piratas (torrents) e até anúncios maliciosos em sites legítimos (Malvertising).
         `),
-        dica: gettext("Utiliza um Antivírus atualizado e nunca ligues Pens USB encontradas na rua (podem executar scripts maliciosos instantaneamente).")
+        dica: gettext("Não confies apenas no Antivírus. Mantém o teu sistema operativo (Windows/macOS/Linux) sempre atualizado, pois as atualizações corrigem os buracos de segurança que o malware usa para entrar.")
     },
 
     'redes': {
         titulo: gettext("Segurança de Redes, VPN e Criptografia"),
         icon: '🌐',
         texto: gettext(`
-            Como os teus dados viajam pela Internet define se podem ser roubados a meio do caminho.
-            <br><br><b>Criptografia SSL/TLS (HTTPS):</b> Quando vês o cadeado no browser, os teus dados estão "embrulhados" numa cifra que só o site destino consegue ler. 
-            <br><br><b>Os Riscos do Wi-Fi Público:</b> Em redes de cafés ou aeroportos, um atacante pode realizar um ataque <i>'Man-in-the-Middle'</i>, intercetando todo o teu tráfego.
-            <br><br><b>O papel da VPN:</b> Uma Virtual Private Network cria um túnel cifrado entre ti e a Internet, escondendo o teu endereço IP e protegendo os dados mesmo em redes inseguras.
-            <br><br><b>Firewall:</b> Atua como um filtro que decide que ligações podem entrar ou sair do teu dispositivo, bloqueando acessos não autorizados.
+            A Internet é uma rede pública. Sem proteção, os teus dados viajam como "postais abertos" que qualquer pessoa no caminho pode ler. A segurança de redes foca-se em criar túneis privados e cifrar a informação.
+            <br><br><b>Criptografia SSL/TLS (HTTPS):</b> Quando vês o cadeado verde, os dados entre ti e o servidor estão cifrados. No entanto, o HTTPS protege os dados, mas não esconde a que site te estás a ligar.
+            <br><br><b>O Papel Vital da VPN:</b> Uma Virtual Private Network cria um túnel encriptado entre o teu dispositivo e um servidor seguro. Isto tem três benefícios:
+            <ol>
+                <li><b>Segurança em Wi-Fi Público:</b> Protege-te de ataques "Man-in-the-Middle" em cafés ou aeroportos.</li>
+                <li><b>Anonimato de IP:</b> Esconde a tua localização geográfica real e o teu endereço IP dos sites que visitas.</li>
+                <li><b>Contornar Censura:</b> Permite aceder a conteúdos bloqueados na tua região.</li>
+            </ol>
+            <br><b>Segurança de Wi-Fi Doméstico:</b> O teu router é a porta de entrada da tua casa. Protocolos antigos como WEP ou WPA podem ser quebrados em minutos. Utiliza sempre WPA2-AES ou WPA3 com uma password longa. Desativa o WPS (Wi-Fi Protected Setup), pois é uma falha de segurança conhecida.
         `),
-        dica: gettext("Protocolos de Wi-Fi: Prefere sempre WPA3 ou WPA2. Evita o protocolo WEP, pois pode ser quebrado em poucos minutos.")
+        dica: gettext("Evita fazer login em contas bancárias ou introduzir cartões de crédito quando estiveres ligado a redes Wi-Fi públicas sem o uso de uma VPN confiável.")
     },
 
     'dispositivos': {
-        titulo: gettext("Proteção de Dispositivos e Manutenção"),
+        titulo: gettext("Proteção de Dispositivos e Higiene Digital"),
         icon: '💻',
         texto: gettext(`
-            A segurança física e lógica do teu hardware é a base de tudo.
-            <br><br><b>Atualizações de Software:</b> Não servem apenas para novas funcionalidades. Elas trazem 'Patches' de segurança que corrigem vulnerabilidades que os hackers já conhecem.
-            <br><br><b>A Regra de Backup 3-2-1:</b>
+            A segurança física e a manutenção lógica dos teus aparelhos são a base da tua defesa. Se um atacante tiver acesso físico ao teu telemóvel ou portátil desprotegido, a maioria das defesas digitais pode ser contornada rapidamente.
+            <br><br><b>A Regra de Ouro dos Backups (3-2-1):</b>
+            Ter os teus ficheiros apenas no computador é um risco enorme (avaria, roubo ou ransomware). Deves seguir a estratégia:
             <ul>
-                <li><b>3</b> Cópias dos teus dados importantes.</li>
-                <li><b>2</b> Tipos de suporte diferentes (ex: Disco Externo e Nuvem).</li>
-                <li><b>1</b> Cópia fora de casa (para o caso de incêndio ou roubo).</li>
+                <li><b>3</b> Cópias de tudo o que é importante.</li>
+                <li><b>2</b> Formatos diferentes (ex: um disco rígido externo e uma conta na Nuvem).</li>
+                <li><b>1</b> Cópia fora do local habitual (ex: em casa de um familiar ou numa cloud cifrada) para prevenir desastres físicos como incêndios.</li>
             </ul>
-            <br><b>Segurança Móvel:</b> Evita fazer 'Root' (Android) ou 'Jailbreak' (iOS). Estes processos removem as restrições de segurança do fabricante, permitindo que qualquer malware tome controlo total do sistema.
+            <br><b>Segurança de Hardware:</b>
+            <ul>
+                <li><b>Criptografia de Disco:</b> Ativa o BitLocker (Windows) ou FileVault (macOS). Se o teu portátil for roubado, os dados serão ilegíveis sem a tua senha de login.</li>
+                <li><b>Iot (Internet das Coisas):</b> Lâmpadas inteligentes, câmaras IP e frigoríficos ligados à rede são frequentemente os elos mais fracos da rede doméstica por terem software desatualizado.</li>
+            </ul>
+            <br><b>Higiene Digital:</b> Remove aplicações que já não usas. Elas acumulam cache, podem ter permissões excessivas e tornam-se portas de entrada se o desenvolvedor abandonar as atualizações de segurança.
         `),
-        dica: gettext("Tapa a tua webcam com um protetor físico. Muitos malwares ativam a câmara sem acender a luz indicadora.")
+        dica: gettext("Tapa a tua webcam com um protetor físico. Além disso, desliga o Bluetooth e o Wi-Fi quando não estiverem em uso para reduzir a superfície de ataque do teu telemóvel em locais públicos.")
     }
 };
 
@@ -465,3 +562,77 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+
+
+function focarNoHeader(tipo) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+
+    const botoesNav = document.querySelectorAll('.header-nav .btn-dashboard');
+    const botaoEmergencia = document.querySelector('.btn-emergencia-dashboard');
+    
+    let alvo = null;
+
+    if (tipo === 'quiz') alvo = botoesNav[1];
+    if (tipo === 'simulador') alvo = botoesNav[2];
+    
+   
+    if (tipo === 'aprender') alvo = botaoEmergencia;
+
+    if (alvo) {
+
+        botoesNav.forEach(b => b.classList.remove('piscar-alerta'));
+        if (botaoEmergencia) botaoEmergencia.classList.remove('piscar-alerta');
+        
+     
+        setTimeout(() => {
+            alvo.classList.add('piscar-alerta');
+            
+            setTimeout(() => {
+                alvo.classList.remove('piscar-alerta');
+            }, 5000);
+        }, 400); 
+    }
+}
+
+function goToStep(step) {
+   
+    const steps = [
+        document.getElementById('step1'),
+        document.getElementById('step2'),
+        document.getElementById('step3')
+    ];
+
+    
+    steps.forEach((s, index) => {
+        if (s) {
+            if (index + 1 === step) {
+                s.classList.remove('hidden');
+            } else {
+                s.classList.add('hidden');
+            }
+        }
+    });
+
+    
+    updateStepper(step);
+}
+
+function updateStepper(step) {
+   
+    for (let i = 1; i <= 3; i++) {
+        const dot = document.getElementById('dot' + i);
+        const line = document.getElementById('line' + i);
+        
+        if (dot) {
+            if (i <= step) dot.classList.add('active');
+            else dot.classList.remove('active');
+        }
+        
+        if (line) {
+            if (i < step) line.classList.add('active');
+            else line.classList.remove('active');
+        }
+    }
+}
