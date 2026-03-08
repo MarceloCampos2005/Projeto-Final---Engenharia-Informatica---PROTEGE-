@@ -85,16 +85,26 @@
         </header>
 
         <main class="hero-dashboard">
-            <div class="hero-text">
+            <div class="hero-text glass-hero-card">
+                <div class="mission-pill">
+                    <div class="pill-badge">
+                        <span class="pill-dot"></span>
+                        {% trans "MISSÃO" %}
+                    </div>
+                    <p class="pill-text">
+                        {% trans "Próximo Objetivo:" %} <strong>Nível {{ user.perfil.nivel_quiz|add:1 }}</strong> 
+                        <span class="pill-xp">({{ user.perfil.pontuacao_total_quiz }}/15 XP)</span>
+                    </p>
+                </div>
                 <h1 class="serif-title">
-                    {% blocktrans with username=user.username|slice:":10" %}Olá {{ username }}, <br> Bem Vindo ao Protege+ !{% endblocktrans %}
+                    {% blocktrans with username=user.username|slice:":10" %}Olá {{ username }}, <br> Bem-vindo ao Protege+ !{% endblocktrans %}
                 </h1>
+                
                 <p class="hero-subtitle">
-                    {% trans "Aqui vais melhorar os teus conhecimentos" %} <br>
-                    {% trans "em phishing e segurança digital." %}
+                    {% trans "Pronto para os desafios de hoje?" %}
                 </p>
 
-                <a href="{% url 'atividades:guia_emergencia' %}" class="btn-emergencia-dashboard">
+                <a href="{% url 'atividades:guia_emergencia' %}" class="btn-emergencia-dashboard pulse-glow">
                     <span class="pulse-icon">🚨</span> {% trans "Em caso de ataque!" %}
                 </a>
             </div>

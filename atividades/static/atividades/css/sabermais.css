@@ -7,7 +7,7 @@
 }
 
 .header-main-dashboard {
-    position: fixed; 
+    position: absolute; 
     top: 20px;
     width: 100%;
     display: flex;
@@ -47,10 +47,9 @@
 .doc-container {
     display: block;
     max-width: 1200px;
-    margin: 140px auto 0 auto; 
+    margin: 0 auto; 
     padding: 20px;
 }
-
 
 .profile-area {
     flex-shrink: 0; 
@@ -80,12 +79,12 @@ body.doc-page {
 
 .doc-content {
     margin-left: 320px; 
-    padding-top: 0;     
+    padding-top: 20px;     
 }
 
 .doc-sidebar {
     position: fixed;
-    top: 160px; 
+    top: 240px; 
     width: 280px;
     background: var(--branco-card);
     backdrop-filter: blur(10px);
@@ -149,9 +148,9 @@ body.doc-page {
     opacity: 0.7;
 }
 .doc-header {
-    margin-top: 20px; 
+    margin-top: 0; 
+    margin-bottom: 25px;
 }
-
 
 body:has(#content-wrapper.tritanopia) { 
     background-color: #b8c7b5 !important; 

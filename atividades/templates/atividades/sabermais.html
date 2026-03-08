@@ -73,15 +73,29 @@
           <header class="doc-header">
             <h1 class="serif-title">{% trans "Centro de Conhecimento" %}</h1>
           </header>
-          <div id="conteudo-dinamico"></div>
+          
+          <div id="conteudo-dinamico">
+             <div class="doc-card" style="margin-top: 2rem; text-align: center;">
+                 <div class="card-icon" style="font-size: 4rem; margin-bottom: 1rem;">📚</div>
+                 <h2>{% trans "Bem-vindo à tua base de defesas!" %}</h2>
+                 <p style="color: #4b5563; font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                     {% trans "Escolhe um dos temas no menu lateral para começares a aprender. Domina os conceitos básicos e avança para as ameaças mais complexas para te tornares num mestre da cibersegurança." %}
+                 </p>
+                 <div class="dica-box" style="text-align: left; display: inline-block; margin-top: 2rem;">
+                     💡 <b>{% trans "Dica:" %}</b> {% trans "Lê os conteúdos antes de fazeres o Quiz para garantires a pontuação máxima!" %}
+                 </div>
+             </div>
+          </div>
         </section>
       </main>
 
       <footer class="footer-protege">
-        <p>&copy; 2024 Protege+ - {% trans "A tua segurança em primeiro lugar." %}</p>
+        <p>&copy; 2026 Protege+ - {% trans "A tua segurança em primeiro lugar." %}</p>
       </footer>
       
-    </div> <script src="{% url 'javascript-catalog' %}"></script>
+    </div> 
+    
+    <script src="{% url 'javascript-catalog' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
   </body>
 </html>

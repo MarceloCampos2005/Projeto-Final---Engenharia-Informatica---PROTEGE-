@@ -8,9 +8,33 @@
     padding-right: 20px;
 }
 
-.serif-title {
-    font-family: 'Inter', sans-serif;
+serif-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 5rem; 
+
+    line-height: 0.9; 
+    font-weight: 400;
+    color: var(--floresta-profunda);
+    margin-bottom: 2rem;
+}
+
+
+@media (max-width: 768px) {
+    .serif-title {
+        font-size: 3rem;
+    }
+}
+#titulo-incidente {
+    font-size: 2.5rem !important; 
+    line-height: 1.1;
     text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+@media (max-width: 768px) {
+    #titulo-incidente {
+        font-size: 2.2rem !important;
+    }
 }
 
 .header-main {

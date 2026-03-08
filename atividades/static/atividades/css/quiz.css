@@ -282,6 +282,12 @@ body:has(#content-wrapper.contraste-invertido) { background-color: #000000 !impo
     align-items: center;
 }
 
+.popup-introducao {
+    border: 3px solid #20c214; 
+    box-shadow: 0 0 20px rgba(32, 194, 20, 0.3);
+    border-radius: 2.5rem; 
+}
+
 @keyframes popIn {
     from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }

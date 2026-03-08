@@ -76,7 +76,15 @@
                   
                     {% if wizard.form.errors %}
                         <div class="notificacao-erro">
-                            {{ wizard.form.errors }}
+                            {% for field in wizard.form %}
+                                {% for error in field.errors %}
+                                    <div class="mensagem-alerta">⚠️ {{ error }}</div>
+                                {% endfor %}
+                            {% endfor %}
+                            
+                            {% for error in wizard.form.non_field_errors %}
+                                <div class="mensagem-alerta">⚠️ {{ error }}</div>
+                            {% endfor %}
                         </div>
                     {% endif %}
 
@@ -85,7 +93,7 @@
                     </button>
                     {% if wizard.steps.current == 'auth' %}
                     <div class="navegacao-secundaria" style="margin-top: 1.5rem;padding-top: .1rem;">
-                        <a href="" class="atalho-link">
+                        <a href="{% url 'account_reset_password' %}" class="atalho-link">
                             {% trans "Esqueci-me da palavra-passe" %}
                         </a>
                     </div>

@@ -23,7 +23,7 @@ body.view-autenticacao {
 }
 
 .header-navegacao-login {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -313,14 +313,14 @@ body.view-autenticacao {
 }
 
 .notificacao-erro {
-  color: #721c24;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  padding: 1rem;
-  border-radius: 1rem;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  font-size: 0.9rem;
+    background: rgba(255, 77, 77, 0.2); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 1rem;
+    border-radius: 1.2rem;
+    margin-bottom: 1.5rem;
+    animation: abanar 0.4s ease-in-out; 
 }
 
 .navegacao-secundaria {
@@ -394,6 +394,20 @@ body.view-autenticacao {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.mensagem-alerta {
+    color: #ffffff;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+@keyframes abanar {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
 }
 
 .btn-escolha {
