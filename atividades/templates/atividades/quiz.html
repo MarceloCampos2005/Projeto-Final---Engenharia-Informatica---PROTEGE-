@@ -41,9 +41,22 @@
 
         <main class="quiz-main">
             <div class="quiz-card">
-                <div class="question-box">
+               <div class="question-box" style="position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 15px;">
                     <h2>{{ pergunta.pergunta }}</h2>
+                    
+                    {% if pergunta.dica %}
+                    <button type="button" id="btn-dica" class="btn-dica" title="{% trans 'Pedir uma dica' %}" data-questao="{{ numero }}">
+                        💡
+                        <span id="badge-dicas" class="badge-dicas">2</span>
+                    </button>
+                    {% endif %}
                 </div>
+
+                {% if pergunta.dica %}
+                <div id="caixa-dica" class="caixa-dica" style="display: none;">
+                    <strong>💡 {% trans "Dica:" %}</strong> {{ pergunta.dica }}
+                </div>
+                {% endif %}
 
                 <form method="POST" class="options-grid">
                     {% csrf_token %}
@@ -64,7 +77,6 @@
                 </div>
             </div>
         </main>
-
         {% if mostrar_popup %}
         <div class="overlay">
             <div class="popup-card {% if esta_correto %} popup-correto {% else %} popup-errado {% endif %}">
@@ -107,14 +119,32 @@
                     {% trans "Vais testar as tuas defesas digitais em 7 cenários diferentes. Se quiseres refrescar a memória antes de avançar, dá uma vista de olhos na nossa base de conhecimento." %}
                 </p>
                 
-                <div class="ler-mais-container" style="margin: 1.5rem 0;">
-                    <a href="{% url 'atividades:sabermais' %}" style="text-decoration: none; font-weight: bold; color: var(--d3-verde-noite);">
-                        <u>{% trans "Ler Conteúdos de Aprendizagem" %}</u>
+                <div class="ler-mais-container">
+                    <a href="{% url 'atividades:sabermais' %}#{{ tema_da_pergunta }}">
+                        📚 {% trans "Ler explicação completa" %}
                     </a>
                 </div>
                 
                 <button type="button" class="btn-continue" onclick="fecharpopup()" style="width: 100%; border: none; cursor: pointer; font-family: 'Inter', sans-serif;">
                     {% trans "Começar Quiz!" %}
+                </button>
+            </div>
+        </div>
+        {% endif %}
+        {% if subiu %} <div class="overlay" id="levelup-overlay">
+            <div class="popup-card popup-levelup">
+                <div class="popup-icon icone-levelup">
+                    <span class="simbolo-levelup">🏆</span>
+                </div>
+                <h2 class="popup-title" style="color: #d97706;">
+                    {% trans "Subiste de Nível!" %}
+                </h2>
+                <p class="popup-text">
+                    {% trans "Parabéns! Desbloqueaste um novo nível de dificuldade no Quiz. Continua o excelente trabalho!" %}
+                </p>
+                
+                <button type="button" class="btn-continue btn-gold" onclick="document.getElementById('levelup-overlay').style.display='none'">
+                    {% trans "Incrível!" %}
                 </button>
             </div>
         </div>

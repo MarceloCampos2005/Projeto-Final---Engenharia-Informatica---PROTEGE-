@@ -180,3 +180,65 @@ body {
 .btn-confirm-danger:hover {
   background: #cc0000;
 }
+
+.form-mfa-danger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.mfa-instrucao {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.mfa-input-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.mfa-code-input {
+    width: 80%;
+    max-width: 280px;
+    padding: 15px;
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 12px; 
+    text-align: center;
+    color: #333;
+    background-color: #f9f9f9;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+}
+
+
+.mfa-code-input:focus {
+    border-color: #ff4d4d;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(255, 77, 77, 0.15);
+}
+
+.mfa-code-input::placeholder {
+    color: #ccc;
+}
+
+.mfa-submit-btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

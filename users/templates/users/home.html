@@ -37,8 +37,8 @@
                 <a href="{% url 'sobrenos' %}" class="nav-link-text">{% trans "Sobre Nós" %}</a>
                 
                 <div class="auth-buttons">
-                    <a href="{% url 'login' %}" class="btn-registar">{% trans "ENTRAR" %}</a>
-                    <a href="{% url 'registar' %}" class="btn-registar">{% trans "REGISTAR" %}</a>
+                    <a id="btn-entrar-topo" href="{% url 'login' %}" class="btn-registar">{% trans "ENTRAR" %}</a>
+                    <a id="btn-registar-topo" href="{% url 'registar' %}" class="btn-registar">{% trans "REGISTAR" %}</a>
                 </div>
             </nav>
         </div>
@@ -108,18 +108,18 @@
                     </h2>
                     
                     <div class="solution-grid">
-                        <div class="sol-card">
+                        <div class="sol-card" onclick="focarNoHeader()" style="cursor: pointer;">
                             <div class="sol-icon">🎯</div>
                             <h3>{% trans "Quizzes" %}</h3>
                             <p>{% trans "Questões interativas para testares o teu nível de conhecimento atual." %}</p>
                         </div>
-                        <div class="sol-card">
+                        <div class="sol-card" onclick="focarNoHeader()" style="cursor: pointer;">
                             <div class="sol-icon">🛡️</div>
                             <h3>{% trans "Simuladores" %}</h3>
                             <p>{% trans "Cenários reais de phishing para treinares o teu olho clínico sem riscos." %}</p>
                         </div>
-                        <div class="sol-card">
-                            <div class="sol-icon">🚀</div>
+                        <div class="sol-card" onclick="focarNoHeader()" style="cursor: pointer;">
+                            <div class="sol-icon" >🚀</div>
                             <h3>{% trans "Blindagem" %}</h3>
                             <p>{% trans "Melhoria contínua das tuas defesas digitais contra novos ataques." %}</p>
                         </div>

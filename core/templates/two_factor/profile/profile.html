@@ -45,19 +45,23 @@
                 {% trans "Estás prestes a desativar a autenticação de dois fatores. Isto enfraquece a segurança da tua conta." %}
             </p>
             
-            <form action="{% url 'two_factor:disable' %}" method="post">
+           <form action="{% url 'desativar_mfa_seguro' %}" method="post" class="form-mfa-danger">
                 {% csrf_token %}
                 
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" name="understand" required>
-                        {% trans "Sim, quero desativar." %}
-                    </label>
+                <p class="mfa-instrucao">
+                    {% trans "Abre a tua app autenticadora e insere o código atual para confirmar." %}
+                </p>
+
+                <div class="mfa-input-wrapper">
+                    <input type="text" name="mfa_code" class="mfa-code-input" maxlength="6" pattern="[0-9]{6}" required 
+                        placeholder="000000" autocomplete="off">
                 </div>
                 
-                <button type="submit" class="btn-action btn-confirm-danger">{% trans "Confirmar Desativação" %}</button>
+                <button type="submit" class="btn-action btn-confirm-danger mfa-submit-btn">
+                    {% trans "Confirmar e Desativar" %}
+                </button>
             </form>
-            
+                        
             <button onclick="fecharPopup()" class="back-link">← {% trans "Cancelar" %}</button>
         </div>
     </div>

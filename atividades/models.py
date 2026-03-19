@@ -15,6 +15,7 @@ class QuizPergunta(models.Model):
     explicacao = models.TextField()
     resposta_correta = models.CharField(max_length=1)
     tema = models.CharField(max_length=50, default='phishing')
+    dica = models.TextField(null=True, blank=True, help_text="Texto que aparece ao clicar na lâmpada")
 
     def __str__(self):
         return f"({self.lingua}) Nivel {self.nivel_dificuldade} - {self.pergunta[:50]}"
@@ -63,19 +64,21 @@ class HistoricoQuiz(models.Model):
 
 
 class emails(models.Model):
+    LINGUA_CHOICES = [
+        ('pt', 'Português'),
+        ('en', 'English'),
+    ]
+    lingua = models.CharField(max_length=2, choices=LINGUA_CHOICES, default='pt')
     id = models.BigAutoField(primary_key=True)
-    assunto =models.CharField(max_length=255)
-    remetente = models.EmailField()
-    corpo = models.TextField()
-    nivel_dificuldade = models.IntegerField()
-    explicacao = models.TextField()
-    e_phishing = models.BooleanField(default=True)
+    assunto = models.CharField(max_length=255)
+    remetente = models.EmailField() 
+    corpo = models.TextField() 
+    nivel_dificuldade = models.IntegerField(default=1)
+    
+    
+    total_armadilhas = models.IntegerField(default=1, help_text="Quantas zonas data-is-phishing='true' existem no corpo?")
+    
+    e_phishing = models.BooleanField(default=True, help_text="Desmarca se este email for um teste de 'Email Seguro'.")
 
     def __str__(self):
-        return f"Email {self.id}: {self.assunto[:30]}"
-    
-
-class palavras_clicaveis(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    email = models.ForeignKey(emails, on_delete = models.CASCADE, related_name='email')
-    
+        return f"Nível {self.nivel_dificuldade} - {self.assunto[:40]}"
