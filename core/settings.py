@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
 from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
 load_dotenv()
@@ -27,7 +28,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 USE_I18N = True
 USE_L10N = True
 LANGUAGES = [
@@ -64,13 +65,13 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
-
 #pagina para onde vai quem consegue fazer login
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -111,17 +112,25 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'protege_db',         
-        'USER': 'root',               
-        'PASSWORD': os.getenv('DB_PASSWORD'),   
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
-}
+# Tenta ler a variável do sistema diretamente
+database_url = os.environ.get('DATABASE_URL')
 
+if database_url:
+    DATABASES = {
+        'default': dj_database_url.config(default=database_url, conn_max_age=600)
+    }
+else:
+    # Caso não encontre (localmente), usa o MySQL padrão
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'protege_db',
+            'USER': 'root',
+            'PASSWORD': 'Marcelo123',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -157,7 +166,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / "core" / "static",
 ]
@@ -209,3 +218,16 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 
 DEFAULT_FROM_EMAIL = 'Equipa Protege+ <marc3lo99moreira@gmail.com>'
+
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Protege+] " #Mete o prefixo no assunto envez do 127......
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
