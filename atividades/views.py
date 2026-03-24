@@ -12,21 +12,37 @@ from django.utils import translation
 from django.conf import settings
 import json
 from django_otp import user_has_device
+from django.views.decorators.vary import vary_on_cookie
+from .models import emails
+from users.models import Perfil
 
 #verifica se o utilizador tem login feito, se tiver vai ao perfil dele ver qual a lingua guardada e ativa, senao tenta ler um cookie da sessao
 #o translation.activate(lang) faz com que o django use o ficheiro .po para a lingua
+@vary_on_cookie # Evita que o browser mostre a versão em cache da língua errada
 def home2(request):
+    #Definir a língua padrão
     lang = 'pt'
+    
     if request.user.is_authenticated:
         lang = request.user.perfil.lingua
+        #Atualizar a sessão se ela estiver diferente do perfil
+        if request.session.get(settings.LANGUAGE_COOKIE_NAME) != lang:
+            request.session[settings.LANGUAGE_COOKIE_NAME] = lang
+            request.session['_language'] = lang
     else:
-        lang = request.session.get('django_language', 'pt') 
+        lang = request.session.get(settings.LANGUAGE_COOKIE_NAME, 'pt')
+
     translation.activate(lang)
 
     mfa_ativo = False
     if request.user.is_authenticated:
         mfa_ativo = user_has_device(request.user)
-    return render(request, 'atividades/home2.html',{'mfa_ativo': mfa_ativo})
+    
+    response = render(request, 'atividades/home2.html', {'mfa_ativo': mfa_ativo})
+    
+    # Garantir que o cookie do browser também é atualizado
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
+    return response
 
 
 @login_required
@@ -53,8 +69,55 @@ def atualizar_filtros_acessibilidade(request):
         return JsonResponse({'status': 'sucesso', 'mensagem': 'Filtros atualizados com sucesso'})
     except Exception as e:
         return JsonResponse({'status': 'erro', 'mensagem': str(e)}, status=400)
-    
 
+
+#aqui e pa receber os dados que o utilizador escolhe no formulario e preparar e filtrar o quiz
+@login_required
+def preparar_quiz(request):
+    if request.method == 'POST':
+        modo = request.POST.get('modo_jogo')
+        temas = request.POST.getlist('temas')
+
+        #apaga tudo para comecar um novo quiz
+        for x in ['quiz_indice', 'pergunta_atual', 'pontuacao', 'respostas_utilizador', 'quiz_bonus_xp']:
+            if x in request.session:
+                del request.session[x]
+        
+        lingua = request.user.perfil.lingua
+        nivel = request.user.perfil.nivel_quiz
+
+        #buscar as perguntas, o quiz bonus da 2xp se for escolhido o modo aleatorio
+        if modo == 'aleatorio':
+            request.session['quiz_bonus_xp'] = True
+            perguntas = list(QuizPergunta.objects.filter(lingua=lingua, nivel_dificuldade=request.user.perfil.nivel_quiz))
+        else:
+            request.session['quiz_bonus_xp'] = False
+
+
+
+
+            if temas:
+                perguntas = list(QuizPergunta.objects.filter(lingua=lingua, nivel_dificuldade=request.user.perfil.nivel_quiz,tema__in =temas))
+            else:
+                messages.error(request,'Tens de selecionar um tema')
+                return redirect('atividades:quiz_setup')
+            
+        #ve se ha perguntas
+        if not perguntas:
+            messages.error(request,"Nao ha perguntas suficientes")
+            return render('atividades:quiz_setup')
+                
+        #sleciona 7 perguntas do nivel do utulizador e guardo o id delas 
+        indice = [p.id for p in random.sample(perguntas, min(len(perguntas), 7))]
+        request.session['quiz_indice'] = indice
+        request.session['pergunta_atual'] = 0
+        request.session['pontuacao'] = 0
+        request.session['respostas_utilizador'] = []
+        request.session.modified = True
+
+        return redirect('atividades:quiz')
+        
+    return redirect('atividades:quiz_setup')
 
 
 @login_required
@@ -64,20 +127,8 @@ def quiz(request):
     
     #se nao houver indice na sessao, vai a bd buscar perguntas do nivel do utilizador
     if 'quiz_indice' not in request.session:
-        lingua = request.user.perfil.lingua
-        perguntas = list(QuizPergunta.objects.filter(lingua=lingua, nivel_dificuldade=request.user.perfil.nivel_quiz))
-
-        if not perguntas:
-            messages.error(request, "Não há perguntas disponíveis para o seu nível e língua.")
-            return redirect('atividades:home2')
+        return redirect('atividades:quiz_setup')
         
-        #sleciona 7 perguntas do nivel do utulizador e guardo o id delas 
-        indice = [p.id for p in random.sample(perguntas, min(len(perguntas), 7))]
-        request.session['quiz_indice'] = indice
-        request.session['pergunta_atual'] = 0
-        request.session['pontuacao'] = 0
-        request.session['respostas_utilizador'] = []
-
     indice = request.session['quiz_indice']
     atual = request.session['pergunta_atual']
     
@@ -204,6 +255,11 @@ def quiz_final(request):
     perfil.xp_geral += xp_ganho
     subiu_geral = False
 
+    #adiciona +2xp se o utilizador escolher o modo aleatorio
+    if request.session.get('quiz_bonus_xp', False):
+        perfil.pontuacao_total_quiz +=2
+        perfil.xp_geral +=2
+
     
     xp_necessario = perfil.nivel_geral * 100
 
@@ -216,6 +272,7 @@ def quiz_final(request):
         xp_necessario = perfil.nivel_geral * 100
 
 
+
     perfil.save()
 
     #limpa a  para depois comecar na pergunta 1 e com pontuacao 0 e respostas vazias
@@ -223,6 +280,7 @@ def quiz_final(request):
     del request.session['pergunta_atual']
     del request.session['pontuacao']
     del request.session['respostas_utilizador']
+    del request.session['quiz_bonus_xp']
 
     #vai mostar no html 
     return render(request, 'atividades/quiz_final.html',{
@@ -276,17 +334,25 @@ def detalhe_historico(request, resultado_id):
         'respostas': respostas
     })
 
+@login_required
+def simulador_setup(request):
+    return render(request, 'atividades/simulador_setup.html')
+
+#meter o utilizador a poder escolher se quer analisar email ou detetar o phishing
+@login_required
+def preparar_simulador(request):
+   
+    
+    return redirect('atividades:simulador_setup')
+
 
 @login_required
 def simulador(request):
-    lang = request.session.get('django_language' , 'pt')
-    translation.activate(lang)
- 
-    return render(request, 'atividades/simulador.html')
-
-
-def proximo_email(request):
-    return redirect('simulador')
+    return render(request, 'atividades/simulador_setup.html')
+@login_required
+def simulador_final(request):
+    
+    return render(request, 'atividades/simulador_final.html')
 
 #aqui ativa a traducao na pagina do guia_emergencia
 def guia_emergencia(request):
@@ -310,9 +376,6 @@ def mudar_lingua(request, lang_code):
 
         request.session['_language'] = lang_code
 
-        #guarda a lingua na sessao para dar para o resto do site
-        request.session['django_language'] = lang_code#(2 para garantir que da)
-
         #se o utilizador mudar a lingua a meio do quiz, reinicia o quiz
         if 'quiz_indice' in request.session:
             del request.session['quiz_indice']
@@ -321,8 +384,27 @@ def mudar_lingua(request, lang_code):
         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang_code)  #laguage cookie name é django_language
         return response
 
-    return redirect(request.META.get('HTTP_REFERER', 'atividades:home2'))
-7
+    return redirect('atividades:home2')
+
 
 def sabermais(request):
     return render(request, 'atividades/sabermais.html')
+
+
+@login_required
+def leaderboard(request):
+    top_geral = Perfil.objects.select_related('user').order_by('-nivel_geral', '-xp_geral')
+    top_quiz = Perfil.objects.select_related('user').order_by('-nivel_quiz', '-pontuacao_total_quiz')
+   
+    context = {
+        'top_geral': top_geral,
+        'top_quiz': top_quiz,
+        
+    }
+    return render(request, 'atividades/leaderboard.html', context)
+
+
+@login_required
+def quiz_setup(request):
+    return render(request, 'atividades/quiz_setup.html')
+

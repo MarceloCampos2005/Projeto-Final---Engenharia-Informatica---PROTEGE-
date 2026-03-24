@@ -1,0 +1,108 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protege+ | {% trans "Configurar Treino" %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&family=Instrument+Serif&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'atividades/css/quiz_setup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
+</head>
+
+<body class="{% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}">
+
+    <header class="qs-topo-nav">
+        <a href="{% url 'atividades:home2' %}" class="qs-btn-retroceder">
+            <span>←</span> {% trans "Voltar ao Dashboard" %}
+        </a>
+    </header>
+
+    <div id="content-wrapper" class="qs-wrapper">
+        <main class="qs-container">
+            
+            <div class="qs-header">
+                <div class="qs-icon">🎯</div>
+                <h1 class="serif-title">{% trans "Configurar Treino" %}</h1>
+                <p class="qs-subtitle">{% trans "Escolhe o teu foco para o Quiz de hoje." %}</p>
+            </div>
+
+            <form action="{% url 'atividades:preparar_quiz'%}" method="POST" class="qs-form">
+                {% csrf_token %}
+
+                <div class="qs-modos-grid">
+                    <label class="qs-modo-card">
+                        <input type="radio" name="modo_jogo" value="aleatorio" checked onclick="toggleTemas(false)">
+                        <div class="qs-card-content">
+                            <span class="qs-badge-xp">+2 XP BÓNUS</span>
+                            <div class="qs-card-icon">🎲</div>
+                            <h3>{% trans "Modo Aleatório" %}</h3>
+                            <p>{% trans "Simula ameaças reais e imprevisíveis. Inclui todos os temas." %}</p>
+                        </div>
+                    </label>
+
+                    <label class="qs-modo-card">
+                        <input type="radio" name="modo_jogo" value="personalizado" onclick="toggleTemas(true)">
+                        <div class="qs-card-content">
+                            <div class="qs-card-icon">🛠️</div>
+                            <h3>{% trans "Escolher Temas" %}</h3>
+                            <p>{% trans "Foca-te nos temas onde tens mais dificuldades. Ganhas XP normal." %}</p>
+                        </div>
+                    </label>
+                </div>
+
+                <div id="area-temas" class="qs-temas-area hidden">
+                    <h4 class="qs-temas-titulo">{% trans "Seleciona 1 ou mais temas:" %}</h4>
+                    <div class="qs-temas-grid qs-pills-vibe">
+                        
+                        <label class="qs-tema-pill">
+                            <input type="checkbox" name="temas" value="phishing"> 
+                            <span class="qs-pill-text">📩 Phishing</span>
+                        </label>
+                        
+                        <label class="qs-tema-pill">
+                            <input type="checkbox" name="temas" value="senhas"> 
+                            <span class="qs-pill-text">🔑 Senhas</span>
+                        </label>
+
+                        <label class="qs-tema-pill">
+                            <input type="checkbox" name="temas" value="mfa"> 
+                            <span class="qs-pill-text">🧱 MFA</span>
+                        </label>
+
+                        <label class="qs-tema-pill">
+                            <input type="checkbox" name="temas" value="privacidades"> 
+                            <span class="qs-pill-text">📍 Privacidades</span>
+                        </label>
+
+                        <label class="qs-tema-pill">
+                            <input type="checkbox" name="temas" value="dispositivos"> 
+                            <span class="qs-pill-text">💻 Dispositivos</span>
+                        </label>
+
+                        <label class="qs-tema-pill">
+                            <input type="checkbox" name="temas" value="redes"> 
+                            <span class="qs-pill-text">🌐 Redes</span>
+                        </label>
+
+                    </div>
+                </div>
+
+                <button type="submit" class="qs-btn-comecar">
+                    🚀 {% trans "Começar Treino" %}
+                </button>
+            </form>
+
+        </main>
+    </div>
+
+{% include 'partials/footer_acessibilidade.html' %}
+<script src="{% static 'js/scripts.js' %}"></script>
+
+</body>
+</html>
+
