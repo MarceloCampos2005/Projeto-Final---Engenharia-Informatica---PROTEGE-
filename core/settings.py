@@ -29,6 +29,9 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [
+    'https://projeto-final-engenharia-informatica-protege-production.up.railway.app',
+]
 USE_I18N = True
 USE_L10N = True
 LANGUAGES = [
