@@ -30,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
-    'https://projeto-final-engenharia-informatica-protege-production.up.railway.app',
+    'https://projeto-final-engenharia-informatica.onrender.com',
 ]
 USE_I18N = True
 USE_L10N = True
