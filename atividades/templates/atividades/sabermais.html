@@ -15,48 +15,24 @@
   
   <body class="doc-page {% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
     
-    <header class="header-main-dashboard">
-      <div class="header-pill-container">
-        <div class="header-pill-dashboard">
-          <a href="{% url 'atividades:home2' %}" class="brand">
-            <div class="brand-icon">🛡️</div>
-            <span class="brand-name">Protege+</span>
-          </a>
+    <header class="header-main">
+        <div class="header-pill">
+            <a href="{% url 'atividades:home2' %}" class="brand" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                <div class="brand-icon">🛡️</div>
+                <span class="brand-name" style="color: #1c8814; font-weight: 900; font-style: italic; font-size: 24px;">Protege+</span>
+            </a>
 
-          <nav class="header-nav">
-            <div class="lang-pill">
-              <a href="{% url 'atividades:mudar_lingua' 'pt' %}" class="lang-btn">
-                <img src="{% static 'users/images/portugal.png' %}" alt="PT" /> PT
-              </a>
-              <span class="lang-divider">|</span>
-              <a href="{% url 'atividades:mudar_lingua' 'en' %}" class="lang-btn">
-                <img src="{% static 'users/images/inglaterra.png' %}" alt="EN" /> EN
-              </a>
-            </div>
-
-            <a href="{% url 'sobrenos' %}" class="nav-link-text">{% trans "Sobre Nós" %}</a>
-
-            <div class="auth-buttons">
-              <a href="{% url 'atividades:sabermais' %}" class="btn-dashboard active-doc">{% trans "Quero Aprender!" %}</a>
-              <a href="{% url 'atividades:quiz' %}" class="btn-dashboard">{% trans "QUIZ" %}</a>
-              <a href="{% url 'atividades:simulador' %}" class="btn-dashboard">{% trans "SIMULADOR" %}</a>
-            </div>
-          </nav>
+            <nav class="nav-menu">
+                <a href="javascript:history.go(-1)" class="btn-voltar" style="text-decoration: none;">← Voltar</a>
+            </nav>
         </div>
-
-        <div class="profile-area">
-          <a href="{% url 'perfil' %}" class="btn-avatar-trigger">
-            <img src="{% static 'atividades/images/avatar_perfil.png' %}" alt="Perfil" />
-          </a>
-        </div>
-      </div>
     </header>
 
     <div id="content-wrapper">
       
       <main class="doc-container">
         <aside class="doc-sidebar">
-            <h3>{% trans "Básico (Nível 1)" %}</h3>
+            <h3>{% trans "Temas" %}</h3>
             <ul>
                 <li><a href="javascript:void(0)" onclick="mostrarTema('phishing')">📩 {% trans "Phishing" %}</a></li>
                 <li><a href="javascript:void(0)" onclick="mostrarTema('senhas')">🔑 {% trans "Senhas" %}</a></li>

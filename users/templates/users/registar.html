@@ -65,7 +65,7 @@
                                 <label class="etiqueta-input">{% trans "Nome da instituição:" %}</label>
                                 <input type="text" name="instituicao" required placeholder="Nome da tua escola" class="caixa-texto-protege">
                             </div>
-                            <button type="button" onclick="goToStep(2)" class="botao-acao-principal">{% trans "Seguinte" %}</button>
+                            <button type="button" onclick="validarEAvancar(1, 2)" class="botao-acao-principal">{% trans "Seguinte" %}</button>
                         </div>
 
                         <div id="step2" class="hidden">
@@ -79,7 +79,7 @@
                             </div>
                             <div class="btn-flex">
                                 <button type="button" onclick="goToStep(1)" class="btn-voltar-step">{% trans "Voltar" %}</button>
-                                <button type="button" onclick="goToStep(3)" class="botao-acao-principal" style="flex: 2;">{% trans "Seguinte" %}</button>
+                                <button type="button" onclick="validarEAvancar(2, 3)" class="botao-acao-principal" style="flex: 2;">{% trans "Seguinte" %}</button>
                             </div>
                         </div>
 

@@ -149,6 +149,9 @@
                 <div class="perf-bloco-metrica">
                     <h3>{% trans "Quizzes Realizados" %}</h3>
                     <span class="perf-valor-num">{{ user.perfil.quizzes_realizados }}</span>
+                    <a href="{% url 'atividades:historico' %}" class="perf-link-historico">
+                        {% trans "Ver histórico" %} ➔
+                    </a>
                 </div>
 
                 <div class="perf-bloco-metrica">
@@ -168,6 +171,9 @@
                 <div class="perf-bloco-metrica">
                     <h3>{% trans "Simuladores Realizados" %}</h3>
                     <span class="perf-valor-num">{{ user.perfil.simuladores_realizados }}</span>
+                    <a href="{% url 'atividades:historico' %}" class="perf-link-historico">
+                        {% trans "Ver histórico" %} ➔
+                    </a>
                 </div>
 
                 <div class="perf-bloco-metrica">
@@ -219,10 +225,25 @@
                         maintainAspectRatio: false,
                         scales: {
                             r: {
-                                ticks: { stepSize: 1, display: false }
+                                angleLines: { color: 'rgba(37, 77, 26, 0.2)' }, 
+                                grid: { color: 'rgba(37, 77, 26, 0.2)' }, 
+                                pointLabels: { 
+                                    color: '#254d1a', 
+                                    font: { size: 12, weight: 'bold', family: 'Inter' } 
+                                },
+                                ticks: { display: false } 
                             }
                         },
-                        plugins: { legend: { display: false } }
+                        plugins: { 
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(37, 77, 26, 0.9)', 
+                                titleFont: { size: 14 },
+                                bodyFont: { size: 14 },
+                                padding: 12,
+                                cornerRadius: 8
+                            }
+                        }
                     }
                 });
             }

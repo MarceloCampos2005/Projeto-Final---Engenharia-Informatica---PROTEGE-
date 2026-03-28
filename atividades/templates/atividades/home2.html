@@ -87,12 +87,18 @@
                             {% endif %}
                             
                             <li class="divider"></li>
-                            <li><a href="javascript:void(0);" onclick="fazerLogout('{% url 'logout' %}')" class="dropdown-item exit">🚪 {% trans "Terminar Sessão" %}</a></li>
+                            <li>
+                                <a href="javascript:void(0);" 
+                                onclick="fazerLogout('{% url 'logout' %}')" 
+                                class="dropdown-item exit">
+                                🚪 {% trans "Terminar Sessão" %}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
-                <a href="{% url 'atividades:leaderboard' %}" class="btn-avatar-trigger" style="display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 2rem; background: var(--d3-neve-pura);" title="{% trans 'Ver Tabela de Classificação' %}">
+                <a href="{% url 'atividades:leaderboard' %}" class="btn-avatar-trigger" style="display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 2rem; background: #ffffff80;" title="{% trans 'Ver Tabela de Classificação' %}">
                     🏆
                 </a>
 

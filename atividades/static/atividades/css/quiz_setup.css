@@ -26,6 +26,7 @@ body {
   padding: 2.5rem;
   pointer-events: none;
 }
+
 .qs-btn-retroceder {
   pointer-events: auto;
   display: inline-flex;
@@ -41,6 +42,7 @@ body {
   text-decoration: none;
   transition: 0.3s;
 }
+
 .qs-btn-retroceder:hover {
   background: var(--d3-verde-noite);
   color: var(--d3-neve-pura);
@@ -55,6 +57,7 @@ body {
   min-height: 100vh;
   padding: 100px 20px 40px;
 }
+
 .qs-container {
   width: 100%;
   max-width: 600px;
@@ -70,16 +73,19 @@ body {
   text-align: center;
   margin-bottom: 2.5rem;
 }
+
 .serif-title {
   font-family: "Instrument Serif", serif;
   font-size: 3.5rem;
   color: var(--d3-verde-noite);
   line-height: 1;
 }
+
 .qs-icon {
   font-size: 4rem;
   margin-bottom: 10px;
 }
+
 .qs-subtitle {
   color: var(--d3-verde-noite);
   font-weight: 600;
@@ -95,10 +101,12 @@ body {
   gap: 15px;
   margin-bottom: 2rem;
 }
+
 .qs-modo-card {
   cursor: pointer;
   position: relative;
 }
+
 .qs-modo-card input {
   display: none;
 }
@@ -112,16 +120,19 @@ body {
   height: 100%;
   transition: all 0.3s;
 }
+
 .qs-card-icon {
   font-size: 2.5rem;
   margin-bottom: 10px;
 }
+
 .qs-card-content h3 {
   color: var(--d3-verde-noite);
   font-weight: 900;
   font-size: 1.1rem;
   margin-bottom: 5px;
 }
+
 .qs-card-content p {
   font-size: 0.8rem;
   color: #555;
@@ -143,7 +154,48 @@ body {
   animation: pulse 2s infinite;
 }
 
-.qs-modo-card input:checked + .qs-card-content {
+.qs-badge-xp-inline {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  right: 0;
+  margin-left: 10px;
+  background: #fbbf24;
+  color: #92400e;
+  font-size: 0.7rem;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 2px solid white;
+  box-shadow: 0 4px 8px rgba(251, 191, 36, 0.3);
+  animation: pulseMini 2s infinite;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+@keyframes pulseMini {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+
+.hidden {
+  display: none !important;
+}
+
+.qs-modo-card input:checked+.qs-card-content {
   background: var(--d3-neve-pura);
   border-color: var(--d3-neon-leaf);
   box-shadow: 0 10px 20px rgba(32, 194, 20, 0.15);
@@ -154,6 +206,7 @@ body {
 .hidden {
   display: none !important;
 }
+
 .qs-temas-area {
   background: rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
@@ -161,6 +214,7 @@ body {
   margin-bottom: 2rem;
   animation: fadeIn 0.3s ease;
 }
+
 .qs-temas-titulo {
   color: var(--d3-verde-noite);
   font-weight: 800;
@@ -176,12 +230,15 @@ body {
   gap: 10px;
   justify-content: center;
 }
+
 .qs-tema-pill {
   cursor: pointer;
 }
+
 .qs-tema-pill input {
   display: none;
 }
+
 .qs-pill-text {
   display: inline-block;
   padding: 10px 18px;
@@ -193,7 +250,8 @@ body {
   border: 2px solid transparent;
   transition: 0.2s;
 }
-.qs-tema-pill input:checked + .qs-pill-text {
+
+.qs-tema-pill input:checked+.qs-pill-text {
   background: var(--d3-verde-noite);
   color: var(--d3-neve-pura);
   border-color: var(--d3-verde-noite);
@@ -215,29 +273,34 @@ body {
   transition: 0.3s;
   box-shadow: 0 10px 20px rgba(37, 77, 26, 0.2);
 }
+
 .qs-btn-comecar:hover {
-  background: var(--d3-neon-leaf);
-  color: var(--d3-verde-noite);
+  background: var(--d3-verde-noite);
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(32, 194, 20, 0.3);
+  box-shadow: 0 10px 20px rgba(21, 100, 15, 0.521);
 }
 
 @keyframes pulse {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
+
   100% {
     transform: scale(1);
   }
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

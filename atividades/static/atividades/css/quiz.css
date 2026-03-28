@@ -81,7 +81,7 @@ body {
 
 /* BARRA DE PROGRESSO */
 .progress-container {
-  margin-top: 3rem;
+  margin-top: 5rem;
   width: 100%;
   max-width: 28rem;
   margin-bottom: 2rem;
@@ -118,6 +118,7 @@ body {
   background: var(--d3-verde-noite);
   border-color: var(--d3-verde-noite);
 }
+
 .progress-dot.active {
   background: var(--d3-neon-leaf);
   border-color: var(--d3-neve-pura);
@@ -141,6 +142,7 @@ body {
   text-align: center;
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0);
+  margin-top: 4rem;
 }
 
 .question-box {
@@ -165,6 +167,7 @@ body {
   grid-template-columns: 1fr;
   gap: 1.5rem;
 }
+
 @media (min-width: 768px) {
   .options-grid {
     grid-template-columns: 1fr 1fr;
@@ -220,6 +223,7 @@ body {
   font-size: 1.125rem;
   font-style: italic;
 }
+
 .badge-dicas {
   position: absolute;
   top: -5px;
@@ -258,9 +262,11 @@ body {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-3px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -308,6 +314,7 @@ body {
     transform: scale(0.9);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
@@ -384,6 +391,19 @@ body {
   box-shadow: 0 10px 20px rgba(32, 194, 20, 0.2);
 }
 
+.qs-aviso-erro {
+  background-color: #fee2e2;
+  color: #ef4444;
+  border: 2px solid #ef4444;
+  padding: 3rem;
+  border-radius: 12px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  animation: shake 0.4s ease-in-out;
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
+}
+
 .simbolo-certo {
   background-color: #dcfce7;
   color: var(--d3-neon-leaf);
@@ -427,16 +447,20 @@ body {
 }
 
 @keyframes shake {
+
   0%,
   100% {
     transform: translateX(0);
   }
+
   25% {
     transform: translateX(-8px) rotate(-5deg);
   }
+
   50% {
     transform: translateX(8px) rotate(5deg);
   }
+
   75% {
     transform: translateX(-8px) rotate(-5deg);
   }
@@ -445,6 +469,7 @@ body {
 .popup-correto {
   border: 5px solid var(--d3-neon-leaf) !important;
 }
+
 .popup-correto .popup-title {
   color: var(--d3-verde-noite);
 }
@@ -452,6 +477,7 @@ body {
 .popup-errado {
   border: 5px solid #ff4d4d !important;
 }
+
 .popup-errado .popup-title {
   color: #1f2937;
 }
@@ -504,6 +530,7 @@ body {
     opacity: 0;
     transform: translateY(-15px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -560,7 +587,7 @@ body {
 }
 
 .btn-gold:hover {
-  background: #d97706 !important; 
+  background: #d97706 !important;
   box-shadow: 0 10px 20px rgba(245, 158, 11, 0.4);
 }
 
@@ -569,9 +596,11 @@ body {
     transform: scale(0);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.2);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;

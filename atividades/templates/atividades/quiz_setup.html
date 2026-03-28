@@ -24,12 +24,15 @@
 
     <div id="content-wrapper" class="qs-wrapper">
         <main class="qs-container">
+
             
             <div class="qs-header">
                 <div class="qs-icon">🎯</div>
                 <h1 class="serif-title">{% trans "Configurar Treino" %}</h1>
                 <p class="qs-subtitle">{% trans "Escolhe o teu foco para o Quiz de hoje." %}</p>
             </div>
+
+           
 
             <form action="{% url 'atividades:preparar_quiz'%}" method="POST" class="qs-form">
                 {% csrf_token %}
@@ -91,9 +94,12 @@
 
                     </div>
                 </div>
+                <div id="aviso-temas" class="qs-aviso-erro hidden" style="margin-bottom: 20px; text-align: center; font-weight: 600; color: #b91c1c;">
+                    ⚠️ {% trans "Tens de selecionar pelo menos um tema para começar!" %}
+                </div>
 
                 <button type="submit" class="qs-btn-comecar">
-                    🚀 {% trans "Começar Treino" %}
+                    🚀 {% trans "Começar Quiz" %}
                 </button>
             </form>
 
