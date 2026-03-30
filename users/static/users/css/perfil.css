@@ -117,6 +117,7 @@ body.perf-view-ativa {
   background: var(--p-primaria);
   transform: rotate(45deg);
 }
+
 .perf-btn-definicoes:hover .icon-gear {
   filter: brightness(0) invert(1);
 }
@@ -131,6 +132,7 @@ body.perf-view-ativa {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
 }
+
 .perf-avatar-edit-btn {
   position: absolute;
   bottom: 0px;
@@ -152,6 +154,7 @@ body.perf-view-ativa {
   z-index: 5;
   outline: none;
 }
+
 .perf-avatar-edit-btn:hover {
   transform: scale(1.15);
   background: var(--p-primaria);
@@ -163,6 +166,7 @@ body.perf-view-ativa {
   border-radius: 50%;
   object-fit: cover;
 }
+
 .perf-nome-utilizador {
   font-size: 2.2rem;
   font-weight: 900;
@@ -170,6 +174,7 @@ body.perf-view-ativa {
   color: var(--p-primaria);
   line-height: 1.1;
 }
+
 .perf-email-pill {
   background: var(--p-primaria);
   color: white;
@@ -206,6 +211,7 @@ body.perf-view-ativa {
   flex-direction: column;
   gap: 0.3rem;
 }
+
 .perf-dado-label {
   font-size: 0.7rem;
   font-weight: 800;
@@ -213,6 +219,7 @@ body.perf-view-ativa {
   color: var(--p-primaria);
   opacity: 0.5;
 }
+
 .perf-dado-valor {
   font-size: 1.1rem;
   font-weight: 700;
@@ -320,10 +327,10 @@ body.perf-view-ativa {
 
 .perf-barra-mini-fill {
   height: 100%;
-  background: white;
+  background: linear-gradient(90deg, #ffffff, #e2f8e0);
   border-radius: 10px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-  transition: width 1s ease-in-out;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+  transition: width 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .perf-xp-texto {
@@ -334,8 +341,10 @@ body.perf-view-ativa {
 
 body.modo-escuro .perf-cartao-id,
 body.modo-escuro .perf-bloco-metrica {
-  background: #1e1e1e !important;
-  border-color: #333 !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(15px) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4) !important;
 }
 
 body.modo-escuro .perf-bloco-metrica.destaque {
@@ -446,7 +455,7 @@ body.modo-escuro .perf-info-linha {
   object-fit: cover;
 }
 
-.avatar-option input[type="radio"]:checked + img {
+.avatar-option input[type="radio"]:checked+img {
   border-color: var(--p-acento);
   transform: scale(1.05);
   box-shadow: 0 0 15px rgba(32, 194, 20, 0.4);
@@ -458,6 +467,7 @@ body.modo-escuro .perf-info-linha {
   font-size: 14px;
   position: relative;
 }
+
 .divider::before,
 .divider::after {
   content: "";
@@ -467,9 +477,11 @@ body.modo-escuro .perf-info-linha {
   height: 1px;
   background: #ddd;
 }
+
 .divider::before {
   left: 0;
 }
+
 .divider::after {
   right: 0;
 }
@@ -536,6 +548,7 @@ body.modo-escuro .perf-info-linha {
     transform: scale(0.8);
     opacity: 0;
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -544,4 +557,34 @@ body.modo-escuro .perf-info-linha {
 
 body.modo-escuro .perf-medalha {
   text-shadow: none;
+}
+
+.perf-link-historico {
+  margin-top: 15px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--p-primaria);
+  opacity: 0.6;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.perf-link-historico:hover {
+  opacity: 1;
+  color: var(--p-acento);
+  transform: translateX(4px);
+
+}
+
+
+body.modo-escuro .perf-link-historico {
+  color: #ffffff;
+}
+
+body.modo-escuro .perf-link-historico:hover {
+  color: var(--p-acento);
 }

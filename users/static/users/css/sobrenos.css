@@ -19,7 +19,7 @@ body {
 #content-wrapper {
   min-height: 100vh;
   width: 100%;
-  background-color: var(--musgo-suave); 
+  background-color: var(--musgo-suave);
   transition: filter 0.3s ease, background-color 0.3s ease;
 }
 
@@ -101,6 +101,7 @@ body {
 .lang-btn.active {
   color: var(--verde-escuro);
 }
+
 .lang-divider {
   color: rgba(0, 0, 0, 0.2);
   font-size: 12px;
@@ -190,7 +191,7 @@ body {
 
 /*CARTÃO DE CONTACTO*/
 .contact-card {
-  background: white;
+  background: #ffffff80;
   padding: 40px;
   border-radius: 40px;
   box-shadow: var(--sombra);
@@ -221,9 +222,11 @@ body {
   width: 100%;
   padding: 12px 18px;
   border: 2px solid #eee;
+  background: #ffffff80;
   border-radius: 15px;
   font-family: inherit;
   transition: 0.3s;
+  box-sizing: border-box;
 }
 
 .form-input:focus,
@@ -243,6 +246,7 @@ body {
   width: 100%;
   transition: 0.3s;
   margin-top: 10px;
+  box-sizing: border-box;
 }
 
 .btn-submit:hover {
@@ -264,11 +268,12 @@ body {
   padding: 8px 20px;
   border-radius: 30px;
   display: flex;
-  align-items:start;
+  align-items: start;
   gap: 10px;
   font-weight: 700;
   box-shadow: var(--sombra);
 }
+
 @media (max-width: 768px) {
   .content-grid {
     grid-template-columns: 1fr;
@@ -386,6 +391,7 @@ body {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -455,6 +461,7 @@ body[data-authenticated="false"] .btn-submit {
     transform: translateY(30px) scale(0.9);
     opacity: 0;
   }
+
   to {
     transform: translateY(0) scale(1);
     opacity: 1;
@@ -479,6 +486,7 @@ body[data-authenticated="false"] .btn-submit {
   text-transform: uppercase;
   transition: 0.2s;
 }
+
 .btn-continue:hover {
   transform: scale(1.05);
   background: var(--verde-brilhante);
@@ -489,31 +497,37 @@ body.modo-escuro #content-wrapper {
   background-color: #121212 !important;
   color: #ffffff !important;
 }
+
 body.modo-escuro .contact-card {
   background-color: #1e1e1e !important;
   border: 1px solid #333;
 }
+
 body.modo-escuro .serif-title,
 body.modo-escuro .about-text p,
 body.modo-escuro .info-list li {
   color: #ffffff !important;
 }
+
 body.modo-escuro .form-input,
 body.modo-escuro .form-textarea {
   background-color: #2a2a2a;
   border-color: #444;
   color: white;
 }
+
 body.modo-escuro .email-pill {
   background: rgba(255, 255, 255, 0.1);
   color: white;
   border: 1px solid #444;
 }
+
 body.modo-escuro .popup-card {
   background: #1e1e1e;
   border-color: #333;
   color: white;
 }
+
 body.modo-escuro .locked-content p {
   color: #ccc;
 }
