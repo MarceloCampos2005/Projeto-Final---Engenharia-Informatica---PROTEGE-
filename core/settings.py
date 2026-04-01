@@ -183,7 +183,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    BASE_DIR / "core" / "static",
+    os.path.join(BASE_DIR, "core", "static"),
+    os.path.join(BASE_DIR, "atividades", "static"),
+    os.path.join(BASE_DIR, "users", "static"),
 ]
 
 LOCALE_PATHS = [
