@@ -82,3 +82,29 @@ class emails(models.Model):
 
     def __str__(self):
         return f"Nível {self.nivel_dificuldade} - {self.assunto[:40]}"
+    
+class ResultadoSimulador(models.Model):
+    TIPO_SIMULACAO_CHOICES = [
+        ('classificacao', 'Classificação (Seguro ou Phishing)'),
+        ('identificacao', 'Identificação de Armadilhas (Frases)'),
+    ]
+
+    id = models.BigAutoField(primary_key=True)
+    perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='resultados_simulador')
+    email = models.ForeignKey(emails, on_delete=models.CASCADE, related_name='resultados')
+    
+    #que tipo de simulador escolheu
+    tipo_simulacao = models.CharField(max_length=20, choices=TIPO_SIMULACAO_CHOICES)
+    acertou = models.BooleanField(default=False)
+    
+    armadilhas_encontradas = models.IntegerField(default=0)
+    
+    data_conclusao = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-data_conclusao']
+
+    def __str__(self):
+        modo = "Classificação" if self.tipo_simulacao == 'classificacao' else "Identificação"
+        status = "Acertou" if self.acertou else "Falhou"
+        return f"{self.perfil.user.username} - {modo} - {status}"
