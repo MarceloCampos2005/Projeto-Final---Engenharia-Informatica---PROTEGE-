@@ -1,0 +1,115 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Resumo do Simulador" %} | Protege+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'atividades/css/simulador_final.css' %}">
+    <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
+    
+</head>
+<body>
+
+    <div class="resumo-card" style="background: rgba(255, 255, 255, 0.822); backdrop-filter: blur(10px);">
+        <h1 class="titulo">{% trans "Análise Concluída!" %}</h1>
+        <div class="resultado-box" style="padding: 20px; border-radius: 15px; margin-bottom: 25px; background: {% if media_precisao >= 90 %}#dcfce7{% elif media_precisao >= 70 %}#fef9c3{% else %}#fee2e2{% endif %}; border: 1px solid {% if media_precisao >= 90 %}#22c55e{% elif media_precisao >= 70 %}#eab308{% else %}#ef4444{% endif %}; text-align: center;">
+            <h2 style="color: #1f2937; margin-top: 0;">
+                {% if media_precisao == 100 %} Excelente! 🏆
+                {% elif media_precisao >= 70 %} Muito Bem! 👍
+                {% else %} Precisas de mais atenção... 🧐 {% endif %}
+            </h2>
+            <p style="margin: 5px 0;">{% trans "Analisaste" %} <strong>{{ quantidade_emails }}</strong> {% trans "e-mails com uma precisão média de" %} <strong>{{ media_precisao }}%</strong>.</p>
+            <p style="margin: 5px 0;">{% trans "Ganhaste" %} <strong>{{ pontos_totais }}</strong> {% trans "pontos de simulador!" %}</p>
+        </div>
+        
+        <div class="xp-container">
+            <div class="xp-box">
+                <span>{% trans "XP Ganho" %}</span>
+                <strong>+{{ pontos_totais }}</strong>
+            </div>
+            <div class="xp-box">
+                <span>{% trans "Progresso Nível" %} {{ nivel_atual }}</span>
+                <strong>{{ xp_atual }} / 30</strong>
+            </div>
+        </div>
+
+        <div class="progresso-bar-bg">
+            <div class="progresso-bar-fill" style="width: calc(({{ xp_atual }} / 30) * 100%);"></div>
+        </div>
+
+        {% if subiu %}
+            <div class="alerta-levelup" style="margin-top: 20px; background: #fef3c7; border: 2px solid #f59e0b; color: #b45309; padding: 15px; border-radius: 15px; text-align: center; font-weight: 800;">
+                ⭐ {% trans "PARABÉNS! SUBISTE PARA O NÍVEL" %} {{ nivel_atual }}! ⭐
+            </div>
+        {% endif %}
+
+        <div style="background: #f8fafcef; padding: 25px; border-radius: 20px; text-align: left; margin-top: 40px; border: 2px solid #254d1a;">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+                <h3 style="color: #1e293b; margin: 0; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.5rem;"></span> {% trans "Análise Detalhada (Modo " %} {{ modo|title }} )
+                </h3>
+                
+                {% if emails_jogados|length > 0 %}
+                <span id="contador-emails" style="font-size: 0.95rem; font-weight: 700; color: #475569; background: #e2e8f0; padding: 6px 16px; border-radius: 20px;">
+                    E-mail 1 de {{ emails_jogados|length }}
+                </span>
+                {% endif %}
+            </div>
+            
+            <div id="carrossel-emails" style="min-height: 250px;">
+                {% for email in emails_jogados %}
+                <div class="correcao-email" data-index="{{ forloop.counter0 }}" style="display: {% if forloop.first %}block{% else %}none{% endif %}; line-height: 1.8; animation: fadeIn 0.4s ease-in-out;">
+                    
+                    <h4 style="color: var(--d3-verde-noite, #254d1a); margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
+                        {% trans "Conteúdo do E-mail" %} {{ forloop.counter }}
+                    </h4>
+                    
+                    {% if email.e_phishing %}
+                        <div class="badge-resultado-email badge-phishing">
+                            🚨 {% trans "VEREDICTO: ESTE E-MAIL ERA PHISHING!" %}
+                        </div>
+                    {% else %}
+                        <div class="badge-resultado-email badge-seguro">
+                            ✅ {% trans "VEREDICTO: ESTE E-MAIL ERA SEGURO!" %}
+                        </div>
+                    {% endif %}
+
+                    <div style="background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #cbd5e1; margin-bottom: 15px;">
+                        {{ email.corpo|safe }}
+                    </div>
+
+                </div>
+                {% empty %}
+                <p style="text-align: center; color: #64748b;">Nenhum e-mail para analisar.</p>
+                {% endfor %}
+            </div>
+
+            {% if emails_jogados|length > 1 %}
+            <div style="display: flex; justify-content: space-between; margin-top: 30px; border-top: 2px solid #e2e8f0; padding-top: 20px;">
+                <button id="btn-ant" class="nav-btn" style="background: #fff; border: 2px solid #cbd5e1; color: #475569;" disabled>
+                    <span>⬅️</span> {% trans "Anterior" %}
+                </button>
+                <button id="btn-prox" class="nav-btn" style="background: #254d1a; border: none; color: white; box-shadow: 0 4px 6px rgba(37,77,26,0.2);">
+                    {% trans "Próximo" %} <span>➡️</span>
+                </button>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="btn-container">
+            <a href="{% url 'atividades:simulador_setup' %}" class="btn-action btn-jogar">
+                🔄 {% trans "Fazer Outro Cenário" %}
+            </a>
+            
+            <a href="{% url 'atividades:home2' %}" class="btn-action btn-voltar">
+                🏠 {% trans "Voltar ao Início" %}
+            </a>
+        </div>
+    </div>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+body.simulador-view {
+  background-color: var(--musgo-suave, #76a361);
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 20px;
+}
+
+.sim-header {
+  width: 100%;
+  max-width: 1000px;
+  padding: 30px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+}
+
+.sim-pill {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  padding: 12px 24px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #254d1a;
+  font-weight: 900;
+  font-style: italic;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+}
+
+a.sim-pill:hover {
+  background: #254d1a;
+  color: white;
+  transform: scale(1.05);
+}
+
+.sim-main-container {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 40px;
+  position: relative;
+}
+
+/* Painel de Pistas */
+.sim-progress-panel {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  padding: 12px 35px;
+  border-radius: 50px;
+  color: #475569;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+.sim-progress-panel .contador {
+  color: #ef4444;
+  font-size: 1.5rem;
+  background: #fef2f2;
+  padding: 2px 16px;
+  border-radius: 20px;
+}
+
+.sim-browser-mockup {
+  background: #333;
+  border-radius: 30px 30px 0 0;
+  padding: 15px;
+  border-left: 8px solid #4b5563;
+  border-right: 8px solid #4b5563;
+  border-top: 8px solid #4b5563;
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sim-browser-top {
+  background: #e5e7eb;
+  border-radius: 12px 12px 0 0;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.sim-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.sim-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.sim-dots .red {
+  background: #f87171;
+}
+
+.sim-dots .yellow {
+  background: #facc15;
+}
+
+.sim-dots .green {
+  background: #4ade80;
+}
+
+.sim-url-bar {
+  background: white;
+  border-radius: 8px;
+  padding: 6px 15px;
+  flex: 1;
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.sim-browser-bottom {
+  background: #374151;
+  height: 25px;
+  width: 104%;
+  margin-left: -2%;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  margin-bottom: 40px;
+}
+
+.sim-email-body {
+  background: #ffffff;
+  min-height: 400px;
+  padding: 40px;
+  color: #334155;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  border-radius: 0 0 12px 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sim-email-header {
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.sim-email-header span.assunto {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+/* Zonas de Phishing */
+.phish-zone {
+  cursor: help;
+  border-radius: 6px;
+  padding: 2px 6px;
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.phish-zone:hover {
+  background-color: rgba(250, 204, 21, 0.15);
+  border-color: rgba(250, 204, 21, 0.6);
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.2);
+}
+
+.phish-zone.selecionada {
+  background-color: #fef3c7;
+  border-color: #f59e0b;
+  border-style: dashed;
+  color: #b45309;
+  font-weight: bold;
+}
+
+/* Botão Analisar Respostas */
+.sim-btn-proximo {
+  display: inline-block;
+  background: #f59e0b;
+  color: white;
+  padding: 15px 40px;
+  border-radius: 50px;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
+  transition: 0.3s;
+  margin-bottom: 80px;
+  border: none;
+  cursor: pointer;
+}
+
+.sim-btn-proximo:hover {
+  background: #d97706;
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+@media (max-width: 768px) {
+  .sim-header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  .sim-email-body {
+    padding: 20px;
+    font-size: 1rem;
+  }
+
+  .sim-progress-panel {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    width: 90%;
+    justify-content: center;
+  }
+
+  .sim-url-bar {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  .sim-btn-proximo {
+    width: 100%;
+    padding: 15px 20px;
+  }
+}
+
+
+body.modo-escuro .sim-pill {
+  background: rgba(30, 30, 30, 0.6);
+  color: var(--d3-neve-pura);
+  border-color: #444;
+}
+
+body.modo-escuro .sim-pill:hover {
+  background: #333;
+}
+
+
+body.modo-escuro .sim-progress-panel {
+  background: #1e1e1e;
+  color: #cbd5e1;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+body.modo-escuro .sim-progress-panel .contador {
+  background: #450a0a;
+  color: #f87171;
+}
+
+body.modo-escuro .sim-browser-top {
+  background: #2a2a2a;
+}
+
+body.modo-escuro .sim-url-bar {
+  background: #1e1e1e;
+  color: #94a3b8;
+}
+
+body.modo-escuro .sim-email-body {
+  background: #1e1e1e;
+  color: #e2e8f0;
+}
+
+body.modo-escuro .sim-email-header {
+  border-bottom-color: #333;
+}
+
+body.modo-escuro .sim-email-header span.assunto {
+  color: #ffffff;
+}
+
+
+body.modo-escuro .phish-zone:hover {
+  background-color: rgba(250, 204, 21, 0.1);
+  border-color: rgba(250, 204, 21, 0.4);
+}
+
+body.modo-escuro .phish-zone.selecionada {
+  background-color: rgba(245, 158, 11, 0.15);
+  border-color: #f59e0b;
+  color: #fcd34d;
+}

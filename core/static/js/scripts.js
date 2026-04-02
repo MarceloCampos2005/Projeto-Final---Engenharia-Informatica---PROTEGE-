@@ -525,13 +525,13 @@ function testarSenha() {
 
     if (forca < 50) {
         barra.style.backgroundColor = '#ef4444';
-        feedback.innerText =gettext("Fraca: Um hacker demora segundos.");
+        feedback.innerText = gettext("Fraca: Um hacker demora segundos.");
     } else if (forca < 100) {
         barra.style.backgroundColor = '#eab308';
-        feedback.innerText =gettext("Média: Melhor, mas ainda vulnerável.");
+        feedback.innerText = gettext("Média: Melhor, mas ainda vulnerável.");
     } else {
         barra.style.backgroundColor = '#22c55e';
-        feedback.innerText =gettext("Forte: Levaria séculos para ser descoberta!");
+        feedback.innerText = gettext("Forte: Levaria séculos para ser descoberta!");
     }
 }
 
@@ -678,79 +678,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    const btnDica = document.getElementById('btn-dica');
-    const caixaDica = document.getElementById('caixa-dica');
-    const badgeDicas = document.getElementById('badge-dicas');
-
-    if (btnDica && caixaDica) {
-        const questaoAtual = parseInt(btnDica.getAttribute('data-questao'));
-
-        const isNovoQuiz = document.getElementById('intro-overlay') !== null;
-
-        if (questaoAtual === 1 && isNovoQuiz) {
-            sessionStorage.setItem('dicasQuiz', '2');
-        }
-
-        let dicasRestantes = parseInt(sessionStorage.getItem('dicasQuiz') || '2');
-
-        if (badgeDicas) {
-            badgeDicas.innerText = dicasRestantes;
-        }
-
-        // Se já não houver dicas ao carregar a página, fica logo cinzento
-        if (dicasRestantes === 0) {
-            btnDica.style.filter = 'grayscale(100%)';
-            btnDica.style.opacity = '0.6';
-            btnDica.style.cursor = 'not-allowed';
-        }
-
-        let dicaDesbloqueadaNestaPergunta = false;
-
-        btnDica.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            const estaEscondida = window.getComputedStyle(caixaDica).display === 'none';
-
-            if (estaEscondida) {
-                if (!dicaDesbloqueadaNestaPergunta) {
-                    if (dicasRestantes > 0) {
-                        dicasRestantes--;
-                        sessionStorage.setItem('dicasQuiz', dicasRestantes.toString());
-                        if (badgeDicas) badgeDicas.innerText = dicasRestantes;
-                        dicaDesbloqueadaNestaPergunta = true;
-                    } else {
-
-                        return;
-                    }
-                }
-
-                // Mostrar a caixa da dica
-                caixaDica.style.display = 'block';
-                btnDica.style.transform = 'scale(1.2) rotate(10deg)';
-
-                // Manter cinzento se gastou a última agora, senão fica brilhante
-                if (dicasRestantes === 0) {
-                    btnDica.style.filter = 'grayscale(100%)';
-                    btnDica.style.cursor = 'not-allowed';
-                } else {
-                    btnDica.style.filter = 'drop-shadow(0 0 10px #fbbf24)';
-                }
-
-            } else {
-                caixaDica.style.display = 'none';
-                btnDica.style.transform = 'scale(1)';
-
-                // Se ainda tiver dicas, tira os filtros. Se não, volta a cinzento
-                if (dicasRestantes > 0) {
-                    btnDica.style.filter = 'none';
-                } else {
-                    btnDica.style.filter = 'grayscale(100%)';
-                }
-            }
-        });
-    }
-});
 
 
 
@@ -807,3 +734,269 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem("esconderAlertaMFA") === "true") {
+        const alerta = document.getElementById("mfa-alert-box");
+        if (alerta) alerta.style.display = "none";
+    }
+});
+
+function fecharAlertaMFA() {
+    const alerta = document.getElementById("mfa-alert-box");
+    if (alerta) {
+        alerta.style.display = "none";
+        localStorage.setItem("esconderAlertaMFA", "true");
+    }
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const phishZones = document.querySelectorAll('.phish-zone');
+    const contadorDisplay = document.getElementById('contador-pistas');
+    const inputAcertos = document.getElementById('input-acertos');
+    const btnFinalizar = document.getElementById('btn-finalizar');
+    const formResultado = document.getElementById('form-resultado');
+
+    if (phishZones.length > 0 && formResultado) {
+        let pistasClicadas = 0;
+
+
+        phishZones.forEach(zone => {
+            zone.addEventListener('click', function (e) {
+                // Se o utilizador clicar num link dentro do corpo do email, evita que a página mude
+                if (e.target.tagName.toLowerCase() === 'a') {
+                    e.preventDefault();
+                }
+
+                // Liga ou desliga a seleção
+                this.classList.toggle('selecionada');
+
+                // Atualiza o número no contador do ecrã
+                if (this.classList.contains('selecionada')) {
+                    pistasClicadas++;
+                } else {
+                    pistasClicadas--;
+                }
+
+                if (contadorDisplay) {
+                    contadorDisplay.innerText = pistasClicadas;
+                }
+            });
+        });
+
+        if (btnFinalizar) {
+            btnFinalizar.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // pistas selcionadas
+                let acertosReais = document.querySelectorAll('.phish-zone.selecionada[data-is-phishing="true"]').length;
+
+
+                if (inputAcertos) {
+                    inputAcertos.value = acertosReais;
+                }
+
+                //formulário
+                formResultado.submit();
+            });
+        }
+    }
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    //botões de modo do Simulador
+    const radiosModo = document.querySelectorAll('input[name="modo_simulador"]');
+    const zonaTemporizador = document.getElementById('zona-temporizador');
+    const checkTemporizador = document.getElementById('check-temporizador');
+
+    //avança se estivermos na página de Setup do Simulador
+    if (radiosModo.length > 0 && zonaTemporizador) {
+        radiosModo.forEach(radio => {
+            radio.addEventListener('change', function () {
+                if (this.value === 'rapido') {
+                    //escolheu Rápido, mostra a opção do temporizador
+                    zonaTemporizador.classList.remove('hidden');
+                } else {
+                    //escolheu Detetive, esconde e desmarca a caixa
+                    zonaTemporizador.classList.add('hidden');
+                    if (checkTemporizador) {
+                        checkTemporizador.checked = false;
+                    }
+                }
+            });
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const emails = document.querySelectorAll('.correcao-email');
+    const btnAnt = document.getElementById('btn-ant');
+    const btnProx = document.getElementById('btn-prox');
+    const contador = document.getElementById('contador-emails');
+
+    let currentIndex = 0;
+
+    if (emails.length > 0) {
+
+        function atualizarCarrossel() {
+           
+            emails.forEach((el, index) => {
+                if (index === currentIndex) {
+                    el.style.display = 'block';
+                    el.style.animation = 'none';
+                    el.offsetHeight; 
+                    el.style.animation = 'fadeIn 0.4s ease-in-out';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+
+            //botão Anterior
+            if (btnAnt) {
+                btnAnt.disabled = (currentIndex === 0);
+                btnAnt.style.opacity = (currentIndex === 0) ? '0.5' : '1';
+            }
+
+            //botão Próximo
+            if (btnProx) {
+                btnProx.disabled = (currentIndex === emails.length - 1);
+                btnProx.style.opacity = (currentIndex === emails.length - 1) ? '0.5' : '1';
+            }
+            if (contador) {
+                contador.innerText = `E-mail ${currentIndex + 1} de ${emails.length}`;
+            }
+        }
+
+        //Botão Anterior
+        if (btnAnt) {
+            btnAnt.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    atualizarCarrossel();
+                }
+            });
+        }
+
+        //Botão Próximo
+        if (btnProx) {
+            btnProx.addEventListener('click', () => {
+                if (currentIndex < emails.length - 1) {
+                    currentIndex++;
+                    atualizarCarrossel();
+                }
+            });
+        }
+
+       
+        atualizarCarrossel();
+    }
+});
+
+
+// Variáveis para o simulador
+let simRespondido = false;
+let ePhishingReal = false;
+let totalArmadilhas = 0;
+let totalPistasView = 0;
+
+document.addEventListener("DOMContentLoaded", function() {
+   
+    const simDados = document.getElementById('simulador-dados');
+    
+   
+    if (simDados) {
+        // Lê os dados do Django pelo HTML
+        ePhishingReal = simDados.getAttribute('data-e-phishing') === 'true';
+        totalArmadilhas = parseInt(simDados.getAttribute('data-total-armadilhas')) || 0;
+        const temTimer = simDados.getAttribute('data-timer') === 'true';
+        
+        totalPistasView = totalArmadilhas + (ePhishingReal ? 2 : 0);
+
+        if (temTimer) {
+            iniciarCronometro();
+        }
+    }
+});
+
+
+window.avaliarEmail = function(escolhaDoUtilizador) {
+    if (simRespondido) return;
+    simRespondido = true;
+
+    let acertou = false;
+
+    if (escolhaDoUtilizador === 'phishing' && ePhishingReal) {
+        acertou = true;
+    } else if (escolhaDoUtilizador === 'seguro' && !ePhishingReal) {
+        acertou = true;
+    }
+
+    const inputAcertos = document.getElementById('input-acertos');
+    
+    if (acertou) {
+        inputAcertos.value = totalPistasView;
+    } else {
+        inputAcertos.value = 0;
+    }
+
+    const btnClicado = escolhaDoUtilizador === 'phishing' 
+        ? document.querySelector('.btn-phish') 
+        : document.querySelector('.btn-safe');
+        
+    btnClicado.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A registar...';
+    
+    document.querySelectorAll('.btn-decisao').forEach(btn => {
+        btn.style.opacity = '0.6';
+        btn.disabled = true;
+        btn.style.cursor = 'not-allowed';
+    });
+
+    setTimeout(() => {
+        document.getElementById('form-rapido').submit();
+    }, 400);
+};
+
+
+function iniciarCronometro() {
+    let timeLeft = 15; 
+    const tempoTotal = 15;
+    const timerElement = document.getElementById('time-left');
+
+    const countdown = setInterval(() => {
+        if (simRespondido) {
+            clearInterval(countdown); 
+            return;
+        }
+
+        timeLeft--;
+        const percentage = (timeLeft / tempoTotal) * 100;
+        
+        if (timerElement) {
+            timerElement.style.width = percentage + '%';
+            
+            if (timeLeft <= 5) {
+                timerElement.style.backgroundColor = '#ef4444'; 
+            }
+        }
+
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            simRespondido = true;
+            
+            document.getElementById('input-acertos').value = 0; 
+            
+            document.querySelectorAll('.btn-decisao').forEach(btn => {
+                btn.innerHTML = 'Tempo Esgotado! ⏱️';
+                btn.style.opacity = '0.6';
+                btn.disabled = true;
+            });
+            
+            setTimeout(() => {
+                document.getElementById('form-rapido').submit();
+            }, 600);
+        }
+    }, 1000);
+}

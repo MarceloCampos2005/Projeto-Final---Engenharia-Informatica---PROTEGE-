@@ -1,5 +1,10 @@
 from gettext import translation
+import os
+import time
 import random
+from django.utils import timezone
+from datetime import timedelta
+from urllib import response
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -7,7 +12,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from urllib3 import request
-from .models import QuizPergunta, OpcaoPergunta, ResultadoQuiz, HistoricoQuiz
+from users.views import perfil
+from .models import QuizPergunta, OpcaoPergunta, ResultadoQuiz, HistoricoQuiz, ResultadoSimulador
 from django.utils import translation
 from django.conf import settings
 import json
@@ -15,35 +21,47 @@ from django_otp import user_has_device
 from django.views.decorators.vary import vary_on_cookie
 from .models import emails
 from users.models import Perfil
+from django.views.decorators.http import require_POST
+
+from django.views.decorators.cache import never_cache
+
 
 #verifica se o utilizador tem login feito, se tiver vai ao perfil dele ver qual a lingua guardada e ativa, senao tenta ler um cookie da sessao
 #o translation.activate(lang) faz com que o django use o ficheiro .po para a lingua
+@never_cache
 @vary_on_cookie # Evita que o browser mostre a versão em cache da língua errada
 def home2(request):
-    #Definir a língua padrão
+    #Definir a língua padrão 
     lang = 'pt'
+    hoje = timezone.now().date()
+    mfa_ativo = False
     
     if request.user.is_authenticated:
         lang = request.user.perfil.lingua
+        perfil = request.user.perfil
         #Atualizar a sessão se ela estiver diferente do perfil
         if request.session.get(settings.LANGUAGE_COOKIE_NAME) != lang:
             request.session[settings.LANGUAGE_COOKIE_NAME] = lang
             request.session['_language'] = lang
-    else:
-        lang = request.session.get(settings.LANGUAGE_COOKIE_NAME, 'pt')
 
-    translation.activate(lang)
-
-    mfa_ativo = False
-    if request.user.is_authenticated:
+        
+        #Verifica se o utilizador tem o dispositivo MFA configurado
         mfa_ativo = user_has_device(request.user)
+        
+        
+        perfil.save()   
+        
+    else:
+        # Se NÃO estiver logado
+        lang = request.session.get(settings.LANGUAGE_COOKIE_NAME, 'pt')
+        
+    translation.activate(lang)
+             
+    response = render(request, 'atividades/home2.html', {
+        'mfa_ativo': mfa_ativo        
+    })
     
-    response = render(request, 'atividades/home2.html', {'mfa_ativo': mfa_ativo})
-    
-    # Garantir que o cookie do browser também é atualizado
-    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
     return response
-
 
 @login_required
 @require_http_methods(["POST"])
@@ -140,8 +158,18 @@ def quiz(request):
     #vai buscar a pergunta e as ocoes para a resposta
     pergunta = QuizPergunta.objects.get(id=indice[atual])
     opcoes = pergunta.opcoes.all().order_by('id') 
+    perfil = request.user.perfil
+    dica_revelada = request.session.pop('dica_revelada', False)
+    
+    
+    mostrar_intro = False
+    if atual == 0:
+        # Garante que só mostra 1 vez por quiz e NÃO mostra se a dica foi pedida
+        if request.session.get('intro_visto_quiz') != indice[0] and not dica_revelada:
+            mostrar_intro = True
+            request.session['intro_visto_quiz'] = indice[0]
 
-    #o que vai ser mostrado no html(
+    #o que vai ser mostrado no html
     #popup false porque so e para a parecer depois de clicar na resposta
     context = {
         'pergunta': pergunta,
@@ -149,7 +177,9 @@ def quiz(request):
         'numero': atual + 1,
         'total': len(indice),
         'mostrar_popup': False,
-        'tema_da_pergunta': pergunta.tema
+        'tema_da_pergunta': pergunta.tema,
+        'dica_revelada': dica_revelada,
+        'mostrar_intro': mostrar_intro,
     }
 
 
@@ -157,10 +187,21 @@ def quiz(request):
         resposta_letra = request.POST.get('resposta')
 
         #ve o resultado do post e compara com a resposta que e correta
-        esta_correto = (resposta_letra == pergunta.resposta_correta)
-
+        
         #mete as respostas numa lista pa depois mostrar
         respostas = request.session.get('respostas_utilizador', [])
+        if request.POST.get('pedir_dica') == '1':
+            if perfil.dicas_disponiveis > 0:
+                perfil.dicas_disponiveis -= 1
+                perfil.save()
+                # Avisa a página para mostrar a dica e recarrega
+                request.session['dica_revelada'] = True
+            else:
+                messages.error(request, "Não tens dicas suficientes! Volta amanhã.")
+            return redirect('atividades:quiz')
+        
+        resposta_letra = request.POST.get('resposta')
+        esta_correto = (resposta_letra == pergunta.resposta_correta)
 
         respostas.append({
             'pergunta': pergunta.id,
@@ -172,6 +213,10 @@ def quiz(request):
         #se acertar aumenta a pontuacao
         if esta_correto:
             request.session['pontuacao'] += 1
+        
+        
+            
+        
 
         #mete o popup a mostrar a explicacao e se ta correto ou errado depois de carregar no botao de resposta
         context.update({
@@ -271,6 +316,7 @@ def quiz_final(request):
         
         xp_necessario = perfil.nivel_geral * 100
 
+    
 
 
     perfil.save()
@@ -307,9 +353,11 @@ def quiz_final(request):
 def historico_atividades(request):
     #vai buscar os resultados do quiz do utilizadore ordenados pela data
     resultados = ResultadoQuiz.objects.filter(perfil=request.user.perfil).order_by('-data_conclusao')
+    resultados_simulador = ResultadoSimulador.objects.filter(perfil=request.user.perfil).order_by('-data_conclusao')
     
     return render(request, 'atividades/historico.html', {
-        'resultados': resultados
+        'resultados': resultados,
+        'simuladores': resultados_simulador
     })
 
 
@@ -334,6 +382,17 @@ def detalhe_historico(request, resultado_id):
         'respostas': respostas
     })
 
+from .models import ResultadoSimulador
+
+@login_required
+def detalhe_simulador(request, resultado_id):
+    resultado = ResultadoSimulador.objects.get(id=resultado_id, perfil=request.user.perfil)
+    
+    return render(request, 'atividades/detalhe_simulador.html', {
+        'resultado': resultado
+    })
+    
+    
 @login_required
 def simulador_setup(request):
     return render(request, 'atividades/simulador_setup.html')
@@ -341,18 +400,181 @@ def simulador_setup(request):
 #meter o utilizador a poder escolher se quer analisar email ou detetar o phishing
 @login_required
 def preparar_simulador(request):
-   
     
+    if request.method == 'POST':
+            modo = request.POST.get('modo_simulador')
+            quantidade = int(request.POST.get('num_emails',5))
+            tempo = request.POST.get('com_tempo') == 'on'
+
+
+            lingua = request.user.perfil.lingua
+            nivel = request.user.perfil.nivel_simulador
+
+            #vai buscar os emails
+            lista_emails = list(emails.objects.filter(lingua=lingua, nivel_dificuldade__lte = nivel))
+
+            if not lista_emails:
+                messages.error(request,"Não ha simuladores para o seu nivel!")
+                return redirect('atividades:simulador_setup')
+                
+            num_final = min(len(lista_emails), quantidade)
+
+            selecionados = [e.id for e in random.sample(lista_emails, num_final)]
+            request.session['sim_indice'] = selecionados
+            request.session['sim_atual'] = 0
+            request.session['sim_pontuacao'] = 0
+            request.session['sim_modo'] = modo
+            request.session['sim_timer'] = tempo
+
+            return redirect('atividades:simulador')
+
     return redirect('atividades:simulador_setup')
 
 
 @login_required
 def simulador(request):
-    return render(request, 'atividades/simulador_setup.html')
+    #ve se a lista foi criada
+    if 'sim_indice' not in request.session:
+        return redirect('atividades:simulador_setup')
+    
+    indice = request.session['sim_indice']
+    atual = request.session['sim_atual']
+
+    #se ja jogou os emails todos vai para o fim
+    if atual >= len(indice):
+        return redirect('atividades:simulador_final')
+        
+
+    # Escolhe um e-mail aleatoriamente
+    email_atual = emails.objects.get(id = indice[atual])
+    
+    modo = request.session.get('sim_modo', 'detetive')
+    tempo = request.session.get('sim_timer',False)
+
+
+
+    context = {
+        'email': email_atual,
+        'numero': atual + 1,
+        'total':len(indice),
+        'modo':modo,
+        'timer': tempo
+    }
+
+    if modo =='rapido':
+        return render (request, 'atividades/simulador_escolha.html',context)
+    else:
+        return render (request, 'atividades/simulador.html',context)
+
 @login_required
 def simulador_final(request):
+    if request.method != 'POST' or 'sim_indice' not in request.session:
+        return redirect('atividades:home2')
+
+    indice = request.session.get('sim_indice', [])
+    atual = request.session.get('sim_atual', 0)
+
+    #Avaliar o email atual antes de avançar
+    email_jogado = emails.objects.get(id=indice[atual])
+    acertos = int(request.POST.get('acertos', 0))
+    modo = request.session.get('sim_modo', 'detetive')
+
+    total_pistas_real = email_jogado.total_armadilhas + (2 if email_jogado.e_phishing else 0)
     
-    return render(request, 'atividades/simulador_final.html')
+    if modo == 'rapido':
+        tipo_sim = 'classificacao'
+        foi_sucesso = (acertos >= total_pistas_real) if total_pistas_real > 0 else True
+    else:
+        tipo_sim = 'identificacao'
+        # No modo detetive, acertou se encontrou todas as armadilhas
+        foi_sucesso = (acertos == email_jogado.total_armadilhas) if email_jogado.e_phishing else True
+        
+        
+    ResultadoSimulador.objects.create(
+        perfil=request.user.perfil,
+        email=email_jogado,
+        tipo_simulacao=tipo_sim,
+        acertou=foi_sucesso,
+        armadilhas_encontradas=acertos if tipo_sim == 'identificacao' else 0
+    )
+    
+    if total_pistas_real > 0:
+        precisao_atual = (acertos / total_pistas_real) * 100
+    else:
+        precisao_atual = 100.0
+
+    if precisao_atual == 100:
+        pontos = 10
+    elif precisao_atual >= 70:
+        pontos = 5
+    elif precisao_atual >= 0:
+        pontos = 1
+    else:
+        pontos = 0
+
+    #Acumula na sessão
+    request.session['sim_pontuacao'] = request.session.get('sim_pontuacao', 0) + pontos
+    request.session['sim_soma_precisao'] = request.session.get('sim_soma_precisao', 0) + precisao_atual
+
+    #Avança para o proximo e-mail
+    request.session['sim_atual'] += 1
+    novo_atual = request.session['sim_atual']
+
+    if novo_atual < len(indice):
+        return redirect('atividades:simulador')
+
+    perfil = request.user.perfil
+    quantidade_emails = len(indice)
+    pontos_totais = request.session.get('sim_pontuacao', 0)
+    media_precisao = request.session.get('sim_soma_precisao', 0) / quantidade_emails
+
+    # Atualizar Perfil
+    perfil.simuladores_realizados += quantidade_emails
+    perfil.soma_percentagens_simulador += media_precisao
+    perfil.pontuacao_total_simulador += pontos_totais
+    
+    subiu = False
+    while perfil.pontuacao_total_simulador >= 30:
+        perfil.nivel_simulador += 1
+        perfil.pontuacao_total_simulador -= 30
+        subiu = True
+
+    xp_geral_ganho = pontos_totais * 3 
+    perfil.xp_geral += xp_geral_ganho
+    subiu_geral = False
+    
+    xp_necessario = perfil.nivel_geral * 100
+    while perfil.xp_geral >= xp_necessario:
+        perfil.xp_geral -= xp_necessario
+        perfil.nivel_geral += 1
+        subiu_geral = True
+        xp_necessario = perfil.nivel_geral * 100
+    
+    perfil.save()
+    emails_jogados = emails.objects.filter(id__in=indice)
+    modo_jogado = request.session.get('sim_modo', 'detetive')
+    
+    context = {
+        'pontos_totais': pontos_totais,
+        'xp_geral_ganho': xp_geral_ganho,
+        'media_precisao': round(media_precisao, 1),
+        'quantidade_emails': quantidade_emails,
+        'xp_atual': perfil.pontuacao_total_simulador,
+        'nivel_atual': perfil.nivel_simulador,
+        'subiu': subiu,
+        'subiu_geral': subiu_geral,
+        'nivel_geral': perfil.nivel_geral,
+        'emails_jogados': emails_jogados,
+        'modo': modo_jogado
+    }
+
+    # Limpa a sessão no final de tudo
+    x = ['sim_indice', 'sim_atual', 'sim_pontuacao', 'sim_soma_precisao', 'sim_modo', 'sim_timer']
+    for chave in x:
+        if chave in request.session:
+            del request.session[chave]
+
+    return render(request, 'atividades/simulador_final.html', context)
 
 #aqui ativa a traducao na pagina do guia_emergencia
 def guia_emergencia(request):
@@ -408,3 +630,13 @@ def leaderboard(request):
 def quiz_setup(request):
     return render(request, 'atividades/quiz_setup.html')
 
+
+
+@login_required 
+@require_POST
+def analisar_phishing_ia(request):
+    return JsonResponse({'status': 'Funcionalidade em desenvolvimento. Em breve!'})
+
+
+def detetor_ia(request):
+    return render(request, 'atividades/detetor_ia.html')

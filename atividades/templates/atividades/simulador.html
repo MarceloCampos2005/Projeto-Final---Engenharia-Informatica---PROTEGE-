@@ -1,0 +1,79 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Simulador de Phishing" %} | Protege+</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'atividades/css/simulador.css' %}">
+    <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
+</head>
+
+<body class="simulador-view {% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% else %}normal normal{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
+
+    <header class="sim-header">
+        <a href="{% url 'atividades:home2' %}" class="sim-pill">← {% trans "Sair do Treino" %}</a>
+        <div class="sim-pill">{% trans "Cenário" %} {{ numero }} {% trans "de" %} {{total}}</div>
+    </header>
+
+    <main class="sim-main-container">
+    <div class="sim-progress-panel">
+        <span>🕵️‍♂️ {% trans "Pistas Selecionadas:" %}</span>
+        <span id="contador-pistas" class="contador">0</span>
+    </div>
+
+    <div class="sim-browser-mockup">
+        <div class="sim-browser-top">
+            <div class="sim-dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div>
+            <div class="sim-url-bar phish-zone" 
+                 data-is-phishing="{{ email.e_phishing|lower }}" 
+                 data-explicacao="{% trans 'Domínio Suspeito! O endereço do remetente não corresponde à entidade oficial ou tem caracteres alterados.' %}">
+                {% trans "De:" %} <span style="color: #1f2937;">{{ email.remetente }}</span>
+            </div>
+        </div>
+
+        <div class="sim-email-body">
+            <div class="sim-email-header">
+                <p>
+                    <strong>{% trans "Assunto:" %}</strong> 
+                    <span class="phish-zone assunto" 
+                          data-is-phishing="{{ email.e_phishing|lower }}" 
+                          data-explicacao="{% trans 'O assunto do e-mail é utilizado para criar um falso sentido de urgência ou curiosidade.' %}">
+                        {{ email.assunto }}
+                    </span>
+                </p>
+            </div>
+            
+            <div class="sim-email-content">
+                {{ email.corpo|safe }}
+            </div>
+        </div>
+    </div>
+    <div class="sim-browser-bottom"></div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <form id="form-resultado" action="{% url 'atividades:simulador_final' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="acertos" id="input-acertos" value="0"> 
+            
+            <button type="button" id="btn-finalizar" class="sim-btn-proximo" 
+                    data-is-ultimo="{% if numero >= total %}true{% else %}false{% endif %}">
+                
+                {% if numero < total %}
+                    {% trans "Próximo E-mail" %} →
+                {% else %}
+                    ✅ {% trans "Analisar as minhas respostas" %}
+                {% endif %}
+                
+            </button>
+        </form>
+    </div>
+    </main>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    
+</body>
+</html>

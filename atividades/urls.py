@@ -23,4 +23,7 @@ urlpatterns = [
     path('preparar_quiz/', views.preparar_quiz, name='preparar_quiz'),
     path('preparar_simulador/', views.preparar_simulador, name='preparar_simulador'),
     path('simulador_setup/', views.simulador_setup, name='simulador_setup'),
+    path('api/analisar-phishing-ia/', views.analisar_phishing_ia, name='analisar_phishing_ia'),
+    path('detetor_ia/', views.detetor_ia, name='detetor_ia'),
+    path('historico/simulador/<int:resultado_id>/', views.detalhe_simulador, name='detalhe_simulador'),
 ]
