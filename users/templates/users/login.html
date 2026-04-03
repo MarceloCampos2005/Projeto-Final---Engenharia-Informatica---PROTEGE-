@@ -104,14 +104,14 @@
                     {% if wizard.steps.current == 'auth' %}
                         <div class="social-login-container">
                             <div class="divisor-linha"><span>ou</span></div>
-                        {% comment %}
+                        
                             <a href="{% provider_login_url 'google' %}" class="btn-google">
                                 <div class="google-icon-wrapper">
                                     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo">
                                 </div>
                                 <span class="btn-text">{% trans "Entrar com Google" %}</span>
                             </a>
-                        {% endcomment %}
+                       
                         </div>
                     {% endif %}
                     
