@@ -1,51 +1,62 @@
-body.protanopia #content-wrapper,
-body.protanopia .header-main-dashboard,
-body.protanopia .header-main,
-body.protanopia .footer-fixed {
-  filter: saturate(0.5) hue-rotate(-20deg) !important;
+/* =========================================
+   FILTROS DE ACESSIBILIDADE GLOBAIS (LENTE)
+========================================= */
+/* 1. Cria a lente invisível sobre o ecrã inteiro */
+body.protanopia::before,
+body.deuteranopia::before,
+body.tritanopia::before,
+body.achromatopsia::before,
+body.alto-contraste::before,
+body.contraste-invertido::before {
+  content: "";
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+  pointer-events: none; /* Garante que consegues clicar nos botões por baixo */
+  z-index: 9998; /* Fica logo abaixo do menu de acessibilidade (9999) */
 }
 
-body.deuteranopia #content-wrapper,
-body.deuteranopia .header-main-dashboard,
-body.deuteranopia .header-main,
-body.deuteranopia .footer-fixed {
-  filter: saturate(0.5) hue-rotate(-45deg) !important;
+/* 2. Aplica o filtro na lente */
+body.protanopia::before {
+  backdrop-filter: saturate(0.5) hue-rotate(-20deg);
+  -webkit-backdrop-filter: saturate(0.5) hue-rotate(-20deg);
 }
 
-body.tritanopia #content-wrapper,
-body.tritanopia .header-main-dashboard,
-body.tritanopia .header-main,
-body.tritanopia .footer-fixed {
-  filter: hue-rotate(180deg) saturate(0.6) !important;
+body.deuteranopia::before {
+  backdrop-filter: saturate(0.5) hue-rotate(-45deg);
+  -webkit-backdrop-filter: saturate(0.5) hue-rotate(-45deg);
 }
 
-body.achromatopsia #content-wrapper,
-body.achromatopsia .header-main-dashboard,
-body.achromatopsia .header-main,
-body.achromatopsia .footer-fixed {
-  filter: grayscale(1) !important;
+body.tritanopia::before {
+  backdrop-filter: hue-rotate(180deg) saturate(0.6);
+  -webkit-backdrop-filter: hue-rotate(180deg) saturate(0.6);
 }
 
-body.alto-contraste #content-wrapper,
-body.alto-contraste .header-main-dashboard,
-body.alto-contraste .header-main,
-body.alto-contraste .footer-fixed {
-  filter: contrast(180%) brightness(110%) !important;
+body.achromatopsia::before {
+  backdrop-filter: grayscale(1);
+  -webkit-backdrop-filter: grayscale(1);
 }
 
-body.contraste-invertido #content-wrapper,
-body.contraste-invertido .header-main-dashboard,
-body.contraste-invertido .header-main,
-body.contraste-invertido .footer-fixed {
-  filter: invert(100%) hue-rotate(180deg) !important;
+body.alto-contraste::before {
+  backdrop-filter: contrast(180%) brightness(110%);
+  -webkit-backdrop-filter: contrast(180%) brightness(110%);
 }
 
-body.contraste-invertido,
-body.contraste-invertido #content-wrapper {
-  background-color: #000000 !important;
+body.contraste-invertido::before {
+  backdrop-filter: invert(100%) hue-rotate(180deg);
+  -webkit-backdrop-filter: invert(100%) hue-rotate(180deg);
 }
 
-/* Modo escuro */
+/* Força o fundo a branco para que a lente o inverta para preto corretamente */
+body.contraste-invertido {
+  background-color: #ffffff !important;
+}
+
+/* =========================================
+   MODO ESCURO
+========================================= */
 body.modo-escuro .doc-sidebar,
 body.modo-escuro .doc-card {
   background: #1e1e1e !important;
@@ -95,11 +106,14 @@ body.modo-escuro .accessibility-pill {
 body.modo-escuro .menu-btn {
   color: #ffffff;
 }
+
 body.modo-escuro .menu-btn:hover {
   background: #333;
 }
 
-/*Footer e menu de acessibilidade*/
+/* =========================================
+   FOOTER E MENU DE ACESSIBILIDADE
+========================================= */
 .footer-fixed {
   position: fixed !important;
   bottom: 25px;
@@ -143,6 +157,7 @@ body.modo-escuro .menu-btn:hover {
 .accessibility-pill:hover {
   padding-left: 20px;
 }
+
 .accessibility-pill:hover .help-label {
   max-width: 150px;
   opacity: 1;
@@ -182,6 +197,7 @@ body.modo-escuro .menu-btn:hover {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -227,7 +243,9 @@ body.modo-escuro .menu-btn:hover {
   display: none !important;
 }
 
-/*Guia de Emergência */
+/* =========================================
+   GUIA DE EMERGÊNCIA
+========================================= */
 body.modo-escuro #guia-instrucoes,
 body.modo-escuro .section-subtitle {
   color: #ffffff !important;
@@ -238,4 +256,33 @@ body.modo-escuro .step-item {
   background: #1e1e1e !important;
   border-color: #333 !important;
   color: #ffffff !important;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+@media (max-width: 768px) {
+  .footer-fixed {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .accessibility-pill {
+    padding: 6px 10px;
+  }
+
+  .accessibility-pill .help-label {
+    display: none;
+  }
+
+  .accessibility-menu {
+    width: 180px;
+    padding: 1rem;
+    right: 0;
+  }
+
+  .access-icon {
+    width: 35px;
+    height: 35px;
+  }
 }

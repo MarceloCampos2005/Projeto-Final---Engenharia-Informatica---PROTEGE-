@@ -30,7 +30,7 @@ body {
   width: 100%;
   background-color: var(--musgo-suave) !important;
   transition: filter 0.3s ease;
-  overflow: hidden;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -502,10 +502,10 @@ img {
 }
 
 .btn-action-primary:hover {
-  background: var(--d3-neon-leaf);
+  background: var(--d3-verde-noite);
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(32, 194, 20, 0.3);
-  color: var(--d3-verde-noite);
+  color: #ffffff;
 }
 
 @media (max-width: 992px) {
@@ -826,4 +826,409 @@ img {
     left: 5vw;
     top: 5rem;
   }
+}
+
+.btn-ai-special {
+  background: linear-gradient(135deg, rgba(32, 194, 20, 0.2), rgba(255, 255, 255, 0.5)) !important;
+  border: 2px solid #20c214 !important;
+  position: relative;
+  overflow: visible;
+}
+
+.btn-ai-special:hover {
+  box-shadow: 0 0 15px rgba(32, 194, 20, 0.4);
+  transform: scale(1.05);
+}
+
+.badge-new {
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  background: #ef4444;
+  color: white;
+  font-size: 0.6rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 900;
+  animation: pulseNew 2s infinite;
+}
+
+@keyframes pulseNew {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.mfa-achievement-alert.compact {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 217, 0, 0.288);
+  border: 1px dashed rgba(255, 200, 0, 0.932);
+  padding: 12px 15px;
+  border-radius: 12px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.mfa-achievement-alert.compact:hover {
+  background: rgba(255, 215, 0, 0.15);
+  border-style: solid;
+}
+
+.mfa-alert-icon {
+  font-size: 1.8rem;
+}
+
+.mfa-alert-content {
+  flex: 1;
+}
+
+.mfa-alert-content strong {
+  display: block;
+  color: #b8860b;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+  font-weight: 900;
+}
+
+.mfa-alert-content p {
+  color: var(--d3-verde-noite);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.btn-mfa-alert-small {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffcc00, #ffaa00);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px rgba(255, 170, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.btn-mfa-alert-small:hover {
+  transform: scale(1.05);
+  color: white;
+}
+
+.btn-close-alert {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: #b8860b;
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.btn-close-alert:hover {
+  opacity: 1;
+  color: #ff4b4b;
+}
+
+/*STREAK COMPACTA*/
+.streak-side-panel {
+  background: linear-gradient(to right, rgba(255, 127, 95, 0.445), rgba(254, 180, 123, 0.418));
+  border: 1px solid rgba(255, 126, 95, 0.2);
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.streak-side-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.streak-side-fire {
+  font-weight: 800;
+  color: #d92626;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.streak-side-dicas {
+  font-weight: 700;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.streak-side-track {
+  position: relative;
+  background: rgba(0, 0, 0, 0.05);
+  height: 8px;
+  border-radius: 10px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.streak-side-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  border-radius: 10px;
+  transition: width 1s ease-in-out;
+}
+
+.streak-side-checkpoints {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ss-cp {
+  background: white;
+  color: #9ca3af;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 2px solid #e5e7eb;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.ss-cp.reached {
+  color: #d92626;
+  border-color: #ff7e5f;
+  box-shadow: 0 0 8px rgba(255, 126, 95, 0.4);
+  transform: scale(1.1);
+}
+
+.ai-floating-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  /* Colocado à esquerda para equilibrar com a acessibilidade que está à direita */
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  /* Cores "IA/Futuristas" */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+}
+
+.ai-floating-btn:hover {
+  transform: scale(1.15) translateY(-5px);
+  box-shadow: 0 15px 35px rgba(168, 85, 247, 0.6);
+}
+
+/* Pequena animação de flutuar */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.ai-floating-btn {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* =========================================
+   ACESSIBILIDADE (MODO ESCURO) - HOME2
+========================================= */
+
+/* Painel de Missões e XP */
+body.modo-escuro .mission-panel {
+  background: rgba(30, 30, 30, 0.8);
+  border-color: #333;
+}
+
+body.modo-escuro .mission-task {
+  color: var(--d3-neve-pura);
+}
+
+body.modo-escuro .mission-level {
+  background: #333;
+  color: #e2e8f0;
+}
+
+body.modo-escuro .xp-bar-bg {
+  background-color: #333;
+}
+
+/* Dropdown do Perfil */
+body.modo-escuro .dropdown-menu {
+  background: rgba(30, 30, 30, 0.85);
+  border-color: #444;
+}
+
+body.modo-escuro .dropdown-username,
+body.modo-escuro .dropdown-item {
+  color: #e2e8f0;
+}
+
+body.modo-escuro .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+body.modo-escuro .divider {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body.modo-escuro .dropdown-label {
+  color: #94a3b8;
+}
+
+body.modo-escuro .streak-side-panel {
+  background: linear-gradient(to right, rgba(200, 70, 50, 0.2), rgba(200, 100, 50, 0.2));
+  border-color: rgba(255, 126, 95, 0.2);
+}
+
+body.modo-escuro .streak-side-dicas {
+  background: #422006;
+  color: #fcd34d;
+}
+
+body.modo-escuro .ss-cp {
+  background: #1e1e1e;
+  border-color: #4b5563;
+  color: #9ca3af;
+}
+
+body.modo-escuro .mfa-achievement-alert.compact {
+  background: rgba(200, 150, 0, 0.15);
+  border-color: rgba(200, 150, 0, 0.5);
+}
+
+body.modo-escuro .section-divider .shape-fill {
+  fill: #1e1e1e !important;
+}
+
+
+body.modo-escuro .threat-item {
+  background: #1e1e1e;
+  border-color: #333;
+
+}
+
+body.modo-escuro .threat-title {
+  color: var(--d3-neve-pura);
+}
+
+body.modo-escuro .solution-banner {
+  background: #1e1e1e;
+  border: 1px solid #333;
+}
+
+body.modo-escuro .sol-card {
+  background: rgba(40, 40, 40, 0.8);
+  border-color: #555;
+}
+
+body.modo-escuro .sol-card h3 {
+  color: var(--d3-neve-pura);
+}
+
+body.modo-escuro .sol-card p {
+  color: #cbd5e1;
+}
+
+body.modo-escuro .solution-footer-text {
+  color: #94a3b8;
+}
+
+body.modo-escuro,
+body.modo-escuro #content-wrapper,
+body.modo-escuro .home-info-section {
+  background-color: #121212 !important;
+}
+
+body.modo-escuro .section-divider .shape-fill {
+  fill: #121212 !important;
+}
+
+body.modo-escuro .serif-title,
+body.modo-escuro .hero-subtitle,
+body.modo-escuro .threat-title {
+  color: #ffffff !important;
+}
+
+
+#content-wrapper {
+  filter: inherit !important;
+  overflow: visible !important;
+}
+
+.home-info-section,
+.section-divider,
+.solution-banner {
+  transform: none !important;
+  perspective: none !important;
+}
+
+.threat-item,
+.sol-card {
+  backdrop-filter: none !important;
+}
+
+
+body.modo-escuro .section-divider .shape-fill {
+  fill: #121212 !important;
+}
+
+body.modo-escuro .home-info-section {
+  background-color: #121212 !important;
+}
+
+body.modo-escuro .solution-banner {
+  background: #1e1e1e !important;
+  border: 1px solid #333;
+}
+
+body.modo-escuro .threat-item {
+  background: #1e1e1e !important;
+  border-color: #444 !important;
 }

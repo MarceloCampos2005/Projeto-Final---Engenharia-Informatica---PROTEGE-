@@ -22,7 +22,6 @@ from django.views.decorators.vary import vary_on_cookie
 from .models import emails
 from users.models import Conquista, Perfil
 from django.views.decorators.http import require_POST
-from google import genai
 from dotenv import load_dotenv
 from openai import OpenAI
 from django.views.decorators.cache import never_cache
