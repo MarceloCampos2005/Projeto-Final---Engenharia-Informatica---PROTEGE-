@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Protege+ JS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-09 22:36+0000\n"
+"POT-Creation-Date: 2026-04-02 00:14+0100\n"
 "PO-Revision-Date: 2026-03-09 22:55+0000\n"
 "Last-Translator: Gemini\n"
 "Language-Team: English\n"
@@ -17,227 +17,689 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\core\static\js\scripts.js:228
+#: .\core\static\js\scripts.js:232
 msgid "Cliquei num link ou descarreguei algo:"
 msgstr "I clicked a link or downloaded something:"
 
-#: .\core\static\js\scripts.js:230
+#: .\core\static\js\scripts.js:234
 msgid "Desliga a Internet (Wi-Fi ou Dados) imediatamente."
 msgstr "Disconnect the Internet (Wi-Fi or Data) immediately."
 
-#: .\core\static\js\scripts.js:231
+#: .\core\static\js\scripts.js:235
 msgid "Não introduzas mais nenhuma palavra-passe nesse dispositivo."
 msgstr "Do not enter any more passwords on this device."
 
-#: .\core\static\js\scripts.js:232
+#: .\core\static\js\scripts.js:236
 msgid "Corre um antivírus completo para verificar se há malware."
 msgstr "Run a full antivirus scan to check for malware."
 
-#: .\core\static\js\scripts.js:233
-msgid "Se meteste dados num site, muda a password original noutro dispositivo seguro."
-msgstr "If you entered data on a site, change the original password on another secure device."
-
 #: .\core\static\js\scripts.js:237
+msgid ""
+"Se meteste dados num site, muda a password original noutro dispositivo "
+"seguro."
+msgstr ""
+"If you entered data on a site, change the original password on another "
+"secure device."
+
+#: .\core\static\js\scripts.js:241
 msgid "Perdi o acesso ou detetei login estranho:"
 msgstr "I lost access or detected a strange login:"
 
-#: .\core\static\js\scripts.js:239
+#: .\core\static\js\scripts.js:243
 msgid "Tenta fazer 'Reset Password' imediatamente."
 msgstr "Try to 'Reset Password' immediately."
 
-#: .\core\static\js\scripts.js:240
+#: .\core\static\js\scripts.js:244
 msgid "Usa a opção 'Terminar sessão em todos os dispositivos'."
 msgstr "Use the 'Logout from all devices' option."
 
-#: .\core\static\js\scripts.js:241
+#: .\core\static\js\scripts.js:245
 msgid "Ativa a Autenticação de Dois Fatores (2FA)."
 msgstr "Enable Two-Factor Authentication (2FA)."
 
-#: .\core\static\js\scripts.js:242
+#: .\core\static\js\scripts.js:246
 msgid "Verifica se o teu email de recuperação foi alterado."
 msgstr "Check if your recovery email has been changed."
 
-#: .\core\static\js\scripts.js:246
+#: .\core\static\js\scripts.js:250
 msgid "Exposição de Cartão ou MBWay:"
 msgstr "Card or MBWay exposure:"
 
-#: .\core\static\js\scripts.js:248
+#: .\core\static\js\scripts.js:252
 msgid "Liga para a linha de cancelamento do teu banco (disponível 24h)."
 msgstr "Call your bank's cancellation line (available 24h)."
 
-#: .\core\static\js\scripts.js:249
+#: .\core\static\js\scripts.js:253
 msgid "Bloqueia o cartão temporariamente através da App do banco."
 msgstr "Temporarily block the card through the bank's App."
 
-#: .\core\static\js\scripts.js:250
+#: .\core\static\js\scripts.js:254
 msgid "Verifica o extrato por movimentos que não reconheças."
 msgstr "Check the statement for movements you don't recognize."
 
-#: .\core\static\js\scripts.js:251
+#: .\core\static\js\scripts.js:255
 msgid "Faz queixa na polícia se houver roubo de dinheiro efetivo."
 msgstr "File a police report if there is actual money theft."
 
-#: .\core\static\js\scripts.js:255
+#: .\core\static\js\scripts.js:259
 msgid "Como configurar a Autenticação de Dois Fatores (MFA):"
 msgstr "How to setup Multi-Factor Authentication (MFA):"
 
-#: .\core\static\js\scripts.js:257
-msgid "Instala uma App de autenticação (ex: Google Authenticator ou Bitwarden)."
-msgstr "Install an authentication App (e.g. Google Authenticator or Bitwarden)."
+#: .\core\static\js\scripts.js:261
+msgid ""
+"Instala uma App de autenticação (ex: Google Authenticator ou Bitwarden)."
+msgstr ""
+"Install an authentication App (e.g. Google Authenticator or Bitwarden)."
 
-#: .\core\static\js\scripts.js:258
+#: .\core\static\js\scripts.js:262
 msgid "Acede às definições de segurança da tua conta (E-mail, Redes Sociais)."
 msgstr "Access the security settings of your account (Email, Social Networks)."
 
-#: .\core\static\js\scripts.js:259
+#: .\core\static\js\scripts.js:263
 msgid "Escolhe 'Autenticação de 2 Passos' e faz scan do código QR fornecido."
 msgstr "Choose '2-Step Authentication' and scan the provided QR code."
 
-#: .\core\static\js\scripts.js:260
+#: .\core\static\js\scripts.js:264
 msgid "Guarda os códigos de recuperação num local físico seguro (fora do PC)."
 msgstr "Keep recovery codes in a safe physical place (off the PC)."
 
-#: .\core\static\js\scripts.js:264
+#: .\core\static\js\scripts.js:268
 msgid "Configurar um Gestor de Passwords:"
 msgstr "Setting up a Password Manager:"
 
-#: .\core\static\js\scripts.js:266
+#: .\core\static\js\scripts.js:270
 msgid "Escolhe um gestor fiável (ex: Bitwarden, 1Password ou Keepass)."
 msgstr "Choose a reliable manager (e.g. Bitwarden, 1Password or Keepass)."
 
-#: .\core\static\js\scripts.js:267
+#: .\core\static\js\scripts.js:271
 msgid "Cria uma 'Master Password' longa e memorizável."
 msgstr "Create a long, memorable 'Master Password'."
 
-#: .\core\static\js\scripts.js:268
+#: .\core\static\js\scripts.js:272
 msgid "Importa ou guarda as tuas passwords atuais no cofre cifrado."
 msgstr "Import or save your current passwords in the encrypted vault."
 
-#: .\core\static\js\scripts.js:269
+#: .\core\static\js\scripts.js:273
 msgid "Ativa a extensão do navegador para preenchimento automático seguro."
 msgstr "Enable the browser extension for secure autofill."
 
-#: .\core\static\js\scripts.js:273
+#: .\core\static\js\scripts.js:277
 msgid "Manter o Sistema Protegido:"
 msgstr "Keeping the System Protected:"
 
-#: .\core\static\js\scripts.js:275
+#: .\core\static\js\scripts.js:279
 msgid "Ativa as 'Atualizações Automáticas' no Windows ou macOS."
 msgstr "Enable 'Automatic Updates' on Windows or macOS."
 
-#: .\core\static\js\scripts.js:276
+#: .\core\static\js\scripts.js:280
 msgid "Verifica regularmente as atualizações na App Store ou Play Store."
 msgstr "Regularly check for updates in the App Store or Play Store."
 
-#: .\core\static\js\scripts.js:277
-msgid "Reinicia o dispositivo após grandes atualizações para aplicar os patches."
+#: .\core\static\js\scripts.js:281
+msgid ""
+"Reinicia o dispositivo após grandes atualizações para aplicar os patches."
 msgstr "Restart the device after major updates to apply patches."
 
-#: .\core\static\js\scripts.js:278
+#: .\core\static\js\scripts.js:282
 msgid "Remove programas que já não usas e que podem ter falhas de segurança."
 msgstr "Remove programs you no longer use that may have security flaws."
 
-#: .\core\static\js\scripts.js:282 .\core\static\js\scripts.js:289
-#: .\core\static\js\scripts.js:297
+#: .\core\static\js\scripts.js:286 .\core\static\js\scripts.js:293
+#: .\core\static\js\scripts.js:301
 msgid "Tens alguma dúvida?"
 msgstr "Do you have any questions?"
 
-#: .\core\static\js\scripts.js:284 .\core\static\js\scripts.js:291
-#: .\core\static\js\scripts.js:299
-msgid "Para nos enviares uma mensagem e obteres suporte personalizado, precisas de ter sessão iniciada."
-msgstr "To send us a message and get personalized support, you need to be logged in."
+#: .\core\static\js\scripts.js:288 .\core\static\js\scripts.js:295
+#: .\core\static\js\scripts.js:303
+msgid ""
+"Para nos enviares uma mensagem e obteres suporte personalizado, precisas de "
+"ter sessão iniciada."
+msgstr ""
+"To send us a message and get personalized support, you need to be logged in."
 
-#: .\core\static\js\scripts.js:319
+#: .\core\static\js\scripts.js:323
 msgid "Escolhe o incidente que aconteceu para saberes o que fazer agora:"
 msgstr "Choose the incident that happened to know what to do now:"
 
-#: .\core\static\js\scripts.js:325
+#: .\core\static\js\scripts.js:329
 msgid "Segue estes conselhos para reforçar a tua segurança preventiva:"
 msgstr "Follow this advice to reinforce your preventative security:"
 
-#: .\core\static\js\scripts.js:373
+#: .\core\static\js\scripts.js:378
 msgid "Phishing e Engenharia Social"
 msgstr "Phishing and Social Engineering"
 
-#: .\core\static\js\scripts.js:375
-msgid "O Phishing é a espinha dorsal da maioria dos ataques cibernéticos modernos. Trata-se de uma técnica de manipulação que utiliza comunicações fraudulentas (e-mail, SMS, voz, redes sociais) para enganar utilizadores e obter dados sensíveis, como credenciais de acesso e números de cartões de crédito, ou para instalar malware silenciosamente.<br><br><b>A Psicologia da Engenharia Social:</b> Ao contrário de ataques técnicos que tentam forçar a entrada via software, a Engenharia Social foca na 'vulnerabilidade humana'. Os atacantes exploram emoções primárias:<ul><li><b>Urgência e Medo:</b> 'A sua conta será encerrada em 2 horas se não confirmar os seus dados.'</li><li><b>Curiosidade e Ganância:</b> 'Ganhaste o sorteio anual do supermercado X, clica aqui para reclamar.'</li><li><b>Autoridade:</b> Fingem ser o CEO da empresa, o banco ou a Autoridade Tributária a exigir um pagamento imediato.</li></ul><br><b>Variantes Avançadas:</b><ul><li><b>Smishing (SMS Phishing):</b> Mensagens rápidas, muitas vezes inseridas no mesmo fio de mensagens (histórico) de bancos reais ou transportadoras (ex: CTT, DHL), contendo links para sites clones perfeitos.</li><li><b>Vishing (Voice Phishing) e Deepfakes:</b> Chamadas telefónicas onde o burlão utiliza 'Spoofing' (falsificação do número de origem). Atualmente, usam IA para clonar a voz de familiares ou chefes, pedindo transferências urgentes.</li><li><b>Spear Phishing:</b> Um ataque cirúrgico e altamente personalizado. O atacante estuda as tuas redes sociais (OSINT) e sabe o teu nome, onde trabalhas e quem são os teus amigos para criar uma armadilha impossível de ignorar.</li><li><b>Whaling:</b> Foca-se em 'peixes grandes' (CEOs e executivos), frequentemente através de esquemas de 'Business Email Compromise' (BEC), induzindo desvios de fundos de alto valor.</li></ul><br><b>Sinais Vermelhos (Red Flags):</b> Saudações impessoais ('Caro Cliente'), erros gramaticais (embora a IA os esteja a eliminar), anexos inesperados (.zip ou .exe) e <b>Typosquatting</b> (domínios ligeiramente alterados, ex: @rnicrosoft.com com 'r' e 'n' em vez de 'm').<br><br><b>Controlo de Danos:</b> Se clicares num link suspeito, desliga imediatamente a internet do dispositivo, corre um antivírus e altera as tuas senhas a partir de <i>outro</i> aparelho seguro."
-msgstr "Phishing is the backbone of most modern cyberattacks. It is a manipulation technique that uses fraudulent communications (e-mail, SMS, voice, social networks) to trick users into providing sensitive data, like login credentials and credit card numbers, or to silently install malware.<br><br><b>The Psychology of Social Engineering:</b> Unlike technical attacks trying to force entry via software, Social Engineering focuses on 'human vulnerability'. Attackers exploit primary emotions:<ul><li><b>Urgency and Fear:</b> 'Your account will be closed in 2 hours if you don't confirm your details.'</li><li><b>Curiosity and Greed:</b> 'You won supermarket X's annual sweepstakes, click here to claim.'</li><li><b>Authority:</b> Pretending to be the company CEO, the bank or the Tax Authority demanding immediate payment.</li></ul><br><b>Advanced Variants:</b><ul><li><b>Smishing (SMS Phishing):</b> Quick messages, often inserted into the same message thread (history) of real banks or delivery services (e.g. FedEx, DHL), containing links to perfect clone sites.</li><li><b>Vishing (Voice Phishing) and Deepfakes:</b> Phone calls where the scammer uses 'Spoofing' (faking the origin number). Nowadays, they use AI to clone the voice of family members or bosses, asking for urgent transfers.</li><li><b>Spear Phishing:</b> A surgical and highly personalized attack. The attacker studies your social networks (OSINT) and knows your name, where you work and who your friends are to create an impossible-to-ignore trap.</li><li><b>Whaling:</b> Focuses on 'big fish' (CEOs and executives), frequently through schemes of 'Business Email Compromise' (BEC), inducing high-value fund diversions.</li></ul><br><b>Red Flags:</b> Impersonal greetings ('Dear Customer'), grammatical errors (though AI is eliminating them), unexpected attachments (.zip or .exe) and <b>Typosquatting</b> (slightly altered domains, e.g. @rnicrosoft.com with 'r' and 'n' instead of 'm').<br><br><b>Damage Control:</b> If you click a suspicious link, immediately disconnect the device from the internet, run an antivirus and change your passwords from <i>another</i> secure device."
-
-#: .\core\static\js\scripts.js:376
-msgid "Sempre que receberes uma mensagem urgente, aplica a regra dos 5 segundos. Respira, não cliques. Contacta a entidade pelo número oficial que tens no teu cartão físico ou digitando o endereço manualmente no browser."
-msgstr "Whenever you receive an urgent message, apply the 5-second rule. Breathe, don't click. Contact the entity using the official number on your physical card or by manually typing the address in the browser."
-
 #: .\core\static\js\scripts.js:380
+msgid ""
+"O Phishing é a espinha dorsal da maioria dos ataques cibernéticos modernos. "
+"Trata-se de uma técnica de manipulação que utiliza comunicações fraudulentas "
+"(e-mail, SMS, voz, redes sociais) para enganar utilizadores e obter dados "
+"sensíveis, como credenciais de acesso e números de cartões de crédito, ou "
+"para instalar malware silenciosamente.<br><br><b>A Psicologia da Engenharia "
+"Social:</b> Ao contrário de ataques técnicos que tentam forçar a entrada via "
+"software, a Engenharia Social foca na 'vulnerabilidade humana'. Os atacantes "
+"exploram emoções primárias:<ul><li><b>Urgência e Medo:</b> 'A sua conta será "
+"encerrada em 2 horas se não confirmar os seus dados.'</li><li><b>Curiosidade "
+"e Ganância:</b> 'Ganhaste o sorteio anual do supermercado X, clica aqui para "
+"reclamar.'</li><li><b>Autoridade:</b> Fingem ser o CEO da empresa, o banco "
+"ou a Autoridade Tributária a exigir um pagamento imediato.</li></"
+"ul><br><b>Variantes Avançadas:</b><ul><li><b>Smishing (SMS Phishing):</b> "
+"Mensagens rápidas, muitas vezes inseridas no mesmo fio de mensagens "
+"(histórico) de bancos reais ou transportadoras (ex: CTT, DHL), contendo "
+"links para sites clones perfeitos.</li><li><b>Vishing (Voice Phishing) e "
+"Deepfakes:</b> Chamadas telefónicas onde o burlão utiliza 'Spoofing' "
+"(falsificação do número de origem). Atualmente, usam IA para clonar a voz de "
+"familiares ou chefes, pedindo transferências urgentes.</li><li><b>Spear "
+"Phishing:</b> Um ataque cirúrgico e altamente personalizado. O atacante "
+"estuda as tuas redes sociais (OSINT) e sabe o teu nome, onde trabalhas e "
+"quem são os teus amigos para criar uma armadilha impossível de ignorar.</"
+"li><li><b>Whaling:</b> Foca-se em 'peixes grandes' (CEOs e executivos), "
+"frequentemente através de esquemas de 'Business Email Compromise' (BEC), "
+"induzindo desvios de fundos de alto valor.</li></ul><br><b>Sinais Vermelhos "
+"(Red Flags):</b> Saudações impessoais ('Caro Cliente'), erros gramaticais "
+"(embora a IA os esteja a eliminar), anexos inesperados (.zip ou .exe) e "
+"<b>Typosquatting</b> (domínios ligeiramente alterados, ex: @rnicrosoft.com "
+"com 'r' e 'n' em vez de 'm').<br><br><b>Controlo de Danos:</b> Se clicares "
+"num link suspeito, desliga imediatamente a internet do dispositivo, corre um "
+"antivírus e altera as tuas senhas a partir de <i>outro</i> aparelho seguro."
+msgstr ""
+"Phishing is the backbone of most modern cyberattacks. It is a manipulation "
+"technique that uses fraudulent communications (e-mail, SMS, voice, social "
+"networks) to trick users into providing sensitive data, like login "
+"credentials and credit card numbers, or to silently install malware."
+"<br><br><b>The Psychology of Social Engineering:</b> Unlike technical "
+"attacks trying to force entry via software, Social Engineering focuses on "
+"'human vulnerability'. Attackers exploit primary emotions:<ul><li><b>Urgency "
+"and Fear:</b> 'Your account will be closed in 2 hours if you don't confirm "
+"your details.'</li><li><b>Curiosity and Greed:</b> 'You won supermarket X's "
+"annual sweepstakes, click here to claim.'</li><li><b>Authority:</b> "
+"Pretending to be the company CEO, the bank or the Tax Authority demanding "
+"immediate payment.</li></ul><br><b>Advanced Variants:</b><ul><li><b>Smishing "
+"(SMS Phishing):</b> Quick messages, often inserted into the same message "
+"thread (history) of real banks or delivery services (e.g. FedEx, DHL), "
+"containing links to perfect clone sites.</li><li><b>Vishing (Voice Phishing) "
+"and Deepfakes:</b> Phone calls where the scammer uses 'Spoofing' (faking the "
+"origin number). Nowadays, they use AI to clone the voice of family members "
+"or bosses, asking for urgent transfers.</li><li><b>Spear Phishing:</b> A "
+"surgical and highly personalized attack. The attacker studies your social "
+"networks (OSINT) and knows your name, where you work and who your friends "
+"are to create an impossible-to-ignore trap.</li><li><b>Whaling:</b> Focuses "
+"on 'big fish' (CEOs and executives), frequently through schemes of 'Business "
+"Email Compromise' (BEC), inducing high-value fund diversions.</li></"
+"ul><br><b>Red Flags:</b> Impersonal greetings ('Dear Customer'), grammatical "
+"errors (though AI is eliminating them), unexpected attachments (.zip "
+"or .exe) and <b>Typosquatting</b> (slightly altered domains, e.g. "
+"@rnicrosoft.com with 'r' and 'n' instead of 'm').<br><br><b>Damage Control:</"
+"b> If you click a suspicious link, immediately disconnect the device from "
+"the internet, run an antivirus and change your passwords from <i>another</i> "
+"secure device."
+
+#: .\core\static\js\scripts.js:384
+msgid "Repara no 'rn' em vez de 'm'. Isto chama-se Typosquatting!"
+msgstr ""
+
+#: .\core\static\js\scripts.js:385
+msgid "Os atacantes usam o medo para te fazer agir sem pensar."
+msgstr ""
+
+#: .\core\static\js\scripts.js:385
+msgid "URGENTE: Conta Bloqueada!"
+msgstr ""
+
+#: .\core\static\js\scripts.js:387
+msgid "Caro utilizador, detetámos algo estranho."
+msgstr ""
+
+#: .\core\static\js\scripts.js:388
+msgid "Clique no botão abaixo para evitar a perda de dados."
+msgstr ""
+
+#: .\core\static\js\scripts.js:389
+msgid "Link real: http://hack-site.ru/roubo"
+msgstr ""
+
+#: .\core\static\js\scripts.js:394
+msgid ""
+"Sempre que receberes uma mensagem urgente, aplica a regra dos 5 segundos. "
+"Respira, não cliques. Contacta a entidade pelo número oficial que tens no "
+"teu cartão físico ou digitando o endereço manualmente no browser."
+msgstr ""
+"Whenever you receive an urgent message, apply the 5-second rule. Breathe, "
+"don't click. Contact the entity using the official number on your physical "
+"card or by manually typing the address in the browser."
+
+#: .\core\static\js\scripts.js:398
 msgid "Gestão de Identidade e Senhas"
 msgstr "Identity and Password Management"
 
-#: .\core\static\js\scripts.js:382
-msgid "As palavras-passe são as chaves da tua casa digital, mas na era da computação de alta performance, senhas curtas ou previsíveis são vulnerabilidades críticas. Hoje, um computador com boas placas gráficas consegue testar mil milhões de combinações por segundo.<br><br><b>Os Tipos de Ataque mais Comuns:</b><ul><li><b>Brute Force (Força Bruta):</b> Tentar todas as combinações possíveis do teclado até acertar.</li><li><b>Dictionary Attack:</b> Usar listas de palavras comuns, nomes, clubes de futebol e datas.</li><li><b>Credential Stuffing:</b> Se usares a mesma senha no site A e site B, e o site A for pirateado, os hackers testam automaticamente esse e-mail e senha no teu banco, redes sociais, etc.</li></ul><br><b>Critérios de uma Senha Invencível:</b><ul><li><b>Comprimento é Rei:</b> A matemática não mente. Uma senha de 8 caracteres complexos é quebrada em minutos; uma de 16 caracteres apenas com letras e números demora séculos. O ideal é ter +15 caracteres.</li><li><b>Unicidade Absoluta:</b> Nunca repitas senhas. Zero exceções.</li></ul><br><b>O Papel dos Gestores de Senhas (Vaults):</b> No mundo atual, é humanamente impossível memorizar 50 senhas únicas e fortes. Gestores como Bitwarden, 1Password ou Dashlane permitem guardar tudo num cofre cifrado (encriptação ponta-a-ponta). Tu só precisas de saber uma 'Master Password' extremamente forte. O gestor trata de gerar e preencher as restantes automaticamente, protegendo-te inclusive contra Keyloggers (malware que regista teclas).<br><br><b>O Futuro (Passkeys):</b> O mundo está a transitar para as Passkeys, que substituem as senhas tradicionais por chaves criptográficas geradas no teu telemóvel, validadas pela tua biometria, tornando o phishing de credenciais matematicamente impossível."
-msgstr "Passwords are the keys to your digital home, but in the era of high-performance computing, short or predictable passwords are critical vulnerabilities. Today, a computer with good graphics cards can test a billion combinations per second.<br><br><b>Most Common Attack Types:</b><ul><li><b>Brute Force:</b> Trying every possible keyboard combination until it hits.</li><li><b>Dictionary Attack:</b> Using lists of common words, names, football clubs, and dates.</li><li><b>Credential Stuffing:</b> If you use the same password on site A and site B, and site A is hacked, hackers automatically test that email and password on your bank, social networks, etc.</li></ul><br><b>Criteria for an Invincible Password:</b><ul><li><b>Length is King:</b> The math doesn't lie. An 8-character complex password is cracked in minutes; a 16-character password with just letters and numbers takes centuries. The ideal is +15 characters.</li><li><b>Absolute Uniqueness:</b> Never repeat passwords. Zero exceptions.</li></ul><br><b>The Role of Password Managers (Vaults):</b> In today's world, it is humanly impossible to memorize 50 strong, unique passwords. Managers like Bitwarden, 1Password, or Dashlane let you save everything in an encrypted vault (end-to-end encryption). You only need to know one 'Master Password' extremely strong. The manager automatically generates and autofills the rest, protecting you even against Keyloggers (malware that records keystrokes).<br><br><b>The Future (Passkeys):</b> The world is transitioning to Passkeys, which replace traditional passwords with cryptographic keys generated on your phone, validated by your biometrics, making credential phishing mathematically impossible."
+#: .\core\static\js\scripts.js:400
+msgid ""
+"As palavras-passe são as chaves da tua casa digital, mas na era da "
+"computação de alta performance, senhas curtas ou previsíveis são "
+"vulnerabilidades críticas. Hoje, um computador com boas placas gráficas "
+"consegue testar mil milhões de combinações por segundo.<br><br><b>Os Tipos "
+"de Ataque mais Comuns:</b><ul><li><b>Brute Force (Força Bruta):</b> Tentar "
+"todas as combinações possíveis do teclado até acertar.</li><li><b>Dictionary "
+"Attack:</b> Usar listas de palavras comuns, nomes, clubes de futebol e datas."
+"</li><li><b>Credential Stuffing:</b> Se usares a mesma senha no site A e "
+"site B, e o site A for pirateado, os hackers testam automaticamente esse e-"
+"mail e senha no teu banco, redes sociais, etc.</li></ul><br><b>Critérios de "
+"uma Senha Invencível:</b><ul><li><b>Comprimento é Rei:</b> A matemática não "
+"mente. Uma senha de 8 caracteres complexos é quebrada em minutos; uma de 16 "
+"caracteres apenas com letras e números demora séculos. O ideal é ter +15 "
+"caracteres.</li><li><b>Unicidade Absoluta:</b> Nunca repitas senhas. Zero "
+"exceções.</li></ul><br><b>O Papel dos Gestores de Senhas (Vaults):</b> No "
+"mundo atual, é humanamente impossível memorizar 50 senhas únicas e fortes. "
+"Gestores como Bitwarden, 1Password ou Dashlane permitem guardar tudo num "
+"cofre cifrado (encriptação ponta-a-ponta). Tu só precisas de saber uma "
+"'Master Password' extremamente forte. O gestor trata de gerar e preencher as "
+"restantes automaticamente, protegendo-te inclusive contra Keyloggers "
+"(malware que regista teclas).<br><br><b>O Futuro (Passkeys):</b> O mundo "
+"está a transitar para as Passkeys, que substituem as senhas tradicionais por "
+"chaves criptográficas geradas no teu telemóvel, validadas pela tua "
+"biometria, tornando o phishing de credenciais matematicamente impossível."
+msgstr ""
+"Passwords are the keys to your digital home, but in the era of high-"
+"performance computing, short or predictable passwords are critical "
+"vulnerabilities. Today, a computer with good graphics cards can test a "
+"billion combinations per second.<br><br><b>Most Common Attack Types:</"
+"b><ul><li><b>Brute Force:</b> Trying every possible keyboard combination "
+"until it hits.</li><li><b>Dictionary Attack:</b> Using lists of common "
+"words, names, football clubs, and dates.</li><li><b>Credential Stuffing:</b> "
+"If you use the same password on site A and site B, and site A is hacked, "
+"hackers automatically test that email and password on your bank, social "
+"networks, etc.</li></ul><br><b>Criteria for an Invincible Password:</"
+"b><ul><li><b>Length is King:</b> The math doesn't lie. An 8-character "
+"complex password is cracked in minutes; a 16-character password with just "
+"letters and numbers takes centuries. The ideal is +15 characters.</"
+"li><li><b>Absolute Uniqueness:</b> Never repeat passwords. Zero exceptions.</"
+"li></ul><br><b>The Role of Password Managers (Vaults):</b> In today's world, "
+"it is humanly impossible to memorize 50 strong, unique passwords. Managers "
+"like Bitwarden, 1Password, or Dashlane let you save everything in an "
+"encrypted vault (end-to-end encryption). You only need to know one 'Master "
+"Password' extremely strong. The manager automatically generates and "
+"autofills the rest, protecting you even against Keyloggers (malware that "
+"records keystrokes).<br><br><b>The Future (Passkeys):</b> The world is "
+"transitioning to Passkeys, which replace traditional passwords with "
+"cryptographic keys generated on your phone, validated by your biometrics, "
+"making credential phishing mathematically impossible."
 
-#: .\core\static\js\scripts.js:383
-msgid "Adota o método das 'Passphrases' para a tua Master Password: junta quatro palavras aleatórias com símbolos. Exemplo: 'Cadeira#Elefante%Pizza$Porto'. Verifica também o site 'Have I Been Pwned' para veres se o teu e-mail já esteve envolvido em fugas de dados."
-msgstr "Adopt the 'Passphrases' method for your Master Password: combine four random words with symbols. Example: 'Chair#Elephant%Pizza$Porto'. Also check the 'Have I Been Pwned' website to see if your email has been involved in data breaches."
+#: .\core\static\js\scripts.js:402
+msgid "Testador de Força (Simulação)"
+msgstr ""
 
-#: .\core\static\js\scripts.js:387
+#: .\core\static\js\scripts.js:403
+msgid "Digita uma senha..."
+msgstr ""
+
+#: .\core\static\js\scripts.js:408
+msgid "Digita para ver a resistência."
+msgstr ""
+
+#: .\core\static\js\scripts.js:411
+msgid ""
+"Adota o método das 'Passphrases' para a tua Master Password: junta quatro "
+"palavras aleatórias com símbolos. Exemplo: 'Cadeira#Elefante%Pizza$Porto'. "
+"Verifica também o site 'Have I Been Pwned' para veres se o teu e-mail já "
+"esteve envolvido em fugas de dados."
+msgstr ""
+"Adopt the 'Passphrases' method for your Master Password: combine four random "
+"words with symbols. Example: 'Chair#Elephant%Pizza$Porto'. Also check the "
+"'Have I Been Pwned' website to see if your email has been involved in data "
+"breaches."
+
+#: .\core\static\js\scripts.js:415
 msgid "Autenticação Multi-Fator (MFA/2FA)"
 msgstr "Multi-Factor Authentication (MFA/2FA)"
 
-#: .\core\static\js\scripts.js:389
-msgid "A Autenticação Multi-Fator (MFA) é a diferença entre perderes uma conta ou bloqueares um hacker à porta. Ela parte do princípio que a senha (algo que sabes) já não é suficiente e que tens de provar quem és por um segundo canal independente.<br><br><b>As Três Categorias de Autenticação:</b><ol><li><b>Algo que sabes:</b> A tua password tradicional, um código PIN ou resposta secreta.</li><li><b>Algo que tens:</b> O teu telemóvel (recebe uma notificação), uma App de autenticação ou uma chave física (Smartcard/USB).</li><li><b>Algo que és (Biometria):</b> A tua impressão digital, reconhecimento facial (FaceID) ou padrão de voz.</li></ol><br><b>Hierarquia de Segurança do MFA:</b><ul><li><b>SMS e E-mail (Nível Base):</b> Melhor que nada, mas altamente vulnerável. E-mails podem ser intercetados e SMS sofrem de 'SIM Swapping' (onde o hacker suborna ou engana a operadora para clonar o teu número de telemóvel).</li><li><b>Apps de Autenticação (Ouro):</b> Google Authenticator, Authy ou Aegis. Geram códigos offline (TOTP) que mudam a cada 30 segundos. Não dependem da rede móvel e não podem ser clonados remotamente.</li><li><b>Chaves de Segurança Físicas (Platina):</b> YubiKey ou Google Titan. Requerem que insiras a pen e lhe toques fisicamente. São a única defesa 100% imune a ataques de phishing avançados.</li></ul><br><b>Fadiga de MFA (MFA Fatigue):</b> Uma tática onde o hacker, tendo a tua senha, envia dezenas de pedidos de 'Aprovar Login' para o teu telemóvel a meio da noite, esperando que tu cliques 'Sim' por engano ou cansaço. Se receberes um aviso de login que não pediste, clica sempre em 'Rejeitar' e muda a senha de imediato!"
-msgstr "Multi-Factor Authentication (MFA) is the difference between losing an account or blocking a hacker at the door. It assumes that the password (something you know) is no longer enough and you must prove who you are through a second independent channel.<br><br><b>The Three Authentication Categories:</b><ol><li><b>Something you know:</b> Your traditional password, a PIN code, or secret answer.</li><li><b>Something you have:</b> Your phone (receives a notification), an authenticator App, or a physical key (Smartcard/USB).</li><li><b>Something you are (Biometrics):</b> Your fingerprint, facial recognition (FaceID), or voice pattern.</li></ol><br><b>MFA Security Hierarchy:</b><ul><li><b>SMS and Email (Base Level):</b> Better than nothing, but highly vulnerable. Emails can be intercepted and SMS suffer from 'SIM Swapping' (where the hacker bribes or tricks the carrier to clone your phone number).</li><li><b>Authenticator Apps (Gold):</b> Google Authenticator, Authy, or Aegis. They generate offline codes (TOTP) that change every 30 seconds. They do not depend on the mobile network and cannot be remotely cloned.</li><li><b>Physical Security Keys (Platinum):</b> YubiKey or Google Titan. They require you to insert the thumb drive and physically touch it. They are the only defense 100% immune to advanced phishing attacks.</li></ul><br><b>MFA Fatigue:</b> A tactic where the hacker, having your password, sends dozens of 'Approve Login' requests to your phone in the middle of the night, hoping you click 'Yes' by mistake or exhaustion. If you receive a login prompt you didn't request, always click 'Reject' and change the password immediately!"
+#: .\core\static\js\scripts.js:417
+msgid ""
+"A Autenticação Multi-Fator (MFA) é a diferença entre perderes uma conta ou "
+"bloqueares um hacker à porta. Ela parte do princípio que a senha (algo que "
+"sabes) já não é suficiente e que tens de provar quem és por um segundo canal "
+"independente.<br><br><b>As Três Categorias de Autenticação:</"
+"b><ol><li><b>Algo que sabes:</b> A tua password tradicional, um código PIN "
+"ou resposta secreta.</li><li><b>Algo que tens:</b> O teu telemóvel (recebe "
+"uma notificação), uma App de autenticação ou uma chave física (Smartcard/"
+"USB).</li><li><b>Algo que és (Biometria):</b> A tua impressão digital, "
+"reconhecimento facial (FaceID) ou padrão de voz.</li></ol><br><b>Hierarquia "
+"de Segurança do MFA:</b><ul><li><b>SMS e E-mail (Nível Base):</b> Melhor que "
+"nada, mas altamente vulnerável. E-mails podem ser intercetados e SMS sofrem "
+"de 'SIM Swapping' (onde o hacker suborna ou engana a operadora para clonar o "
+"teu número de telemóvel).</li><li><b>Apps de Autenticação (Ouro):</b> Google "
+"Authenticator, Authy ou Aegis. Geram códigos offline (TOTP) que mudam a cada "
+"30 segundos. Não dependem da rede móvel e não podem ser clonados remotamente."
+"</li><li><b>Chaves de Segurança Físicas (Platina):</b> YubiKey ou Google "
+"Titan. Requerem que insiras a pen e lhe toques fisicamente. São a única "
+"defesa 100% imune a ataques de phishing avançados.</li></ul><br><b>Fadiga de "
+"MFA (MFA Fatigue):</b> Uma tática onde o hacker, tendo a tua senha, envia "
+"dezenas de pedidos de 'Aprovar Login' para o teu telemóvel a meio da noite, "
+"esperando que tu cliques 'Sim' por engano ou cansaço. Se receberes um aviso "
+"de login que não pediste, clica sempre em 'Rejeitar' e muda a senha de "
+"imediato!"
+msgstr ""
+"Multi-Factor Authentication (MFA) is the difference between losing an "
+"account or blocking a hacker at the door. It assumes that the password "
+"(something you know) is no longer enough and you must prove who you are "
+"through a second independent channel.<br><br><b>The Three Authentication "
+"Categories:</b><ol><li><b>Something you know:</b> Your traditional password, "
+"a PIN code, or secret answer.</li><li><b>Something you have:</b> Your phone "
+"(receives a notification), an authenticator App, or a physical key "
+"(Smartcard/USB).</li><li><b>Something you are (Biometrics):</b> Your "
+"fingerprint, facial recognition (FaceID), or voice pattern.</li></"
+"ol><br><b>MFA Security Hierarchy:</b><ul><li><b>SMS and Email (Base Level):</"
+"b> Better than nothing, but highly vulnerable. Emails can be intercepted and "
+"SMS suffer from 'SIM Swapping' (where the hacker bribes or tricks the "
+"carrier to clone your phone number).</li><li><b>Authenticator Apps (Gold):</"
+"b> Google Authenticator, Authy, or Aegis. They generate offline codes (TOTP) "
+"that change every 30 seconds. They do not depend on the mobile network and "
+"cannot be remotely cloned.</li><li><b>Physical Security Keys (Platinum):</b> "
+"YubiKey or Google Titan. They require you to insert the thumb drive and "
+"physically touch it. They are the only defense 100% immune to advanced "
+"phishing attacks.</li></ul><br><b>MFA Fatigue:</b> A tactic where the "
+"hacker, having your password, sends dozens of 'Approve Login' requests to "
+"your phone in the middle of the night, hoping you click 'Yes' by mistake or "
+"exhaustion. If you receive a login prompt you didn't request, always click "
+"'Reject' and change the password immediately!"
 
-#: .\core\static\js\scripts.js:390
-msgid "Guarda os 'Códigos de Backup' (Backup Codes) que os sites te dão quando ativas o MFA. Imprime-os e guarda-os numa gaveta segura. Se perderes o telemóvel amanhã, esses códigos são a única forma de voltares a entrar nas tuas contas."
-msgstr "Save the 'Backup Codes' that sites give you when you enable MFA. Print them and keep them in a safe drawer. If you lose your phone tomorrow, those codes are the only way to get back into your accounts."
+#: .\core\static\js\scripts.js:418
+msgid ""
+"Guarda os 'Códigos de Backup' (Backup Codes) que os sites te dão quando "
+"ativas o MFA. Imprime-os e guarda-os numa gaveta segura. Se perderes o "
+"telemóvel amanhã, esses códigos são a única forma de voltares a entrar nas "
+"tuas contas."
+msgstr ""
+"Save the 'Backup Codes' that sites give you when you enable MFA. Print them "
+"and keep them in a safe drawer. If you lose your phone tomorrow, those codes "
+"are the only way to get back into your accounts."
 
-#: .\core\static\js\scripts.js:394
+#: .\core\static\js\scripts.js:422
 msgid "Privacidade, Cookies e Pegada Digital"
 msgstr "Privacy, Cookies, and Digital Footprint"
 
-#: .\core\static\js\scripts.js:396
-msgid "A privacidade online não é sobre 'não ter nada a esconder', mas sim sobre ter o poder de decidir quem acede, lucra e te manipula com os teus dados. Cada clique, tempo de ecrã e movimento GPS contribui para a tua 'Pegada Digital', um rasto indelével.<br><br><b>A Indústria dos Data Brokers:</b> Existem empresas bilionárias cujo único propósito é recolher os teus dados dispersos (o que compras, a tua orientação política, problemas de saúde e histórico de localização), empacotá-los num perfil exato e vendê-los a quem pagar mais — desde anunciantes a companhias de seguros.<br><br><b>O Ecossistema de Rastreamento:</b><ul><li><b>Cookies de Terceiros (Tracking):</b> Ficheiros colocados no teu browser por redes de publicidade para te seguir entre o site A, B e C.</li><li><b>Browser Fingerprinting:</b> Uma técnica avançada que te identifica sem usar cookies, recolhendo detalhes técnicos da tua máquina (tamanho do ecrã, fontes instaladas, versão do sistema operativo), criando uma 'impressão digital' única do teu computador.</li></ul><br><b>O Perigo dos Metadados (EXIF):</b> Quando tiras uma foto e a envias diretamente do rolo da câmara, ela contém dados ocultos: modelo do telemóvel, hora exata e as coordenadas GPS exatas. Partilhar uma foto da tua nova TV pode dar a localização da tua casa a estranhos.<br><br><b>Permissões de Apps (O Cavalo de Troia moderno):</b> Se uma simples app de lanterna ou uma calculadora pedir acesso ao teu microfone, lista de contactos e localização, recusa! Se o produto é gratuito, o produto real são os teus dados."
-msgstr "Online privacy is not about 'having nothing to hide', but rather having the power to decide who accesses, profits from, and manipulates you with your data. Every click, screen time, and GPS movement contributes to your 'Digital Footprint', an indelible trail.<br><br><b>The Data Broker Industry:</b> There are billion-dollar companies whose sole purpose is to collect your scattered data (what you buy, your political orientation, health issues, and location history), package it into an exact profile, and sell it to the highest bidder — from advertisers to insurance companies.<br><br><b>The Tracking Ecosystem:</b><ul><li><b>Third-Party Cookies (Tracking):</b> Files placed in your browser by advertising networks to follow you between site A, B, and C.</li><li><b>Browser Fingerprinting:</b> An advanced technique that identifies you without using cookies, collecting technical details of your machine (screen size, installed fonts, operating system version), creating a 'fingerprint' unique to your computer.</li></ul><br><b>The Danger of Metadata (EXIF):</b> When you take a photo and send it directly from your camera roll, it contains hidden data: phone model, exact time, and exact GPS coordinates. Sharing a photo of your new TV could give strangers the location of your house.<br><br><b>App Permissions (The modern Trojan Horse):</b> If a simple flashlight app or a calculator asks for access to your microphone, contact list, and location, refuse! If the product is free, the real product is your data."
+#: .\core\static\js\scripts.js:424
+msgid ""
+"A privacidade online não é sobre 'não ter nada a esconder', mas sim sobre "
+"ter o poder de decidir quem acede, lucra e te manipula com os teus dados. "
+"Cada clique, tempo de ecrã e movimento GPS contribui para a tua 'Pegada "
+"Digital', um rasto indelével.<br><br><b>A Indústria dos Data Brokers:</b> "
+"Existem empresas bilionárias cujo único propósito é recolher os teus dados "
+"dispersos (o que compras, a tua orientação política, problemas de saúde e "
+"histórico de localização), empacotá-los num perfil exato e vendê-los a quem "
+"pagar mais — desde anunciantes a companhias de seguros.<br><br><b>O "
+"Ecossistema de Rastreamento:</b><ul><li><b>Cookies de Terceiros (Tracking):</"
+"b> Ficheiros colocados no teu browser por redes de publicidade para te "
+"seguir entre o site A, B e C.</li><li><b>Browser Fingerprinting:</b> Uma "
+"técnica avançada que te identifica sem usar cookies, recolhendo detalhes "
+"técnicos da tua máquina (tamanho do ecrã, fontes instaladas, versão do "
+"sistema operativo), criando uma 'impressão digital' única do teu computador."
+"</li></ul><br><b>O Perigo dos Metadados (EXIF):</b> Quando tiras uma foto e "
+"a envias diretamente do rolo da câmara, ela contém dados ocultos: modelo do "
+"telemóvel, hora exata e as coordenadas GPS exatas. Partilhar uma foto da tua "
+"nova TV pode dar a localização da tua casa a estranhos.<br><br><b>Permissões "
+"de Apps (O Cavalo de Troia moderno):</b> Se uma simples app de lanterna ou "
+"uma calculadora pedir acesso ao teu microfone, lista de contactos e "
+"localização, recusa! Se o produto é gratuito, o produto real são os teus "
+"dados."
+msgstr ""
+"Online privacy is not about 'having nothing to hide', but rather having the "
+"power to decide who accesses, profits from, and manipulates you with your "
+"data. Every click, screen time, and GPS movement contributes to your "
+"'Digital Footprint', an indelible trail.<br><br><b>The Data Broker Industry:"
+"</b> There are billion-dollar companies whose sole purpose is to collect "
+"your scattered data (what you buy, your political orientation, health "
+"issues, and location history), package it into an exact profile, and sell it "
+"to the highest bidder — from advertisers to insurance companies."
+"<br><br><b>The Tracking Ecosystem:</b><ul><li><b>Third-Party Cookies "
+"(Tracking):</b> Files placed in your browser by advertising networks to "
+"follow you between site A, B, and C.</li><li><b>Browser Fingerprinting:</b> "
+"An advanced technique that identifies you without using cookies, collecting "
+"technical details of your machine (screen size, installed fonts, operating "
+"system version), creating a 'fingerprint' unique to your computer.</li></"
+"ul><br><b>The Danger of Metadata (EXIF):</b> When you take a photo and send "
+"it directly from your camera roll, it contains hidden data: phone model, "
+"exact time, and exact GPS coordinates. Sharing a photo of your new TV could "
+"give strangers the location of your house.<br><br><b>App Permissions (The "
+"modern Trojan Horse):</b> If a simple flashlight app or a calculator asks "
+"for access to your microphone, contact list, and location, refuse! If the "
+"product is free, the real product is your data."
 
-#: .\core\static\js\scripts.js:397
-msgid "Faz auditorias regulares às tuas redes sociais: coloca os perfis em modo privado e limita quem pode ver o teu histórico. Usa extensões como o 'uBlock Origin' para travar rastreadores e nunca faças login em sites através de botões 'Entrar com o Facebook/Google' a menos que confies plenamente neles."
-msgstr "Do regular audits of your social networks: set profiles to private mode and limit who can see your history. Use extensions like 'uBlock Origin' to block trackers and never log into sites via 'Login with Facebook/Google' buttons unless you fully trust them."
+#: .\core\static\js\scripts.js:425
+msgid ""
+"Faz auditorias regulares às tuas redes sociais: coloca os perfis em modo "
+"privado e limita quem pode ver o teu histórico. Usa extensões como o 'uBlock "
+"Origin' para travar rastreadores e nunca faças login em sites através de "
+"botões 'Entrar com o Facebook/Google' a menos que confies plenamente neles."
+msgstr ""
+"Do regular audits of your social networks: set profiles to private mode and "
+"limit who can see your history. Use extensions like 'uBlock Origin' to block "
+"trackers and never log into sites via 'Login with Facebook/Google' buttons "
+"unless you fully trust them."
 
-#: .\core\static\js\scripts.js:401
+#: .\core\static\js\scripts.js:429
 msgid "Malware: Ameaças e Software Malicioso"
 msgstr "Malware: Threats and Malicious Software"
 
-#: .\core\static\js\scripts.js:403
-msgid "Malware (Malicious Software) é o termo que abrange qualquer código criado para danificar, bloquear, roubar ou espiar sistemas informáticos. O que outrora era feito por hackers por 'diversão', é hoje uma indústria criminosa altamente organizada.<br><br><b>O Arsenal do Cibercrime:</b><ul><li><b>Ransomware (Sequestro de Dados):</b> A ameaça mais letal para empresas e particulares. Encripta todos os teus ficheiros (fotos, documentos, discos rígidos) e exige um pagamento em criptomoedas. Ficas impedido de aceder à tua própria vida digital.</li><li><b>Spyware e Keyloggers:</b> Instalam-se em silêncio e gravam tudo o que digitas (senhas, conversas), tiram capturas de ecrã e podem até ativar a tua webcam sem ligar a luz indicadora.</li><li><b>Trojans (Cavalos de Troia):</b> Disfarçam-se de software legítimo (ex: um jogo pirata, um leitor de PDF grátis ou um anexo de fatura). Ao abrires, eles abrem uma 'Backdoor' (porta das traseiras) para o hacker controlar o teu PC.</li><li><b>Botnets:</b> Malware que transforma o teu dispositivo num 'zombie' dormente. O teu telemóvel ou PC passa a fazer parte de um exército global usado para atacar sistemas governamentais ou enviar spam, gastando a tua rede e bateria.</li><li><b>Fileless Malware:</b> Malware altamente avançado que não guarda ficheiros no disco. Vive inteiramente na memória RAM do computador e aproveita ferramentas legítimas do Windows (como o PowerShell) para atacar, tornando-se quase invisível para antivírus comuns.</li></ul><br><b>Sinais de Infeção:</b> O computador fica subitamente lento, ventoinhas a disparar sem estares a fazer nada (sinal de mineração de criptomoedas oculta), bateria que dura muito pouco, pop-ups constantes ou a página inicial do browser que mudou sozinha."
-msgstr "Malware (Malicious Software) is the term that covers any code created to damage, block, steal, or spy on computer systems. What was once done by hackers for 'fun' is today a highly organized criminal industry.<br><br><b>The Cybercrime Arsenal:</b><ul><li><b>Ransomware (Data Kidnapping):</b> The most lethal threat to businesses and individuals. It encrypts all your files (photos, documents, hard drives) and demands payment in cryptocurrency. You are prevented from accessing your own digital life.</li><li><b>Spyware and Keyloggers:</b> They install silently and record everything you type (passwords, conversations), take screenshots, and can even activate your webcam without turning on the indicator light.</li><li><b>Trojans:</b> They disguise themselves as legitimate software (e.g. a pirated game, a free PDF reader, or an invoice attachment). When you open them, they open a 'Backdoor' for the hacker to control your PC.</li><li><b>Botnets:</b> Malware that turns your device into a dormant 'zombie'. Your phone or PC becomes part of a global army used to attack government systems or send spam, wasting your network and battery.</li><li><b>Fileless Malware:</b> Highly advanced malware that doesn't save files to disk. It lives entirely in the computer's RAM and takes advantage of legitimate Windows tools (like PowerShell) to attack, making it almost invisible to common antiviruses.</li></ul><br><b>Signs of Infection:</b> The computer suddenly gets slow, fans spinning up without you doing anything (sign of hidden cryptocurrency mining), battery lasting very little, constant pop-ups, or the browser homepage changing by itself."
+#: .\core\static\js\scripts.js:431
+msgid ""
+"Malware (Malicious Software) é o termo que abrange qualquer código criado "
+"para danificar, bloquear, roubar ou espiar sistemas informáticos. O que "
+"outrora era feito por hackers por 'diversão', é hoje uma indústria criminosa "
+"altamente organizada.<br><br><b>O Arsenal do Cibercrime:</"
+"b><ul><li><b>Ransomware (Sequestro de Dados):</b> A ameaça mais letal para "
+"empresas e particulares. Encripta todos os teus ficheiros (fotos, "
+"documentos, discos rígidos) e exige um pagamento em criptomoedas. Ficas "
+"impedido de aceder à tua própria vida digital.</li><li><b>Spyware e "
+"Keyloggers:</b> Instalam-se em silêncio e gravam tudo o que digitas (senhas, "
+"conversas), tiram capturas de ecrã e podem até ativar a tua webcam sem ligar "
+"a luz indicadora.</li><li><b>Trojans (Cavalos de Troia):</b> Disfarçam-se de "
+"software legítimo (ex: um jogo pirata, um leitor de PDF grátis ou um anexo "
+"de fatura). Ao abrires, eles abrem uma 'Backdoor' (porta das traseiras) para "
+"o hacker controlar o teu PC.</li><li><b>Botnets:</b> Malware que transforma "
+"o teu dispositivo num 'zombie' dormente. O teu telemóvel ou PC passa a fazer "
+"parte de um exército global usado para atacar sistemas governamentais ou "
+"enviar spam, gastando a tua rede e bateria.</li><li><b>Fileless Malware:</b> "
+"Malware altamente avançado que não guarda ficheiros no disco. Vive "
+"inteiramente na memória RAM do computador e aproveita ferramentas legítimas "
+"do Windows (como o PowerShell) para atacar, tornando-se quase invisível para "
+"antivírus comuns.</li></ul><br><b>Sinais de Infeção:</b> O computador fica "
+"subitamente lento, ventoinhas a disparar sem estares a fazer nada (sinal de "
+"mineração de criptomoedas oculta), bateria que dura muito pouco, pop-ups "
+"constantes ou a página inicial do browser que mudou sozinha."
+msgstr ""
+"Malware (Malicious Software) is the term that covers any code created to "
+"damage, block, steal, or spy on computer systems. What was once done by "
+"hackers for 'fun' is today a highly organized criminal industry."
+"<br><br><b>The Cybercrime Arsenal:</b><ul><li><b>Ransomware (Data "
+"Kidnapping):</b> The most lethal threat to businesses and individuals. It "
+"encrypts all your files (photos, documents, hard drives) and demands payment "
+"in cryptocurrency. You are prevented from accessing your own digital life.</"
+"li><li><b>Spyware and Keyloggers:</b> They install silently and record "
+"everything you type (passwords, conversations), take screenshots, and can "
+"even activate your webcam without turning on the indicator light.</"
+"li><li><b>Trojans:</b> They disguise themselves as legitimate software (e.g. "
+"a pirated game, a free PDF reader, or an invoice attachment). When you open "
+"them, they open a 'Backdoor' for the hacker to control your PC.</"
+"li><li><b>Botnets:</b> Malware that turns your device into a dormant "
+"'zombie'. Your phone or PC becomes part of a global army used to attack "
+"government systems or send spam, wasting your network and battery.</"
+"li><li><b>Fileless Malware:</b> Highly advanced malware that doesn't save "
+"files to disk. It lives entirely in the computer's RAM and takes advantage "
+"of legitimate Windows tools (like PowerShell) to attack, making it almost "
+"invisible to common antiviruses.</li></ul><br><b>Signs of Infection:</b> The "
+"computer suddenly gets slow, fans spinning up without you doing anything "
+"(sign of hidden cryptocurrency mining), battery lasting very little, "
+"constant pop-ups, or the browser homepage changing by itself."
 
-#: .\core\static\js\scripts.js:404
-msgid "A prevenção é tudo. Mantém o teu sistema operativo (Windows, macOS, Android, iOS) sempre atualizado na última versão. As atualizações não trazem apenas designs novos, elas fecham as falhas de código que os hackers usam para injetar malware."
-msgstr "Prevention is everything. Keep your operating system (Windows, macOS, Android, iOS) always updated to the latest version. Updates don't just bring new designs, they close the code flaws that hackers use to inject malware."
+#: .\core\static\js\scripts.js:433
+msgid "Checklist de Proteção"
+msgstr ""
 
-#: .\core\static\js\scripts.js:408
+#: .\core\static\js\scripts.js:434
+msgid "Sistema Operativo Atualizado"
+msgstr ""
+
+#: .\core\static\js\scripts.js:435
+msgid "Antivírus Ativo"
+msgstr ""
+
+#: .\core\static\js\scripts.js:436
+msgid "Não descarregar software pirata"
+msgstr ""
+
+#: .\core\static\js\scripts.js:439
+msgid ""
+"A prevenção é tudo. Mantém o teu sistema operativo (Windows, macOS, Android, "
+"iOS) sempre atualizado na última versão. As atualizações não trazem apenas "
+"designs novos, elas fecham as falhas de código que os hackers usam para "
+"injetar malware."
+msgstr ""
+"Prevention is everything. Keep your operating system (Windows, macOS, "
+"Android, iOS) always updated to the latest version. Updates don't just bring "
+"new designs, they close the code flaws that hackers use to inject malware."
+
+#: .\core\static\js\scripts.js:443
 msgid "Segurança de Redes, VPN e Criptografia"
 msgstr "Network Security, VPN, and Cryptography"
 
-#: .\core\static\js\scripts.js:410
-msgid "A Internet é uma autoestrada pública. Sem proteção, os teus dados (senhas, e-mails, conversas) viajam em 'texto limpo', podendo ser lidos por qualquer pessoa que esteja na mesma rede. A segurança de redes visa criar túneis blindados para a tua informação.<br><br><b>Criptografia e Protocolos:</b><ul><li><b>HTTPS e SSL/TLS:</b> Quando vês o cadeado no browser, significa que a comunicação entre o teu PC e o servidor está encriptada. Se um site pedir senha e apresentar apenas HTTP (sem o S de Seguro), foge!</li><li><b>Cifra Ponta-a-Ponta (E2EE):</b> Usada no Signal ou WhatsApp. As mensagens são trancadas no teu telemóvel e só são destrancadas no telemóvel de quem recebe. Nem sequer os donos da app conseguem ler o conteúdo.</li></ul><br><b>O Perigo das Redes Wi-Fi Públicas (Evil Twins):</b> Ligar-se ao 'Wi-Fi Grátis do Aeroporto' é um risco massivo. Atacantes criam redes falsas com o mesmo nome (Evil Twin) para que o teu telemóvel se ligue a eles. A partir daí, executam ataques 'Man-in-the-Middle', intercetando e roubando tudo o que procuras na net.<br><br><b>O Escudo da VPN (Virtual Private Network):</b> Uma VPN de confiança cria um túnel encriptado e reencaminha o teu tráfego por um servidor seguro. Isto impede que a rede local (ou o dono do café) veja o que estás a fazer e esconde o teu IP real, dando-te maior anonimato geográfico.<br><br><b>A Tua Rede Doméstica:</b> O teu Router é a principal porta de entrada da tua casa. Se usas os dados de origem ('admin' e 'password'), a tua rede está comprometida. Altera a senha do painel de controlo, desativa protocolos velhos e usa sempre encriptação WPA2 ou WPA3 para a rede Wi-Fi."
-msgstr "The Internet is a public highway. Without protection, your data (passwords, emails, conversations) travels in 'clear text', and can be read by anyone on the same network. Network security aims to create armored tunnels for your information.<br><br><b>Cryptography and Protocols:</b><ul><li><b>HTTPS and SSL/TLS:</b> When you see the padlock in the browser, it means the communication between your PC and the server is encrypted. If a site asks for a password and only shows HTTP (without the S for Secure), run!</li><li><b>End-to-End Encryption (E2EE):</b> Used in Signal or WhatsApp. Messages are locked on your phone and only unlocked on the receiver's phone. Not even the app owners can read the content.</li></ul><br><b>The Danger of Public Wi-Fi Networks (Evil Twins):</b> Connecting to the 'Free Airport Wi-Fi' is a massive risk. Attackers create fake networks with the same name (Evil Twin) so your phone connects to them. From there, they execute 'Man-in-the-Middle' attacks, intercepting and stealing everything you search for on the net.<br><br><b>The VPN Shield (Virtual Private Network):</b> A trusted VPN creates an encrypted tunnel and routes your traffic through a secure server. This prevents the local network (or the coffee shop owner) from seeing what you are doing and hides your real IP, giving you greater geographical anonymity.<br><br><b>Your Home Network:</b> Your Router is the main gateway to your home. If you use the default data ('admin' and 'password'), your network is compromised. Change the control panel password, disable old protocols, and always use WPA2 or WPA3 encryption for the Wi-Fi network."
+#: .\core\static\js\scripts.js:445
+msgid ""
+"A Internet é uma autoestrada pública. Sem proteção, os teus dados (senhas, e-"
+"mails, conversas) viajam em 'texto limpo', podendo ser lidos por qualquer "
+"pessoa que esteja na mesma rede. A segurança de redes visa criar túneis "
+"blindados para a tua informação.<br><br><b>Criptografia e Protocolos:</"
+"b><ul><li><b>HTTPS e SSL/TLS:</b> Quando vês o cadeado no browser, significa "
+"que a comunicação entre o teu PC e o servidor está encriptada. Se um site "
+"pedir senha e apresentar apenas HTTP (sem o S de Seguro), foge!</"
+"li><li><b>Cifra Ponta-a-Ponta (E2EE):</b> Usada no Signal ou WhatsApp. As "
+"mensagens são trancadas no teu telemóvel e só são destrancadas no telemóvel "
+"de quem recebe. Nem sequer os donos da app conseguem ler o conteúdo.</li></"
+"ul><br><b>O Perigo das Redes Wi-Fi Públicas (Evil Twins):</b> Ligar-se ao "
+"'Wi-Fi Grátis do Aeroporto' é um risco massivo. Atacantes criam redes falsas "
+"com o mesmo nome (Evil Twin) para que o teu telemóvel se ligue a eles. A "
+"partir daí, executam ataques 'Man-in-the-Middle', intercetando e roubando "
+"tudo o que procuras na net.<br><br><b>O Escudo da VPN (Virtual Private "
+"Network):</b> Uma VPN de confiança cria um túnel encriptado e reencaminha o "
+"teu tráfego por um servidor seguro. Isto impede que a rede local (ou o dono "
+"do café) veja o que estás a fazer e esconde o teu IP real, dando-te maior "
+"anonimato geográfico.<br><br><b>A Tua Rede Doméstica:</b> O teu Router é a "
+"principal porta de entrada da tua casa. Se usas os dados de origem ('admin' "
+"e 'password'), a tua rede está comprometida. Altera a senha do painel de "
+"controlo, desativa protocolos velhos e usa sempre encriptação WPA2 ou WPA3 "
+"para a rede Wi-Fi."
+msgstr ""
+"The Internet is a public highway. Without protection, your data (passwords, "
+"emails, conversations) travels in 'clear text', and can be read by anyone on "
+"the same network. Network security aims to create armored tunnels for your "
+"information.<br><br><b>Cryptography and Protocols:</b><ul><li><b>HTTPS and "
+"SSL/TLS:</b> When you see the padlock in the browser, it means the "
+"communication between your PC and the server is encrypted. If a site asks "
+"for a password and only shows HTTP (without the S for Secure), run!</"
+"li><li><b>End-to-End Encryption (E2EE):</b> Used in Signal or WhatsApp. "
+"Messages are locked on your phone and only unlocked on the receiver's phone. "
+"Not even the app owners can read the content.</li></ul><br><b>The Danger of "
+"Public Wi-Fi Networks (Evil Twins):</b> Connecting to the 'Free Airport Wi-"
+"Fi' is a massive risk. Attackers create fake networks with the same name "
+"(Evil Twin) so your phone connects to them. From there, they execute 'Man-in-"
+"the-Middle' attacks, intercepting and stealing everything you search for on "
+"the net.<br><br><b>The VPN Shield (Virtual Private Network):</b> A trusted "
+"VPN creates an encrypted tunnel and routes your traffic through a secure "
+"server. This prevents the local network (or the coffee shop owner) from "
+"seeing what you are doing and hides your real IP, giving you greater "
+"geographical anonymity.<br><br><b>Your Home Network:</b> Your Router is the "
+"main gateway to your home. If you use the default data ('admin' and "
+"'password'), your network is compromised. Change the control panel password, "
+"disable old protocols, and always use WPA2 or WPA3 encryption for the Wi-Fi "
+"network."
 
-#: .\core\static\js\scripts.js:411
-msgid "Desativa a funcionalidade do teu telemóvel de se ligar automaticamente a redes Wi-Fi conhecidas. Além disso, se precisares de aceder ao banco na rua, é muito mais seguro usar os teus Dados Móveis (4G/5G) do que a rede Wi-Fi de um restaurante."
-msgstr "Disable your phone's feature to automatically connect to known Wi-Fi networks. Also, if you need to access your bank on the street, it is much safer to use your Mobile Data (4G/5G) than a restaurant's Wi-Fi network."
+#: .\core\static\js\scripts.js:446
+msgid ""
+"Desativa a funcionalidade do teu telemóvel de se ligar automaticamente a "
+"redes Wi-Fi conhecidas. Além disso, se precisares de aceder ao banco na rua, "
+"é muito mais seguro usar os teus Dados Móveis (4G/5G) do que a rede Wi-Fi de "
+"um restaurante."
+msgstr ""
+"Disable your phone's feature to automatically connect to known Wi-Fi "
+"networks. Also, if you need to access your bank on the street, it is much "
+"safer to use your Mobile Data (4G/5G) than a restaurant's Wi-Fi network."
 
-#: .\core\static\js\scripts.js:415
+#: .\core\static\js\scripts.js:450
 msgid "Proteção de Dispositivos e Higiene Digital"
 msgstr "Device Protection and Digital Hygiene"
 
-#: .\core\static\js\scripts.js:417
-msgid "De nada valem senhas complexas se o teu dispositivo físico for roubado ou comprometido. A segurança começa no hardware e nas práticas de manutenção dos aparelhos.<br><br><b>Criptografia de Disco Inteiro (FDE):</b> É a defesa física definitiva. No Windows chama-se 'BitLocker' e no Mac 'FileVault'. Ao ser ativada, codifica todo o teu disco rígido. Se alguém te roubar o portátil e tentar tirar o disco para ler noutro computador, só verá lixo digital sem a tua palavra-passe.<br><br><b>A Regra de Ouro dos Backups (Estratégia 3-2-1):</b> Contra perdas, roubos e ataques de Ransomware, deves implementar esta estratégia militar:<ul><li><b>3</b> Cópias dos teus dados importantes (a original + 2 cópias de segurança).</li><li><b>2</b> Tipos de suporte diferentes (ex: Num Disco Externo SSD e numa Cloud/Nuvem).</li><li><b>1</b> Cópia 'Offsite' (fora de casa). Pode ser a nuvem, ou um disco guardado em casa de um familiar. Se houver um incêndio na tua casa, não perdes os originais e os backups locais ao mesmo tempo.</li></ul><br><b>IoT (A Internet das Coisas):</b> Lâmpadas, frigoríficos, TVs inteligentes e aspiradores-robô. Estes aparelhos raramente recebem atualizações de segurança das marcas e ligam-se ao teu Wi-Fi, tornando-se o elo mais fraco e uma porta de entrada fácil para invadir os teus computadores domésticos.<br><br><b>Higiene Digital e Limpeza:</b><ul><li>Apaga apps que não usas há mais de 6 meses. O seu código desatualizado pode ser explorado.</li><li>Antes de venderes um PC ou telemóvel antigo, faz um 'Wipe' (limpeza segura com reposição de fábrica). Apenas apagar ficheiros e esvaziar a reciclagem não os elimina permanentemente.</li></ul>"
-msgstr "Complex passwords are useless if your physical device is stolen or compromised. Security starts with hardware and device maintenance practices.<br><br><b>Full Disk Encryption (FDE):</b> It's the ultimate physical defense. In Windows it's called 'BitLocker' and on Mac 'FileVault'. When enabled, it encrypts your entire hard drive. If someone steals your laptop and tries to take the drive out to read on another computer, they will only see digital garbage without your password.<br><br><b>The Golden Rule of Backups (3-2-1 Strategy):</b> Against loss, theft, and Ransomware attacks, you must implement this military strategy:<ul><li><b>3</b> Copies of your important data (the original + 2 backups).</li><li><b>2</b> Different types of media (e.g. On an External SSD Drive and in a Cloud).</li><li><b>1</b> 'Offsite' Copy (away from home). It can be the cloud, or a drive kept at a relative's house. If there's a fire in your house, you don't lose the originals and local backups at the same time.</li></ul><br><b>IoT (The Internet of Things):</b> Smart bulbs, refrigerators, smart TVs, and robot vacuums. These devices rarely receive security updates from brands and connect to your Wi-Fi, becoming the weakest link and an easy gateway to invade your home computers.<br><br><b>Digital Hygiene and Cleanup:</b><ul><li>Delete apps you haven't used in over 6 months. Their outdated code can be exploited.</li><li>Before selling an old PC or phone, do a 'Wipe' (secure wipe with factory reset). Just deleting files and emptying the trash does not permanently delete them.</li></ul>"
+#: .\core\static\js\scripts.js:452
+msgid ""
+"De nada valem senhas complexas se o teu dispositivo físico for roubado ou "
+"comprometido. A segurança começa no hardware e nas práticas de manutenção "
+"dos aparelhos.<br><br><b>Criptografia de Disco Inteiro (FDE):</b> É a defesa "
+"física definitiva. No Windows chama-se 'BitLocker' e no Mac 'FileVault'. Ao "
+"ser ativada, codifica todo o teu disco rígido. Se alguém te roubar o "
+"portátil e tentar tirar o disco para ler noutro computador, só verá lixo "
+"digital sem a tua palavra-passe.<br><br><b>A Regra de Ouro dos Backups "
+"(Estratégia 3-2-1):</b> Contra perdas, roubos e ataques de Ransomware, deves "
+"implementar esta estratégia militar:<ul><li><b>3</b> Cópias dos teus dados "
+"importantes (a original + 2 cópias de segurança).</li><li><b>2</b> Tipos de "
+"suporte diferentes (ex: Num Disco Externo SSD e numa Cloud/Nuvem).</"
+"li><li><b>1</b> Cópia 'Offsite' (fora de casa). Pode ser a nuvem, ou um "
+"disco guardado em casa de um familiar. Se houver um incêndio na tua casa, "
+"não perdes os originais e os backups locais ao mesmo tempo.</li></"
+"ul><br><b>IoT (A Internet das Coisas):</b> Lâmpadas, frigoríficos, TVs "
+"inteligentes e aspiradores-robô. Estes aparelhos raramente recebem "
+"atualizações de segurança das marcas e ligam-se ao teu Wi-Fi, tornando-se o "
+"elo mais fraco e uma porta de entrada fácil para invadir os teus "
+"computadores domésticos.<br><br><b>Higiene Digital e Limpeza:</"
+"b><ul><li>Apaga apps que não usas há mais de 6 meses. O seu código "
+"desatualizado pode ser explorado.</li><li>Antes de venderes um PC ou "
+"telemóvel antigo, faz um 'Wipe' (limpeza segura com reposição de fábrica). "
+"Apenas apagar ficheiros e esvaziar a reciclagem não os elimina "
+"permanentemente.</li></ul>"
+msgstr ""
+"Complex passwords are useless if your physical device is stolen or "
+"compromised. Security starts with hardware and device maintenance practices."
+"<br><br><b>Full Disk Encryption (FDE):</b> It's the ultimate physical "
+"defense. In Windows it's called 'BitLocker' and on Mac 'FileVault'. When "
+"enabled, it encrypts your entire hard drive. If someone steals your laptop "
+"and tries to take the drive out to read on another computer, they will only "
+"see digital garbage without your password.<br><br><b>The Golden Rule of "
+"Backups (3-2-1 Strategy):</b> Against loss, theft, and Ransomware attacks, "
+"you must implement this military strategy:<ul><li><b>3</b> Copies of your "
+"important data (the original + 2 backups).</li><li><b>2</b> Different types "
+"of media (e.g. On an External SSD Drive and in a Cloud).</li><li><b>1</b> "
+"'Offsite' Copy (away from home). It can be the cloud, or a drive kept at a "
+"relative's house. If there's a fire in your house, you don't lose the "
+"originals and local backups at the same time.</li></ul><br><b>IoT (The "
+"Internet of Things):</b> Smart bulbs, refrigerators, smart TVs, and robot "
+"vacuums. These devices rarely receive security updates from brands and "
+"connect to your Wi-Fi, becoming the weakest link and an easy gateway to "
+"invade your home computers.<br><br><b>Digital Hygiene and Cleanup:</"
+"b><ul><li>Delete apps you haven't used in over 6 months. Their outdated code "
+"can be exploited.</li><li>Before selling an old PC or phone, do a 'Wipe' "
+"(secure wipe with factory reset). Just deleting files and emptying the trash "
+"does not permanently delete them.</li></ul>"
 
-#: .\core\static\js\scripts.js:418
-msgid "Tapa a tua webcam com um autocolante ou protetor deslizante. Bloqueia o ecrã instantaneamente quando te levantas numa biblioteca ou escritório (Usa o atalho Win + L no Windows, ou Ctrl + Cmd + Q no Mac). O tempo que vais beber água é suficiente para instalarem algo malicioso na tua máquina."
-msgstr "Cover your webcam with a sticker or sliding cover. Lock the screen instantly when you get up in a library or office (Use the shortcut Win + L on Windows, or Ctrl + Cmd + Q on Mac). The time it takes to get water is enough for them to install something malicious on your machine."
+#: .\core\static\js\scripts.js:453
+msgid ""
+"Tapa a tua webcam com um autocolante ou protetor deslizante. Bloqueia o ecrã "
+"instantaneamente quando te levantas numa biblioteca ou escritório (Usa o "
+"atalho Win + L no Windows, ou Ctrl + Cmd + Q no Mac). O tempo que vais beber "
+"água é suficiente para instalarem algo malicioso na tua máquina."
+msgstr ""
+"Cover your webcam with a sticker or sliding cover. Lock the screen instantly "
+"when you get up in a library or office (Use the shortcut Win + L on Windows, "
+"or Ctrl + Cmd + Q on Mac). The time it takes to get water is enough for them "
+"to install something malicious on your machine."
+
+#: .\core\static\js\scripts.js:528
+msgid "Fraca: Um hacker demora segundos."
+msgstr ""
+
+#: .\core\static\js\scripts.js:531
+msgid "Média: Melhor, mas ainda vulnerável."
+msgstr ""
+
+#: .\core\static\js\scripts.js:534
+msgid "Forte: Levaria séculos para ser descoberta!"
+msgstr ""
 
 #~ msgid "Fazer Login Agora"
 #~ msgstr "Login Now"

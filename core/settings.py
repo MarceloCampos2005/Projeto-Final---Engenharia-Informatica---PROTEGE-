@@ -248,3 +248,12 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+
+#para que sempre que se feche o browser a sessao expire
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+SESSION_COOKIE_AGE = 1800 
+
+# Garante que a sessão é guardada a cada modificação 
+SESSION_SAVE_EVERY_REQUEST = True

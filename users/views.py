@@ -21,7 +21,6 @@ from django.contrib import messages
 from django_otp.plugins.otp_totp.models import TOTPDevice
 
 
-print("TESTE DEBUG: O ficheiro views foi carregado com sucesso!")
 
 @login_required
 def perfil(request):
@@ -66,6 +65,8 @@ def perfil(request):
 
 
 def home(request):
+    if request.user.is_authenticated:
+        logout(request)
     return render(request, 'users/home.html')
 
 
@@ -185,10 +186,10 @@ def salvar_acessibilidade(request):
     #vai ao perfil do utilizador e guarda a preferencia
     perfil = request.user.perfil
     if tipo == 'daltonismo':
-        perfil.daltonismo = valor 
+        perfil.filtro_daltonismo = valor  
     elif tipo == 'contraste':
-        perfil.contraste = valor
-
+        perfil.filtro_contraste = valor  
+        
     #guarda tipo update
     perfil.save()
     return JsonResponse({'status': 'success'})#o js sabe que de sucesso
@@ -208,7 +209,7 @@ def criar_perfil_utilizador_social(sender, instance, created, **kwargs):
                 'instituicao': 'Não definida',
                 'ano_letivo': 'Não definido',
                 'idade': 0
-            }
+           }
         )
 
 @login_required
