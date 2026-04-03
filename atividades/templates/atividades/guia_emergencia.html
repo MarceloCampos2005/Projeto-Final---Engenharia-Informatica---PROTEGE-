@@ -54,7 +54,7 @@
             <div id="section-emergencia" class="mode-section">
                 <div class="threats-glitch-grid">
                     
-                    <div class="threat-item threat-emergencia" onclick="mostrarInstrucoes('{% if user.is_authenticated %}phishing{% else %}phishing_vazio{% endif %}')">
+                    <div class="threat-item threat-emergencia" onclick="mostrarInstrucoes('{% if user.is_authenticated %}phishing{% else %}phishing_vazio{% endif %}'); document.getElementById('painel-passos').classList.remove('tema-verde');">
                         <div class="threat-header">
                             <span class="threat-alert-tag tag-red">AJUDA IMEDIATA</span>
                             <span class="click-icon">➔</span>
@@ -66,7 +66,7 @@
                         <div class="threat-status">{% trans "AÇÃO: GUIA DE EMERGÊNCIA" %}</div>
                     </div>
 
-                    <div class="threat-item threat-emergencia" onclick="mostrarInstrucoes('{% if user.is_authenticated %}password{% else %}password_vazio{% endif %}')">
+                    <div class="threat-item threat-emergencia" onclick="mostrarInstrucoes('{% if user.is_authenticated %}password{% else %}password_vazio{% endif %}'); document.getElementById('painel-passos').classList.remove('tema-verde');">
                         <div class="threat-header">
                             <span class="threat-alert-tag tag-red">CONTA COMPROMETIDA</span>
                             <span class="click-icon">➔</span>
@@ -78,7 +78,7 @@
                         <div class="threat-status">{% trans "AÇÃO: RECUPERAÇÃO" %}</div>
                     </div>
 
-                    <div class="threat-item threat-emergencia" onclick="mostrarInstrucoes('{% if user.is_authenticated %}banco{% else %}banco_vazio{% endif %}')">
+                    <div class="threat-item threat-emergencia" onclick="mostrarInstrucoes('{% if user.is_authenticated %}banco{% else %}banco_vazio{% endif %}'); document.getElementById('painel-passos').classList.remove('tema-verde');">
                         <div class="threat-header">
                             <span class="threat-alert-tag tag-red">SEGURANÇA BANCÁRIA</span>
                             <span class="click-icon">➔</span>
@@ -96,7 +96,7 @@
             <div id="section-mitigacao" class="mode-section hidden">
                 <div class="threats-glitch-grid">
                     
-                    <div class="threat-item threat-mitigacao" onclick="mostrarInstrucoes('{% if user.is_authenticated %}mfa{% else %}banco_vazio{% endif %}')">
+                    <div class="threat-item threat-mitigacao" onclick="mostrarInstrucoes('{% if user.is_authenticated %}mfa{% else %}banco_vazio{% endif %}'); document.getElementById('painel-passos').classList.add('tema-verde');">
                         <div class="threat-header">
                             <span class="threat-alert-tag tag-green">🛡️ PREVENÇÃO</span>
                             <span class="click-icon">➔</span>
@@ -108,7 +108,7 @@
                         <div class="threat-status">{% trans "ESTADO: PROTEÇÃO ATIVA" %}</div>
                     </div>
 
-                    <div class="threat-item threat-mitigacao" onclick="mostrarInstrucoes('{% if user.is_authenticated %}gestor{% else %}banco_vazio{% endif %}')">
+                    <div class="threat-item threat-mitigacao" onclick="mostrarInstrucoes('{% if user.is_authenticated %}gestor{% else %}banco_vazio{% endif %}'); document.getElementById('painel-passos').classList.add('tema-verde');">
                         <div class="threat-header">
                             <span class="threat-alert-tag tag-green">🛡️ PREVENÇÃO</span>
                             <span class="click-icon">➔</span>
@@ -120,7 +120,7 @@
                         <div class="threat-status">{% trans "ESTADO: IDENTIDADE SEGURA" %}</div>
                     </div>
 
-                    <div class="threat-item threat-mitigacao" onclick="mostrarInstrucoes('{% if user.is_authenticated %}updates{% else %}banco_vazio{% endif %}')">
+                    <div class="threat-item threat-mitigacao" onclick="mostrarInstrucoes('{% if user.is_authenticated %}updates{% else %}banco_vazio{% endif %}'); document.getElementById('painel-passos').classList.add('tema-verde');">
                         <div class="threat-header">
                             <span class="threat-alert-tag tag-green">🛡️ PREVENÇÃO</span>
                             <span class="click-icon">➔</span>
@@ -137,7 +137,7 @@
 
             <div id="painel-passos" class="passos-container" style="display: none;">
                 <div class="passos-header-wrapper">
-                    <h2 id="titulo-incidente" class="serif-title" style="color: #ff4b4b; margin: 0; font-size: 2.5rem; text-transform: uppercase;"></h2>
+                    <h2 id="titulo-incidente" class="serif-title" style="margin: 0; font-size: 2.5rem; text-transform: uppercase;"></h2>                    
                     <button class="btn-fechar" onclick="document.getElementById('painel-passos').style.display = 'none';">✕ Fechar</button>
                 </div>
                 <div id="lista-passos"></div>
