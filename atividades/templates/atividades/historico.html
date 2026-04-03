@@ -24,8 +24,10 @@
         </header>
 
         <main class="hist-container">
+            <h2 class="hist-titulo" style="font-size: 1.5rem; margin-bottom: 1.5rem;">🎯 {% trans "Treino de Quizzes" %}</h2>
+            
             {% if resultados %}
-                <div class="hist-grid">
+                <div class="hist-grid" style="margin-bottom: 4rem;">
                     {% for res in resultados %}
                     <div class="hist-card">
                         <div class="hist-card-topo">
@@ -39,8 +41,9 @@
                                 <span class="hist-stat-label">{% trans "Acertos" %}</span>
                             </div>
                             <div class="hist-stat-item">
-                                <div class="hist-circulo-progresso" style="--percent: {{ res.percentagem }}">
+                                <div class="hist-circulo-progresso" style="--percent: {{ res.percentagem|stringformat:'f' }}">
                                     <span>{{ res.percentagem|floatformat:0 }}%</span>
+                                    <span class="hist-stat-label">{% trans "Precisão" %}</span>
                                 </div>
                             </div>
                         </div>
@@ -54,9 +57,58 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <div class="hist-vazio">
+                <div class="hist-vazio" style="margin-bottom: 4rem;">
                     <p>{% trans "Ainda não completaste nenhum quiz. Começa agora!" %}</p>
-                    <a href="{% url 'atividades:quiz' %}" class="btn-jogar">{% trans "Jogar Quiz" %}</a>
+                    <a href="{% url 'atividades:quiz_setup' %}" class="btn-jogar">{% trans "Jogar Quiz" %}</a>
+                </div>
+            {% endif %}
+
+            <h2 class="hist-titulo" style="font-size: 1.5rem; margin-bottom: 1.5rem;">🛡️ {% trans "Análise de Emails" %}</h2>
+            
+            {% if simuladores %}
+                <div class="hist-grid">
+                    {% for sim in simuladores %}
+                    <div class="hist-card">
+                        <div class="hist-card-topo">
+                            <span class="hist-tag" style="background: #b45309;">
+                                {% if sim.tipo_simulacao == 'classificacao' %}Rápido{% else %}Detetive{% endif %}
+                            </span>
+                            <span class="hist-data">{{ sim.data_conclusao|date:"d/m/Y H:i" }}</span>
+                        </div>
+                        
+                        <div class="hist-stats" style="flex-direction: column; align-items: flex-start; gap: 10px;">
+                            <strong style="color: var(--d3-verde-noite); font-size: 1.1rem;">
+                                {{ sim.email.assunto|truncatechars:35 }}
+                            </strong>
+                            
+                            {% if sim.acertou %}
+                                <span style="color: var(--d3-neon-leaf); font-weight: 800; font-size: 1.2rem;">
+                                    ✅ {% trans "Decisão Correta" %}
+                                </span>
+                            {% else %}
+                                <span style="color: var(--d3-perigo); font-weight: 800; font-size: 1.2rem;">
+                                    ❌ {% trans "Caíste na Armadilha" %}
+                                </span>
+                            {% endif %}
+                            
+                            {% if sim.tipo_simulacao == 'identificacao' %}
+                                <span class="hist-stat-label">
+                                    {% trans "Armadilhas Encontradas:" %} {{ sim.armadilhas_encontradas }}/{{ sim.email.total_armadilhas }}
+                                </span>
+                            {% endif %}
+                            <div class="hist-footer">
+                            <a href="{% url 'atividades:detalhe_simulador' sim.id %}" class="btn-detalhes">
+                                {% trans "Rever Questões" %}
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="hist-vazio">
+                    <p>{% trans "Ainda não analisaste nenhum email." %}</p>
+                    <a href="{% url 'atividades:simulador_setup' %}" class="btn-jogar" style="background: #b45309;">{% trans "Abrir Simulador" %}</a>
                 </div>
             {% endif %}
         </main>

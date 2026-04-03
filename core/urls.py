@@ -24,7 +24,7 @@ from two_factor.views import LoginView
 urlpatterns = [
     path('9UMOYRE2CSZH/', admin.site.urls), 
     path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),
-    
+    path('i18n/', include('django.conf.urls.i18n')),
 
     path('', include('users.urls')), 
     
@@ -33,5 +33,5 @@ urlpatterns = [
     
     path('atividades/', include('atividades.urls')),
     path('accounts/', include('allauth.urls')),
-    path('jsi18h/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 ]

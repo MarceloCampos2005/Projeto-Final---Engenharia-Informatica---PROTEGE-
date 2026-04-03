@@ -842,12 +842,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (emails.length > 0) {
 
         function atualizarCarrossel() {
-           
+
             emails.forEach((el, index) => {
                 if (index === currentIndex) {
                     el.style.display = 'block';
                     el.style.animation = 'none';
-                    el.offsetHeight; 
+                    el.offsetHeight;
                     el.style.animation = 'fadeIn 0.4s ease-in-out';
                 } else {
                     el.style.display = 'none';
@@ -890,7 +890,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-       
+
         atualizarCarrossel();
     }
 });
@@ -902,17 +902,17 @@ let ePhishingReal = false;
 let totalArmadilhas = 0;
 let totalPistasView = 0;
 
-document.addEventListener("DOMContentLoaded", function() {
-   
+document.addEventListener("DOMContentLoaded", function () {
+
     const simDados = document.getElementById('simulador-dados');
-    
-   
+
+
     if (simDados) {
         // Lê os dados do Django pelo HTML
         ePhishingReal = simDados.getAttribute('data-e-phishing') === 'true';
         totalArmadilhas = parseInt(simDados.getAttribute('data-total-armadilhas')) || 0;
         const temTimer = simDados.getAttribute('data-timer') === 'true';
-        
+
         totalPistasView = totalArmadilhas + (ePhishingReal ? 2 : 0);
 
         if (temTimer) {
@@ -922,7 +922,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-window.avaliarEmail = function(escolhaDoUtilizador) {
+window.avaliarEmail = function (escolhaDoUtilizador) {
     if (simRespondido) return;
     simRespondido = true;
 
@@ -935,19 +935,19 @@ window.avaliarEmail = function(escolhaDoUtilizador) {
     }
 
     const inputAcertos = document.getElementById('input-acertos');
-    
+
     if (acertou) {
         inputAcertos.value = totalPistasView;
     } else {
         inputAcertos.value = 0;
     }
 
-    const btnClicado = escolhaDoUtilizador === 'phishing' 
-        ? document.querySelector('.btn-phish') 
+    const btnClicado = escolhaDoUtilizador === 'phishing'
+        ? document.querySelector('.btn-phish')
         : document.querySelector('.btn-safe');
-        
+
     btnClicado.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A registar...';
-    
+
     document.querySelectorAll('.btn-decisao').forEach(btn => {
         btn.style.opacity = '0.6';
         btn.disabled = true;
@@ -961,42 +961,119 @@ window.avaliarEmail = function(escolhaDoUtilizador) {
 
 
 function iniciarCronometro() {
-    let timeLeft = 15; 
+    let timeLeft = 15;
     const tempoTotal = 15;
     const timerElement = document.getElementById('time-left');
 
     const countdown = setInterval(() => {
         if (simRespondido) {
-            clearInterval(countdown); 
+            clearInterval(countdown);
             return;
         }
 
         timeLeft--;
         const percentage = (timeLeft / tempoTotal) * 100;
-        
+
         if (timerElement) {
             timerElement.style.width = percentage + '%';
-            
+
             if (timeLeft <= 5) {
-                timerElement.style.backgroundColor = '#ef4444'; 
+                timerElement.style.backgroundColor = '#ef4444';
             }
         }
 
         if (timeLeft <= 0) {
             clearInterval(countdown);
             simRespondido = true;
-            
-            document.getElementById('input-acertos').value = 0; 
-            
+
+            document.getElementById('input-acertos').value = 0;
+
             document.querySelectorAll('.btn-decisao').forEach(btn => {
                 btn.innerHTML = 'Tempo Esgotado! ⏱️';
                 btn.style.opacity = '0.6';
                 btn.disabled = true;
             });
-            
+
             setTimeout(() => {
                 document.getElementById('form-rapido').submit();
             }, 600);
         }
     }, 1000);
+}
+
+const btnAnalisar = document.getElementById('btn-analisar');
+const btnText = document.getElementById('btn-text');
+const spinner = document.getElementById('loading-spinner');
+const iaResultado = document.getElementById('ia-resultado');
+const textArea = document.getElementById('email-text');
+
+btnAnalisar.addEventListener('click', async () => {
+    const texto = textArea.value.trim();
+    if (texto.length < 10) {
+        alert("{% trans 'Por favor, cola um texto mais longo para análise.' %}");
+        return;
+    }
+
+    //enquanto espera
+    btnAnalisar.disabled = true;
+    btnText.classList.add('hidden');
+    spinner.classList.remove('hidden');
+    iaResultado.classList.add('hidden');
+
+    try {
+        const response = await fetch("{% url 'atividades:analisar_phishing_ia' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ texto_email: texto })
+        });
+
+        const data = await response.json();
+
+        if (data.erro) throw new Error(data.erro);
+
+        //Preencher Resultados
+        document.getElementById('result-status-text').innerText = data.status.toUpperCase();
+        document.getElementById('result-risco').innerText = data.risco.toUpperCase();
+        document.getElementById('result-risco').className = `risco-badge risk-${data.risco}`;
+        document.getElementById('result-conselho-text').innerText = data.conselho;
+
+        const listMotivos = document.getElementById('list-motivos');
+        listMotivos.innerHTML = '';
+        data.motivos.forEach(m => {
+            const li = document.createElement('li');
+            li.innerText = m;
+            listMotivos.appendChild(li);
+        });
+
+        const iconDiv = document.getElementById('result-status-icon');
+        const resultHeader = document.querySelector('.result-header');
+        if (data.status === 'phishing') {
+            iconDiv.innerHTML = '💀';
+            resultHeader.style.color = '#ef4444';
+            iaResultado.style.borderTop = '8px solid #ef4444';
+        } else {
+            iconDiv.innerHTML = '🛡️';
+            resultHeader.style.color = '#22c55e';
+            iaResultado.style.borderTop = '8px solid #22c55e';
+        }
+
+        iaResultado.classList.remove('hidden');
+        iaResultado.scrollIntoView({ behavior: 'smooth' });
+
+    } catch (err) {
+        alert("{% trans 'Erro ao analisar: ' %}" + err.message);
+    } finally {
+        btnAnalisar.disabled = false;
+        btnText.classList.remove('hidden');
+        spinner.classList.add('hidden');
+    }
+});
+
+function reiniciarAnalise() {
+    textArea.value = '';
+    iaResultado.classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }

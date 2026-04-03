@@ -1,0 +1,76 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Detetor de Phishing | Protege+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'atividades/css/detetor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
+</head>
+<body class="{% if user.is_authenticated %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
+
+    <header class="ia-header">
+        <a href="{% url 'atividades:home2' %}" class="btn-voltar">← {% trans "Voltar ao Dashboard" %}</a>
+        <div class="ia-badge">Groq Cloud</div>
+    </header>
+
+    <main class="ia-wrapper">
+        <div class="ia-container">
+            <div class="ia-intro">
+                <h1 class="serif-title">{% trans "Detetor de Phishing Inteligente" %}</h1>
+                <p>{% trans "Copia e cola o conteúdo do e-mail suspeito abaixo. A nossa IA vai analisar padrões de linguagem, urgência e possíveis armadilhas." %}</p>
+            </div>
+
+            <div class="ia-card">
+                <div class="ia-warning">
+                    <span>⚠️</span>
+                    <p>{% trans "Aviso de Privacidade: Remove nomes reais, passwords ou dados bancários antes de colar." %}</p>
+                </div>
+
+                <textarea id="email-text" placeholder="{% trans 'Cola aqui o conteúdo do e-mail...' %}"></textarea>
+
+                <button id="btn-analisar" class="btn-ai-glow">
+                    <span id="btn-text">🚀 {% trans "Analisar E-mail com IA" %}</span>
+                    <div id="loading-spinner" class="spinner hidden"></div>
+                </button>
+                <div class="ia-status-container" style="margin-bottom: 15px; text-align: right;">
+                    <span class="ia-badge-usos">
+                        🤖 {% trans "Usos hoje:" %} 
+                        <strong id="contador-ia-usos">{{ user.perfil.usos_restantes_ia }}</strong> / 5
+                    </span>
+                </div>
+            </div>
+
+            <div id="ia-resultado" class="ia-result-card hidden">
+                <div class="result-header">
+                    <div id="result-status-icon"></div>
+                    <h2 id="result-status-text"></h2>
+                </div>
+                
+                <div class="result-body">
+                    <div class="result-meta">
+                        <span class="meta-label">{% trans "Nível de Risco:" %}</span>
+                        <span id="result-risco" class="risco-badge"></span>
+                    </div>
+                    
+                    <div class="result-motivos">
+                        <h3>🔍 {% trans "Análise da IA:" %}</h3>
+                        <ul id="list-motivos"></ul>
+                    </div>
+
+                    <div class="result-conselho">
+                        <p id="result-conselho-text"></p>
+                    </div>
+                </div>
+                
+                <button onclick="reiniciarAnalise()" class="btn-reset">{% trans "Nova Análise" %}</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

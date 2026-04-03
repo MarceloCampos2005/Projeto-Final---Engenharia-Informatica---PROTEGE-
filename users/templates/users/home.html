@@ -24,15 +24,24 @@
             </div>
 
             <nav class="header-nav">
-                <div class="lang-pill">
-                    <button class="lang-btn active">
-                        <img src="{% static 'users/images/portugal.png' %}" alt="PT"> PT
-                    </button>
-                    <span class="lang-divider">|</span>
-                    <button class="lang-btn">
-                        <img src="{% static 'users/images/inglaterra.png' %}" alt="EN"> EN
-                    </button>
-                </div>
+                {% get_current_language as LANGUAGE_CODE %}
+
+                <form action="{% url 'set_language' %}" method="post" style="margin: 0;">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                    
+                    <div class="lang-pill">
+                        <button type="submit" name="language" value="pt" class="lang-btn {% if LANGUAGE_CODE == 'pt' %}active{% endif %}">
+                            <img src="{% static 'users/images/portugal.png' %}" alt="PT"> PT
+                        </button>
+                        
+                        <span class="lang-divider">|</span>
+                        
+                        <button type="submit" name="language" value="en" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
+                            <img src="{% static 'users/images/inglaterra.png' %}" alt="EN"> EN
+                        </button>
+                    </div>
+                </form>
                 
                 <a href="{% url 'sobrenos' %}" class="nav-link-text">{% trans "Sobre Nós" %}</a>
                 

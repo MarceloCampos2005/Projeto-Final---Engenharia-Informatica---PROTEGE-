@@ -115,9 +115,16 @@ body {
 
 .hist-stats {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.hist-footer {
+  text-align: center;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 1.5rem;
 }
 
 .hist-stat-val {
@@ -126,6 +133,13 @@ body {
   font-weight: 900;
   color: var(--d3-verde-noite);
 }
+
+.hist-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .hist-stat-label {
   font-size: 0.7rem;
   font-weight: 800;
@@ -134,18 +148,26 @@ body {
 }
 
 .hist-circulo-progresso {
-  width: 70px;
-  height: 70px;
+  width: 85px;
+  height: 85px;
   border-radius: 50%;
   background:
     radial-gradient(closest-side, white 79%, transparent 80% 100%),
     conic-gradient(var(--d3-neon-leaf) calc(var(--percent) * 1%), #e5e7eb 0);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.hist-circulo-progresso span:first-child {
+  font-size: 1.2rem;
   font-weight: 900;
   color: var(--d3-verde-noite);
-  font-size: 0.9rem;
+  line-height: 1;
+  margin-bottom: 2px;
 }
 
 .btn-detalhes {
@@ -159,6 +181,9 @@ body {
   text-transform: uppercase;
   transition: 0.3s ease;
   display: inline-block;
+  width: 100%;
+  padding: 1rem;
+  letter-spacing: 1px;
 }
 
 .btn-detalhes:hover {
@@ -182,5 +207,87 @@ body.modo-escuro .hist-circulo-progresso {
   background:
     radial-gradient(closest-side, #1e1e1e 79%, transparent 80% 100%),
     conic-gradient(var(--d3-neon-leaf) calc(var(--percent) * 1%), #333 0);
+}
+
+body.modo-escuro .hist-circulo-progresso span:first-child {
+  color: var(--d3-neve-pura) !important;
+}
+
+body.modo-escuro .hist-vazio p {
+  color: var(--d3-neve-pura) !important;
+}
+
+body.modo-escuro .hist-vazio {
+  background: rgba(30, 30, 30, 0.6) !important;
+  border-color: #333 !important;
+}
+
+.hist-circulo-progresso .hist-stat-label {
+  font-size: 0.55rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.hist-vazio {
+  text-align: center;
+  background: var(--d3-vidro);
+  backdrop-filter: blur(10px);
+  padding: 4rem 2rem;
+  border-radius: 40px;
+  border: 2px dashed rgba(255, 255, 255, 0.6);
+  margin-top: 2rem;
+}
+
+.hist-vazio p {
+  font-size: 1.2rem;
+  color: var(--d3-verde-noite);
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.btn-jogar {
+  background: var(--d3-verde-noite);
   color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  transition: 0.3s;
+  display: inline-block;
+  box-shadow: 0 10px 20px rgba(37, 77, 26, 0.2);
+}
+
+.btn-jogar:hover {
+  transform: translateY(-5px);
+  background: var(--d3-neon-leaf);
+}
+
+@media (max-width: 768px) {
+  #content-wrapper {
+    padding: 1rem;
+  }
+
+  .hist-header {
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 2rem;
+  }
+
+  .hist-titulo {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .hist-card {
+    padding: 1.5rem;
+  }
+
+
+  .hist-vazio {
+    padding: 2rem 1rem;
+  }
 }

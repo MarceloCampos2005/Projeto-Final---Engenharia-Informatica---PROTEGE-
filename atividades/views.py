@@ -20,11 +20,14 @@ import json
 from django_otp import user_has_device
 from django.views.decorators.vary import vary_on_cookie
 from .models import emails
-from users.models import Perfil
+from users.models import Conquista, Perfil
 from django.views.decorators.http import require_POST
-
+from google import genai
+from dotenv import load_dotenv
+from openai import OpenAI
 from django.views.decorators.cache import never_cache
 
+load_dotenv(override=True)
 
 #verifica se o utilizador tem login feito, se tiver vai ao perfil dele ver qual a lingua guardada e ativa, senao tenta ler um cookie da sessao
 #o translation.activate(lang) faz com que o django use o ficheiro .po para a lingua
@@ -37,18 +40,62 @@ def home2(request):
     mfa_ativo = False
     
     if request.user.is_authenticated:
-        lang = request.user.perfil.lingua
-        perfil = request.user.perfil
+
+
+        perfil, created = Perfil.objects.get_or_create(user=request.user)
+        lang = perfil.lingua
         #Atualizar a sessão se ela estiver diferente do perfil
         if request.session.get(settings.LANGUAGE_COOKIE_NAME) != lang:
             request.session[settings.LANGUAGE_COOKIE_NAME] = lang
             request.session['_language'] = lang
 
+        if perfil.ultima_recompensa != hoje:
+            ontem = hoje - timedelta(days=1)
+            
+            #ATUALIZAR A CHAMA
+            if perfil.ultima_recompensa == ontem:
+                perfil.streak_atual += 1
+            else:
+                perfil.streak_atual = 1
+
+            #DAR DICA 
+            perfil.dicas_disponiveis += 1
+            msg = f"Streak de {perfil.streak_atual} dias! Ganhaste +1 Dica."
+            
+            #Marco de 15 dias
+            if perfil.streak_atual == 15:
+                try:
+                    m15 = Conquista.objects.get(codigo='streak_15')
+                    if m15 not in perfil.conquistas.all():
+                        perfil.conquistas.add(m15)
+                        msg += f"Ganhaste a medalha: {m15.nome}!"
+                except Conquista.DoesNotExist: 
+                    pass
+
+            messages.success(request, msg)
+            perfil.ultima_recompensa = hoje
         
         #Verifica se o utilizador tem o dispositivo MFA configurado
         mfa_ativo = user_has_device(request.user)
         
-        
+        if mfa_ativo:
+            try:
+                #tenta encontrar a medalha
+                medalha_mfa = Conquista.objects.get(codigo='mfa_ativo')
+                
+                #ve se o utilizador já tem esta medalha
+                ja_tem_medalha = perfil.conquistas.filter(id=medalha_mfa.id).exists()
+                
+                if not ja_tem_medalha:
+                    perfil.conquistas.add(medalha_mfa)
+                    
+                    perfil.xp_geral += 50 
+                    
+                    messages.success(request, f"CONQUISTA DESBLOQUEADA: {medalha_mfa.nome}! Ganhaste 50 XP de bónus por protegeres a tua conta.")
+                
+            except Conquista.DoesNotExist:
+                print("Aviso: Criar medalha com código 'mfa_ativo' no Painel Admin!")
+            
         perfil.save()   
         
     else:
@@ -214,7 +261,23 @@ def quiz(request):
         if esta_correto:
             request.session['pontuacao'] += 1
         
-        
+        if esta_correto:
+            #se acertar soma 1 à sequência de perguntas
+            perfil.perguntas_consecutivas += 1
+            
+            # Se chegou às 7, dá a medalha
+            if perfil.perguntas_consecutivas >= 7:
+                try:
+                    #aqui ve se o utilizador ja tem a medalha
+                    medalha_7 = Conquista.objects.get(codigo='7_seguidas')
+                    if medalha_7 not in perfil.conquistas.all():
+                        perfil.conquistas.add(medalha_7)
+                        messages.success(request, f"Estás imparável! Ganhaste a medalha: {medalha_7.nome}!")
+                except Conquista.DoesNotExist:
+                    pass
+        else:
+            
+            perfil.perguntas_consecutivas = 0
             
         
 
@@ -316,7 +379,19 @@ def quiz_final(request):
         
         xp_necessario = perfil.nivel_geral * 100
 
-    
+    if percentagem == 100:
+        perfil.quizzes_perfeitos_consecutivos += 1
+        
+        if perfil.quizzes_perfeitos_consecutivos >= 10:
+            try:
+                medalha = Conquista.objects.get(codigo='quiz_perfeito_10')
+                if medalha not in perfil.conquistas.all():
+                    perfil.conquistas.add(medalha)
+                    messages.success(request, f"INCRÍVEL! Ganhaste a medalha: {medalha.nome}!")
+            except Conquista.DoesNotExist:
+                pass
+    else:
+        perfil.quizzes_perfeitos_consecutivos = 0
 
 
     perfil.save()
@@ -632,10 +707,69 @@ def quiz_setup(request):
 
 
 
+cliente_ia = OpenAI(
+    api_key=os.environ.get("GROQ_API_KEY"),
+    base_url="https://api.groq.com/openai/v1"
+)
+
+
 @login_required 
 @require_POST
 def analisar_phishing_ia(request):
-    return JsonResponse({'status': 'Funcionalidade em desenvolvimento. Em breve!'})
+    try:
+        perfil = request.user.perfil
+        hoje = timezone.now().date()
+        
+        if perfil.data_ultima_analise_ia != hoje:
+            perfil.analises_ia_hoje = 0
+            perfil.data_ultima_analise_ia = hoje
+            perfil.save()
+
+        #bloquear ao passar o limite
+        LIMITE_DIARIO = 5
+        if perfil.analises_ia_hoje >= LIMITE_DIARIO:
+            return JsonResponse({
+                'erro': f'Já atingiste o limite de {LIMITE_DIARIO} análises por dia. Volta amanhã!'
+            }, status=429)
+
+        data = json.loads(request.body)
+        texto_email = data.get('texto_email', '')
+        
+        if not texto_email.strip():
+            return JsonResponse({'erro': 'O texto do e-mail está vazio.'}, status=400)
+
+        # Prompt exigindo JSON
+        prompt = f"""
+        És um especialista de cibersegurança. Analisa este e-mail suspeito e devolve APENAS um objeto JSON.
+        O JSON deve ter exatamente estas chaves:
+        "status": (escreve "phishing" ou "seguro"),
+        "risco": (escreve "alto", "medio" ou "baixo"),
+        "motivos": (uma lista com 2 ou 3 frases do porquê),
+        "conselho": (uma frase direta do que fazer).
+        
+        E-mail a analisar:
+        "{texto_email}"
+        """
+
+        #chamar a ia com o prompt
+        resposta = cliente_ia.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.1,
+            response_format={"type": "json_object"} 
+        )
+
+        texto_resposta = resposta.choices[0].message.content.strip()
+        resultado_json = json.loads(texto_resposta)
+        perfil.analises_ia_hoje += 1
+        perfil.save()
+        resultado_json['usos_restantes'] = LIMITE_DIARIO - perfil.analises_ia_hoje
+        
+        return JsonResponse(resultado_json)
+
+    except Exception as e:
+        print(f"ERRO REAL NO TERMINAL (GROQ): {e}")
+        return JsonResponse({'erro': 'Erro técnico na IA. Vê o terminal.'}, status=500)
 
 
 def detetor_ia(request):

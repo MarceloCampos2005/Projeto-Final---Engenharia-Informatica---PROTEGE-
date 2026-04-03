@@ -588,3 +588,166 @@ body.modo-escuro .perf-link-historico {
 body.modo-escuro .perf-link-historico:hover {
   color: var(--p-acento);
 }
+
+.perf-conquistas-box {
+  width: 100%;
+  background: var(--p-vidro-limpo);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 40px;
+  padding: 2.5rem;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.conquistas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(37, 77, 26, 0.1);
+  padding-bottom: 1rem;
+}
+
+.conquistas-contador {
+  background: var(--p-primaria);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.medalhas-grid {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}
+
+.medalha-card {
+  position: relative;
+  background: white;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  width: 130px;
+  height: 160px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+
+}
+
+.medalha-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 15px 25px rgba(255, 215, 0, 0.2);
+  border-color: #ffcc00;
+}
+
+.medalha-icon-big {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.medalha-card:hover .medalha-icon-big {
+  transform: rotate(5deg) scale(1.1);
+}
+
+.medalha-nome {
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: var(--p-primaria);
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sem-medalhas {
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+  color: var(--p-primaria);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  border: 1px dashed rgba(37, 77, 26, 0.3);
+}
+
+/* Tooltip Inteligente */
+.tooltip-content {
+  position: absolute;
+  bottom: 115%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--p-primaria);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 12px;
+  width: 220px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 100;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: var(--p-primaria) transparent transparent transparent;
+}
+
+.medalha-card:hover .tooltip-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tooltip-titulo {
+  display: block;
+  color: #ffcc00;
+  font-weight: 900;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.tooltip-content p {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+/* Adaptação para o Modo Escuro */
+body.modo-escuro .perf-conquistas-box {
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.modo-escuro .medalha-card {
+  background: linear-gradient(145deg, rgba(50, 50, 50, 0.8), rgba(20, 20, 20, 0.9));
+}
+
+body.modo-escuro .conquistas-header h3,
+body.modo-escuro .medalha-nome,
+body.modo-escuro .sem-medalhas {
+  color: white !important;
+}

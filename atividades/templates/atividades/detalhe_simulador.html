@@ -1,0 +1,75 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Revisão do Simulador" %} | Protege+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'atividades/css/historico.css' %}">
+    <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
+</head>
+
+<body class="hist-view {% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
+    
+    <div id="content-wrapper">
+        <header class="hist-header">
+            <a href="{% url 'atividades:historico' %}" class="btn-voltar">← {% trans "Voltar ao Histórico" %}</a>
+            <h1 class="hist-titulo">{% trans "Análise do Email" %}</h1>
+        </header>
+
+        <main class="hist-container">
+            <div class="hist-card {% if resultado.acertou %}border-correto{% else %}border-errado{% endif %}" style="margin-bottom: 2rem;">
+                <div class="hist-card-topo">
+                    <span class="hist-tag" style="background: #b45309;">
+                        {% if resultado.tipo_simulacao == 'classificacao' %}Modo Rápido{% else %}Modo Detetive{% endif %}
+                    </span>
+                    <span class="hist-icon" style="font-size: 1.5rem;">
+                        {% if resultado.acertou %}✅ {% trans "Análise Correta" %}{% else %}❌ {% trans "Caíste na Armadilha" %}{% endif %}
+                    </span>
+                </div>
+                
+                <div class="detalhe-info" style="margin-top: 1rem;">
+                    <p><strong>{% trans "Tipo de Email:" %}</strong> 
+                        <span class="badge-escolha" style="{% if resultado.email.e_phishing %}background: #fee2e2; color: #ef4444;{% else %}background: #dcfce7; color: #22c55e;{% endif %}">
+                            {% if resultado.email.e_phishing %}🎣 {% trans "Phishing Malicioso" %}{% else %}🛡️ {% trans "Email Seguro" %}{% endif %}
+                        </span>
+                    </p>
+                    
+                    {% if resultado.tipo_simulacao == 'identificacao' and resultado.email.e_phishing %}
+                    <p><strong>{% trans "O teu desempenho:" %}</strong> 
+                        Encontraste {{ resultado.armadilhas_encontradas }} de {{ resultado.email.total_armadilhas }} armadilhas.
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <h2 class="hist-titulo" style="font-size: 1.2rem; margin-bottom: 1rem;">📧 {% trans "Email Original" %}</h2>
+            <div class="hist-card" style="background: white; border-radius: 10px; padding: 0; overflow: hidden; color: #333;">
+                
+                <div style="background: #f3f4f6; padding: 1.5rem; border-bottom: 1px solid #e5e7eb;">
+                    <p style="margin-bottom: 0.5rem; font-size: 1.1rem;">
+                        <strong>{% trans "Assunto:" %}</strong> {{ resultado.email.assunto }}
+                    </p>
+                    <p style="color: #6b7280; font-size: 0.95rem;">
+                        <strong>{% trans "De:" %}</strong> &lt;{{ resultado.email.remetente }}&gt;
+                    </p>
+                </div>
+                
+                <div style="padding: 2rem; font-family: Arial, sans-serif; font-size: 1rem; line-height: 1.6;">
+                    {{ resultado.email.corpo|safe }}
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    {% include 'partials/footer_acessibilidade.html' %}
+    
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
