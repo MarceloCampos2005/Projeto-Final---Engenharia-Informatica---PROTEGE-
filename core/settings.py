@@ -67,7 +67,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 ]
 
-SITE_ID = 2
+SITE_ID = 1
 #pagina para onde vai quem consegue fazer login
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
