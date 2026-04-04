@@ -1010,8 +1010,8 @@ const textArea = document.getElementById('email-text');
 btnAnalisar.addEventListener('click', async () => {
     const texto = textArea.value.trim();
     if (texto.length < 10) {
-        alert("{% trans 'Por favor, cola um texto mais longo para análise.' %}");
-        return;
+        alert("Por favor, cola um texto mais longo para análise.");
+        return;;
     }
 
     //enquanto espera
@@ -1021,14 +1021,18 @@ btnAnalisar.addEventListener('click', async () => {
     iaResultado.classList.add('hidden');
 
     try {
-        const response = await fetch("{% url 'atividades:analisar_phishing_ia' %}", {
+        const response = await fetch("/atividades/analisar_phishing_ia/", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
+                'X-CSRFToken': getCookie('csrftoken')
             },
             body: JSON.stringify({ texto_email: texto })
         });
+
+        if (!response.ok) {
+            throw new Error("Erro no servidor ao processar o pedido.");
+        }
 
         const data = await response.json();
 
