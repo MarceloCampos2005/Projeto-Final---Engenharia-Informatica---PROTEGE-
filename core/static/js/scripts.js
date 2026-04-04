@@ -1021,7 +1021,7 @@ btnAnalisar.addEventListener('click', async () => {
     iaResultado.classList.add('hidden');
 
     try {
-        const response = await fetch("/atividades/analisar_phishing_ia/", {
+        const response = await fetch("/atividades/api/analisar-phishing-ia/", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
