@@ -7,85 +7,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% trans "Configurar MFA" %} | Protege+</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/setup.css' %}">
-
     
+    <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
+    <link rel="stylesheet" href="{% static 'css/setup.css' %}">
 </head>
-<body>
 
-    <div class="header-pill">🛡️ Protege+ | {% trans "Segurança" %}</div>
+<body data-authenticated="{{ user.is_authenticated|lower }}" class="{% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}">
 
-    <div class="security-card">
-        <h1 class="title">🔑 {% trans "Configurar MFA" %}</h1>
-        
-        <div class="setup-content">
-            {% if wizard.steps.current == 'welcome' %}
-                <p class="description">
-                    {% trans "Para começar, vais precisar de uma aplicação de autenticação (como Google Authenticator ou Authy) no teu telemóvel." %}
-                </p>
-            {% elif wizard.steps.current == 'method' %}
-                <p class="description">
-                    {% trans "Como desejas receber os teus códigos de validação?" %}
-                </p>
-            {% elif wizard.steps.current == 'generator' %}
-                <p class="description">
-                    {% trans "1. Faz scan do QR Code abaixo com a tua App:" %}
-                </p>
-                
-                <div class="qr-container">
-                    <img src="{{ QR_URL }}" alt="QR Code">
+    {% if messages %}
+        <div class="django-messages-toast">
+            {% for message in messages %}
+                <div class="toast-alert {% if message.tags %}toast-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                    <button type="button" class="close-toast" onclick="this.parentElement.style.display='none';">&times;</button>
                 </div>
-                
-                <p class="description" style="font-size: 0.9rem; margin-bottom: 10px;">
-                    {% trans "2. Introduz o código de 6 dígitos gerado:" %}
-                </p>
-            {% else %}
-                 <p class="description">
-                    {% trans "Segue as instruções para protegeres a tua conta." %}
-                </p>
-            {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
 
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ wizard.management_form }}
-                
-                {% if wizard.form.token %}
-                    <input type="text" name="{{ wizard.form.token.html_name }}" id="id_generator-token"
-                           maxlength="6" required placeholder="000000" autofocus autocomplete="off"
-                           class="token-input" inputmode="numeric" pattern="[0-9]*">
-                           
-                    {% if wizard.form.token.errors %}
-                        <div class="error-msg">⚠️ {% trans "Código inválido. Tenta novamente." %}</div>
-                    {% endif %}
-                {% else %}
-                    <div class="hidden-fields">
-                        {{ wizard.form.as_p }}
+    <div class="mfa-wrapper">
+        <div class="header-pill">🛡️ Protege+ | {% trans "Segurança" %}</div>
+
+        <div class="security-card">
+            <h1 class="title">🔑 {% trans "Configurar MFA" %}</h1>
+            
+            <div class="setup-content">
+                {% if wizard.steps.current == 'welcome' %}
+                    <p class="description">
+                        {% trans "Para começar, vais precisar de uma aplicação de autenticação (como Google Authenticator ou Authy) no teu telemóvel." %}
+                    </p>
+                {% elif wizard.steps.current == 'method' %}
+                    <p class="description">
+                        {% trans "Como desejas receber os teus códigos de validação?" %}
+                    </p>
+                {% elif wizard.steps.current == 'generator' %}
+                    <p class="description">
+                        {% trans "1. Faz scan do QR Code abaixo com a tua App:" %}
+                    </p>
+                    
+                    <div class="qr-container">
+                        <img src="{{ QR_URL }}" alt="QR Code">
                     </div>
+                    
+                    <p class="description" style="font-size: 0.9rem; margin-bottom: 10px;">
+                        {% trans "2. Introduz o código de 6 dígitos gerado:" %}
+                    </p>
+                {% else %}
+                     <p class="description">
+                        {% trans "Segue as instruções para protegeres a tua conta." %}
+                    </p>
                 {% endif %}
 
-                <div style="display: flex; gap: 10px; margin-top: 10px;">
-                    {% if wizard.steps.prev %}
-                        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="btn-action btn-secondary" style="flex: 1;">
-                            {% trans "Voltar" %}
-                        </button>
-                    {% endif %}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ wizard.management_form }}
                     
-                    <button type="submit" class="btn-action" style="flex: 2;">
-                        {% if wizard.steps.current == 'generator' %}
-                            {% trans "Ativar Agora" %} ✅
-                        {% else %}
-                            {% trans "Avançar" %} →
+                    {% if wizard.form.token %}
+                        <input type="text" name="{{ wizard.form.token.html_name }}" id="id_generator-token"
+                               maxlength="6" required placeholder="000000" autofocus autocomplete="off"
+                               class="token-input" inputmode="numeric" pattern="[0-9]*">
+                               
+                        {% if wizard.form.token.errors %}
+                            <div class="error-msg">⚠️ {% trans "Código inválido. Tenta novamente." %}</div>
                         {% endif %}
-                    </button>
-                </div>
-            </form>
+                    {% else %}
+                        <div class="hidden-fields">
+                            {{ wizard.form.as_p }}
+                        </div>
+                    {% endif %}
+
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        {% if wizard.steps.prev %}
+                            <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="btn-action btn-secondary" style="flex: 1;">
+                                {% trans "Voltar" %}
+                            </button>
+                        {% endif %}
+                        
+                        <button type="submit" class="btn-action" style="flex: 2;">
+                            {% if wizard.steps.current == 'generator' %}
+                                {% trans "Ativar Agora" %} ✅
+                            {% else %}
+                                {% trans "Avançar" %} →
+                            {% endif %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <a href="{% url 'atividades:home2' %}" class="back-link">
+                ← {% trans "Cancelar e Sair" %}
+            </a>
         </div>
-        
-        <a href="{% url 'atividades:home2' %}" class="back-link">
-            ← {% trans "Cancelar e Sair" %}
-        </a>
     </div>
-   
+
+    {% include 'partials/footer_acessibilidade.html' %}
+
+    <input type="hidden" id="csrf_token_helper" value="{{ csrf_token }}">
+    <script src="{% static 'js/scripts.js' %}"></script>
 
 </body>
 </html>

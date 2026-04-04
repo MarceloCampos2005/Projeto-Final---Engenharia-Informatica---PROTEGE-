@@ -7,33 +7,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% trans "Segurança" %} | Protege+</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
     
 </head>
-<body>
+
+<body data-authenticated="{{ user.is_authenticated|lower }}" class="{% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}">
+    {% if messages %}
+    <div class="django-messages-toast">
+        {% for message in messages %}
+            <div class="toast-alert {% if message.tags %}toast-{{ message.tags }}{% endif %}">
+                {{ message }}
+                <button type="button" class="close-toast" onclick="this.parentElement.style.display='none';">&times;</button>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     
-    <div class="header-pill">🛡️ Protege+ | {% trans "Segurança" %}</div>
-    
-    <div class="security-card">
-        <h1 class="title">{% trans "Definições MFA" %}</h1>
+    <div class="mfa-wrapper">
+        <div class="header-pill">🛡️ Protege+ | {% trans "Segurança" %}</div>
         
-        <div class="status-badge">✅ {% trans "CONTA BLINDADA" %}</div>
-        
-        <p class="description">
-            {% trans "A tua conta está atualmente protegida pela Autenticação de Dois Fatores. Tens uma camada extra de segurança contra intrusos." %}
-        </p>
-        
-        <a href="{% url 'two_factor:backup_tokens' %}" class="btn-action">
-            📜 {% trans "Códigos de Reserva" %}
-        </a>
-        
-        <button onclick="abrirPopup()" class="btn-action btn-danger">
-            ⚠️ {% trans "Desativar MFA" %}
-        </button>
-        
-        <a href="{% url 'atividades:home2' %}" class="back-link">
-            ← {% trans "Voltar ao Dashboard" %}
-        </a>
+        <div class="security-card">
+            <h1 class="title">{% trans "Definições MFA" %}</h1>
+            
+            <div class="status-badge">✅ {% trans "CONTA BLINDADA" %}</div>
+            
+            <p class="description">
+                {% trans "A tua conta está atualmente protegida pela Autenticação de Dois Fatores. Tens uma camada extra de segurança contra intrusos." %}
+            </p>
+            
+            <a href="{% url 'two_factor:backup_tokens' %}" class="btn-action">
+                📜 {% trans "Códigos de Reserva" %}
+            </a>
+            
+            <button onclick="abrirPopup()" class="btn-action btn-danger">
+                ⚠️ {% trans "Desativar MFA" %}
+            </button>
+            
+            <a href="{% url 'atividades:home2' %}" class="back-link">
+                ← {% trans "Voltar ao Dashboard" %}
+            </a>
+        </div>
     </div>
 
     <div id="popupDesativar" class="modal-overlay">
@@ -45,7 +60,7 @@
                 {% trans "Estás prestes a desativar a autenticação de dois fatores. Isto enfraquece a segurança da tua conta." %}
             </p>
             
-           <form action="{% url 'desativar_mfa_seguro' %}" method="post" class="form-mfa-danger">
+            <form action="{% url 'desativar_mfa_seguro' %}" method="post" class="form-mfa-danger">
                 {% csrf_token %}
                 
                 <p class="mfa-instrucao">
@@ -66,6 +81,10 @@
         </div>
     </div>
 
+    {% include 'partials/footer_acessibilidade.html' %}
+
+    <input type="hidden" id="csrf_token_helper" value="{{ csrf_token }}">
+    <script src="{% static 'js/scripts.js' %}"></script>
     <script>
         function abrirPopup() {
             document.getElementById('popupDesativar').classList.add('active');
@@ -74,6 +93,5 @@
             document.getElementById('popupDesativar').classList.remove('active');
         }
     </script>
-
 </body>
 </html>

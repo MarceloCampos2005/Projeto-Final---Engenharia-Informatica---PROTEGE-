@@ -1,0 +1,45 @@
+{% load i18n %}
+<div class="lb-row {% if forloop.counter == 1 %}lb-ouro{% elif forloop.counter == 2 %}lb-prata{% elif forloop.counter == 3 %}lb-bronze{% endif %} {% if jogador.user == request.user %}lb-eu{% endif %}">
+    
+    <div class="lb-pos">
+        <span>{{ forloop.counter }}º</span>
+        {% if forloop.counter == 1 %}
+            <span style="font-size: 1.5rem;" title="Ouro">🥇</span>
+        {% elif forloop.counter == 2 %}
+            <span style="font-size: 1.5rem;" title="Prata">🥈</span>
+        {% elif forloop.counter == 3 %}
+            <span style="font-size: 1.5rem;" title="Bronze">🥉</span>
+        {% endif %}
+    </div>
+    
+    <div class="lb-avatar">
+        {% if jogador.avatar %}
+            <img src="{{ jogador.avatar.url }}" alt="Avatar">
+        {% else %}
+            <img src="/static/users/images/{{ jogador.avatar_padrao }}" alt="Default">
+        {% endif %}
+    </div>
+    
+    <div class="lb-info">
+        <h3 class="lb-name">{{ jogador.user.username }}</h3>
+        {% if jogador.user == request.user %}
+            <span class="lb-tag-eu">{% trans "Tu" %}</span>
+        {% endif %}
+    </div>
+    
+    <div class="lb-stats" style="text-align: right;">
+        <div class="lb-level" style="font-size: 0.85rem; color: #64748b; font-weight: 700; margin-bottom: 2px;">
+            {% trans "Nível" %} 
+            {% if tipo == "geral" %}{{ jogador.nivel_geral }}
+            {% elif tipo == "quiz" %}{{ jogador.nivel_quiz }}
+            {% elif tipo == "simulador" %}{{ jogador.nivel_simulador }}
+            {% endif %}
+        </div>
+        <div class="lb-points" style="font-size: 1.2rem; font-weight: 900; color: var(--d3-verde-noite);">
+            {% if tipo == "geral" %}{{ jogador.xp_geral }}
+            {% elif tipo == "quiz" %}{{ jogador.pontuacao_total_quiz }}
+            {% elif tipo == "simulador" %}{{ jogador.pontuacao_total_simulador }}
+            {% endif %} <span style="font-size: 0.8rem; color: #64748b;">XP</span>
+        </div>
+    </div>
+</div>

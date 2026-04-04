@@ -1,0 +1,92 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protege+ | {% trans "Leaderboard" %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&family=Instrument+Serif&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'atividades/css/leaderboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
+</head>
+
+<body data-authenticated="{{ user.is_authenticated|lower }}" class="{% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}">
+
+    <header class="lb-topo-nav">
+        <a href="{% url 'atividades:home2' %}" class="lb-btn-retroceder">
+            <span>←</span> {% trans "Voltar" %}
+        </a>
+    </header>
+
+    <div id="content-wrapper" class="lb-wrapper">
+        <main class="leaderboard-main">
+            
+            <div class="leaderboard-header">
+                <div class="lb-icon">🏆</div>
+                <h1 class="serif-title lb-main-title">
+                    {% trans "Mural dos Campeões" %}
+                </h1>
+                <p class="lb-subtitle">{% trans "Descobre quem são os mestres da cibersegurança." %}</p>
+            </div>
+
+            <div class="lb-tabs">
+                <button class="lb-tab-btn active" onclick="abrirTab('geral', this)">🌍 {% trans "Geral" %}</button>
+                <button class="lb-tab-btn" onclick="abrirTab('quiz', this)">🎯 {% trans "Quiz" %}</button>
+                <button class="lb-tab-btn" onclick="abrirTab('simulador', this)">🛡️ {% trans "Simulador" %}</button>
+            </div>
+
+            <div id="tab-geral" class="lb-content active">
+                <div class="lb-list">
+                    {% for jogador in top_geral %}
+                        {% include 'partials/leaderboard_row.html' with jogador=jogador tipo="geral" %}
+                    {% empty %}
+                        <p class="lb-empty-msg">{% trans "Ainda não há dados suficientes." %}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="tab-quiz" class="lb-content hidden">
+                <div class="lb-list">
+                    {% for jogador in top_quiz %}
+                        {% include 'partials/leaderboard_row.html' with jogador=jogador tipo="quiz" %}
+                    {% empty %}
+                        <p class="lb-empty-msg">{% trans "Ainda não há dados suficientes." %}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="tab-simulador" class="lb-content hidden">
+                <div class="lb-list">
+                    {% for jogador in top_simulador %}
+                        {% include 'partials/leaderboard_row.html' with jogador=jogador tipo="simulador" %}
+                    {% empty %}
+                        <p class="lb-empty-msg">{% trans "Ainda não há dados suficientes." %}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    {% include 'partials/footer_acessibilidade.html' %}
+
+    <script>
+    function abrirTab(nomeTab, elementoBotao) {
+        document.querySelectorAll('.lb-content').forEach(tab => {
+            tab.classList.add('hidden');
+            tab.classList.remove('active');
+        });
+        document.querySelectorAll('.lb-tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.getElementById('tab-' + nomeTab).classList.remove('hidden');
+        document.getElementById('tab-' + nomeTab).classList.add('active');
+        elementoBotao.classList.add('active');
+    }
+    </script>
+</body>
+</html>

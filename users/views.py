@@ -257,7 +257,7 @@ def desativar_mfa_seguro(request):
         
         # Vai buscar o dispositivo MFA ativo deste utilizador
         device = TOTPDevice.objects.filter(user=request.user, confirmed=True).first()
-        
+
         # Verifica se o dispositivo existe e se o código inserido é o correto
         if device and device.verify_token(token_inserido):
             #Apaga o MFA do utilizador
@@ -266,10 +266,14 @@ def desativar_mfa_seguro(request):
             request.user.staticdevice_set.all().delete()
             
             messages.success(request, "MFA desativado com segurança.")
+
+            return redirect('two_factor:setup')
         else:
             # CÓDIGO ERRADO: Bloqueia a ação
             messages.error(request, "Código incorreto! O MFA não foi desativado.")
-            
+            return redirect('two_factor:profile')
+        
+                    
     # Redireciona de volta para a tua página de segurança 
     return redirect('two_factor:profile')
 
