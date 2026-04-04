@@ -279,3 +279,9 @@ def desativar_mfa_seguro(request):
 
 
 
+@login_required
+def mfa_sucesso_redirect(request):
+    # Mensagem a dizer que concluiu mfa
+    messages.success(request, "MFA ativo com sucesso! A tua conta está agora mais segura.")
+    
+    return redirect('two_factor:profile')

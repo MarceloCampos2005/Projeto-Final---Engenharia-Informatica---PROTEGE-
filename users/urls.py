@@ -13,5 +13,5 @@ urlpatterns = [
     path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
     path('atualizar-avatar/', views.atualizar_avatar, name='atualizar_avatar'),
     path('desativar-mfa-seguro/', views.desativar_mfa_seguro, name='desativar_mfa_seguro'),
-    
+    path('mfa/account/two_factor/setup/complete/', views.mfa_sucesso_redirect, name='mfa_sucesso_redirect'),
 ]
