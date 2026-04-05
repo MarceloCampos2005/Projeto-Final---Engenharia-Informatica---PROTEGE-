@@ -229,15 +229,13 @@ ACCOUNT_ADAPTER = 'allauth_2fa.adapter.OTPAdapter'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_HOST = 'smtp-relay.brevo.com' 
+EMAIL_PORT = 2525 
+
 EMAIL_USE_TLS = True
 
-
-EMAIL_HOST_USER = 'marc3lo99moreira@gmail.com' 
-
+EMAIL_HOST_USER = 'a71fa0001@smtp-brevo.com' 
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-
 
 DEFAULT_FROM_EMAIL = 'Equipa Protege+ <marc3lo99moreira@gmail.com>'
 
