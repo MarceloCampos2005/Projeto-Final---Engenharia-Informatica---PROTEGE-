@@ -451,6 +451,38 @@ const baseConhecimento = {
         icon: '💻',
         texto: gettext("De nada valem senhas complexas se o teu dispositivo físico for roubado ou comprometido. A segurança começa no hardware e nas práticas de manutenção dos aparelhos.<br><br><b>Criptografia de Disco Inteiro (FDE):</b> É a defesa física definitiva. No Windows chama-se 'BitLocker' e no Mac 'FileVault'. Ao ser ativada, codifica todo o teu disco rígido. Se alguém te roubar o portátil e tentar tirar o disco para ler noutro computador, só verá lixo digital sem a tua palavra-passe.<br><br><b>A Regra de Ouro dos Backups (Estratégia 3-2-1):</b> Contra perdas, roubos e ataques de Ransomware, deves implementar esta estratégia militar:<ul><li><b>3</b> Cópias dos teus dados importantes (a original + 2 cópias de segurança).</li><li><b>2</b> Tipos de suporte diferentes (ex: Num Disco Externo SSD e numa Cloud/Nuvem).</li><li><b>1</b> Cópia 'Offsite' (fora de casa). Pode ser a nuvem, ou um disco guardado em casa de um familiar. Se houver um incêndio na tua casa, não perdes os originais e os backups locais ao mesmo tempo.</li></ul><br><b>IoT (A Internet das Coisas):</b> Lâmpadas, frigoríficos, TVs inteligentes e aspiradores-robô. Estes aparelhos raramente recebem atualizações de segurança das marcas e ligam-se ao teu Wi-Fi, tornando-se o elo mais fraco e uma porta de entrada fácil para invadir os teus computadores domésticos.<br><br><b>Higiene Digital e Limpeza:</b><ul><li>Apaga apps que não usas há mais de 6 meses. O seu código desatualizado pode ser explorado.</li><li>Antes de venderes um PC ou telemóvel antigo, faz um 'Wipe' (limpeza segura com reposição de fábrica). Apenas apagar ficheiros e esvaziar a reciclagem não os elimina permanentemente.</li></ul>"),
         dica: gettext("Tapa a tua webcam com um autocolante ou protetor deslizante. Bloqueia o ecrã instantaneamente quando te levantas numa biblioteca ou escritório (Usa o atalho Win + L no Windows, ou Ctrl + Cmd + Q no Mac). O tempo que vais beber água é suficiente para instalarem algo malicioso na tua máquina.")
+    },
+    'ia': {
+        titulo: gettext("Ameaças com Inteligência Artificial"),
+        icon: '🤖',
+        texto: gettext("A Inteligência Artificial (IA) revolucionou o mundo, mas também armou os cibercriminosos com ferramentas de nível militar. O que antes exigia conhecimentos técnicos avançados, agora pode ser automatizado por algoritmos em segundos.<br><br><b>Como a IA está a ser usada contra ti:</b><ul><li><b>Phishing Perfeito:</b> Esquece os e-mails com erros ortográficos do passado. Ferramentas como o ChatGPT (ou variantes maliciosas criadas por hackers) permitem criar e-mails falsos indetetáveis, escritos em português perfeito e com um tom altamente persuasivo.</li><li><b>Clonagem de Voz (Vishing com IA):</b> Bastam 3 a 5 segundos de áudio retirados de um vídeo teu no Instagram ou TikTok para a IA clonar a tua voz com uma precisão assustadora. Os burlões usam isto para ligar aos teus familiares a chorar, dizendo que tiveram um acidente e precisam de dinheiro por MB WAY.</li><li><b>Deepfakes de Vídeo:</b> Vídeos manipulados de figuras públicas, políticos ou mesmo do CEO de uma empresa a recomendar falsos investimentos em criptomoedas ou a ordenar transferências urgentes a funcionários.</li><li><b>Malware Mutante:</b> Código malicioso escrito e reescrito por IA que altera a sua própria assinatura digital constantemente para escapar aos radares dos antivírus tradicionais.</li></ul><br><b>A Defesa na Era da IA:</b> Nunca confies apenas no que vês num ecrã ou ouves num telefonema. O ceticismo digital é a tua maior arma. Se algo parece demasiado urgente ou apela a emoções fortes (medo, ganância), faz uma pausa."),
+        dica: gettext("Cria uma 'Palavra-Passe Familiar' (Uma palavra de segurança). Se alguém te ligar de um número estranho a pedir ajuda urgente com a voz de um familiar teu, pede essa palavra. Se a pessoa do outro lado não souber ou inventar desculpas, desliga imediatamente.")
+    },
+
+    'engenharia_social': {
+        titulo: gettext("Engenharia Social e Manipulação"),
+        icon: '🎭',
+        texto: gettext("A Engenharia Social é a arte de 'hackear' os seres humanos em vez de computadores. Os sistemas de segurança atuais são extremamente robustos, por isso é muito mais fácil e barato para um atacante enganar-te para que sejas tu a abrir-lhe a porta.<br><br><b>Táticas de Manipulação:</b><ul><li><b>Pretexting:</b> O atacante cria um cenário falso. O exemplo clássico é a 'Fraude da Microsoft', onde te ligam a dizer que o teu PC está infetado e pedem que instales um programa de acesso remoto (como AnyDesk ou TeamViewer) para 'te ajudar'. Assim que instalas, eles controlam o teu banco.</li><li><b>Baiting (O Isco):</b> Explora a curiosidade natural humana. Um hacker deixa uma pen USB propositadamente no parque de estacionamento da tua empresa com o rótulo 'Salários_Direção_2026.xls'. Quem a encontrar e a ligar ao computador vai infetar a rede instantaneamente em silêncio.</li><li><b>Quid Pro Quo:</b> Oferecer um benefício falso em troca dos teus dados. Exemplos: 'Preencha este inquérito para ganhar um iPhone novo' ou falsas ofertas de emprego de luxo no LinkedIn que pedem as tuas informações bancárias antecipadamente.</li><li><b>Tailgating (Segurança Física):</b> Uma técnica onde uma pessoa sem autorização segue um funcionário legítimo num edifício seguro. O atacante aproxima-se com caixas pesadas nas mãos para forçar a empatia humana e fazer com que o funcionário lhe segure a porta, burlando a entrada com cartão.</li></ul>"),
+        dica: gettext("Nunca aceites ajuda técnica (por telefone ou e-mail) que não solicitaste primeiro. Bancos, operadoras de telecomunicações, Microsoft ou Polícia NUNCA te vão ligar a pedir senhas, códigos de SMS ou para instalares aplicações de suporte remoto.")
+    },
+
+    'backups': {
+        titulo: gettext("Backups e Recuperação de Desastres"),
+        icon: '💾',
+        texto: gettext("Existem apenas dois tipos de pessoas no mundo informático: as que já perderam dados importantes e as que ainda vão perder. Seja por um ataque de Ransomware, por roubo do portátil, ou uma falha de hardware, uma cópia de segurança (backup) limpa é a tua única salvação.<br><br><b>Sincronização NÃO É Backup:</b><br>Muitas pessoas acham que ter o Google Drive, OneDrive ou iCloud ativado no PC é ter um backup. <b>Isto é falso!</b> Estas ferramentas são plataformas de 'sincronização'. Se um vírus corromper os teus ficheiros locais, essa alteração é sincronizada imediatamente para a nuvem, destruindo também a cópia que lá estava.<br><br><b>A Estratégia Invencível (A Regra 3-2-1):</b><ul><li><b>3 Cópias:</b> Mantém sempre 3 cópias dos teus ficheiros essenciais (o original + 2 backups).</li><li><b>2 Suportes:</b> Usa formatos físicos diferentes (ex: o disco do teu PC + um Disco Rígido Externo USB).</li><li><b>1 Cópia Offsite:</b> Guarda uma cópia fora da tua casa/escritório (numa nuvem segura que mantenha um histórico de versões, ou um disco na casa dos teus pais). Isto garante que não perdes tudo em caso de incêndio ou assalto à tua casa.</li></ul><br><b>O Perigo Oculto dos Backups Locais:</b> Os malwares de Ransomware modernos procuram ativamente por discos externos ou pens USB ligadas ao PC para encriptar esses dados também.") + `
+            <div class="info-box" style="background:#e0f2fe; border-left:5px solid #0ea5e9; padding:15px; border-radius:8px; margin-top:20px;">
+                <h4 style="margin-top:0; color:#0369a1; margin-bottom:10px;">🔄 ${gettext("A Regra de Ouro do Restauro")}</h4>
+                <p style="margin-bottom:0; font-size:0.9rem; color:#0c4a6e;">${gettext("Um backup que nunca foi testado é apenas uma esperança. Tenta restaurar ficheiros aleatórios do teu disco externo a cada 6 meses para garantir que o disco não avariou e que o processo funciona.")}</p>
+            </div>
+        `,
+        dica: gettext("Desliga sempre o teu disco externo (cabo USB) assim que a cópia de segurança terminar. Um disco de backup só é 100% à prova de hackers se estiver desligado fisicamente da corrente e do computador.")
+    },
+
+    'compras': {
+        titulo: gettext("Compras Online e Segurança Financeira"),
+        icon: '🛒',
+        texto: gettext("O e-commerce e as plataformas de classificados são convenientes, mas são também o principal campo de caça para o roubo de dados financeiros. Proteger o teu dinheiro é tão importante como proteger as tuas senhas.<br><br><b>Identificar Lojas Fraudulentas (Scam Stores):</b><ul><li><b>Preços Mirabolantes:</b> Se aquele smartphone, PS5 ou sapatilhas de marca estão com 70% de desconto num site desconhecido, é burla garantida.</li><li><b>Falta de Informação Legal:</b> Lojas legítimas têm de exibir NIF, morada física, Política de Devolução e Termos e Condições. Se o único contacto for um formulário web genérico, sai do site.</li><li><b>Anúncios Falsos nas Redes Sociais:</b> Cuidado extremo com anúncios patrocinados no Instagram, Facebook ou TikTok. É muito fácil e barato para um criminoso criar uma loja visualmente perfeita no Shopify, pagar anúncios, recolher milhares de euros em 48 horas e desaparecer.</li></ul><br><b>A Higiene no Pagamento:</b> Nunca guardes os detalhes do teu cartão de crédito real (número e CVV) na base de dados de uma loja online. Se a loja for invadida no mês seguinte, os teus dados vazam com ela.<br><br><b>O Escudo dos Cartões Virtuais (MB WAY / Revolut):</b> A melhor defesa financeira é a virtualização. Usa ferramentas para gerar um 'Cartão Virtual de Utilização Única' com o limite exato do produto que vais comprar. Assim que a compra for feita, o cartão expira e autodestrói-se. Mesmo que a loja seja pirata, não conseguem tirar de lá nem mais um cêntimo."),
+        dica: gettext("Nas compras entre particulares (OLX, Vinted, Facebook Marketplace), nunca aceites sair do chat oficial da plataforma para o WhatsApp. O MB WAY NUNCA pede o teu PIN de acesso para 'receberes' dinheiro. Se te pedirem o PIN, estão a tentar aceder à tua conta bancária.")
     }
 };
 
@@ -474,7 +506,7 @@ function mostrarTema(idTema) {
                     </div>
 
                     <div class="dica-box" style="margin-top: 30px; background: rgba(76,175,80,0.1); border-left: 6px solid var(--verde-principal); padding: 20px; border-radius: 0 20px 20px 0;">
-                        <strong>💡 Dica:</strong> ${info.dica}
+                        <strong>💡 ${gettext("Dica:")}</strong> ${info.dica}
                     </div>
                 </article>
             </div>
@@ -1001,83 +1033,99 @@ function iniciarCronometro() {
     }, 1000);
 }
 
+//detetor ai
 const btnAnalisar = document.getElementById('btn-analisar');
 const btnText = document.getElementById('btn-text');
 const spinner = document.getElementById('loading-spinner');
 const iaResultado = document.getElementById('ia-resultado');
 const textArea = document.getElementById('email-text');
 
-btnAnalisar.addEventListener('click', async () => {
-    const texto = textArea.value.trim();
-    if (texto.length < 10) {
-        alert("Por favor, cola um texto mais longo para análise.");
-        return;;
-    }
-
-    //enquanto espera
-    btnAnalisar.disabled = true;
-    btnText.classList.add('hidden');
-    spinner.classList.remove('hidden');
-    iaResultado.classList.add('hidden');
-
-    try {
-        const response = await fetch("/atividades/api/analisar-phishing-ia/", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify({ texto_email: texto })
-        });
-
-        if (!response.ok) {
-            throw new Error("Erro no servidor ao processar o pedido.");
+if (btnAnalisar) {
+    btnAnalisar.addEventListener('click', async () => {
+        const texto = textArea.value.trim();
+        if (texto.length < 10) {
+            alert("Por favor, cola um texto mais longo para análise.");
+            return;
         }
 
-        const data = await response.json();
+        // enquanto espera
+        btnAnalisar.disabled = true;
+        btnText.classList.add('hidden');
+        spinner.classList.remove('hidden');
+        iaResultado.classList.add('hidden');
 
-        if (data.erro) throw new Error(data.erro);
+        try {
+            const response = await fetch("/atividades/api/analisar-phishing-ia/", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({ texto_email: texto })
+            });
 
-        //Preencher Resultados
-        document.getElementById('result-status-text').innerText = data.status.toUpperCase();
-        document.getElementById('result-risco').innerText = data.risco.toUpperCase();
-        document.getElementById('result-risco').className = `risco-badge risk-${data.risco}`;
-        document.getElementById('result-conselho-text').innerText = data.conselho;
+            if (!response.ok) {
+                throw new Error("Erro no servidor ao processar o pedido.");
+            }
 
-        const listMotivos = document.getElementById('list-motivos');
-        listMotivos.innerHTML = '';
-        data.motivos.forEach(m => {
-            const li = document.createElement('li');
-            li.innerText = m;
-            listMotivos.appendChild(li);
-        });
+            const data = await response.json();
 
-        const iconDiv = document.getElementById('result-status-icon');
-        const resultHeader = document.querySelector('.result-header');
-        if (data.status === 'phishing') {
-            iconDiv.innerHTML = '💀';
-            resultHeader.style.color = '#ef4444';
-            iaResultado.style.borderTop = '8px solid #ef4444';
-        } else {
-            iconDiv.innerHTML = '🛡️';
-            resultHeader.style.color = '#22c55e';
-            iaResultado.style.borderTop = '8px solid #22c55e';
+            if (data.erro) throw new Error(data.erro);
+
+            //Preencher Resultados
+            document.getElementById('result-status-text').innerText = data.status.toUpperCase();
+            document.getElementById('result-risco').innerText = data.risco.toUpperCase();
+            document.getElementById('result-risco').className = `risco-badge risk-${data.risco}`;
+            document.getElementById('result-conselho-text').innerText = data.conselho;
+
+            const listMotivos = document.getElementById('list-motivos');
+            listMotivos.innerHTML = '';
+            data.motivos.forEach(m => {
+                const li = document.createElement('li');
+                li.innerText = m;
+                listMotivos.appendChild(li);
+            });
+
+            const iconDiv = document.getElementById('result-status-icon');
+            const resultHeader = document.querySelector('.result-header');
+            if (data.status === 'phishing') {
+                iconDiv.innerHTML = '💀';
+                resultHeader.style.color = '#ef4444';
+                iaResultado.style.borderTop = '8px solid #ef4444';
+            } else {
+                iconDiv.innerHTML = '🛡️';
+                resultHeader.style.color = '#22c55e';
+                iaResultado.style.borderTop = '8px solid #22c55e';
+            }
+
+            iaResultado.classList.remove('hidden');
+            iaResultado.scrollIntoView({ behavior: 'smooth' });
+
+        } catch (err) {
+            alert("{% trans 'Erro ao analisar: ' %}" + err.message);
+        } finally {
+            btnAnalisar.disabled = false;
+            btnText.classList.remove('hidden');
+            spinner.classList.add('hidden');
         }
-
-        iaResultado.classList.remove('hidden');
-        iaResultado.scrollIntoView({ behavior: 'smooth' });
-
-    } catch (err) {
-        alert("{% trans 'Erro ao analisar: ' %}" + err.message);
-    } finally {
-        btnAnalisar.disabled = false;
-        btnText.classList.remove('hidden');
-        spinner.classList.add('hidden');
-    }
-});
+    });
+}
 
 function reiniciarAnalise() {
-    textArea.value = '';
-    iaResultado.classList.add('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (textArea && iaResultado) {
+        textArea.value = '';
+        iaResultado.classList.add('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 }
+
+//mensagem no perfil depois de atualzar
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+        const toasts = document.querySelectorAll('.toast-msg');
+        toasts.forEach(function (toast) {
+            toast.style.animation = 'fadeOut 0.5s ease forwards';
+            setTimeout(() => toast.remove(), 500);
+        });
+    }, 4000);
+});

@@ -44,16 +44,19 @@
                <div class="question-box" style="position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 15px;">
                     <h2>{{ pergunta.pergunta }}</h2>
                     
-                    {% if pergunta.dica %}
-                    <button type="button" id="btn-dica" class="btn-dica" title="{% trans 'Pedir uma dica' %}" data-questao="{{ numero }}">
-                        💡
-                        <span id="badge-dicas" class="badge-dicas">2</span>
-                    </button>
+                    {% if pergunta.dica and not dica_revelada %}
+                        <form method="POST" style="margin: 0;">
+                            {% csrf_token %}
+                            <button type="submit" name="pedir_dica" value="1" class="btn-dica" title="{% trans 'Pedir uma dica' %}" {% if user.perfil.dicas_disponiveis <= 0 %}disabled style="opacity:0.5; cursor:not-allowed;"{% endif %}>
+                                💡
+                                <span class="badge-dicas">{{ user.perfil.dicas_disponiveis }}</span>
+                            </button>
+                        </form>
                     {% endif %}
                 </div>
 
-                {% if pergunta.dica %}
-                <div id="caixa-dica" class="caixa-dica" style="display: none;">
+                {% if pergunta.dica and dica_revelada %}
+                <div class="caixa-dica" style="display: block; margin-bottom: 15px; border: 1px solid #ffcc00; background: #fffbeb; padding: 12px; border-radius: 10px;">
                     <strong>💡 {% trans "Dica:" %}</strong> {{ pergunta.dica }}
                 </div>
                 {% endif %}
@@ -105,7 +108,7 @@
         </div>
         {% endif %}
         
-        {% if numero == 1 and not mostrar_popup %}
+        {% if mostrar_intro %}
         <div class="overlay" id="intro-overlay">
             <div class="popup-card popup-introducao">
                 

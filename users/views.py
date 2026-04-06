@@ -83,6 +83,11 @@ def registar(request):
         if User.objects.filter(username=dados.get('username')).exists():
             messages.error(request, "Este nome de utilizador já está em uso.")
             return render(request, 'users/registar.html')
+        
+        try:
+            idade_certa = int(dados.get('idade', 0))
+        except (ValueError, TypeError):
+            idade_certa = 0
 
 
         try:
@@ -98,7 +103,9 @@ def registar(request):
                 
           
                 perfil.instituicao = dados.get('instituicao')
-                perfil.idade = int(dados.get('idade') or 0)
+
+
+                perfil.idade = idade_certa
                 perfil.ano_letivo = dados.get('ano_letivo')
                 perfil.save() 
             
@@ -214,41 +221,74 @@ def criar_perfil_utilizador_social(sender, instance, created, **kwargs):
 
 @login_required
 def editar_perfil(request):
-    #identifica o perfil na bd
-    perfil = request.user.perfil
-    #se carregar em guardar alteracoes
     if request.method == 'POST':
-        form = EditarPerfilForm(request.POST, instance=perfil)
+        novo_username = request.POST.get('username')
+        novo_email = request.POST.get('email')
+        nova_inst = request.POST.get('instituicao')
+        novo_ano = request.POST.get('ano_letivo')
+        nova_lingua = request.POST.get('lingua')
         
-        #valida se ta direito e atualiza na bd
-        if form.is_valid():
-            form.save()
-            return redirect('perfil')
-    else:
-        #quando entra para editar
-        form = EditarPerfilForm(instance=perfil)
-    
-    return render(request, 'users/editar_perfil.html', {'form': form})
+        try:
+            #atualizar a conta principal
+            user = request.user
+            if novo_username and novo_username != user.username:
+                if User.objects.filter(username=novo_username).exists():
+                    messages.error(request, "Este nome de utilizador já está em uso. Tenta outro.")
+                    return redirect('perfil')
+                user.username = novo_username
+            
+            if novo_email:
+                user.email = novo_email
+                
+            user.save()
+            
+            perfil = user.perfil
+            if nova_inst:
+                perfil.instituicao = nova_inst
+            if novo_ano:
+                perfil.ano_letivo = novo_ano
+            if nova_lingua:
+                perfil.lingua = nova_lingua
+                
+            perfil.save()
+            
+            messages.success(request, "Alterações guardadas com sucesso! ✏️")
+            
+        except Exception as e:
+            #se acontecer algum erro
+            messages.error(request, "Ocorreu um erro ao guardar. Tenta novamente.")
+            
+    return redirect('perfil')
+
 
 @login_required
 def atualizar_avatar(request):
     if request.method == 'POST':
         perfil = request.user.perfil
         
-        #Se o utilizador carregou uma foto própria
+        #se carregar uma foto dele
         if 'avatar_custom' in request.FILES and request.FILES['avatar_custom']:
+            
+            #se meter uma foto nova apaga a antiga do sv
+            if perfil.avatar:
+                perfil.avatar.delete(save=False) 
+                
             perfil.avatar = request.FILES['avatar_custom']
             perfil.save()
+            messages.success(request, "Foto de perfil atualizada com sucesso! 📷")
             
-        #Se o utilizador escolheu uma foto da grelha
+        # Se o utilizador escolheu uma foto da grelha
         elif 'avatar_padrao' in request.POST:
+            
+            if perfil.avatar:
+                perfil.avatar.delete(save=False)
+                
             perfil.avatar = None 
             perfil.avatar_padrao = request.POST['avatar_padrao'] 
             perfil.save()
-            
+            messages.success(request, "Avatar atualizado com sucesso! 📷")
 
     return redirect('perfil')
-
 
 @login_required
 def desativar_mfa_seguro(request):

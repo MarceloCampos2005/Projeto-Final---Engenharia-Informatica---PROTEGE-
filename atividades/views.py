@@ -706,16 +706,18 @@ def quiz_setup(request):
 
 
 
-cliente_ia = OpenAI(
-    api_key=os.environ.get("GROQ_API_KEY"),
-    base_url="https://api.groq.com/openai/v1"
-)
+
 
 
 @login_required 
 @require_POST
 def analisar_phishing_ia(request):
     try:
+        cliente_ia = OpenAI(
+        api_key=os.environ.get("GROQ_API_KEY"),
+        base_url="https://api.groq.com/openai/v1"
+        )
+        
         perfil = request.user.perfil
         hoje = timezone.now().date()
         

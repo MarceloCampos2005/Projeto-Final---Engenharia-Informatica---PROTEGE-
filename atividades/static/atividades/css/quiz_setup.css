@@ -17,7 +17,7 @@ body {
   min-height: 100vh;
 }
 
-/* NAVBAR DE VOLTAR */
+
 .qs-topo-nav {
   position: absolute;
   top: 0;
@@ -25,6 +25,7 @@ body {
   width: 100%;
   padding: 2.5rem;
   pointer-events: none;
+  z-index: 999;
 }
 
 .qs-btn-retroceder {
@@ -49,7 +50,6 @@ body {
   transform: translateX(-5px);
 }
 
-/* CONTAINER PRINCIPAL */
 .qs-wrapper {
   display: flex;
   justify-content: center;
@@ -311,4 +311,96 @@ body {
   .qs-modos-grid {
     grid-template-columns: 1fr;
   }
+}
+
+@media (max-width: 768px) {
+  .qs-topo-nav {
+    padding: 1.5rem 1rem;
+
+  }
+
+  .qs-wrapper {
+    padding-top: 120px;
+    padding-bottom: 20px;
+  }
+
+  .qs-container {
+    padding: 2rem 1.5rem;
+    border-radius: 30px;
+  }
+
+  .serif-title {
+    font-size: 2.8rem;
+  }
+}
+
+body.modo-escuro .qs-container {
+  background: rgba(30, 30, 30, 0.6);
+  border-color: #444;
+}
+
+body.modo-escuro .serif-title,
+body.modo-escuro .qs-subtitle {
+  color: var(--d3-neve-pura);
+}
+
+/*botões de Voltar*/
+body.modo-escuro .qs-btn-retroceder {
+  background: rgba(30, 30, 30, 0.8);
+  color: var(--d3-neve-pura);
+  border-color: #444;
+}
+
+body.modo-escuro .qs-btn-retroceder:hover {
+  background: #444;
+}
+
+body.modo-escuro .qs-card-content {
+  background: rgba(40, 40, 40, 0.8);
+  border-color: #555;
+}
+
+body.modo-escuro .qs-card-content h3 {
+  color: var(--d3-neve-pura);
+}
+
+body.modo-escuro .qs-card-content p {
+  color: #a1a1aa;
+}
+
+body.modo-escuro .qs-modo-card input:checked+.qs-card-content {
+  background: #1e1e1e;
+  border-color: var(--d3-neon-leaf);
+  box-shadow: 0 10px 20px rgba(32, 194, 20, 0.3);
+}
+
+
+body.modo-escuro .qs-temas-area {
+  background: rgba(40, 40, 40, 0.6);
+}
+
+body.modo-escuro .qs-temas-titulo {
+  color: var(--d3-neve-pura);
+}
+
+body.modo-escuro .qs-pill-text {
+  background: rgba(50, 50, 50, 0.8);
+  color: #cbd5e1;
+  border-color: #555;
+}
+
+body.modo-escuro .qs-tema-pill input:checked+.qs-pill-text {
+  background: var(--d3-neon-leaf);
+  color: #000;
+  border-color: var(--d3-neon-leaf);
+}
+
+body.modo-escuro .qs-btn-comecar {
+  background: var(--d3-neon-leaf);
+  color: #000;
+}
+
+body.modo-escuro .qs-btn-comecar:hover {
+  background: #15803d;
+  color: white;
 }

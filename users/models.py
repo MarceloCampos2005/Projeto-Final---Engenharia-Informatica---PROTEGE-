@@ -59,6 +59,7 @@ class Perfil(models.Model):
     avatar_padrao = models.CharField(max_length=100, default='avatar_perfil.png')
     conquistas = models.ManyToManyField(Conquista, blank=True)
     quizzes_perfeitos_consecutivos = models.IntegerField(default=0)
+    perguntas_consecutivas = models.IntegerField(default=0)
     streak_atual = models.IntegerField(default=0)
     ultima_recompensa = models.DateField(null=True, blank=True) 
     dicas_disponiveis = models.IntegerField(default=0)
