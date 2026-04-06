@@ -29,10 +29,16 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
-    'projeto-final-engenharia-informatica.onrender.com',
     'localhost',
     '127.0.0.1'
 ]
+render_host = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if render_host:
+    ALLOWED_HOSTS.append(render_host)
+
+
+
+    
 CSRF_TRUSTED_ORIGINS = [
     'https://projeto-final-engenharia-informatica.onrender.com',
 ]
