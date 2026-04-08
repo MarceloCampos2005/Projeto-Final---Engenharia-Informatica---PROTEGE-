@@ -70,9 +70,9 @@ class emails(models.Model):
     ]
     lingua = models.CharField(max_length=2, choices=LINGUA_CHOICES, default='pt')
     id = models.BigAutoField(primary_key=True)
-    assunto = models.CharField(max_length=255)
-    remetente = models.EmailField() 
-    corpo = models.TextField() 
+    assunto = models.CharField(max_length=500)
+    remetente = models.CharField(max_length=500) 
+    corpo = models.TextField()
     nivel_dificuldade = models.IntegerField(default=1)
     
     

@@ -103,6 +103,29 @@ body.modo-escuro .accessibility-pill {
   border-color: #333 !important;
 }
 
+body.modo-escuro .home-info-section,
+body.modo-escuro .como-funciona-section {
+  background-color: #121212 !important;
+}
+
+body.modo-escuro .home-info-section .serif-title,
+body.modo-escuro .como-funciona-section .serif-title {
+  color: #ffffff !important;
+}
+
+body.modo-escuro .step-title,
+body.modo-escuro .step-description {
+  color: #ffffff !important;
+}
+
+body.modo-escuro .solution-banner {
+  background: #0a0a0a !important;
+}
+
+body.modo-escuro .section-divider .shape-fill {
+  fill: #0a0a0a !important;
+}
+
 body.modo-escuro .menu-btn {
   color: #ffffff;
 }
