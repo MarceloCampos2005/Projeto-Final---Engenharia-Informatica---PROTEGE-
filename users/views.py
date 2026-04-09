@@ -54,12 +54,20 @@ def perfil(request):
         labels = ['Phishing', 'Senhas', 'Malware', 'Redes']
         dados = [0, 0, 0, 0]
 
+    xp_necessario_quiz = perfil_user.nivel_quiz * 30
+    xp_necessario_simulador = perfil_user.nivel_simulador * 30
+    xp_necessario_geral = perfil_user.nivel_geral * 100
+
+
     context = {
         'labels_grafico': json.dumps(labels), # Passa para JSON string
         'dados_grafico': json.dumps(dados),   # Passa para JSON string
         'rank_geral':rank_geral,
         'rank_quiz':rank_quiz,
         'rank_simulador':rank_simulador,
+        'xp_necessario_quiz': xp_necessario_quiz,
+        'xp_necessario_simulador': xp_necessario_simulador,
+        'xp_geral_necessario': xp_necessario_geral
     }
     return render(request, 'users/perfil.html', context)
 
@@ -178,7 +186,7 @@ def logout_view(request):
     response = redirect('home')
     response.set_cookie('django_language', lingua) #guarda a lingua no cookie antes do logout assim fica na sessao e o utilizador vai estar na mesma lingua 
     logout(request)
-    messages.info(request, "Sessão terminada com sucesso.")
+    #messages.info(request, "Sessão terminada com sucesso.")
     return response
 
 
@@ -275,7 +283,7 @@ def atualizar_avatar(request):
                 
             perfil.avatar = request.FILES['avatar_custom']
             perfil.save()
-            messages.success(request, "Foto de perfil atualizada com sucesso! 📷")
+            messages.success(request, "Foto de perfil atualizada com sucesso!")
             
         # Se o utilizador escolheu uma foto da grelha
         elif 'avatar_padrao' in request.POST:
@@ -286,7 +294,16 @@ def atualizar_avatar(request):
             perfil.avatar = None 
             perfil.avatar_padrao = request.POST['avatar_padrao'] 
             perfil.save()
-            messages.success(request, "Avatar atualizado com sucesso! 📷")
+            messages.success(request, "Avatar atualizado com sucesso!")
+
+        if 'moldura_escolhida' in request.POST:
+            nova_moldura = request.POST['moldura_escolhida']
+            
+            # Só guarda se tivre a moldura e se for diferente da que ele ja tem
+            if nova_moldura and perfil.moldura_atual != nova_moldura:
+                perfil.moldura_atual = nova_moldura
+                perfil.save()
+                messages.success(request, "Moldura atualizada com sucesso!")
 
     return redirect('perfil')
 

@@ -37,16 +37,20 @@ def home2(request):
     lang = 'pt'
     hoje = timezone.now().date()
     mfa_ativo = False
+    xp_ganho = 0
     
     if request.user.is_authenticated:
 
 
         perfil, created = Perfil.objects.get_or_create(user=request.user)
         lang = perfil.lingua
+        nivel_antigo = perfil.nivel_geral
         #Atualizar a sessão se ela estiver diferente do perfil
         if request.session.get(settings.LANGUAGE_COOKIE_NAME) != lang:
             request.session[settings.LANGUAGE_COOKIE_NAME] = lang
             request.session['_language'] = lang
+
+        
 
         if perfil.ultima_recompensa != hoje:
             ontem = hoje - timedelta(days=1)
@@ -73,6 +77,20 @@ def home2(request):
 
             messages.success(request, msg)
             perfil.ultima_recompensa = hoje
+
+    #para saber se a data é de hoje ou ontem
+        hoje_str = str(hoje)
+        if request.session.get('data_referencia') != hoje_str:
+            request.session['xp_inicial']=perfil.pontuacao_total_quiz
+            request.session['data_referencia'] = hoje_str
+
+
+        xp_inicial = request.session.get('xp_inicial', perfil.pontuacao_total_quiz)
+        xp_ganho= perfil.pontuacao_total_quiz - xp_inicial
+
+        if xp_ganho < 0:
+            xp_ganho = perfil.pontuacao_total_quiz
+            request.session['xp_inicial'] = 0
         
         #Verifica se o utilizador tem o dispositivo MFA configurado
         mfa_ativo = user_has_device(request.user)
@@ -81,10 +99,8 @@ def home2(request):
             try:
                 #tenta encontrar a medalha
                 medalha_mfa = Conquista.objects.get(codigo='mfa_ativo')
-                
                 #ve se o utilizador já tem esta medalha
                 ja_tem_medalha = perfil.conquistas.filter(id=medalha_mfa.id).exists()
-                
                 if not ja_tem_medalha:
                     perfil.conquistas.add(medalha_mfa)
                     
@@ -94,7 +110,22 @@ def home2(request):
                 
             except Conquista.DoesNotExist:
                 print("Aviso: Criar medalha com código 'mfa_ativo' no Painel Admin!")
-            
+
+
+        #preciso de atualizar o nivel na home2 se o utilizador subir com os 50 pontos do mfa
+        xp_necessario = perfil.nivel_geral * 100
+        while perfil.xp_geral >= xp_necessario:
+            perfil.xp_geral -= xp_necessario
+            perfil.nivel_geral += 1  
+            xp_necessario = perfil.nivel_geral * 100
+
+        #o utilizador pode subir de nivel com o xp de ativar o mfa
+        if nivel_antigo < 10 and perfil.nivel_geral >= 10:
+            messages.success(request, "DESBLOQUEASTE: Moldura Néon Hacker de Elite! Vai ao teu Perfil para a equipares.")
+        
+        elif nivel_antigo < 5 and perfil.nivel_geral >= 5:
+            messages.success(request, "DESBLOQUEASTE: Moldura de Ouro! Vai ao teu Perfil para a equipares.")
+                
         perfil.save()   
         
     else:
@@ -104,7 +135,9 @@ def home2(request):
     translation.activate(lang)
              
     response = render(request, 'atividades/home2.html', {
-        'mfa_ativo': mfa_ativo        
+        'mfa_ativo': mfa_ativo,
+        'xp_ganho': xp_ganho,
+        'meta':30
     })
     
     return response
@@ -343,6 +376,8 @@ def quiz_final(request):
 
     #aumenta o numero de quizzes feitos
     perfil = request.user.perfil
+    nivel_antigo = perfil.nivel_geral
+
     perfil.quizzes_realizados += 1
 
     #aumenta a soma das percentagens que serve para calcular a media de acertos
@@ -351,32 +386,51 @@ def quiz_final(request):
     #o subiu so vai para true se o utilizador passar de 30 pontos
     subiu  = False
 
-    #fiz o perfil.pontuacao_total_quiz -=30, assim se o utilizador tiver 29 pontos e acertar as 7 perguntas, ele fica com os 6 pontos ja no proximo nuvel
     perfil.pontuacao_total_quiz += pontos
-    if perfil.pontuacao_total_quiz >=30:
-        perfil.nivel_quiz += 1
-        perfil.pontuacao_total_quiz -=30
-        subiu = True
+    
 
     xp_ganho = pontos * 7 
     perfil.xp_geral += xp_ganho
-    subiu_geral = False
+
 
     #adiciona +2xp se o utilizador escolher o modo aleatorio
     if request.session.get('quiz_bonus_xp', False):
-        perfil.pontuacao_total_quiz +=2
-        perfil.xp_geral +=2
+        perfil.pontuacao_total_quiz += 2
+        perfil.xp_geral += 2
+
+
+    subiu_geral = False
+
+    while True:
+        meta_atual_quiz = perfil.nivel_quiz * 30 
+        if perfil.pontuacao_total_quiz >= meta_atual_quiz:
+            perfil.pontuacao_total_quiz -= meta_atual_quiz
+            perfil.nivel_quiz += 1
+            subiu = True
+        else:
+            break
+
+    subiu_geral = False
+    while True:
+        meta_atual_geral = perfil.nivel_geral * 100
+        if perfil.xp_geral >= meta_atual_geral:
+            perfil.xp_geral -= meta_atual_geral
+            perfil.nivel_geral += 1
+            subiu_geral = True
+        else:
+            break
+    
 
     
     xp_necessario = perfil.nivel_geral * 100
 
    
-    while perfil.xp_geral >= xp_necessario:
-        perfil.xp_geral -= xp_necessario 
-        perfil.nivel_geral += 1          
-        subiu_geral = True              
+
+    if nivel_antigo < 10 and perfil.nivel_geral >= 10:
+        messages.success(request, "DESBLOQUEASTE: Moldura Néon Hacker de Elite! Vai ao teu Perfil para a equipares.")
         
-        xp_necessario = perfil.nivel_geral * 100
+    elif nivel_antigo < 5 and perfil.nivel_geral >= 5:
+        messages.success(request, "DESBLOQUEASTE: Moldura de Ouro! Vai ao teu Perfil para a equipares.")
 
     if percentagem == 100:
         perfil.quizzes_perfeitos_consecutivos += 1
@@ -601,6 +655,7 @@ def simulador_final(request):
     quantidade_emails = len(indice)
     pontos_totais = request.session.get('sim_pontuacao', 0)
     media_precisao = request.session.get('sim_soma_precisao', 0) / quantidade_emails
+    nivel_antigo = perfil.nivel_geral
 
     # Atualizar Perfil
     perfil.simuladores_realizados += quantidade_emails
@@ -608,10 +663,16 @@ def simulador_final(request):
     perfil.pontuacao_total_simulador += pontos_totais
     
     subiu = False
-    while perfil.pontuacao_total_simulador >= 30:
+    pontos_necessarios = perfil.nivel_simulador * 30
+
+
+    while perfil.pontuacao_total_simulador >= pontos_necessarios:
+        perfil.pontuacao_total_simulador -= pontos_necessarios
         perfil.nivel_simulador += 1
-        perfil.pontuacao_total_simulador -= 30
         subiu = True
+
+
+        pontos_necessarios = perfil.nivel_simulador * 30
 
     xp_geral_ganho = pontos_totais * 3 
     perfil.xp_geral += xp_geral_ganho
@@ -623,6 +684,14 @@ def simulador_final(request):
         perfil.nivel_geral += 1
         subiu_geral = True
         xp_necessario = perfil.nivel_geral * 100
+
+    
+
+    if nivel_antigo < 10 and perfil.nivel_geral >= 10:
+        messages.success(request, "DESBLOQUEASTE: Moldura Néon Hacker de Elite! Vai ao teu Perfil para a equipares.")
+        
+    elif nivel_antigo < 5 and perfil.nivel_geral >= 5:
+        messages.success(request, "DESBLOQUEASTE: Moldura de Ouro! Vai ao teu Perfil para a equipares.")
     
     perfil.save()
     emails_jogados = emails.objects.filter(id__in=indice)
@@ -639,7 +708,8 @@ def simulador_final(request):
         'subiu_geral': subiu_geral,
         'nivel_geral': perfil.nivel_geral,
         'emails_jogados': emails_jogados,
-        'modo': modo_jogado
+        'modo': modo_jogado,
+        'xp_necessario':pontos_necessarios
     }
 
     # Limpa a sessão no final de tudo
@@ -691,11 +761,11 @@ def sabermais(request):
 def leaderboard(request):
     top_geral = Perfil.objects.select_related('user').order_by('-nivel_geral', '-xp_geral')
     top_quiz = Perfil.objects.select_related('user').order_by('-nivel_quiz', '-pontuacao_total_quiz')
-   
+    top_simulador = Perfil.objects.select_related('user').order_by('-nivel_simulador', '-pontuacao_total_simulador')
     context = {
         'top_geral': top_geral,
         'top_quiz': top_quiz,
-        
+        'top_simulador': top_simulador
     }
     return render(request, 'atividades/leaderboard.html', context)
 

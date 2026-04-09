@@ -30,7 +30,7 @@
             <div class="sim-url-bar phish-zone" 
                  data-is-phishing="{{ email.e_phishing|lower }}" 
                  data-explicacao="{% trans 'Domínio Suspeito! O endereço do remetente não corresponde à entidade oficial ou tem caracteres alterados.' %}">
-                {% trans "De:" %} <span style="color: #1f2937;">{{ email.remetente }}</span>
+                {% trans "De:" %} <span style="color: #1f2937;">{{ email.remetente|safe }}</span>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
                     <span class="phish-zone assunto" 
                           data-is-phishing="{{ email.e_phishing|lower }}" 
                           data-explicacao="{% trans 'O assunto do e-mail é utilizado para criar um falso sentido de urgência ou curiosidade.' %}">
-                        {{ email.assunto }}
+                        {{ email.assunto|safe }}
                     </span>
                 </p>
             </div>

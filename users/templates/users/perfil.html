@@ -37,7 +37,7 @@
             
             <section class="perf-cartao-id">
                 
-                <div class="perf-moldura-avatar">
+                <div class="perf-moldura-avatar {{ user.perfil.moldura_atual|default:'moldura-base' }}">
                     {% if user.perfil.avatar %}
                         <img src="{{ user.perfil.avatar.url }}" alt="Avatar do Utilizador">
                     {% elif user.socialaccount_set.all %}
@@ -78,10 +78,36 @@
 
                             <div class="upload-section">
                                 <label for="avatar-upload" class="btn-dashboard" style="cursor: pointer;">
-                                    📂 {% trans "Carregar Foto Própria" %}
+                                    {% trans "Carregar Foto Própria" %}
                                 </label>
                                 <input type="file" id="avatar-upload" name="avatar_custom" accept="image/*" class="hidden" onchange="mostrarNomeFicheiro()">
                                 <span id="nome-ficheiro" class="file-name"></span>
+                            </div>
+
+                            <div class="divider">{% trans "Escolhe a tua Moldura" %}</div>
+
+                            <div class="avatar-grid" style="margin-bottom: 25px; align-items: end;">
+                                <label class="avatar-option">
+                                    <input type="radio" name="moldura_escolhida" value="moldura-base" {% if user.perfil.moldura_atual == 'moldura-base' or not user.perfil.moldura_atual %}checked{% endif %}>
+                                    <div class="perf-moldura-avatar moldura-base" style="width: 60px; height: 60px; margin: 0 auto; background: #e2e8f0; border-width: 3px;"></div>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #4b5563;">Padrão</p>
+                                </label>
+
+                                {% if user.perfil.nivel_geral >= 5 %}
+                                <label class="avatar-option">
+                                    <input type="radio" name="moldura_escolhida" value="moldura-ouro" {% if user.perfil.moldura_atual == 'moldura-ouro' %}checked{% endif %}>
+                                    <div class="perf-moldura-avatar moldura-ouro" style="width: 60px; height: 60px; margin: 0 auto; background: #e2e8f0; border-width: 3px;"></div>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #b45309;">Ouro (Nv. 5)</p>
+                                </label>
+                                {% endif %}
+
+                                {% if user.perfil.nivel_geral >= 10 %}
+                                <label class="avatar-option">
+                                    <input type="radio" name="moldura_escolhida" value="moldura-hacker" {% if user.perfil.moldura_atual == 'moldura-hacker' %}checked{% endif %}>
+                                    <div class="perf-moldura-avatar moldura-hacker" style="width: 60px; height: 60px; margin: 0 auto; background: #1e293b; border-width: 3px;"></div>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #16a34a;">Elite (Nv. 10)</p>
+                                </label>
+                                {% endif %}
                             </div>
 
                             <button type="submit" class="btn-action-primary save-btn" style="width: 100%; border: none; cursor: pointer;">
@@ -127,12 +153,20 @@
                 
                 <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin-top: 15px;">
                     <h2 class="perf-nome-utilizador" style="margin: 0;">{{ user.username }}</h2>
-                    <button type="button" class="inline-edit-btn" onclick="abrirEdicao('username', '{% trans 'Nome de Utilizador' %}')" title="{% trans 'Editar Dados' %}">✏️</button>
+                    <button type="button" class="inline-edit-btn" onclick="abrirEdicao('username', '{% trans 'Nome de Utilizador' %}')" title="{% trans 'Editar Dados' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                        </svg>
+                    </button>
                 </div>
 
                 <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 2rem;">
                     <span class="perf-email-pill" style="margin: 0;">{{ user.email }}</span>
-                    <button type="button" class="inline-edit-btn" onclick="abrirEdicao('email', '{% trans 'Email' %}')" title="{% trans 'Editar Dados' %}">✏️</button>
+                    <button type="button" class="inline-edit-btn" onclick="abrirEdicao('email', '{% trans 'Email' %}')" title="{% trans 'Editar Dados' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                        </svg>
+                    </button>
                 </div>
 
                 <div class="perf-medalhas-container">
@@ -164,46 +198,68 @@
                 </div>
 
                 <div class="perf-info-box">
-                    <div class="perf-info-linha">
-                        <div class="perf-dado-grupo">
-                            <span class="perf-dado-label">
-                                {% trans "INSTITUIÇÃO" %}
-                                <button type="button" class="inline-edit-btn" onclick="abrirEdicao('instituicao', '{% trans 'Instituição' %}')" title="{% trans 'Editar' %}">✏️</button>
-                            </span>
-                            <span class="perf-dado-valor">{{ user.perfil.instituicao }}</span>
-                        </div>
-                        <div class="perf-dado-grupo">
-                            <span class="perf-dado-label">
-                                {% trans "ESCOLARIDADE" %}
-                                <button type="button" class="inline-edit-btn" onclick="abrirEdicao('ano_letivo', '{% trans 'Escolaridade' %}')" title="{% trans 'Editar' %}">✏️</button>
-                            </span>
-                            <span class="perf-dado-valor">{{ user.perfil.ano_letivo }}</span>
+    
+                    <div class="perf-info-header">
+                        <div class="perf-info-header-left">
+                            <div class="perf-info-icon">
+                                🎓
+                            </div>
+                            <div class="perf-info-titles">
+                                <h3>{% trans "Dados" %}</h3>
+                                <p>{% trans "As tuas informações pessoais" %}</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="perf-global-progresso" style="width: 100%; padding-top: 15px;">
-    
+                    <div class="perf-info-grid">
+                        <div class="perf-dado-grupo box-style">
+                            <div class="dado-header">
+                                <span class="perf-dado-label">{% trans "INSTITUIÇÃO" %}</span>
+                                <button type="button" class="inline-edit-btn" onclick="abrirEdicao('instituicao', '{% trans 'Instituição' %}')" title="{% trans 'Editar' %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="perf-dado-valor">{{ user.perfil.instituicao|default:"Não definido" }}</span>
+                        </div>
+                        
+                        <div class="perf-dado-grupo box-style">
+                            <div class="dado-header">
+                                <span class="perf-dado-label">{% trans "ESCOLARIDADE" %}</span>
+                                <button type="button" class="inline-edit-btn" onclick="abrirEdicao('ano_letivo', '{% trans 'Escolaridade' %}')" title="{% trans 'Editar' %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="perf-dado-valor">{{ user.perfil.ano_letivo|default:"-" }}</span>
+                        </div>
+                    </div>
+
+                    <hr class="perf-info-divider">
+
+                    <div class="perf-global-progresso">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; width: 100%;">
                             <span class="perf-global-label" style="font-weight: 800; color: #254d1a; font-size: 0.9rem; letter-spacing: 0.5px;">
                                 🏆 {% trans "NÍVEL GERAL DE DEFESA" %}
                             </span>
-                            
-                            <span style="font-size: 1.2rem; font-weight: 900; color: #1c8814; background: rgba(32, 194, 20, 0.15); padding: 5px 15px; border-radius: 20px; border: 1px solid rgba(32, 194, 20, 0.3);">
+                            <span style="font-size: 1.1rem; font-weight: 900; color: #1c8814; background: rgba(32, 194, 20, 0.15); padding: 5px 12px; border-radius: 12px; border: 1px solid rgba(32, 194, 20, 0.3);">
                                 {% trans "Nível" %} {{ user.perfil.nivel_geral }}
                             </span>
                         </div>
                         
                         <div class="perf-barra-global-container">
-                            <div class="perf-barra-global-fill" style="width: calc(({{ user.perfil.pontuacao_total_quiz|add:user.perfil.pontuacao_total_simulador }} / 60) * 100%);"></div>
+                            <div class="perf-barra-global-fill" style="width: calc(({{ user.perfil.pontuacao_total_quiz|add:user.perfil.pontuacao_total_simulador }} / {{xp_geral_necessario}}) * 100%);"></div>
                         </div>
                         
                         <div style="text-align: right; margin-top: 8px;">
                             <span class="perf-global-xp" style="font-size: 0.85rem; font-weight: 700; color: #6b7280;">
-                                {{ user.perfil.pontuacao_total_quiz|add:user.perfil.pontuacao_total_simulador }} / 60 XP Totais
+                                {{ user.perfil.pontuacao_total_quiz|add:user.perfil.pontuacao_total_simulador }} / {{xp_geral_necessario}} XP Totais
                             </span>
                         </div>
-
                     </div>
+
                 </div>
             </section>
             
@@ -240,9 +296,9 @@
                     <h3>{% trans "Nível Quiz" %}</h3>
                     <span class="perf-valor-num">{{ user.perfil.nivel_quiz }}</span>
                     <div class="perf-barra-mini-container">
-                        <div class="perf-barra-mini-fill" style="width: calc(({{ user.perfil.pontuacao_total_quiz }} / 30) * 100%);"></div>
+                        <div class="perf-barra-mini-fill" style="width: calc(({{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }}) * 100%);"></div>
                     </div>
-                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_quiz }} / 30 XP</span>
+                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }} XP</span>
                 </div>
 
                 <div class="perf-bloco-metrica">
@@ -262,9 +318,9 @@
                     <h3>{% trans "Nível Simulador" %}</h3>
                     <span class="perf-valor-num">{{ user.perfil.nivel_simulador }}</span>
                     <div class="perf-barra-mini-container">
-                        <div class="perf-barra-mini-fill" style="width: calc(({{ user.perfil.pontuacao_total_simulador }} / 30) * 100%);"></div>
+                        <div class="perf-barra-mini-fill" style="width: calc(({{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }}) * 100%);"></div>
                     </div>
-                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_simulador }} / 30 XP</span>
+                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }} XP</span>
                 </div>
 
                 <div class="perf-bloco-metrica">

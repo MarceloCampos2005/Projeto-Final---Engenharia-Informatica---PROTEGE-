@@ -46,8 +46,8 @@
 
             <div class="email-display">
                 <div class="email-header">
-                    <p><strong>De:</strong> {{ email.remetente }}</p>
-                    <p><strong>Assunto:</strong> {{ email.assunto }}</p>
+                    <p><strong>De:</strong> {{ email.remetente|safe }}</p>
+                    <p><strong>Assunto:</strong> {{ email.assunto|safe }}</p>
                 </div>
                 <div class="email-body">
                     {{ email.corpo|safe }}

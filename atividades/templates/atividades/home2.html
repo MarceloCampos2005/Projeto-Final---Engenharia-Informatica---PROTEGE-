@@ -17,7 +17,16 @@
 </head>
 
 <body data-authenticated="{{ user.is_authenticated|lower }}" class="{% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}">
-
+    {% if messages %}
+    <div id="toast-container" style="position: fixed; top: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;">
+        {% for message in messages %}
+            <div class="toast-msg {{ message.tags }}" style="padding: 16px 24px; border-radius: 16px; color: white; font-weight: 800; font-size: 0.95rem; box-shadow: 0 15px 30px rgba(0,0,0,0.2); animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;">
+                {% if message.tags == 'success' %}✅{% else %}⚠️{% endif %} 
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     <header class="header-main-dashboard">
         <div class="header-pill-container">
             <div class="header-pill-dashboard">
@@ -49,7 +58,7 @@
 
             <div style="display: flex; align-items: center; gap: 15px;">
                 <div class="profile-area">
-                    <button id="btn-avatar-trigger" type="button" class="btn-avatar-trigger">
+                    <button id="btn-avatar-trigger" type="button" class="btn-avatar-trigger {{ user.perfil.moldura_atual|default:'moldura-base' }}">
                         {% if user.perfil.avatar %}
                             <img src="{{ user.perfil.avatar.url }}" alt="Avatar do Utilizador" style="object-fit: cover;">
                         {% elif user.socialaccount_set.all %}
@@ -57,6 +66,7 @@
                         {% else %}
                             <img src="{% static 'users/images/' %}{{ user.perfil.avatar_padrao }}" alt="Avatar Padrão" style="object-fit: cover;">
                         {% endif %}
+
                     </button>
                     
                     <div id="perfil-menu" class="dropdown-menu hidden">
@@ -123,22 +133,22 @@
             <div class="hero-mission-side">
                 <div class="mission-panel">
                     <div class="mission-header">
-                        {% if user.perfil.pontuacao_total_quiz >= 15 %}
+                        {% if xp_ganho >= meta %}
                             <span class="mission-tag" style="background: rgba(32, 194, 20, 0.2); color: var(--d3-neon-leaf);">
-                                ✅ {% trans "MISSÃO CONCLUÍDA" %}
+                                ✅ {% trans "MIssão Diária Concluída" %}
                             </span>
                         {% else %}
-                            <span class="mission-tag">🎯 {% trans "OBJETIVO ATUAL" %}</span>
+                            <span class="mission-tag">🎯 {% trans "Objetivo de hoje" %}</span>
                         {% endif %}
                         
                         <span class="mission-level">{% trans "Nível" %} {{ user.perfil.nivel_quiz|add:1 }}</span>
                     </div>
                     
                     <div class="mission-body">
-                        {% if user.perfil.pontuacao_total_quiz >= 15 %}
+                        {% if xp_ganho >= meta %}
                             <h3 class="mission-task" style="color: var(--d3-neon-leaf);">{% trans "Treino Diário Completo!" %}</h3>
                             <p style="font-weight: 600; color: #6b7280; margin-bottom: 20px; font-size: 0.95rem;">
-                                {% trans "Excelente trabalho! As tuas defesas estão mais fortes hoje. Podes descansar ou continuar a treinar." %}
+                                {% trans "Excelente trabalho! Ganhaste os teus 30 XP de hoje. Podes continuar a treinar para subir o teu nível geral." %}
                             </p>
                             
                             <div class="xp-progress-container">
@@ -146,32 +156,32 @@
                                     <div class="xp-bar-fill" style="width: 100%; background: var(--d3-neon-leaf); box-shadow: 0 0 15px rgba(32, 194, 20, 0.6);"></div>
                                 </div>
                                 <div class="xp-stats">
-                                    <span class="xp-current" style="color: var(--d3-neon-leaf);">15/15 XP</span>
+                                    <span class="xp-current" style="color: var(--d3-neon-leaf);">{{ xp_ganho }}/{{ meta }} XP</span>
                                     <span class="xp-target" style="color: var(--d3-neon-leaf); font-weight: 800;">{% trans "Feito!" %} 🏆</span>
                                 </div>
                             </div>
                         {% else %}
-                            <h3 class="mission-task">{% trans "Completar Treino de Phishing" %}</h3>
+                            <h3 class="mission-task">{% trans "Ganhar 30 XP em Quizzes" %}</h3>
                             
                             <div class="xp-progress-container">
                                 <div class="xp-bar-bg">
-                                    <div class="xp-bar-fill" style="width: calc(({{ user.perfil.pontuacao_total_quiz }} / 15) * 100%);"></div>
+                                    <div class="xp-bar-fill" style="width: {% widthratio xp_ganho meta 100 %}%"></div>
                                 </div>
-                                <div class="xp-stats">
-                                    <span class="xp-current">{{ user.perfil.pontuacao_total_quiz }} XP</span>
-                                    <span class="xp-target">15 XP {% trans "para evoluir" %}</span>
+                                <div class="xp-stats"> 
+                                    <span class="xp-current">{{ xp_ganho }} XP</span>
+                                    <span class="xp-target">{{ meta }} XP</span>
                                 </div>
                             </div>
                         {% endif %}
                     </div>
                     
                     <div class="mission-actions">
-                        {% if user.perfil.pontuacao_total_quiz >= 15 %}
-                            <a href="{% url 'atividades:quiz' %}" class="btn-action-primary" style="background: #e5e7eb; color: #4b5563; box-shadow: none;">
+                        {% if xp_ganho >= meta %}
+                            <a href="{% url 'atividades:quiz_setup' %}" class="btn-action-primary" style="background: #e5e7eb; color: #4b5563; box-shadow: none;">
                                 {% trans "Treino Extra (Opcional)" %} ➔
                             </a>
                         {% else %}
-                            <a href="{% url 'atividades:quiz' %}" class="btn-action-primary">
+                            <a href="{% url 'atividades:quiz_setup' %}" class="btn-action-primary">
                                 {% trans "Continuar Treino" %} ➔
                             </a>
                         {% endif %}

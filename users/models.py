@@ -66,6 +66,7 @@ class Perfil(models.Model):
     #pa limitar o uso da ia nos emails
     analises_ia_hoje = models.IntegerField(default=0)
     data_ultima_analise_ia = models.DateField(null=True, blank=True)
+    moldura_atual = models.CharField(max_length=50, default='moldura-base')
     
     
     @property
