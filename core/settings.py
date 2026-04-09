@@ -57,12 +57,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
   
     'users',       
-    'atividades',  
+    'atividades', 
+    'cloudinary', 
 
     'allauth_2fa',#login co google
     'two_factor',
@@ -192,6 +194,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
@@ -270,3 +275,14 @@ SESSION_COOKIE_AGE = 1800
 
 # Garante que a sessão é guardada a cada modificação 
 SESSION_SAVE_EVERY_REQUEST = True
+
+
+#configs para o render ler as variaveis do cloudinary
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
+}
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
