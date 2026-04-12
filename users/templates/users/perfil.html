@@ -108,6 +108,13 @@
                                     <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #16a34a;">Elite (Nv. 10)</p>
                                 </label>
                                 {% endif %}
+                                {% if user.perfil.streak_atual >= 30 %}
+                                <label class="avatar-option">
+                                    <input type="radio" name="moldura_escolhida" value="moldura-elite" {% if user.perfil.moldura_atual == 'moldura-elite' %}checked{% endif %}>
+                                    <div class="perf-moldura-avatar moldura-elite" style="width: 60px; height: 60px; margin: 0 auto; background: #e2e8f0; border-width: 3px; border-radius: 50%;"></div>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #bd1a92;">Elite (30 Dias)</p>
+                                </label>
+                                {% endif %}
                             </div>
 
                             <button type="submit" class="btn-action-primary save-btn" style="width: 100%; border: none; cursor: pointer;">
