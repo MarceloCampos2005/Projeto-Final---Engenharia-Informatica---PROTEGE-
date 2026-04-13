@@ -400,7 +400,7 @@ const baseConhecimento = {
         texto: gettext("As palavras-passe são as chaves da tua casa digital, mas na era da computação de alta performance, senhas curtas ou previsíveis são vulnerabilidades críticas. Hoje, um computador com boas placas gráficas consegue testar mil milhões de combinações por segundo.<br><br><b>Os Tipos de Ataque mais Comuns:</b><ul><li><b>Brute Force (Força Bruta):</b> Tentar todas as combinações possíveis do teclado até acertar.</li><li><b>Dictionary Attack:</b> Usar listas de palavras comuns, nomes, clubes de futebol e datas.</li><li><b>Credential Stuffing:</b> Se usares a mesma senha no site A e site B, e o site A for pirateado, os hackers testam automaticamente esse e-mail e senha no teu banco, redes sociais, etc.</li></ul><br><b>Critérios de uma Senha Invencível:</b><ul><li><b>Comprimento é Rei:</b> A matemática não mente. Uma senha de 8 caracteres complexos é quebrada em minutos; uma de 16 caracteres apenas com letras e números demora séculos. O ideal é ter +15 caracteres.</li><li><b>Unicidade Absoluta:</b> Nunca repitas senhas. Zero exceções.</li></ul><br><b>O Papel dos Gestores de Senhas (Vaults):</b> No mundo atual, é humanamente impossível memorizar 50 senhas únicas e fortes. Gestores como Bitwarden, 1Password ou Dashlane permitem guardar tudo num cofre cifrado (encriptação ponta-a-ponta). Tu só precisas de saber uma 'Master Password' extremamente forte. O gestor trata de gerar e preencher as restantes automaticamente, protegendo-te inclusive contra Keyloggers (malware que regista teclas).<br><br><b>O Futuro (Passkeys):</b> O mundo está a transitar para as Passkeys, que substituem as senhas tradicionais por chaves criptográficas geradas no teu telemóvel, validadas pela tua biometria, tornando o phishing de credenciais matematicamente impossível.") + `
             <div class="password-tester-box">
                 <h4 style="margin-top:0;">🛠️ ${gettext("Testador de Força (Simulação)")}</h4>
-                <input type="password" id="pass-test" placeholder="${gettext("Digita uma senha...")}" oninput="testarSenha()" 
+                <input type="password" id="pass-test" placeholder="${gettext("Digita uma senha...")}" oninput="testarpass()" 
                        style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd; margin:10px 0;">
                 <div class="forca-barra-bg" style="height:8px; background:#ddd; border-radius:10px; overflow:hidden;">
                     <div id="forca-barra-fill" style="height:100%; width:0%; background:#ef4444; transition:0.3s;"></div>
@@ -542,10 +542,22 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function testarSenha() {
-    const val = document.getElementById('pass-test').value;
+
+function testarpass(inputId = 'pass-test') {
+    const inputEl = document.getElementById(inputId);
     const barra = document.getElementById('forca-barra-fill');
     const feedback = document.getElementById('pass-feedback');
+
+    if (!inputEl || !barra || !feedback) return;
+
+    const val = inputEl.value;
+
+    if (!val) {
+        barra.style.width = '0%';
+        feedback.innerText = gettext("Escreve para testar a força.");
+        barra.style.backgroundColor = '#ef4444';
+        return;
+    }
 
     let forca = 0;
     if (val.length >= 8) forca += 25;
@@ -557,7 +569,7 @@ function testarSenha() {
 
     if (forca < 50) {
         barra.style.backgroundColor = '#ef4444';
-        feedback.innerText = gettext("Fraca: Um hacker demora segundos.");
+        feedback.innerText = gettext("Fraca: Um hacker descobre isto em segundos.");
     } else if (forca < 100) {
         barra.style.backgroundColor = '#eab308';
         feedback.innerText = gettext("Média: Melhor, mas ainda vulnerável.");
@@ -1033,7 +1045,7 @@ function iniciarCronometro() {
     }, 1000);
 }
 
-//detetor ai
+
 const btnAnalisar = document.getElementById('btn-analisar');
 const btnText = document.getElementById('btn-text');
 const spinner = document.getElementById('loading-spinner');
@@ -1050,9 +1062,9 @@ if (btnAnalisar) {
 
         // enquanto espera
         btnAnalisar.disabled = true;
-        btnText.classList.add('hidden');
-        spinner.classList.remove('hidden');
-        iaResultado.classList.add('hidden');
+        if (btnText) btnText.classList.add('hidden');
+        if (spinner) spinner.classList.remove('hidden');
+        if (iaResultado) iaResultado.classList.add('hidden');
 
         try {
             const response = await fetch("/atividades/api/analisar-phishing-ia/", {
@@ -1078,6 +1090,8 @@ if (btnAnalisar) {
             document.getElementById('result-risco').className = `risco-badge risk-${data.risco}`;
             document.getElementById('result-conselho-text').innerText = data.conselho;
 
+
+            //lista dos motivos econtrados
             const listMotivos = document.getElementById('list-motivos');
             listMotivos.innerHTML = '';
             data.motivos.forEach(m => {
@@ -1088,6 +1102,7 @@ if (btnAnalisar) {
 
             const iconDiv = document.getElementById('result-status-icon');
             const resultHeader = document.querySelector('.result-header');
+
             if (data.status === 'phishing') {
                 iconDiv.innerHTML = '💀';
                 resultHeader.style.color = '#ef4444';
@@ -1098,15 +1113,21 @@ if (btnAnalisar) {
                 iaResultado.style.borderTop = '8px solid #22c55e';
             }
 
+            //pa contar quandos usos da ia fez
+            const contadorUsos = document.getElementById('contador-ia-usos');
+            if (contadorUsos && data.usos_restantes !== undefined) {
+                contadorUsos.innerText = data.usos_restantes;
+            }
+
             iaResultado.classList.remove('hidden');
             iaResultado.scrollIntoView({ behavior: 'smooth' });
 
         } catch (err) {
-            alert("{% trans 'Erro ao analisar: ' %}" + err.message);
+            alert(gettext("Erro ao analisar: ") + err.message);
         } finally {
             btnAnalisar.disabled = false;
-            btnText.classList.remove('hidden');
-            spinner.classList.add('hidden');
+            if (btnText) btnText.classList.remove('hidden');
+            if (spinner) spinner.classList.add('hidden');
         }
     });
 }
@@ -1119,6 +1140,7 @@ function reiniciarAnalise() {
     }
 }
 
+
 //mensagem no perfil depois de atualzar
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
@@ -1129,3 +1151,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }, 4000);
 });
+
+
+
