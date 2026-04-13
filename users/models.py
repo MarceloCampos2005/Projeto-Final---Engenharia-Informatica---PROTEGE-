@@ -61,6 +61,8 @@ class Perfil(models.Model):
     quizzes_perfeitos_consecutivos = models.IntegerField(default=0)
     perguntas_consecutivas = models.IntegerField(default=0)
     streak_atual = models.IntegerField(default=0)
+    #vai ser usada para guardar a streak maxima, assim caso o utilizador bata os 30 dias, nao perde a moldura
+    streak_maximo = models.IntegerField(default=0)
     ultima_recompensa = models.DateField(null=True, blank=True) 
     dicas_disponiveis = models.IntegerField(default=0)
     #pa limitar o uso da ia nos emails
