@@ -191,27 +191,6 @@ def logout_view(request):
 
 
 
-
-@login_required
-def salvar_acessibilidade(request):
-    #guarda se e datonismo ou contraste e o tipo de daltonismo ou contraste
-    tipo  = request.POST.get('tipo')
-    valor = request.POST.get('valor')   
-
-    #vai ao perfil do utilizador e guarda a preferencia
-    perfil = request.user.perfil
-    if tipo == 'daltonismo':
-        perfil.filtro_daltonismo = valor  
-    elif tipo == 'contraste':
-        perfil.filtro_contraste = valor  
-        
-    #guarda tipo update
-    perfil.save()
-    return JsonResponse({'status': 'success'})#o js sabe que de sucesso
-
-
-
-
 @receiver(post_save, sender=User)
 def criar_perfil_utilizador_social(sender, instance, created, **kwargs):
     if created:
@@ -336,7 +315,7 @@ def desativar_mfa_seguro(request):
 
 
 
-@login_required
+@login_required         
 def mfa_sucesso_redirect(request):
     # Mensagem a dizer que concluiu mfa
     messages.success(request, "MFA ativo com sucesso! A tua conta está agora mais segura.")

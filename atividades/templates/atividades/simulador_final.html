@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <div class="resumo-card" style="background: rgba(255, 255, 255, 0.822); backdrop-filter: blur(10px);">
+    <div class="resumo-card" style="background: rgba(255, 255, 255, 0.937); backdrop-filter: blur(10px);">
         <h1 class="titulo">{% trans "Análise Concluída!" %}</h1>
         <div class="resultado-box" style="padding: 20px; border-radius: 15px; margin-bottom: 25px; background: {% if media_precisao >= 90 %}#dcfce7{% elif media_precisao >= 70 %}#fef9c3{% else %}#fee2e2{% endif %}; border: 1px solid {% if media_precisao >= 90 %}#22c55e{% elif media_precisao >= 70 %}#eab308{% else %}#ef4444{% endif %}; text-align: center;">
             <h2 style="color: #1f2937; margin-top: 0;">
@@ -74,7 +74,20 @@
                     {% endif %}
 
                     <div style="background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #cbd5e1; margin-bottom: 15px;">
-                        {{ email.corpo|safe }}
+    
+                        <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 15px;">
+                            <p style="margin: 0 0 8px 0; color: #475569;">
+                                <strong style="color: #1e293b;">De:</strong> {{ email.remetente|safe }}
+                            </p>
+                            <p style="margin: 0; color: #475569;">
+                                <strong style="color: #1e293b;">Assunto:</strong> {{ email.assunto|safe }}
+                            </p>
+                        </div>
+                        
+                        <div class="conteudo-email-real">
+                            {{ email.corpo|safe }}
+                        </div>
+
                     </div>
 
                 </div>

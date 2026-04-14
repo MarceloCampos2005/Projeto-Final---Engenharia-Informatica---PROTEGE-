@@ -1045,7 +1045,7 @@ function iniciarCronometro() {
     }, 1000);
 }
 
-
+//detetor ai
 const btnAnalisar = document.getElementById('btn-analisar');
 const btnText = document.getElementById('btn-text');
 const spinner = document.getElementById('loading-spinner');
@@ -1102,7 +1102,6 @@ if (btnAnalisar) {
 
             const iconDiv = document.getElementById('result-status-icon');
             const resultHeader = document.querySelector('.result-header');
-
             if (data.status === 'phishing') {
                 iconDiv.innerHTML = '💀';
                 resultHeader.style.color = '#ef4444';

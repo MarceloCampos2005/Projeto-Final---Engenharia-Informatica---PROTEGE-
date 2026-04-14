@@ -360,3 +360,28 @@ body.modo-escuro .correcao-email>div {
   background: #1e1e1e !important;
   border-color: #333 !important;
 }
+
+/*para aparecer as armadilhas a vermelho*/
+
+.correcao-email a.phish-zone[data-is-phishing="true"],
+.correcao-email span.phish-zone[data-is-phishing="true"],
+.correcao-email .phish-zone[data-is-phishing="true"] {
+  background-color: #fee2e2 !important;
+  border-bottom: 2px dashed #ef4444 !important;
+
+  color: #b91c1c !important;
+
+  font-weight: 800 !important;
+  padding: 2px 6px !important;
+  border-radius: 6px !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+}
+
+.correcao-email a.phish-zone[data-is-phishing="true"]:hover,
+.correcao-email span.phish-zone[data-is-phishing="true"]:hover,
+.correcao-email .phish-zone[data-is-phishing="true"]:hover {
+  background-color: #fca5a5 !important;
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
+}

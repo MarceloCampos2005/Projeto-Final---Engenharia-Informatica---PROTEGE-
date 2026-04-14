@@ -17,14 +17,17 @@
         <div class="ia-badge">Groq Cloud</div>
     </header>
 
-    <main class="ia-wrapper">
+    <main class="ia-wrapper" style="margin-top: -60px;">
         <div class="ia-container">
-            <div class="ia-intro">
+            <div class="ia-intro" style="position: relative;">
                 <h1 class="serif-title">{% trans "Detetor de Phishing Inteligente" %}</h1>
                 <p>{% trans "Copia e cola o conteúdo do e-mail suspeito abaixo. A nossa IA vai analisar padrões de linguagem, urgência e possíveis armadilhas." %}</p>
             </div>
 
             <div class="ia-card">
+                <div style="position: absolute; top: -15px; right: 30px; background: #ffffff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; color: #254d1a; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 2px solid #e2e8f0; z-index: 10;">
+                    🤖 {% trans "Usos hoje:" %} <strong id="contador-ia-usos" style="color: #20c214;">{{ user.perfil.usos_restantes_ia }}</strong> / 5
+                </div>
                 <div class="ia-warning">
                     <span>⚠️</span>
                     <p>{% trans "Aviso de Privacidade: Remove nomes reais, passwords ou dados bancários antes de colar." %}</p>
@@ -36,12 +39,6 @@
                     <span id="btn-text">🚀 {% trans "Analisar E-mail com IA" %}</span>
                     <div id="loading-spinner" class="spinner hidden"></div>
                 </button>
-                <div class="ia-status-container" style="margin-bottom: 15px; text-align: right;">
-                    <span class="ia-badge-usos">
-                        🤖 {% trans "Usos hoje:" %} 
-                        <strong id="contador-ia-usos">{{ user.perfil.usos_restantes_ia }}</strong> / 5
-                    </span>
-                </div>
             </div>
 
             <div id="ia-resultado" class="ia-result-card hidden">
