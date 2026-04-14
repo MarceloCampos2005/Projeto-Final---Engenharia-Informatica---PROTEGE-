@@ -60,17 +60,18 @@ def home2(request):
                 perfil.streak_atual += 1
             else:
                 perfil.streak_atual = 1
-
+            
+            msg = f"Streak de {perfil.streak_atual} dias!"
+            
             if perfil.streak_atual > perfil.streak_maximo:
                 perfil.streak_maximo = perfil.streak_atual
-            
-            if perfil.streak_maximo == 30:
-                    msg += "Streak de 30 Completa! Desbloqueaste a Moldura Elite! Vai ao teu Perfil para a equipares."
+                if perfil.streak_maximo == 30:
+                        msg += "Streak de 30 Completa! Desbloqueaste a Moldura Elite! Vai ao teu Perfil para a equipares."
 
             #DAR DICA 
             if perfil.streak_atual % 2 == 0:
                 perfil.dicas_disponiveis += 1
-                msg += f"Streak de {perfil.streak_atual} dias! Ganhaste +1 Dica."
+                msg += "Ganhaste +1 Dica."
             
             
             #Marco de 15 dias
