@@ -777,9 +777,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
+//utilizar a sessionstorage para nao mostrar a notificaçao do mfa enquanto durar a sessao, 
+//o localstorage bastava fechar 1 vez e nunaca mais aparecia 
 document.addEventListener("DOMContentLoaded", function () {
-    if (localStorage.getItem("esconderAlertaMFA") === "true") {
+    if (sessionStorage.getItem("esconderAlertaMFA") === "true") {
         const alerta = document.getElementById("mfa-alert-box");
         if (alerta) alerta.style.display = "none";
     }
@@ -789,7 +790,7 @@ function fecharAlertaMFA() {
     const alerta = document.getElementById("mfa-alert-box");
     if (alerta) {
         alerta.style.display = "none";
-        localStorage.setItem("esconderAlertaMFA", "true");
+        sessionStorage.setItem("esconderAlertaMFA", "true");
     }
 }
 
