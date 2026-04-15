@@ -1151,5 +1151,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 4000);
 });
 
+//funcao para o registar, nao dar para avancar sem ter tudo preenchido
+function validarEAvancar(passoAtual, proximoPasso) {
+    
+    const stepDiv = document.getElementById('step' + passoAtual);
+    
+    const inputs = stepDiv.querySelectorAll('input');
+    
+    let tudoValido = true;
+    for (let input of inputs) {
+        if (!input.checkValidity()) {
+            input.reportValidity();
+            tudoValido = false;
+            break; 
+        }
+    }
 
+    //avanca se os campos tiverm preenchidos
+    if (tudoValido) {
+        goToStep(proximoPasso);
+    }
+}
 
