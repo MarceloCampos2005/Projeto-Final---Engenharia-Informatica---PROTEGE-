@@ -1074,14 +1074,15 @@ if (btnAnalisar) {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': getCookie('csrftoken')
                 },
+                credentials: 'same-origin',
                 body: JSON.stringify({ texto_email: texto })
             });
 
-            if (!response.ok) {
-                throw new Error("Erro no servidor ao processar o pedido.");
-            }
-
             const data = await response.json();
+            if (!response.ok) {
+                //se o django der uma mensagem mostra essa, senao mostra esta geral
+                throw new Error(data.error || "Erro no servidor ao processar o pedido.");
+            }
 
             if (data.erro) throw new Error(data.erro);
 

@@ -788,9 +788,12 @@ def quiz_setup(request):
 
 
 
-@login_required 
 @require_POST
 def analisar_phishing_ia(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({
+            'erro': 'A tua sessão de 30 minutos expirou. Por favor, faz login novamente para usares a IA.'
+        }, status=401)
     try:
         cliente_ia = OpenAI(
         api_key=os.environ.get("GROQ_API_KEY"),
