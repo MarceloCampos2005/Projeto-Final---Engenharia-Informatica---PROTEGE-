@@ -82,6 +82,18 @@ INSTALLED_APPS = [
 SITE_ID = 1
 #pagina para onde vai quem consegue fazer login
 SOCIALACCOUNT_LOGIN_ON_GET = True
+#deixa fazer login direto se o email ja existir
+SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
+
+#liga automaticamente a conta Google à conta local
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+
+#salta o formulário
+SOCIALACCOUNT_AUTO_SIGNUP = True
+
+#garante que o email é obrigatório e único
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
 
 
 MIDDLEWARE = [

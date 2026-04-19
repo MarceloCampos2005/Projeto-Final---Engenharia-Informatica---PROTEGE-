@@ -37,7 +37,7 @@ class Perfil(models.Model):
     id = models.BigAutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     instituicao = models.CharField(max_length=200)
-    idade = models.PositiveIntegerField()
+    idade = models.IntegerField(null=True, blank=True)
     ano_letivo = models.CharField(max_length=50)
     nivel_geral = models.IntegerField(default=1)
     xp_geral = models.IntegerField(default=0)
