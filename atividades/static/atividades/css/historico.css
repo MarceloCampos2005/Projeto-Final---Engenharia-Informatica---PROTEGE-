@@ -291,3 +291,89 @@ body.modo-escuro .hist-vazio {
     padding: 2rem 1rem;
   }
 }
+
+.detalhe-pergunta {
+  font-size: 1.1rem;
+  color: var(--d3-verde-noite);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.detalhe-info {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 1rem 1.2rem;
+  border-radius: 15px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detalhe-info p {
+  font-size: 0.95rem;
+  color: var(--d3-verde-noite);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.badge-escolha, .badge-certa {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+.badge-escolha {
+  background-color: var(--d3-verde-noite);
+  color: var(--d3-neve-pura);
+}
+
+.badge-certa {
+  background-color: var(--d3-neon-leaf);
+  color: var(--d3-verde-noite);
+}
+
+.explicacao-box {
+  background: rgba(0, 0, 0, 0.04);
+  border-left: 4px solid var(--d3-verde-noite);
+  padding: 1.2rem;
+  border-radius: 0 12px 12px 0;
+  margin-top: auto;
+}
+
+.explicacao-box p {
+  font-size: 0.9rem;
+  color: var(--d3-verde-noite);
+  opacity: 0.9;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.border-correto {
+  border: 2px solid var(--d3-neon-leaf);
+  box-shadow: 0 10px 30px rgba(32, 194, 20, 0.08);
+}
+
+.border-errado {
+  border: 2px solid var(--d3-perigo);
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.08);
+}
+
+body.modo-escuro .detalhe-info {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+body.modo-escuro .detalhe-pergunta,
+body.modo-escuro .detalhe-info p,
+body.modo-escuro .explicacao-box p {
+  color: var(--d3-neve-pura);
+}
+
+body.modo-escuro .explicacao-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-left-color: var(--d3-neon-leaf);
+}
