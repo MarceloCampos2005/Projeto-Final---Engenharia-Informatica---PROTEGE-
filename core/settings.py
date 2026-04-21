@@ -39,9 +39,12 @@ if render_host:
 
 
     
-CSRF_TRUSTED_ORIGINS = [
-    'https://projeto-final-engenharia-informatica.onrender.com',
-]
+CSRF_TRUSTED_ORIGINS = []
+if render_host:
+    #confia no link do render para evitar erros no csrf
+    CSRF_TRUSTED_ORIGINS.append(f'https://{render_host}')
+else:
+    pass
 USE_I18N = True
 USE_L10N = True
 LANGUAGES = [
