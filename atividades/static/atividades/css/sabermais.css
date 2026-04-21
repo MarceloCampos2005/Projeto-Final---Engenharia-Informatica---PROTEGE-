@@ -397,3 +397,40 @@ body.modo-escuro .termo-glossario {
   background: rgba(251, 191, 36, 0.15);
   color: #fde047;
 }
+
+.doc-card.tema-conteudo {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/*estilos do pfd*/
+.no-pdf {
+  margin-bottom: 15px;
+}
+
+.btn-pdf-download {
+  background-color: #1b3211;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.btn-pdf-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+p, li, .dica-box, .checklist-box, .password-tester-box, .email-fake-card, .doc-card h2, .doc-card h3 {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+#pdf-area {
+  padding-bottom: 20px;
+}

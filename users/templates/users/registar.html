@@ -90,11 +90,28 @@
                             </div>
                             <div class="agrupamento-input">
                                 <label class="etiqueta-input">{% trans "Palavra-passe:" %}</label>
-                                <input type="password" name="password" required placeholder="Cria uma senha" class="caixa-texto-protege">
+                                <div class="password-wrapper" style="position: relative; display: flex; align-items: center;">
+                                    <input type="password" name="password" id="id_reg_password" required placeholder="Cria uma senha" class="caixa-texto-protege" style="width: 100%; padding-right: 45px;">
+                                    
+                                    <img src="{% static 'users/images/olho.png' %}" 
+                                        class="toggle-password-img" 
+                                        data-target="id_reg_password" 
+                                        alt="Mostrar pass"
+                                        style="position: absolute; right: 15px; width: 20px; cursor: pointer; opacity: 0.6;">
+                                </div>
                             </div>
+
                             <div class="agrupamento-input">
                                 <label class="etiqueta-input">{% trans "Repetir palavra-passe:" %}</label>
-                                <input type="password" name="confirm_password" required placeholder="Repete a senha" class="caixa-texto-protege">
+                                <div class="password-wrapper" style="position: relative; display: flex; align-items: center;">
+                                    <input type="password" name="confirm_password" id="id_reg_confirm" required placeholder="Repete a senha" class="caixa-texto-protege" style="width: 100%; padding-right: 45px;">
+                                    
+                                    <img src="{% static 'users/images/olho.png' %}" 
+                                        class="toggle-password-img" 
+                                        data-target="id_reg_confirm" 
+                                        alt="Mostrar pass"
+                                        style="position: absolute; right: 15px; width: 20px; cursor: pointer; opacity: 0.6;">
+                                </div>
                             </div>
                             <div class="btn-flex">
                                 <button type="button" onclick="goToStep(2)" class="btn-voltar-step">{% trans "Voltar" %}</button>

@@ -14,7 +14,7 @@ function fazerLogout(logoutUrl) {
     target.classList.remove('protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia');
     target.classList.remove('alto-contraste', 'contraste-invertido', 'modo-escuro');
 
-    console.log('✓ Filtros limpos. Redirecionando...');
+    console.log('✓ Filtros limpos. A redirecionar...');
 
     if (!logoutUrl) {
         logoutUrl = '/logout/';
@@ -492,14 +492,25 @@ function mostrarTema(idTema) {
 
     if (info) {
         container.innerHTML = `
-            <div style="animation: popIn 0.3s ease-out;">
-                <article class="doc-card tema-conteudo">
+            <div style="animation: popIn 0.3s ease-out; "id="pdf-area">
+                
+                
+                <article class="doc-card tema-conteudo" style="position: relative;">
+                    <div class="no-pdf" style="position: absolute; top: 30px; right: 30px; z-index: 99;">
+                        <button onclick="imprimirPDF('${idTema}')" title="${gettext("Descarregar PDF")}" style="background-color: rgba(28, 136, 20, 0.1); cursor: pointer; border: none; width: 45px; height: 45px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; transition: all 0.3s ease;" 
+                            onmouseover="this.style.background='#1c8814'; this.querySelector('img').style.filter='brightness(0) invert(1)';" 
+                            onmouseout="this.style.background='rgba(28, 136, 20, 0.1)'; this.querySelector('img').style.filter='none';"> 
+                            
+                            <img src="/static/img/download-seta.png" alt="PDF" style="width: 20px; height: 20px; transition: all 0.3s ease;"> 
+                        </button>
+                    </div>
+
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                         <div class="card-icon">${info.icon}</div>
                         ${info.tempo ? `<span style="font-size:0.8rem; background:rgba(0,0,0,0.05); padding:4px 12px; border-radius:20px; font-weight:bold; color:#666;">⏱️ ${info.tempo}</span>` : ''}
                     </div>
                     
-                    <h2 style="font-size: 2rem; margin-bottom: 20px; color: var(--verde-escuro);">${info.titulo}</h2>
+                    <h2 style="font-size: 2rem; margin-bottom: 20px; color: var(--verde-escuro); padding-right: 60px;">${info.titulo}</h2>
                     
                     <div class="texto-principal" style="color: #4b5563; font-size: 1.1rem; line-height: 1.6;">
                         ${info.texto}
@@ -1174,4 +1185,60 @@ function validarEAvancar(passoAtual, proximoPasso) {
         goToStep(proximoPasso);
     }
 }
+
+//funcao para mostrar palavra-passe no login e no registo
+document.addEventListener('DOMContentLoaded', function () {
+    //seleciona os icones
+    const togglers = document.querySelectorAll('.toggle-password-img');
+
+    togglers.forEach(btn => {
+        btn.addEventListener('click', function () {
+            //Descobre qual o input que este botão controla
+            const targetId = this.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+
+            if (input) {
+                //muda entre password e text
+                input.type = input.type === 'password' ? 'text' : 'password';
+            }
+        });
+    });
+});
+
+
+function imprimirPDF(idTema) {
+    const elemento = document.getElementById('pdf-area');
+    if (!elemento) return;
+
+    const botaoPDF = elemento.querySelector('.no-pdf');
+    const btnTextoOriginal = botaoPDF.querySelector('button').innerHTML;
+
+    //Feedback visual
+    botaoPDF.querySelector('button').disabled = true;
+    botaoPDF.querySelector('button').innerHTML = "A descarregar...";
+    botaoPDF.style.display = 'none';
+
+    //Configurações inteligentes do PDF
+    const opcoes = {
+        margin: [20, 15, 20, 15],
+        filename: `Protege+_Guia_${idTema}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#ffffff'
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['css', 'avoid-all'] }
+    };
+
+    //Constroi o PDF
+    html2pdf().set(opcoes).from(elemento).save().then(() => {
+
+        botaoPDF.style.display = 'block';
+        botaoPDF.querySelector('button').disabled = false;
+        botaoPDF.querySelector('button').innerHTML = btnTextoOriginal;
+    });
+}
+
 
