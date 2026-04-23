@@ -215,8 +215,8 @@
                         </div>
                     </div>
 
-                    {% if not ja_tem_medalha_mfa %}
-                    <div class="mfa-achievement-alert compact" id="mfa-alert-box">
+                    {% if not mfa_ativo %}  
+                    <div class="mfa-achievement-alert compact" id="mfa-alert-box" data-username="{{ user.username }}">
                         <button type="button" class="btn-close-alert" onclick="fecharAlertaMFA()"
                             title="{% trans 'Ocultar' %}">✖</button>
                         <div class="mfa-alert-icon">🛡️</div>

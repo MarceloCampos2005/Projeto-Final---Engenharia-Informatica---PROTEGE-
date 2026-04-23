@@ -315,3 +315,47 @@ body.modo-escuro .btn-exit-login {
     font-size: 1.8rem;
   }
 }
+
+/*CHECKLIST DA PASSWORD*/
+.password-req-list {
+  list-style: none;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 1rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0;
+  padding: 0 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.agrupamento-input:focus-within .password-req-list {
+  max-height: 250px;
+  opacity: 1;
+  margin-top: 10px;
+  padding: 15px 20px;
+}
+
+.req-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+  font-weight: 700;
+  
+}
+
+.req-item:last-child {
+  margin-bottom: 0;
+}
+
+.req-item.valid {
+  color: var(--lima-neon);
+}
+
+.req-icon {
+  font-size: 1rem;
+}

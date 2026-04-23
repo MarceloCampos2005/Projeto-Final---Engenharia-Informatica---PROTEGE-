@@ -791,20 +791,30 @@ document.addEventListener('DOMContentLoaded', function () {
 //utilizar a sessionstorage para nao mostrar a notificaçao do mfa enquanto durar a sessao, 
 //o localstorage bastava fechar 1 vez e nunaca mais aparecia 
 document.addEventListener("DOMContentLoaded", function () {
-    if (sessionStorage.getItem("esconderAlertaMFA") === "true") {
-        const alerta = document.getElementById("mfa-alert-box");
-        if (alerta) alerta.style.display = "none";
+    const alerta = document.getElementById("mfa-alert-box");
+
+    if (alerta) {
+        //Vai buscar o nome do utilizador ao html
+        const username = alerta.getAttribute("data-username");
+        const chaveUnica = "esconderAlertaMFA_" + username;
+
+        if (sessionStorage.getItem(chaveUnica) === "true") {
+            alerta.style.display = "none";
+        }
     }
 });
 
 function fecharAlertaMFA() {
     const alerta = document.getElementById("mfa-alert-box");
+
     if (alerta) {
+        const username = alerta.getAttribute("data-username");
+        const chaveUnica = "esconderAlertaMFA_" + username;
+
         alerta.style.display = "none";
-        sessionStorage.setItem("esconderAlertaMFA", "true");
+        sessionStorage.setItem(chaveUnica, "true");
     }
 }
-
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -1353,30 +1363,68 @@ function imprimirPDF(idTema) {
     botaoPDF.querySelector('button').disabled = true;
     botaoPDF.querySelector('button').innerHTML = "A descarregar...";
     botaoPDF.style.display = 'none';
+    elemento.style.animation = 'none';
 
-    //Configurações inteligentes do PDF
+    // Configurações do PDF
     const opcoes = {
-        margin: [20, 15, 20, 15],
+        margin: [25, 15, 20, 15],
         filename: `Protege+_Guia_${idTema}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
             scale: 2,
             useCORS: true,
-            backgroundColor: '#ffffff'
+            backgroundColor: '#ffffff',
+            scrollX: 0,
+            scrollY: 0
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['css', 'avoid-all'] }
+        pagebreak: { mode: ['css', 'legacy'] }
     };
 
-    //Constroi o PDF
-    html2pdf().set(opcoes).from(elemento).save().then(() => {
+    //constroi o pdf
+    html2pdf().set(opcoes).from(elemento).toPdf().get('pdf').then(function (pdf) {
+        const totalPages = pdf.internal.getNumberOfPages();
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const dataAtual = new Date().toLocaleString('pt-PT');
 
+        for (let i = 1; i <= totalPages; i++) {
+            pdf.setPage(i);
+
+            //header
+            pdf.setFontSize(16);
+            pdf.setTextColor(28, 136, 20); 
+            pdf.setFont("helvetica", "bold");
+            pdf.text("Protege+", 15, 15);
+
+            //Subtitulo no header
+            pdf.setFontSize(10);
+            pdf.setTextColor(100, 100, 100); 
+            pdf.setFont("helvetica", "normal");
+            pdf.text("Documentação Oficial", pageWidth - 15, 15, { align: 'right' });
+
+            //linha header
+            pdf.setDrawColor(28, 136, 20);
+            pdf.setLineWidth(0.5);
+            pdf.line(15, 18, pageWidth - 15, 18); 
+
+
+            pdf.setDrawColor(220, 220, 220);
+            pdf.setLineWidth(0.5);
+            pdf.line(15, pageHeight - 16, pageWidth - 15, pageHeight - 16);
+
+            //footer
+            pdf.setFontSize(8);
+            pdf.setTextColor(150, 150, 150);
+            pdf.text(`Protege+ | ${dataAtual} | Página ${i} de ${totalPages}`, pageWidth / 2, pageHeight - 10, { align: 'center' });
+        }
+    }).save().then(() => {
+        // Restaura botao
         botaoPDF.style.display = 'block';
         botaoPDF.querySelector('button').disabled = false;
         botaoPDF.querySelector('button').innerHTML = btnTextoOriginal;
     });
 }
-
 
 document.addEventListener("DOMContentLoaded", function () {
     const observer = new IntersectionObserver((entries) => {
@@ -1418,3 +1466,37 @@ function fecharToast(botao) {
         }, 400);
     }
 }
+
+//meter regras na password no registar
+document.addEventListener("DOMContentLoaded", function () {
+    const passwordInput = document.getElementById('id_reg_password');
+
+    if (passwordInput) {
+        passwordInput.addEventListener('input', function (e) {
+            const pass = e.target.value;
+
+            atualizarRequisito('req-length', pass.length >= 8);
+
+            atualizarRequisito('req-upper', /[A-Z]/.test(pass));
+
+            atualizarRequisito('req-number', /[0-9]/.test(pass));
+
+            atualizarRequisito('req-special', /[!@#$%^&*(),.?":{}|<>]/.test(pass));
+        });
+    }
+    //pega no elemento e troca conforme a ele é cumprido
+    function atualizarRequisito(elementId, isValid) {
+        const elemento = document.getElementById(elementId);
+        if (!elemento) return;
+
+        const icone = elemento.querySelector('.req-icon');
+
+        if (isValid) {
+            elemento.classList.add('valid');
+            icone.textContent = '✓';
+        } else {
+            elemento.classList.remove('valid');
+            icone.textContent = 'X';
+        }
+    }
+});

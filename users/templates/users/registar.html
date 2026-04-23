@@ -92,13 +92,15 @@
                                 <label class="etiqueta-input">{% trans "Palavra-passe:" %}</label>
                                 <div class="password-wrapper" style="position: relative; display: flex; align-items: center;">
                                     <input type="password" name="password" id="id_reg_password" required placeholder="Cria uma senha" class="caixa-texto-protege" style="width: 100%; padding-right: 45px;">
-                                    
-                                    <img src="{% static 'users/images/olho.png' %}" 
-                                        class="toggle-password-img" 
-                                        data-target="id_reg_password" 
-                                        alt="Mostrar pass"
-                                        style="position: absolute; right: 15px; width: 20px; cursor: pointer; opacity: 0.6;">
+                                    <img src="{% static 'users/images/olho.png' %}" class="toggle-password-img" data-target="id_reg_password" alt="Mostrar pass" style="position: absolute; right: 15px; width: 20px; cursor: pointer; opacity: 0.6;">
                                 </div>
+
+                                <ul id="password-requirements" class="password-req-list">
+                                    <li id="req-length" class="req-item"><span class="req-icon">X</span> <span class="req-text">Pelo menos 8 caracteres</span></li>
+                                    <li id="req-upper" class="req-item"><span class="req-icon">X</span> <span class="req-text">Uma letra maiúscula</span></li>
+                                    <li id="req-number" class="req-item"><span class="req-icon">X</span> <span class="req-text">Pelo menos um número</span></li>
+                                    <li id="req-special" class="req-item"><span class="req-icon">X</span> <span class="req-text">Um caráter especial (@$!%*?)</span></li>
+                                </ul>
                             </div>
 
                             <div class="agrupamento-input">

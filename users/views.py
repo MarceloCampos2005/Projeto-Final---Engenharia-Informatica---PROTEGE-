@@ -51,8 +51,8 @@ def perfil(request):
 
     # Se o utilizador não tiver erros nenhuns, pomos dados fictícios ou vazios
     if not labels:
-        labels = ['Phishing', 'Senhas', 'Malware', 'Redes']
-        dados = [0, 0, 0, 0]
+        labels = ['Phishing', 'Senhas', 'MFA', 'Privacidade', 'Dispositivos', 'Redes']
+        dados = [0, 0, 0, 0,0,0]
 
     xp_necessario_quiz = perfil_user.nivel_quiz * 30
     xp_necessario_simulador = perfil_user.nivel_simulador * 30
