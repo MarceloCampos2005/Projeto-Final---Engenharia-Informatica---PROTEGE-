@@ -49,14 +49,15 @@
             </div>
 
             <h2 class="hist-titulo" style="font-size: 1.2rem; margin-bottom: 1rem;">📧 {% trans "Email Original" %}</h2>
+                
             <div class="hist-card" style="background: white; border-radius: 10px; padding: 0; overflow: hidden; color: #333;">
                 
                 <div style="background: #f3f4f6; padding: 1.5rem; border-bottom: 1px solid #e5e7eb;">
                     <p style="margin-bottom: 0.5rem; font-size: 1.1rem;">
-                        <strong>{% trans "Assunto:" %}</strong> {{ resultado.email.assunto }}
+                        <strong>{% trans "Assunto:" %}</strong> {{ resultado.email.assunto|striptags }}
                     </p>
                     <p style="color: #6b7280; font-size: 0.95rem;">
-                        <strong>{% trans "De:" %}</strong> &lt;{{ resultado.email.remetente }}&gt;
+                        <strong>{% trans "De:" %}</strong> {{ resultado.email.remetente|striptags }}
                     </p>
                 </div>
                 

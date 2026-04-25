@@ -10,15 +10,17 @@
     <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
     
 </head>
-<body>
+<body data-authenticated="{{ user.is_authenticated|lower }}" class="{% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}">
 
     <div class="resumo-card" style="background: rgba(255, 255, 255, 0.937); backdrop-filter: blur(10px);">
-        <h1 class="titulo">{% trans "Análise Concluída!" %}</h1>
+        <h1 class="titulo" style="color: #0ea700; font-size: 2.8rem; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; font-style: normal; letter-spacing: 2px; text-shadow: 0px 5px 15px rgba(0, 0, 0, 0.8);">
+            {% trans "Análise Concluída!" %}
+        </h1>
         <div class="resultado-box" style="padding: 20px; border-radius: 15px; margin-bottom: 25px; background: {% if media_precisao >= 90 %}#dcfce7{% elif media_precisao >= 70 %}#fef9c3{% else %}#fee2e2{% endif %}; border: 1px solid {% if media_precisao >= 90 %}#22c55e{% elif media_precisao >= 70 %}#eab308{% else %}#ef4444{% endif %}; text-align: center;">
             <h2 style="color: #1f2937; margin-top: 0;">
-                {% if media_precisao == 100 %} Excelente! 🏆
-                {% elif media_precisao >= 70 %} Muito Bem! 👍
-                {% else %} Precisas de mais atenção... 🧐 {% endif %}
+                {% if media_precisao == 100 %} {% trans "Excelente!" %} 🏆
+                {% elif media_precisao >= 70 %} {% trans "Muito Bem!" %} 👍
+                {% else %} {% trans "Precisas de mais atenção..." %} 🧐 {% endif %}
             </h2>
             <p style="margin: 5px 0;">{% trans "Analisaste" %} <strong>{{ quantidade_emails }}</strong> {% trans "e-mails com uma precisão média de" %} <strong>{{ media_precisao }}%</strong>.</p>
             <p style="margin: 5px 0;">{% trans "Ganhaste" %} <strong>{{ pontos_totais }}</strong> {% trans "pontos de simulador!" %}</p>
@@ -50,7 +52,7 @@
                 
                 {% if emails_jogados|length > 0 %}
                 <span id="contador-emails" style="font-size: 0.95rem; font-weight: 700; color: #475569; background: #e2e8f0; padding: 6px 16px; border-radius: 20px;">
-                    E-mail 1 de {{ emails_jogados|length }}
+                    {% trans "E-mail" %} 1 de {{ emails_jogados|length }}
                 </span>
                 {% endif %}
             </div>
@@ -72,15 +74,46 @@
                             ✅ {% trans "VEREDICTO: ESTE E-MAIL ERA SEGURO!" %}
                         </div>
                     {% endif %}
+                    <div style="background: #ffffff; padding: 15px 20px; border-radius: 12px; margin-bottom: 15px; font-size: 0.95rem; border-left: 5px solid #254d1a;">
+    
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+                            <span><strong>{% trans "Zonas Selecionadas:" %}</strong> {{ email.acertos_reais|add:email.falsos_positivos }} (Total de Armadilhas no e-mail: {{ email.total_armadilhas }})</span>
+                            
+                            {% if email.falsos_positivos > 0 %}
+                                <span style="color: #b45309; background: #fff7ed; padding: 2px 10px; border-radius: 8px; font-weight: 600; border: 1px solid #fed7aa;">
+                                    {% trans "Selecionaste" %} {{ email.falsos_positivos }} {% trans "zona(s) a mais que eram seguras!" %}
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <p style="margin: 12px 0 0 0; font-weight: 500; color: #334155;">
+                            {% if email.acertos_reais == email.total_armadilhas and email.falsos_positivos == 0 %}
+                                <strong style="color: #16a34a;">{% trans "Excelente!" %}</strong> {% trans "Identificaste todos os perigos sem cometer erros." %}
+                            
+                            {% else %}
+                                
+                                {% if email.acertos_reais < email.total_armadilhas %}
+                                    <strong style="color: #dc2626;">{% trans "Atenção:" %}</strong> {% trans "Identificaste apenas" %} {{ email.acertos_reais }}, {% trans "faltaram encontrar" %} {{ email.faltam }} {% trans "armadilha(s)." %} {% trans "Verifica os detalhes abaixo." %}
+                                {% else %}
+                                    <strong style="color: #16a34a;">{% trans "Boa," %}</strong> {% trans "encontraste todas as armadilhas!" %}
+                                {% endif %}
+                                
+                                {% if email.falsos_positivos > 0 %}
+                                    <br><strong style="color: #b45309;">{% trans "Mas," %}</strong> {% trans "clicaste em zonas seguras por engano, o que baixou a tua pontuação." %}
+                                {% endif %}
+                                
+                            {% endif %}     
+                        </p>
+                    </div>
 
                     <div style="background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #cbd5e1; margin-bottom: 15px;">
     
                         <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 15px;">
                             <p style="margin: 0 0 8px 0; color: #475569;">
-                                <strong style="color: #1e293b;">De:</strong> {{ email.remetente|safe }}
+                                <strong style="color: #1e293b;">{% trans "De:" %}</strong> {{ email.remetente|safe }}
                             </p>
                             <p style="margin: 0; color: #475569;">
-                                <strong style="color: #1e293b;">Assunto:</strong> {{ email.assunto|safe }}
+                                <strong style="color: #1e293b;">{% trans "Assunto:" %}</strong> {{ email.assunto|safe }}
                             </p>
                         </div>
                         
@@ -92,7 +125,7 @@
 
                 </div>
                 {% empty %}
-                <p style="text-align: center; color: #64748b;">Nenhum e-mail para analisar.</p>
+                <p style="text-align: center; color: #64748b;">{% trans "Nenhum e-mail para analisar." %}</p>
                 {% endfor %}
             </div>
 

@@ -16,9 +16,11 @@ import json
 from django.db.models import Count, Q
 from atividades.models import HistoricoQuiz 
 from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django_otp.plugins.otp_totp.models import TOTPDevice
+from django.contrib.auth.signals import user_logged_in
+from django.conf import settings
+
 
 
 
@@ -75,6 +77,9 @@ def perfil(request):
 def home(request):
     if request.user.is_authenticated:
         logout(request)
+
+    lang = request.LANGUAGE_CODE
+    translation.activate(lang)
     return render(request, 'users/home.html')
 
 
@@ -321,3 +326,40 @@ def mfa_sucesso_redirect(request):
     messages.success(request, "MFA ativo com sucesso! A tua conta está agora mais segura.")
     
     return redirect('two_factor:profile')
+
+
+@receiver(user_logged_in)
+def sincronizar_preferencias_pos_login(sender, request, user, **kwargs):
+
+    try:
+        perfil = user.perfil
+        mudou_algo = False
+
+        #sincroniza lingua
+        lang_cookie = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME)
+        if lang_cookie and lang_cookie in ['pt', 'en'] and perfil.lingua != lang_cookie:
+            perfil.lingua = lang_cookie
+            mudou_algo = True
+
+        #sincroniza filtros daltonismo
+        filtro_dalt = request.COOKIES.get('filtro_daltonismo')
+        if filtro_dalt and perfil.filtro_daltonismo != filtro_dalt:
+            perfil.filtro_daltonismo = filtro_dalt
+            mudou_algo = True
+
+        #sincroniza filtros de contraste
+        filtro_cont = request.COOKIES.get('filtro_contraste')
+        if filtro_cont and perfil.filtro_contraste != filtro_cont:
+            perfil.filtro_contraste = filtro_cont
+            mudou_algo = True
+
+        # Se algo mudou, guarda no Perfil e ativa a tradução imediatamente
+        if mudou_algo:
+            perfil.save()
+            
+        # Garante que a sessão atual do user tem a lingua certa
+        translation.activate(perfil.lingua)
+        request.session[translation.LANGUAGE_SESSION_KEY] = perfil.lingua
+            
+    except Exception as e:
+        print(f"Erro ao sincronizar preferências no login: {e}")

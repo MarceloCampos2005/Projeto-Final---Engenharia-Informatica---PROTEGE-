@@ -98,7 +98,7 @@ class ResultadoSimulador(models.Model):
     acertou = models.BooleanField(default=False)
     
     armadilhas_encontradas = models.IntegerField(default=0)
-    
+    cliques_utilizador = models.TextField(null=True, blank=True)
     data_conclusao = models.DateTimeField(auto_now_add=True)
 
     class Meta:

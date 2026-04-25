@@ -228,23 +228,6 @@ body {
   }
 }
 
-body.modo-escuro .rf-card,
-body.modo-escuro .popup-card {
-  background: #1e1e1e !important;
-  border-color: #333 !important;
-}
-
-body.modo-escuro .rf-titulo,
-body.modo-escuro .rf-label,
-body.modo-escuro .rf-score-num,
-body.modo-escuro .rf-feedback,
-body.modo-escuro .rf-link-home {
-  color: var(--d3-neve-pura) !important;
-}
-
-body.modo-escuro .rf-score-total {
-  color: rgba(255, 255, 255, 0.2) !important;
-}
 
 @media (max-width: 768px) {
   .rf-main {

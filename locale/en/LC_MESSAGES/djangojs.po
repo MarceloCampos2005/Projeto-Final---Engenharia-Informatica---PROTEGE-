@@ -236,28 +236,27 @@ msgstr ""
 
 #: .\core\static\js\scripts.js:384
 msgid "Repara no 'rn' em vez de 'm'. Isto chama-se Typosquatting!"
-msgstr ""
+msgstr "Notice the 'rn' instead of 'm'. This is called Typosquatting!"
 
 #: .\core\static\js\scripts.js:385
 msgid "Os atacantes usam o medo para te fazer agir sem pensar."
-msgstr ""
+msgstr "Attackers use fear to make you act without thinking."
 
 #: .\core\static\js\scripts.js:385
 msgid "URGENTE: Conta Bloqueada!"
-msgstr ""
+msgstr "URGENT: Account Locked!"
 
 #: .\core\static\js\scripts.js:387
 msgid "Caro utilizador, detetámos algo estranho."
-msgstr ""
+msgstr "Dear user, we detected something unusual."
 
 #: .\core\static\js\scripts.js:388
 msgid "Clique no botão abaixo para evitar a perda de dados."
-msgstr ""
+msgstr "Click the button below to prevent data loss."
 
 #: .\core\static\js\scripts.js:389
 msgid "Link real: http://hack-site.ru/roubo"
-msgstr ""
-
+msgstr "Real link: http://hack-site.ru/theft"
 #: .\core\static\js\scripts.js:394
 msgid ""
 "Sempre que receberes uma mensagem urgente, aplica a regra dos 5 segundos. "
@@ -326,16 +325,15 @@ msgstr ""
 
 #: .\core\static\js\scripts.js:402
 msgid "Testador de Força (Simulação)"
-msgstr ""
+msgstr "Strength Tester (Simulation)"
 
 #: .\core\static\js\scripts.js:403
 msgid "Digita uma senha..."
-msgstr ""
+msgstr "Type a password..."
 
 #: .\core\static\js\scripts.js:408
 msgid "Digita para ver a resistência."
-msgstr ""
-
+msgstr "Type to see the strength."
 #: .\core\static\js\scripts.js:411
 msgid ""
 "Adota o método das 'Passphrases' para a tua Master Password: junta quatro "
@@ -530,22 +528,21 @@ msgstr ""
 "computer suddenly gets slow, fans spinning up without you doing anything "
 "(sign of hidden cryptocurrency mining), battery lasting very little, "
 "constant pop-ups, or the browser homepage changing by itself."
-
 #: .\core\static\js\scripts.js:433
 msgid "Checklist de Proteção"
-msgstr ""
+msgstr "Protection Checklist"
 
 #: .\core\static\js\scripts.js:434
 msgid "Sistema Operativo Atualizado"
-msgstr ""
+msgstr "Updated Operating System"
 
 #: .\core\static\js\scripts.js:435
 msgid "Antivírus Ativo"
-msgstr ""
+msgstr "Active Antivirus"
 
 #: .\core\static\js\scripts.js:436
 msgid "Não descarregar software pirata"
-msgstr ""
+msgstr "Do not download pirated software"
 
 #: .\core\static\js\scripts.js:439
 msgid ""
@@ -688,18 +685,17 @@ msgstr ""
 "when you get up in a library or office (Use the shortcut Win + L on Windows, "
 "or Ctrl + Cmd + Q on Mac). The time it takes to get water is enough for them "
 "to install something malicious on your machine."
-
 #: .\core\static\js\scripts.js:528
 msgid "Fraca: Um hacker demora segundos."
-msgstr ""
+msgstr "Weak: A hacker would take seconds."
 
 #: .\core\static\js\scripts.js:531
 msgid "Média: Melhor, mas ainda vulnerável."
-msgstr ""
+msgstr "Medium: Better, but still vulnerable."
 
 #: .\core\static\js\scripts.js:534
 msgid "Forte: Levaria séculos para ser descoberta!"
-msgstr ""
+msgstr "Strong: It would take centuries to be discovered!"
 
 #~ msgid "Fazer Login Agora"
 #~ msgstr "Login Now"

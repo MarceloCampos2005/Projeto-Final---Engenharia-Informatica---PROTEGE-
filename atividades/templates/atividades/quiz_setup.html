@@ -40,7 +40,7 @@
                     <label class="qs-modo-card">
                         <input type="radio" name="modo_jogo" value="aleatorio" checked onclick="toggleTemas(false)">
                         <div class="qs-card-content">
-                            <span class="qs-badge-xp">+2 XP BÓNUS</span>
+                            <span class="qs-badge-xp">{% trans "+2 XP BÓNUS" %}</span>
                             <div class="qs-card-icon">🎲</div>
                             <h3>{% trans "Modo Aleatório" %}</h3>
                             <p>{% trans "Simula ameaças reais e imprevisíveis. Inclui todos os temas." %}</p>
@@ -63,32 +63,32 @@
                         
                         <label class="qs-tema-pill">
                             <input type="checkbox" name="temas" value="phishing"> 
-                            <span class="qs-pill-text">📩 Phishing</span>
+                            <span class="qs-pill-text">📩 {% trans "Phishing" %}</span>
                         </label>
                         
                         <label class="qs-tema-pill">
                             <input type="checkbox" name="temas" value="senhas"> 
-                            <span class="qs-pill-text">🔑 Senhas</span>
+                            <span class="qs-pill-text">🔑 {% trans "Senhas" %}</span>
                         </label>
 
                         <label class="qs-tema-pill">
                             <input type="checkbox" name="temas" value="mfa"> 
-                            <span class="qs-pill-text">🧱 MFA</span>
+                            <span class="qs-pill-text">🧱 {% trans "MFA" %}</span>
                         </label>
 
                         <label class="qs-tema-pill">
                             <input type="checkbox" name="temas" value="privacidades"> 
-                            <span class="qs-pill-text">📍 Privacidades</span>
+                            <span class="qs-pill-text">📍 {% trans "Privacidades" %}</span>
                         </label>
 
                         <label class="qs-tema-pill">
                             <input type="checkbox" name="temas" value="dispositivos"> 
-                            <span class="qs-pill-text">💻 Dispositivos</span>
+                            <span class="qs-pill-text">💻 {% trans "Dispositivos" %}</span>
                         </label>
 
                         <label class="qs-tema-pill">
                             <input type="checkbox" name="temas" value="redes"> 
-                            <span class="qs-pill-text">🌐 Redes</span>
+                            <span class="qs-pill-text">🌐 {% trans "Redes" %}</span>
                         </label>
 
                     </div>

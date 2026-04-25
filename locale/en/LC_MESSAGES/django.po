@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-02 00:11+0100\n"
+"POT-Creation-Date: 2026-04-25 00:48+0100\n"
 "PO-Revision-Date: 2026-02-17 17:15+0000\n"
 "Last-Translator: Gemini\n"
 "Language-Team: English\n"
@@ -56,7 +56,6 @@ msgid "Análise do Email"
 msgstr "Email Analysis"
 
 #: .\atividades\templates\atividades\detalhe_simulador.html:32
-
 msgid "Análise Correta"
 msgstr "Correct"
 
@@ -66,7 +65,6 @@ msgid "Caíste na Armadilha"
 msgstr "You Fell for the Trap"
 
 #: .\atividades\templates\atividades\detalhe_simulador.html:37
-
 msgid "Tipo de Email:"
 msgstr "Your Email"
 
@@ -86,20 +84,22 @@ msgstr "Your performance:"
 msgid "Email Original"
 msgstr "Original Email"
 
-#: .\atividades\templates\atividades\detalhe_simulador.html:56
-#: .\atividades\templates\atividades\simulador.html:40
+#: .\atividades\templates\atividades\detalhe_simulador.html:57
+#: .\atividades\templates\atividades\simulador.html:38
+#: .\atividades\templates\atividades\simulador_final.html:116
 msgid "Assunto:"
 msgstr "Subject:"
 
-#: .\atividades\templates\atividades\detalhe_simulador.html:59
-#: .\atividades\templates\atividades\simulador.html:33
+#: .\atividades\templates\atividades\detalhe_simulador.html:60
+#: .\atividades\templates\atividades\simulador.html:31
+#: .\atividades\templates\atividades\simulador_final.html:113
 msgid "De:"
 msgstr "From:"
 
 #: .\atividades\templates\atividades\detetor_ia.html:16
-#: .\atividades\templates\atividades\quiz_setup.html:21
+#: .\atividades\templates\atividades\quiz_setup.html:20
 #: .\atividades\templates\atividades\simulador_setup.html:21
-#: .\core\templates\two_factor\profile\profile.html:35
+#: .\core\templates\two_factor\profile\profile.html:49
 msgid "Voltar ao Dashboard"
 msgstr "Back to Dashboard"
 
@@ -112,10 +112,14 @@ msgid ""
 "Copia e cola o conteúdo do e-mail suspeito abaixo. A nossa IA vai analisar "
 "padrões de linguagem, urgência e possíveis armadilhas."
 msgstr ""
-"Copy and paste the content of the suspicious email below. Our AI will analyze "
-"language patterns, urgency, and potential traps."
+"Copy and paste the content of the suspicious email below. Our AI will "
+"analyze language patterns, urgency, and potential traps."
 
-#: .\atividades\templates\atividades\detetor_ia.html:30
+#: .\atividades\templates\atividades\detetor_ia.html:29
+msgid "Usos Restantes:"
+msgstr "Remaining Uses"
+
+#: .\atividades\templates\atividades\detetor_ia.html:33
 msgid ""
 "Aviso de Privacidade: Remove nomes reais, passwords ou dados bancários antes "
 "de colar."
@@ -123,37 +127,25 @@ msgstr ""
 "Privacy Notice: Please remove real names, passwords, or bank details before "
 "pasting."
 
-#: .\atividades\templates\atividades\detetor_ia.html:33
+#: .\atividades\templates\atividades\detetor_ia.html:36
 msgid "Cola aqui o conteúdo do e-mail..."
 msgstr "Paste the email content here..."
 
-#: .\atividades\templates\atividades\detetor_ia.html:36
+#: .\atividades\templates\atividades\detetor_ia.html:39
 msgid "Analisar E-mail com IA"
 msgstr "Analyze Email with AI"
 
-#: .\atividades\templates\atividades\detetor_ia.html:41
-msgid "Usos hoje:"
-msgstr "Uses today:"
-
-#: .\atividades\templates\atividades\detetor_ia.html:55
+#: .\atividades\templates\atividades\detetor_ia.html:52
 msgid "Nível de Risco:"
 msgstr "Risk Level:"
 
-#: .\atividades\templates\atividades\detetor_ia.html:60
+#: .\atividades\templates\atividades\detetor_ia.html:57
 msgid "Análise da IA:"
 msgstr "AI Analysis:"
 
-#: .\atividades\templates\atividades\detetor_ia.html:69
+#: .\atividades\templates\atividades\detetor_ia.html:66
 msgid "Nova Análise"
 msgstr "New Analysis"
-
-#: .\atividades\templates\atividades\detetor_ia.html:85
-msgid "Por favor, cola um texto mais longo para análise."
-msgstr "Please paste a longer text for analysis."
-
-#: .\atividades\templates\atividades\detetor_ia.html:140
-msgid "Erro ao analisar: "
-msgstr "Error analyzing: "
 
 #: .\atividades\templates\atividades\guia_emergencia.html:6
 msgid "Guia de Emergência"
@@ -171,15 +163,17 @@ msgstr "Register"
 
 #: .\atividades\templates\atividades\guia_emergencia.html:28
 #: .\atividades\templates\atividades\historico.html:21
-#: .\atividades\templates\atividades\leaderboard.html:21
-#: .\core\templates\account\password_reset.html:20
-#: .\core\templates\allauth_2fa\authenticate.html:24
-#: .\core\templates\two_factor\core\setup.html:69
-#: .\users\static\users\images\perfil.html:20
-#: .\users\templates\users\login.html:23 .\users\templates\users\perfil.html:20
+#: .\atividades\templates\atividades\leaderboard.html:20
+#: .\atividades\templates\atividades\sabermais.html:26
+#: .\core\templates\account\password_reset.html:21
+#: .\core\templates\allauth_2fa\authenticate.html:25
+#: .\core\templates\two_factor\core\setup.html:82
+#: .\users\templates\users\login.html:23 .\users\templates\users\perfil.html:31
 #: .\users\templates\users\registar.html:24
 #: .\users\templates\users\registar.html:81
-#: .\users\templates\users\registar.html:100
+#: .\users\templates\users\registar.html:119
+#: .\users\templates\users\sobrenos.html:27
+#: .\users\templates\users\sobrenos.html:30
 msgid "Voltar"
 msgstr "Back"
 
@@ -199,6 +193,10 @@ msgstr "I'm under attack right now!"
 msgid "Quero prevenir ataques"
 msgstr "I want to prevent attacks"
 
+#: .\atividades\templates\atividades\guia_emergencia.html:59
+msgid "AJUDA IMEDIATA"
+msgstr "Immediate help"
+
 #: .\atividades\templates\atividades\guia_emergencia.html:63
 msgid "Cliquei num link suspeito"
 msgstr "I clicked a suspicious link"
@@ -210,6 +208,10 @@ msgstr "Do you know what to do if you've interacted with a malicious message?"
 #: .\atividades\templates\atividades\guia_emergencia.html:66
 msgid "AÇÃO: GUIA DE EMERGÊNCIA"
 msgstr "ACTION: EMERGENCY GUIDE"
+
+#: .\atividades\templates\atividades\guia_emergencia.html:71
+msgid "CONTA COMPROMETIDA"
+msgstr "ACCOUNT COMPROMISED"
 
 #: .\atividades\templates\atividades\guia_emergencia.html:75
 msgid "Hackearam a minha conta"
@@ -223,6 +225,10 @@ msgstr "Steps to regain access and expel intruders."
 msgid "AÇÃO: RECUPERAÇÃO"
 msgstr "ACTION: RECOVERY"
 
+#: .\atividades\templates\atividades\guia_emergencia.html:83
+msgid "SEGURANÇA BANCÁRIA"
+msgstr "BANK SECURITY"
+
 #: .\atividades\templates\atividades\guia_emergencia.html:87
 msgid "Dados bancários expostos"
 msgstr "Bank details exposed"
@@ -234,6 +240,12 @@ msgstr "Protect your money and block unauthorized access."
 #: .\atividades\templates\atividades\guia_emergencia.html:90
 msgid "AÇÃO: BLOQUEIO"
 msgstr "ACTION: BLOCKADE"
+
+#: .\atividades\templates\atividades\guia_emergencia.html:101
+#: .\atividades\templates\atividades\guia_emergencia.html:113
+#: .\atividades\templates\atividades\guia_emergencia.html:125
+msgid "PREVENÇÃO"
+msgstr "PREVENTION"
 
 #: .\atividades\templates\atividades\guia_emergencia.html:105
 msgid "Ativa o MFA (2FA)"
@@ -280,6 +292,12 @@ msgstr "Keep your system and apps updated to patch known security flaws."
 msgid "ESTADO: SISTEMA PATCHEADO"
 msgstr "STATUS: PATCHED SYSTEM"
 
+#: .\atividades\templates\atividades\guia_emergencia.html:141
+#: .\atividades\templates\atividades\quiz_final.html:79
+#: .\users\templates\users\sobrenos.html:100
+msgid "Fechar"
+msgstr "Close"
+
 #: .\atividades\templates\atividades\historico.html:8
 msgid "Meu Histórico"
 msgstr "My History"
@@ -289,16 +307,22 @@ msgid "Minhas Conquistas"
 msgstr "My Achievements"
 
 #: .\atividades\templates\atividades\historico.html:27
-
 msgid "Treino de Quizzes"
 msgstr "Quiz Review"
+
+#: .\atividades\templates\atividades\historico.html:34
+#: .\atividades\templates\atividades\home2.html:156
+#: .\atividades\templates\atividades\quiz_final.html:90
+#: .\core\templates\partials\leaderboard_row.html:11
+#: .\users\templates\users\perfil.html:255
+msgid "Nível"
+msgstr "Level"
 
 #: .\atividades\templates\atividades\historico.html:41
 msgid "Acertos"
 msgstr "Correct Answers"
 
 #: .\atividades\templates\atividades\historico.html:46
-
 msgid "Precisão"
 msgstr "Quiz Accuracy"
 
@@ -319,6 +343,14 @@ msgstr "Play Quiz"
 msgid "Análise de Emails"
 msgstr "Email Analysis"
 
+#: .\atividades\templates\atividades\historico.html:74
+msgid "Rápido"
+msgstr "Fast"
+
+#: .\atividades\templates\atividades\historico.html:74
+msgid "Detetive"
+msgstr "Detective Mode"
+
 #: .\atividades\templates\atividades\historico.html:86
 msgid "Decisão Correta"
 msgstr "Correct"
@@ -332,7 +364,6 @@ msgid "Ainda não analisaste nenhum email."
 msgstr "You haven't completed any quiz yet. Start now!"
 
 #: .\atividades\templates\atividades\historico.html:111
-
 msgid "Abrir Simulador"
 msgstr "Simulator Accuracy"
 
@@ -340,238 +371,239 @@ msgstr "Simulator Accuracy"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: .\atividades\templates\atividades\home2.html:40
-#: .\users\templates\users\home.html:37 .\users\templates\users\sobrenos.html:8
+#: .\atividades\templates\atividades\home2.html:61
+#: .\users\templates\users\home.html:46 .\users\templates\users\sobrenos.html:8
 msgid "Sobre Nós"
 msgstr "About Us"
 
-#: .\atividades\templates\atividades\home2.html:43
+#: .\atividades\templates\atividades\home2.html:64
 msgid "Quero Aprender!"
 msgstr "I Want to Learn!"
 
-#: .\atividades\templates\atividades\home2.html:44
+#: .\atividades\templates\atividades\home2.html:65
 msgid "QUIZ"
 msgstr "QUIZ"
 
-#: .\atividades\templates\atividades\home2.html:45
+#: .\atividades\templates\atividades\home2.html:66
 msgid "SIMULADOR"
 msgstr "SIMULATOR"
 
-#: .\atividades\templates\atividades\home2.html:64
+#: .\atividades\templates\atividades\home2.html:86
 msgid "UTILIZADOR"
 msgstr "USER"
 
-#: .\atividades\templates\atividades\home2.html:68
+#: .\atividades\templates\atividades\home2.html:90
 msgid "Ver Perfil"
 msgstr "View Profile"
 
-#: .\atividades\templates\atividades\home2.html:69
+#: .\atividades\templates\atividades\home2.html:91
 msgid "Histórico"
 msgstr "History"
 
-#: .\atividades\templates\atividades\home2.html:73
+#: .\atividades\templates\atividades\home2.html:95
 msgid "Segurança (MFA)"
 msgstr "Security (MFA)"
 
-#: .\atividades\templates\atividades\home2.html:83
+#: .\atividades\templates\atividades\home2.html:105
 msgid "Painel Admin"
 msgstr "Admin Panel"
 
-#: .\atividades\templates\atividades\home2.html:91
+#: .\atividades\templates\atividades\home2.html:113
 msgid "Terminar Sessão"
 msgstr "Logout"
 
-#: .\atividades\templates\atividades\home2.html:98
+#: .\atividades\templates\atividades\home2.html:120
 msgid "Ver Tabela de Classificação"
 msgstr "View Leaderboard"
 
-#: .\atividades\templates\atividades\home2.html:111
+#: .\atividades\templates\atividades\home2.html:133
 #, python-format
 msgid "Olá %(username)s, <br> Bem-vindo ao Protege+ !"
 msgstr "Hello %(username)s, <br> Welcome to Protege+ !"
 
-#: .\atividades\templates\atividades\home2.html:115
+#: .\atividades\templates\atividades\home2.html:137
 msgid "Pronto para os desafios de hoje?"
 msgstr "Ready for today's challenges?"
 
-#: .\atividades\templates\atividades\home2.html:119
+#: .\atividades\templates\atividades\home2.html:141
 msgid "Em caso de ataque!"
 msgstr "I was targeted by an attack!"
 
-#: .\atividades\templates\atividades\home2.html:128
-msgid "MISSÃO CONCLUÍDA"
-msgstr "MISSION ACCOMPLISHED"
+#: .\atividades\templates\atividades\home2.html:150
+msgid "MIssão Diária Concluída"
+msgstr "Analysis Complete!"
 
-#: .\atividades\templates\atividades\home2.html:131
-msgid "OBJETIVO ATUAL"
-msgstr "CURRENT OBJECTIVE"
+#: .\atividades\templates\atividades\home2.html:153
+msgid "Objetivo de hoje"
+msgstr "Today's Goal"
 
-#: .\atividades\templates\atividades\home2.html:134
-#: .\atividades\templates\atividades\quiz_final.html:87
-#: .\core\templates\partials\leaderboard_row.html:32
-msgid "Nível"
-msgstr "Level"
-
-#: .\atividades\templates\atividades\home2.html:139
+#: .\atividades\templates\atividades\home2.html:161
 msgid "Treino Diário Completo!"
 msgstr "Daily Training Complete!"
 
-#: .\atividades\templates\atividades\home2.html:141
+#: .\atividades\templates\atividades\home2.html:163
 msgid ""
-"Excelente trabalho! As tuas defesas estão mais fortes hoje. Podes descansar "
-"ou continuar a treinar."
+"Excelente trabalho! Ganhaste os teus 30 XP de hoje. Podes continuar a "
+"treinar para subir o teu nível geral."
 msgstr ""
-"Excellent work! Your defenses are stronger today. You can rest "
-"or continue training."
+"Excellent work! Your defenses are stronger today. You can rest or continue "
+"training."
 
-#: .\atividades\templates\atividades\home2.html:150
+#: .\atividades\templates\atividades\home2.html:172
 msgid "Feito!"
 msgstr "Done!"
 
-#: .\atividades\templates\atividades\home2.html:154
+#: .\atividades\templates\atividades\home2.html:176
+msgid "Ganhar 30 XP em Quizzes"
+msgstr "Earn 30 XP in Quizzes"
 
-msgid "Completar Treino de Phishing"
-msgstr "Phishing Simulator"
-
-#: .\atividades\templates\atividades\home2.html:162
-msgid "para evoluir"
-msgstr "to level up"
-
-#: .\atividades\templates\atividades\home2.html:171
+#: .\atividades\templates\atividades\home2.html:193
 msgid "Treino Extra (Opcional)"
 msgstr "Extra Training (Optional)"
 
-#: .\atividades\templates\atividades\home2.html:175
+#: .\atividades\templates\atividades\home2.html:197
 msgid "Continuar Treino"
 msgstr "Continue Training"
 
-#: .\atividades\templates\atividades\home2.html:182
+#: .\atividades\templates\atividades\home2.html:204
 msgid "Dias Seguidos"
 msgstr "Day Streak"
 
-#: .\atividades\templates\atividades\home2.html:183
+#: .\atividades\templates\atividades\home2.html:205
 msgid "Dicas para os Quizzes"
 msgstr "Tips for Quizzes"
 
-#: .\atividades\templates\atividades\home2.html:198
+#: .\atividades\templates\atividades\home2.html:211
+msgid "7 Dias - Avatar Aprendiz"
+msgstr "7 Days - Apprentice Avatar"
+
+#: .\atividades\templates\atividades\home2.html:212
+msgid "15 Dias - Medalha"
+msgstr "15 Days - Medal"
+
+#: .\atividades\templates\atividades\home2.html:213
+msgid "30 Dias - Avatar Ninja"
+msgstr "30 Days - Ninja Avatar"
+
+#: .\atividades\templates\atividades\home2.html:221
 msgid "Ocultar"
 msgstr "Hide"
 
-#: .\atividades\templates\atividades\home2.html:201
+#: .\atividades\templates\atividades\home2.html:224
 msgid "Missão Bónus"
 msgstr "Bonus Mission"
 
-#: .\atividades\templates\atividades\home2.html:202
+#: .\atividades\templates\atividades\home2.html:225
 msgid "Ativa o MFA para ganhares a medalha Escudo de Titânio."
 msgstr "Enable MFA to earn the Titanium Shield medal."
 
-#: .\atividades\templates\atividades\home2.html:203
-
+#: .\atividades\templates\atividades\home2.html:226
 msgid "Ganhar"
 msgstr "You earned"
 
-#: .\atividades\templates\atividades\home2.html:217
-#: .\users\templates\users\home.html:74
+#: .\atividades\templates\atividades\home2.html:248
+#: .\users\templates\users\home.html:83
 msgid "Ameaças Comuns"
 msgstr "Common Threats"
 
-#: .\atividades\templates\atividades\home2.html:222
-#: .\users\templates\users\home.html:79
+#: .\atividades\templates\atividades\home2.html:253
+#: .\users\templates\users\home.html:88
 msgid "ALERTA SISTEMA"
 msgstr "SYSTEM ALERT"
 
-#: .\atividades\templates\atividades\home2.html:226
-#: .\users\templates\users\home.html:82
+#: .\atividades\templates\atividades\home2.html:257
+#: .\users\templates\users\home.html:91
 msgid ""
 "Emails e mensagens falsas desenhadas para roubar a tua identidade digital."
 msgstr "Fake emails and messages designed to steal your digital identity."
 
-#: .\atividades\templates\atividades\home2.html:228
-#: .\users\templates\users\home.html:84
+#: .\atividades\templates\atividades\home2.html:260
+#: .\users\templates\users\home.html:93
 msgid "ESTADO: DETETADO"
 msgstr "STATUS: DETECTED"
 
-#: .\atividades\templates\atividades\home2.html:232
-#: .\users\templates\users\home.html:88
+#: .\atividades\templates\atividades\home2.html:264
+#: .\users\templates\users\home.html:97
 msgid "CRÍTICO"
 msgstr "CRITICAL"
 
-#: .\atividades\templates\atividades\home2.html:235
-#: .\users\templates\users\home.html:90
+#: .\atividades\templates\atividades\home2.html:267
+#: .\users\templates\users\home.html:99
 msgid "Dados Bancários"
 msgstr "Bank details exposed"
 
-#: .\atividades\templates\atividades\home2.html:236
-#: .\users\templates\users\home.html:91
+#: .\atividades\templates\atividades\home2.html:268
+#: .\users\templates\users\home.html:100
 msgid ""
 "O roubo de cartões e acessos bancários através de clones perfeitos de sites."
 msgstr "Theft of cards and bank access through perfect website clones."
 
-#: .\atividades\templates\atividades\home2.html:238
-#: .\users\templates\users\home.html:93
+#: .\atividades\templates\atividades\home2.html:270
+#: .\users\templates\users\home.html:102
 msgid "ALVO: FINANCEIRO"
 msgstr "TARGET: FINANCIAL"
 
-#: .\atividades\templates\atividades\home2.html:242
-#: .\users\templates\users\home.html:97
+#: .\atividades\templates\atividades\home2.html:274
+#: .\users\templates\users\home.html:106
 msgid "VULNERÁVEL"
 msgstr "VULNERABLE"
 
-#: .\atividades\templates\atividades\home2.html:245
-#: .\users\templates\users\home.html:99
+#: .\atividades\templates\atividades\home2.html:277
+#: .\atividades\templates\atividades\sabermais.html:46
+#: .\users\templates\users\home.html:108
 msgid "Engenharia Social"
 msgstr "Social Engineering"
 
-#: .\atividades\templates\atividades\home2.html:246
-#: .\users\templates\users\home.html:100
+#: .\atividades\templates\atividades\home2.html:278
+#: .\users\templates\users\home.html:109
 msgid ""
 "A arte de enganar pessoas para que entreguem segredos por livre vontade."
 msgstr ""
 "The art of deceiving people into handing over secrets of their own free will."
 
-#: .\atividades\templates\atividades\home2.html:248
-#: .\users\templates\users\home.html:102
+#: .\atividades\templates\atividades\home2.html:281
+#: .\users\templates\users\home.html:111
 msgid "MÉTODO: PSICOLÓGICO"
 msgstr "METHOD: PSYCHOLOGICAL"
 
-#: .\atividades\templates\atividades\home2.html:254
-#: .\users\templates\users\home.html:108
+#: .\atividades\templates\atividades\home2.html:288
+#: .\users\templates\users\home.html:117
 msgid "A nossa solução"
 msgstr "Our solution"
 
-#: .\atividades\templates\atividades\home2.html:259
-#: .\users\templates\users\home.html:114
+#: .\atividades\templates\atividades\home2.html:293
+#: .\users\templates\users\home.html:123
 msgid "Quizzes"
 msgstr "Quiz"
 
-#: .\atividades\templates\atividades\home2.html:260
-#: .\users\templates\users\home.html:115
+#: .\atividades\templates\atividades\home2.html:294
+#: .\users\templates\users\home.html:124
 msgid "Questões interativas para testares o teu nível de conhecimento atual."
 msgstr "Interactive questions to test your current knowledge level."
 
-#: .\atividades\templates\atividades\home2.html:264
-#: .\users\templates\users\home.html:119
+#: .\atividades\templates\atividades\home2.html:298
+#: .\users\templates\users\home.html:128
 msgid "Simuladores"
 msgstr "Phishing Simulator"
 
-#: .\atividades\templates\atividades\home2.html:265
-#: .\users\templates\users\home.html:120
+#: .\atividades\templates\atividades\home2.html:299
+#: .\users\templates\users\home.html:129
 msgid ""
 "Cenários reais de phishing para treinares o teu olho clínico sem riscos."
 msgstr "Real phishing scenarios to train your clinical eye without risks."
 
-#: .\atividades\templates\atividades\home2.html:269
-#: .\users\templates\users\home.html:124
+#: .\atividades\templates\atividades\home2.html:304
+#: .\users\templates\users\home.html:133
 msgid "Blindagem"
 msgstr "Armor"
 
-#: .\atividades\templates\atividades\home2.html:270
-#: .\users\templates\users\home.html:125
+#: .\atividades\templates\atividades\home2.html:305
+#: .\users\templates\users\home.html:134
 msgid "Melhoria contínua das tuas defesas digitais contra novos ataques."
 msgstr "Continuous improvement of your digital defenses against new attacks."
 
-#: .\atividades\templates\atividades\home2.html:274
-#: .\users\templates\users\home.html:130
+#: .\atividades\templates\atividades\home2.html:309
+#: .\users\templates\users\home.html:139
 msgid ""
 "O <strong>Protege+</strong> prepara-te para identificar ameaças antes que "
 "elas se tornem um problema real."
@@ -579,40 +611,34 @@ msgstr ""
 "<strong>Protege+</strong> prepares you to identify threats before they "
 "become a real problem."
 
-#: .\atividades\templates\atividades\home2.html:284
+#: .\atividades\templates\atividades\home2.html:319
 msgid "Analisar Email com IA"
 msgstr "Analyze Email with AI"
 
 #: .\atividades\templates\atividades\leaderboard.html:10
-
 msgid "Leaderboard"
 msgstr "Dashboard"
 
-#: .\atividades\templates\atividades\leaderboard.html:31
-msgid "Mural dos Campeões"
-msgstr "Champions' Wall"
+#: .\atividades\templates\atividades\leaderboard.html:30
+msgid "Os jogadores com mais pontos acumulados"
+msgstr "Players with the most accumulated points"
 
-#: .\atividades\templates\atividades\leaderboard.html:33
-msgid "Descobre quem são os mestres da cibersegurança."
-msgstr "Discover who the masters of cybersecurity are."
-
-#: .\atividades\templates\atividades\leaderboard.html:37
+#: .\atividades\templates\atividades\leaderboard.html:34
 msgid "Geral"
 msgstr "Global"
 
-#: .\atividades\templates\atividades\leaderboard.html:38
+#: .\atividades\templates\atividades\leaderboard.html:35
 #: .\atividades\templates\atividades\quiz.html:8
 msgid "Quiz"
 msgstr "Quiz"
 
-#: .\atividades\templates\atividades\leaderboard.html:39
-
+#: .\atividades\templates\atividades\leaderboard.html:36
 msgid "Simulador"
 msgstr "Phishing Simulator"
 
-#: .\atividades\templates\atividades\leaderboard.html:47
-#: .\atividades\templates\atividades\leaderboard.html:57
-#: .\atividades\templates\atividades\leaderboard.html:67
+#: .\atividades\templates\atividades\leaderboard.html:82
+#: .\atividades\templates\atividades\leaderboard.html:127
+#: .\atividades\templates\atividades\leaderboard.html:172
 msgid "Ainda não há dados suficientes."
 msgstr "Not enough data yet."
 
@@ -623,8 +649,9 @@ msgstr "Exit Quiz"
 #: .\atividades\templates\atividades\quiz.html:50
 msgid "Pedir uma dica"
 msgstr "Ask for a hint"
+
 #: .\atividades\templates\atividades\quiz.html:60
-#: .\atividades\templates\atividades\sabermais.html:61
+#: .\atividades\templates\atividades\sabermais.html:65
 msgid "Dica:"
 msgstr "Tip:"
 
@@ -678,19 +705,18 @@ msgid "Começar Quiz!"
 msgstr "Play Quiz"
 
 #: .\atividades\templates\atividades\quiz.html:143
-#: .\atividades\templates\atividades\quiz_final.html:74
+#: .\atividades\templates\atividades\quiz_final.html:77
 msgid "Subiste de Nível!"
 msgstr "Level Up!"
 
 #: .\atividades\templates\atividades\quiz.html:146
-
 msgid ""
 "Parabéns! Desbloqueaste um novo nível de dificuldade no Quiz. Continua o "
 "excelente trabalho!"
 msgstr "You unlocked a new Quiz difficulty level."
 
 #: .\atividades\templates\atividades\quiz.html:150
-#: .\atividades\templates\atividades\quiz_final.html:90
+#: .\atividades\templates\atividades\quiz_final.html:93
 msgid "Incrível!"
 msgstr "Amazing"
 
@@ -718,81 +744,110 @@ msgstr "Good effort! Keep learning to stay safer."
 msgid "Nível Geral"
 msgstr "General Level"
 
-#: .\atividades\templates\atividades\quiz_final.html:46
-#: .\atividades\templates\atividades\simulador_final.html:24
+#: .\atividades\templates\atividades\quiz_final.html:45
+#: .\users\templates\users\perfil.html:303
+msgid "Nível Quiz"
+msgstr "Quiz Level"
+
+#: .\atividades\templates\atividades\quiz_final.html:49
+#: .\atividades\templates\atividades\simulador_final.html:26
 msgid "Ganhaste"
 msgstr "You earned"
 
-#: .\atividades\templates\atividades\quiz_final.html:56
+#: .\atividades\templates\atividades\quiz_final.html:59
 msgid "para o próximo nível"
 msgstr "to the next level"
 
-#: .\atividades\templates\atividades\quiz_final.html:63
+#: .\atividades\templates\atividades\quiz_final.html:66
 msgid "Repetir Quiz"
 msgstr "Repeat Quiz"
 
-#: .\atividades\templates\atividades\quiz_final.html:66
-#: .\atividades\templates\atividades\simulador_final.html:108
+#: .\atividades\templates\atividades\quiz_final.html:69
+#: .\atividades\templates\atividades\simulador_final.html:150
 msgid "Voltar ao Início"
 msgstr "Back to Home"
 
-#: .\atividades\templates\atividades\quiz_final.html:75
+#: .\atividades\templates\atividades\quiz_final.html:78
 msgid "Desbloqueaste um novo nível de dificuldade no Quiz."
 msgstr "You unlocked a new Quiz difficulty level."
 
-#: .\atividades\templates\atividades\quiz_final.html:76
-#: .\users\templates\users\sobrenos.html:100
-msgid "Fechar"
-msgstr "Close"
-
-#: .\atividades\templates\atividades\quiz_final.html:85
+#: .\atividades\templates\atividades\quiz_final.html:88
 msgid "Subida de Nível!"
 msgstr "Level Up!"
 
-#: .\atividades\templates\atividades\quiz_final.html:87
+#: .\atividades\templates\atividades\quiz_final.html:90
 msgid "Parabéns! O teu esforço compensou e atingiste o"
 msgstr "Congratulations! Your effort paid off and you reached"
 
-#: .\atividades\templates\atividades\quiz_final.html:87
+#: .\atividades\templates\atividades\quiz_final.html:90
 msgid "Geral de Cibersegurança!"
 msgstr "Cybersecurity"
 
 #: .\atividades\templates\atividades\quiz_setup.html:10
-#: .\atividades\templates\atividades\quiz_setup.html:31
-
+#: .\atividades\templates\atividades\quiz_setup.html:30
 msgid "Configurar Treino"
 msgstr "Setup MFA"
 
-#: .\atividades\templates\atividades\quiz_setup.html:32
+#: .\atividades\templates\atividades\quiz_setup.html:31
 msgid "Escolhe o teu foco para o Quiz de hoje."
 msgstr "Choose your focus for today's Quiz."
 
-#: .\atividades\templates\atividades\quiz_setup.html:46
+#: .\atividades\templates\atividades\quiz_setup.html:43
+msgid "+2 XP BÓNUS"
+msgstr "+2 Bonus XP"
+
+#: .\atividades\templates\atividades\quiz_setup.html:45
 msgid "Modo Aleatório"
 msgstr "Random Mode"
 
-#: .\atividades\templates\atividades\quiz_setup.html:47
+#: .\atividades\templates\atividades\quiz_setup.html:46
 msgid "Simula ameaças reais e imprevisíveis. Inclui todos os temas."
 msgstr "Simulate real and unpredictable threats. Includes all topics."
 
-#: .\atividades\templates\atividades\quiz_setup.html:55
+#: .\atividades\templates\atividades\quiz_setup.html:54
 msgid "Escolher Temas"
 msgstr "Choose Topics"
 
-#: .\atividades\templates\atividades\quiz_setup.html:56
+#: .\atividades\templates\atividades\quiz_setup.html:55
 msgid "Foca-te nos temas onde tens mais dificuldades. Ganhas XP normal."
 msgstr "Focus on topics where you struggle most. Earn normal XP."
 
-#: .\atividades\templates\atividades\quiz_setup.html:62
+#: .\atividades\templates\atividades\quiz_setup.html:61
 msgid "Seleciona 1 ou mais temas:"
 msgstr "Select 1 or more topics:"
 
-#: .\atividades\templates\atividades\quiz_setup.html:98
+#: .\atividades\templates\atividades\quiz_setup.html:66
+#: .\atividades\templates\atividades\sabermais.html:37
+msgid "Phishing"
+msgstr "Phishing"
+
+#: .\atividades\templates\atividades\quiz_setup.html:71
+#: .\atividades\templates\atividades\sabermais.html:38
+msgid "Senhas"
+msgstr "Passwords"
+
+#: .\atividades\templates\atividades\quiz_setup.html:76
+msgid "MFA"
+msgstr "MFA"
+
+#: .\atividades\templates\atividades\quiz_setup.html:81
+msgid "Privacidades"
+msgstr "Privacy"
+
+#: .\atividades\templates\atividades\quiz_setup.html:86
+#: .\atividades\templates\atividades\sabermais.html:41
+msgid "Dispositivos"
+msgstr "Devices"
+
+#: .\atividades\templates\atividades\quiz_setup.html:91
+msgid "Redes"
+msgstr "Networks"
+
+#: .\atividades\templates\atividades\quiz_setup.html:97
 msgid "Tens de selecionar pelo menos um tema para começar!"
 msgstr "You must select at least one topic to start!"
 
-#: .\atividades\templates\atividades\quiz_setup.html:102
-
+#: .\atividades\templates\atividades\quiz_setup.html:101
 msgid "Começar Quiz"
 msgstr "Play Quiz"
 
@@ -804,14 +859,6 @@ msgstr "Illustration"
 msgid "Temas"
 msgstr "Themes"
 
-#: .\atividades\templates\atividades\sabermais.html:37
-msgid "Phishing"
-msgstr "Phishing"
-
-#: .\atividades\templates\atividades\sabermais.html:38
-msgid "Senhas"
-msgstr "Passwords"
-
 #: .\atividades\templates\atividades\sabermais.html:39
 msgid "Autenticação"
 msgstr "Authentication"
@@ -819,10 +866,6 @@ msgstr "Authentication"
 #: .\atividades\templates\atividades\sabermais.html:40
 msgid "Privacidade"
 msgstr "Privacy"
-
-#: .\atividades\templates\atividades\sabermais.html:41
-msgid "Dispositivos"
-msgstr "Devices"
 
 #: .\atividades\templates\atividades\sabermais.html:42
 msgid "Malware"
@@ -836,15 +879,27 @@ msgstr "Networks & Encryption"
 msgid "Conceitos TI"
 msgstr "IT Concepts"
 
-#: .\atividades\templates\atividades\sabermais.html:50
+#: .\atividades\templates\atividades\sabermais.html:45
+msgid "Ameaças com IA"
+msgstr "Common Threats"
+
+#: .\atividades\templates\atividades\sabermais.html:47
+msgid "Backups e Recuperação"
+msgstr "Backups and Recovery"
+
+#: .\atividades\templates\atividades\sabermais.html:48
+msgid "Compras Online"
+msgstr "Online Shopping"
+
+#: .\atividades\templates\atividades\sabermais.html:54
 msgid "Centro de Conhecimento"
 msgstr "Knowledge Center"
 
-#: .\atividades\templates\atividades\sabermais.html:56
+#: .\atividades\templates\atividades\sabermais.html:60
 msgid "Bem-vindo à tua base de defesas!"
 msgstr "Welcome to your defense base!"
 
-#: .\atividades\templates\atividades\sabermais.html:58
+#: .\atividades\templates\atividades\sabermais.html:62
 msgid ""
 "Escolhe um dos temas no menu lateral para começares a aprender. Domina os "
 "conceitos básicos e avança para as ameaças mais complexas para te tornares "
@@ -853,12 +908,12 @@ msgstr ""
 "Choose a topic from the sidebar to start learning. Master the basics and "
 "advance to more complex threats to become a cybersecurity master."
 
-#: .\atividades\templates\atividades\sabermais.html:61
+#: .\atividades\templates\atividades\sabermais.html:65
 msgid ""
 "Lê os conteúdos antes de fazeres o Quiz para garantires a pontuação máxima!"
 msgstr "Read the content before taking the Quiz to ensure a maximum score!"
 
-#: .\atividades\templates\atividades\sabermais.html:69
+#: .\atividades\templates\atividades\sabermais.html:73
 msgid "A tua segurança em primeiro lugar."
 msgstr "Your security comes first."
 
@@ -868,7 +923,6 @@ msgid "Simulador de Phishing"
 msgstr "Phishing Simulator"
 
 #: .\atividades\templates\atividades\simulador.html:17
-
 msgid "Sair do Treino"
 msgstr "Exit Quiz"
 
@@ -884,27 +938,11 @@ msgstr "of"
 msgid "Pistas Selecionadas:"
 msgstr "Selected Clues:"
 
-#: .\atividades\templates\atividades\simulador.html:32
-msgid ""
-"Domínio Suspeito! O endereço do remetente não corresponde à entidade oficial "
-"ou tem caracteres alterados."
-msgstr ""
-"Suspicious Domain! The sender's address does not match the official entity "
-"or has altered characters."
-
-#: .\atividades\templates\atividades\simulador.html:43
-msgid ""
-"O assunto do e-mail é utilizado para criar um falso sentido de urgência ou "
-"curiosidade."
-msgstr ""
-"The email subject is used to create a false sense of urgency or curiosity."
-
-#: .\atividades\templates\atividades\simulador.html:65
-
+#: .\atividades\templates\atividades\simulador.html:63
 msgid "Próximo E-mail"
 msgstr "Next Goal:"
 
-#: .\atividades\templates\atividades\simulador.html:67
+#: .\atividades\templates\atividades\simulador.html:65
 msgid "Analisar as minhas respostas"
 msgstr "Analyze my answers"
 
@@ -913,68 +951,139 @@ msgid "Sair do Detetor"
 msgstr "Exit Detector"
 
 #: .\atividades\templates\atividades\simulador_final.html:7
-
 msgid "Resumo do Simulador"
 msgstr "Simulator Accuracy"
 
-#: .\atividades\templates\atividades\simulador_final.html:16
+#: .\atividades\templates\atividades\simulador_final.html:17
 msgid "Análise Concluída!"
 msgstr "Analysis Complete!"
 
+#: .\atividades\templates\atividades\simulador_final.html:21
+#: .\atividades\templates\atividades\simulador_final.html:91
+msgid "Excelente!"
+msgstr "Excellent!"
+
+#: .\atividades\templates\atividades\simulador_final.html:22
+msgid "Muito Bem!"
+msgstr "Very Well!"
+
 #: .\atividades\templates\atividades\simulador_final.html:23
+msgid "Precisas de mais atenção..."
+msgstr "You need to pay more attention..."
+
+#: .\atividades\templates\atividades\simulador_final.html:25
 msgid "Analisaste"
 msgstr "You analyzed"
 
-#: .\atividades\templates\atividades\simulador_final.html:23
+#: .\atividades\templates\atividades\simulador_final.html:25
 msgid "e-mails com uma precisão média de"
 msgstr "emails with an average accuracy of"
 
-#: .\atividades\templates\atividades\simulador_final.html:24
+#: .\atividades\templates\atividades\simulador_final.html:26
 msgid "pontos de simulador!"
 msgstr "simulator points!"
 
-#: .\atividades\templates\atividades\simulador_final.html:29
+#: .\atividades\templates\atividades\simulador_final.html:31
 msgid "XP Ganho"
 msgstr "XP Gained"
 
-#: .\atividades\templates\atividades\simulador_final.html:33
+#: .\atividades\templates\atividades\simulador_final.html:35
 msgid "Progresso Nível"
 msgstr "Level Progress"
 
-#: .\atividades\templates\atividades\simulador_final.html:44
+#: .\atividades\templates\atividades\simulador_final.html:42
 msgid "PARABÉNS! SUBISTE PARA O NÍVEL"
 msgstr "CONGRATULATIONS! YOU REACHED LEVEL"
 
-#: .\atividades\templates\atividades\simulador_final.html:52
+#: .\atividades\templates\atividades\simulador_final.html:50
 msgid "Análise Detalhada (Modo "
-msgstr "Detailed Analysis (Mode "
+msgstr "Detailed Analysis (Mode"
 
-#: .\atividades\templates\atividades\simulador_final.html:67
+#: .\atividades\templates\atividades\simulador_final.html:55
+msgid "E-mail"
+msgstr "Email:"
+
+#: .\atividades\templates\atividades\simulador_final.html:65
 msgid "Conteúdo do E-mail"
 msgstr "Email Content"
 
-#: .\atividades\templates\atividades\simulador_final.html:72
+#: .\atividades\templates\atividades\simulador_final.html:70
 msgid "VEREDICTO: ESTE E-MAIL ERA PHISHING!"
 msgstr "VERDICT: THIS EMAIL WAS PHISHING!"
 
-#: .\atividades\templates\atividades\simulador_final.html:76
+#: .\atividades\templates\atividades\simulador_final.html:74
 msgid "VEREDICTO: ESTE E-MAIL ERA SEGURO!"
 msgstr "VERDICT: THIS EMAIL WAS SAFE!"
 
-#: .\atividades\templates\atividades\simulador_final.html:93
+#: .\atividades\templates\atividades\simulador_final.html:80
+msgid "Zonas Selecionadas:"
+msgstr "Selected Clues:"
+
+#: .\atividades\templates\atividades\simulador_final.html:84
+msgid "Selecionaste"
+msgstr "Select 1 or more topics:"
+
+#: .\atividades\templates\atividades\simulador_final.html:84
+msgid "zona(s) a mais que eram seguras!"
+msgstr "extra zone(s) that were actually safe!"
+
+#: .\atividades\templates\atividades\simulador_final.html:91
+msgid "Identificaste todos os perigos sem cometer erros."
+msgstr "You identified all hazards without making any mistakes."
+
+#: .\atividades\templates\atividades\simulador_final.html:96
+msgid "Atenção:"
+msgstr "Attention!"
+
+#: .\atividades\templates\atividades\simulador_final.html:96
+msgid "Identificaste apenas"
+msgstr "You identified only"
+
+#: .\atividades\templates\atividades\simulador_final.html:96
+msgid "faltaram encontrar"
+msgstr "you missed finding"
+
+#: .\atividades\templates\atividades\simulador_final.html:96
+msgid "armadilha(s)."
+msgstr "trap(s)."
+
+#: .\atividades\templates\atividades\simulador_final.html:96
+msgid "Verifica os detalhes abaixo."
+msgstr "Check your Email"
+
+#: .\atividades\templates\atividades\simulador_final.html:98
+msgid "Boa,"
+msgstr "Nice"
+
+#: .\atividades\templates\atividades\simulador_final.html:98
+msgid "encontraste todas as armadilhas!"
+msgstr "Analyze the email and find the traps."
+
+#: .\atividades\templates\atividades\simulador_final.html:102
+msgid "Mas,"
+msgstr "But"
+
+#: .\atividades\templates\atividades\simulador_final.html:102
+msgid "clicaste em zonas seguras por engano, o que baixou a tua pontuação."
+msgstr "you clicked on safe zones by mistake, which lowered your score."
+
+#: .\atividades\templates\atividades\simulador_final.html:128
+msgid "Nenhum e-mail para analisar."
+msgstr "No emails to analyze."
+
+#: .\atividades\templates\atividades\simulador_final.html:135
 msgid "Anterior"
 msgstr "Previous"
 
-#: .\atividades\templates\atividades\simulador_final.html:96
-
+#: .\atividades\templates\atividades\simulador_final.html:138
 msgid "Próximo"
 msgstr "Next Goal:"
 
-#: .\atividades\templates\atividades\simulador_final.html:104
+#: .\atividades\templates\atividades\simulador_final.html:146
 msgid "Fazer Outro Cenário"
 msgstr "Try Another Scenario"
-#: .\atividades\templates\atividades\simulador_setup.html:10
 
+#: .\atividades\templates\atividades\simulador_setup.html:10
 msgid "Configurar Simulador"
 msgstr "Setup MFA"
 
@@ -989,8 +1098,8 @@ msgstr "Detective Mode"
 #: .\atividades\templates\atividades\simulador_setup.html:43
 msgid "Analisa o email e encontra as armadilhas."
 msgstr "Analyze the email and find the traps."
-#: .\atividades\templates\atividades\simulador_setup.html:51
 
+#: .\atividades\templates\atividades\simulador_setup.html:51
 msgid "Decisão Rápida"
 msgstr "Quiz Accuracy"
 
@@ -1003,27 +1112,28 @@ msgid "Configurações da Sessão"
 msgstr "Session Settings"
 
 #: .\atividades\templates\atividades\simulador_setup.html:63
-
 msgid "Nº de Emails:"
 msgstr "Your Email"
 
 #: .\atividades\templates\atividades\simulador_setup.html:76
-
 msgid "Ativar Temporizador"
 msgstr "Enable Now"
 
+#: .\atividades\templates\atividades\simulador_setup.html:77
+msgid "+XP BÓNUS"
+msgstr "+BONUS XP"
+
 #: .\atividades\templates\atividades\simulador_setup.html:86
-
 msgid "Iniciar Treino!"
-msgstr "Login"
+msgstr "Start Training!"
 
-#: .\core\settings.py:38
+#: .\core\settings.py:48
 msgid "Portuguese"
-msgstr ""
+msgstr "Português"
 
-#: .\core\settings.py:39
+#: .\core\settings.py:49
 msgid "English"
-msgstr ""
+msgstr "Inglês"
 
 #: .\core\templates\account\email\password_reset_key_message.txt:2
 msgid "Olá!"
@@ -1034,8 +1144,8 @@ msgid ""
 "Recebeu este e-mail porque foi feito um pedido de redefinição de password "
 "para a sua conta no Protege+."
 msgstr ""
-"You are receiving this email because a password reset request was made "
-"for your account on Protege+."
+"You are receiving this email because a password reset request was made for "
+"your account on Protege+."
 
 #: .\core\templates\account\email\password_reset_key_message.txt:6
 msgid "Para escolher uma nova password, clique no link abaixo:"
@@ -1061,19 +1171,23 @@ msgstr "Password Reset - Protege+"
 msgid "Recuperar Palavra-passe"
 msgstr "Repeat password:"
 
-#: .\core\templates\account\password_reset.html:23
+#: .\core\templates\account\password_reset.html:24
 msgid "Recuperar Acesso"
 msgstr "Recover Access"
 
-#: .\core\templates\account\password_reset.html:25
+#: .\core\templates\account\password_reset.html:26
 msgid "Insere o teu email para receberes o link de recuperação."
 msgstr "Enter your email to receive the recovery link."
 
-#: .\core\templates\account\password_reset.html:30
+#: .\core\templates\account\password_reset.html:31
 msgid "O teu Email"
 msgstr "Your Email"
 
 #: .\core\templates\account\password_reset.html:34
+msgid "Email inválido."
+msgstr "Email address"
+
+#: .\core\templates\account\password_reset.html:35
 msgid "Enviar Link"
 msgstr "Send now"
 
@@ -1081,28 +1195,44 @@ msgstr "Send now"
 msgid "Email Enviado"
 msgstr "Email address"
 
-#: .\core\templates\account\password_reset_done.html:14
+#: .\core\templates\account\password_reset_done.html:15
 msgid "Verifica o teu Email"
 msgstr "Check your Email"
 
-#: .\core\templates\account\password_reset_done.html:16
+#: .\core\templates\account\password_reset_done.html:18
 msgid ""
 "Enviámos as instruções para redefinires a tua palavra-passe. Se não as "
-"vires, verifica o Spam."
+"vires, verifica a pasta de Spam."
 msgstr ""
 "We've sent instructions to reset your password. If you don't see them, check "
 "your Spam folder."
 
-#: .\core\templates\account\password_reset_done.html:18
+#: .\core\templates\account\password_reset_done.html:23
+msgid ""
+"Podes fechar este separador em segurança e continuar o processo através do "
+"link que recebeste."
+msgstr ""
+"You can safely close this tab and continue the process using the link you "
+"received."
+
+#: .\core\templates\account\password_reset_done.html:27
 msgid "Voltar ao Login"
 msgstr "Back to Profile"
 
 #: .\core\templates\account\password_reset_from_key.html:7
-#: .\core\templates\account\password_reset_from_key.html:15
+#: .\core\templates\account\password_reset_from_key.html:17
 msgid "Nova Palavra-passe"
 msgstr "Password"
 
-#: .\core\templates\account\password_reset_from_key.html:50
+#: .\core\templates\account\password_reset_from_key.html:20
+msgid "O link expirou."
+msgstr ""
+
+#: .\core\templates\account\password_reset_from_key.html:20
+msgid "Pede um novo."
+msgstr ""
+
+#: .\core\templates\account\password_reset_from_key.html:52
 msgid "Alterar Password"
 msgstr "Change Password"
 
@@ -1110,41 +1240,41 @@ msgstr "Change Password"
 msgid "Sucesso"
 msgstr "Access"
 
-#: .\core\templates\account\password_reset_from_key_done.html:14
+#: .\core\templates\account\password_reset_from_key_done.html:15
 msgid "Tudo Pronto!"
 msgstr "All Set!"
 
-#: .\core\templates\account\password_reset_from_key_done.html:15
+#: .\core\templates\account\password_reset_from_key_done.html:16
 msgid "A tua palavra-passe foi alterada. Já podes entrar na tua conta."
 msgstr "Your password has been changed. You can now log into your account."
 
-#: .\core\templates\account\password_reset_from_key_done.html:16
+#: .\core\templates\account\password_reset_from_key_done.html:17
 msgid "Entrar agora"
 msgstr "Login Now"
 
 #: .\core\templates\allauth_2fa\authenticate.html:8
-#: .\core\templates\allauth_2fa\authenticate.html:30
+#: .\core\templates\allauth_2fa\authenticate.html:31
 #: .\users\templates\users\login.html:47
 msgid "Segunda Chave"
 msgstr "Second Key"
 
-#: .\core\templates\allauth_2fa\authenticate.html:34
-#: .\users\templates\users\login.html:68
+#: .\core\templates\allauth_2fa\authenticate.html:35
+#: .\users\templates\users\login.html:76
 msgid "Introduz o código gerado pela tua aplicação."
 msgstr "Enter the code generated by your app."
 
-#: .\core\templates\allauth_2fa\authenticate.html:41
-#: .\users\templates\users\login.html:71
+#: .\core\templates\allauth_2fa\authenticate.html:42
+#: .\users\templates\users\login.html:79
 msgid "Código de 6 dígitos"
 msgstr "6-digit code"
 
-#: .\core\templates\allauth_2fa\authenticate.html:49
-#: .\core\templates\two_factor\core\setup.html:58
+#: .\core\templates\allauth_2fa\authenticate.html:50
+#: .\core\templates\two_factor\core\setup.html:71
 msgid "Código inválido. Tenta novamente."
 msgstr "Invalid code. Try again."
 
-#: .\core\templates\allauth_2fa\authenticate.html:54
-#: .\users\templates\users\login.html:93
+#: .\core\templates\allauth_2fa\authenticate.html:55
+#: .\users\templates\users\login.html:101
 msgid "Verificar"
 msgstr "Verify"
 
@@ -1156,6 +1286,7 @@ msgstr "Accessibility"
 #: .\core\templates\base.html:30 .\core\templates\base.html:41
 #: .\core\templates\partials\footer_acessibilidade.html:8
 #: .\core\templates\partials\footer_acessibilidade.html:19
+#: .\users\templates\users\perfil.html:93
 msgid "Padrão"
 msgstr "Default"
 
@@ -1204,23 +1335,22 @@ msgstr "Dark Mode"
 msgid "PRECISAS DE AJUDA?"
 msgstr "NEED HELP?"
 
-#: .\core\templates\partials\leaderboard_row.html:26
-
+#: .\core\templates\partials\leaderboard_row.html:9
 msgid "Tu"
 msgstr "Tuesday"
 
 #: .\core\templates\two_factor\core\setup.html:8
-#: .\core\templates\two_factor\core\setup.html:19
+#: .\core\templates\two_factor\core\setup.html:32
 msgid "Configurar MFA"
 msgstr "Setup MFA"
 
-#: .\core\templates\two_factor\core\setup.html:16
+#: .\core\templates\two_factor\core\setup.html:29
 #: .\core\templates\two_factor\profile\profile.html:8
-#: .\core\templates\two_factor\profile\profile.html:15
+#: .\core\templates\two_factor\profile\profile.html:29
 msgid "Segurança"
 msgstr "Security"
 
-#: .\core\templates\two_factor\core\setup.html:24
+#: .\core\templates\two_factor\core\setup.html:37
 msgid ""
 "Para começar, vais precisar de uma aplicação de autenticação (como Google "
 "Authenticator ou Authy) no teu telemóvel."
@@ -1228,44 +1358,43 @@ msgstr ""
 "To get started, you'll need an authenticator app (like Google Authenticator "
 "or Authy) on your phone."
 
-#: .\core\templates\two_factor\core\setup.html:28
+#: .\core\templates\two_factor\core\setup.html:41
 msgid "Como desejas receber os teus códigos de validação?"
 msgstr "How do you wish to receive your validation codes?"
 
-#: .\core\templates\two_factor\core\setup.html:32
+#: .\core\templates\two_factor\core\setup.html:45
 msgid "1. Faz scan do QR Code abaixo com a tua App:"
 msgstr "1. Scan the QR Code below with your App:"
 
-#: .\core\templates\two_factor\core\setup.html:40
+#: .\core\templates\two_factor\core\setup.html:53
 msgid "2. Introduz o código de 6 dígitos gerado:"
 msgstr "2. Enter the generated 6-digit code:"
 
-#: .\core\templates\two_factor\core\setup.html:44
+#: .\core\templates\two_factor\core\setup.html:57
 msgid "Segue as instruções para protegeres a tua conta."
 msgstr "Follow the instructions to protect your account."
 
-#: .\core\templates\two_factor\core\setup.html:75
+#: .\core\templates\two_factor\core\setup.html:88
 msgid "Ativar Agora"
 msgstr "Enable Now"
 
-#: .\core\templates\two_factor\core\setup.html:77
+#: .\core\templates\two_factor\core\setup.html:90
 msgid "Avançar"
 msgstr "Proceed"
 
-#: .\core\templates\two_factor\core\setup.html:85
-#: .\users\templates\users\editar_perfil.html:169
+#: .\core\templates\two_factor\core\setup.html:98
 msgid "Cancelar e Sair"
 msgstr "Cancel and Exit"
 
-#: .\core\templates\two_factor\profile\profile.html:18
+#: .\core\templates\two_factor\profile\profile.html:32
 msgid "Definições MFA"
 msgstr "MFA Settings"
 
-#: .\core\templates\two_factor\profile\profile.html:20
+#: .\core\templates\two_factor\profile\profile.html:34
 msgid "CONTA BLINDADA"
 msgstr "ARMORED ACCOUNT"
 
-#: .\core\templates\two_factor\profile\profile.html:23
+#: .\core\templates\two_factor\profile\profile.html:37
 msgid ""
 "A tua conta está atualmente protegida pela Autenticação de Dois Fatores. "
 "Tens uma camada extra de segurança contra intrusos."
@@ -1273,19 +1402,19 @@ msgstr ""
 "Your account is currently protected by Two-Factor Authentication. You have "
 "an extra layer of security against intruders."
 
-#: .\core\templates\two_factor\profile\profile.html:27
+#: .\core\templates\two_factor\profile\profile.html:41
 msgid "Códigos de Reserva"
 msgstr "Backup Codes"
 
-#: .\core\templates\two_factor\profile\profile.html:31
+#: .\core\templates\two_factor\profile\profile.html:45
 msgid "Desativar MFA"
 msgstr "Disable MFA"
 
-#: .\core\templates\two_factor\profile\profile.html:42
+#: .\core\templates\two_factor\profile\profile.html:57
 msgid "Atenção!"
 msgstr "Attention!"
 
-#: .\core\templates\two_factor\profile\profile.html:45
+#: .\core\templates\two_factor\profile\profile.html:60
 msgid ""
 "Estás prestes a desativar a autenticação de dois fatores. Isto enfraquece a "
 "segurança da tua conta."
@@ -1293,173 +1422,104 @@ msgstr ""
 "You are about to disable two-factor authentication. This weakens the "
 "security of your account."
 
-#: .\core\templates\two_factor\profile\profile.html:52
+#: .\core\templates\two_factor\profile\profile.html:67
 msgid "Abre a tua app autenticadora e insere o código atual para confirmar."
-msgstr ""
+msgstr "Open your authenticator app and enter the current code to confirm."
 
-#: .\core\templates\two_factor\profile\profile.html:61
-
+#: .\core\templates\two_factor\profile\profile.html:76
 msgid "Confirmar e Desativar"
 msgstr "Confirm Deactivation"
 
-#: .\core\templates\two_factor\profile\profile.html:65
+#: .\core\templates\two_factor\profile\profile.html:80
+#: .\users\templates\users\editar_perfil.html:21
 msgid "Cancelar"
 msgstr "Cancel"
 
-#: .\users\static\users\images\perfil.html:8
-#: .\users\templates\users\perfil.html:8
-msgid "Perfil"
-msgstr "Profile"
-
-#: .\users\static\users\images\perfil.html:40
-#: .\users\templates\users\perfil.html:40
-msgid "Mudar Foto"
-msgstr "Change Photo"
-
-#: .\users\static\users\images\perfil.html:48
-#: .\users\templates\users\perfil.html:48
-msgid "Escolhe o teu Avatar"
-msgstr "Choose your Avatar"
-
-#: .\users\static\users\images\perfil.html:72
-#: .\users\templates\users\perfil.html:72
-msgid "Carregar Foto Própria"
-msgstr "Upload your own Photo"
-
-#: .\users\static\users\images\perfil.html:79
-#: .\users\templates\users\editar_perfil.html:165
-#: .\users\templates\users\perfil.html:79
-msgid "Guardar Alterações"
-msgstr "Save Changes"
-
-#: .\users\static\users\images\perfil.html:91
-#: .\users\templates\users\perfil.html:119
-msgid "INSTITUIÇÃO"
-msgstr "INSTITUTION"
-
-#: .\users\static\users\images\perfil.html:95
-#: .\users\templates\users\perfil.html:123
-msgid "ESCOLARIDADE"
-msgstr "EDUCATION LEVEL"
-
-#: .\users\static\users\images\perfil.html:101
-#: .\users\templates\users\perfil.html:129
-msgid "NÍVEL GERAL DE DEFESA"
-msgstr "GENERAL DEFENSE LEVEL"
-
-#: .\users\static\users\images\perfil.html:113
-#: .\users\templates\users\perfil.html:167
-msgid "Nível Quiz"
-msgstr "Quiz Level"
-
-#: .\users\static\users\images\perfil.html:122
-#: .\users\templates\users\perfil.html:176
-msgid "Quizzes Realizados"
-msgstr "Quizzes Completed"
-
-#: .\users\static\users\images\perfil.html:127
-#: .\users\templates\users\perfil.html:184
-msgid "Precisão Quiz"
-msgstr "Quiz Accuracy"
-
-#: .\users\static\users\images\perfil.html:132
-#: .\users\templates\users\perfil.html:189
-msgid "Nível Simulador"
-msgstr "Simulator Level"
-
-#: .\users\static\users\images\perfil.html:141
-#: .\users\templates\users\perfil.html:198
-msgid "Simuladores Realizados"
-msgstr "Simulators Completed"
-
-#: .\users\static\users\images\perfil.html:146
-#: .\users\templates\users\perfil.html:206
-msgid "Precisão Simulador"
-msgstr "Simulator Accuracy"
-
-#: .\users\static\users\images\perfil.html:151
-#: .\users\templates\users\perfil.html:211
-msgid "Mapeamento de Vulnerabilidades (Erros por Tema)"
-msgstr "Vulnerability Mapping (Errors by Topic)"
-
-#: .\users\templates\users\editar_perfil.html:8
-#: .\users\templates\users\editar_perfil.html:120
+#: .\users\templates\users\editar_perfil.html:6
 msgid "Editar Perfil"
 msgstr "Edit Profile"
 
-#: .\users\templates\users\editar_perfil.html:110
+#: .\users\templates\users\editar_perfil.html:11
+#: .\users\templates\users\perfil.html:163
+#: .\users\templates\users\perfil.html:172
+msgid "Editar Dados"
+msgstr "Edit Data"
 
-msgid "Voltar ao Perfil"
-msgstr "Back to Profile"
-
-#: .\users\templates\users\editar_perfil.html:121
-msgid "Personaliza a tua identidade no Protege+"
-msgstr "Customize your identity on Protege+"
-
-#: .\users\templates\users\editar_perfil.html:128
-msgid "Informações de Conta"
-msgstr "Account Information"
-
-#: .\users\templates\users\editar_perfil.html:132
-#: .\users\templates\users\login.html:57
-msgid "Nome de Utilizador"
-msgstr "Username"
-
-#: .\users\templates\users\editar_perfil.html:137
-
-msgid "Email"
-msgstr "Email:"
-
-#: .\users\templates\users\editar_perfil.html:142
-
-msgid "Dados Académicos"
-msgstr "Bank details exposed"
-
-#: .\users\templates\users\editar_perfil.html:146
-
-msgid "Instituição"
-msgstr "Institution name:"
-
-#: .\users\templates\users\editar_perfil.html:151
-msgid "Ano Letivo / Nível de Ensino"
-msgstr "School Year / Education Level"
-
-#: .\users\templates\users\editar_perfil.html:156
-msgid "Preferências"
-msgstr "Preferences"
-
-#: .\users\templates\users\editar_perfil.html:160
-
-msgid "Idioma da Plataforma"
-msgstr "Platform Access"
+#: .\users\templates\users\editar_perfil.html:20
+#: .\users\templates\users\perfil.html:121
+msgid "Guardar Alterações"
+msgstr "Save Changes"
 
 #: .\users\templates\users\home.html:8
 msgid "Cibersegurança"
 msgstr "Cybersecurity"
 
-#: .\users\templates\users\home.html:40
+#: .\users\templates\users\home.html:49
 msgid "ENTRAR"
 msgstr "LOGIN"
 
-#: .\users\templates\users\home.html:41
+#: .\users\templates\users\home.html:50
 msgid "REGISTAR"
 msgstr "REGISTER"
 
-#: .\users\templates\users\home.html:51
+#: .\users\templates\users\home.html:60
 msgid "APRENDE A"
 msgstr "LEARN TO"
 
-#: .\users\templates\users\home.html:51
+#: .\users\templates\users\home.html:60
 msgid "PROTEGER-TE."
 msgstr "PROTECT YOURSELF."
 
-#: .\users\templates\users\home.html:52
+#: .\users\templates\users\home.html:61
 msgid "Continua a aprender e melhorar as tuas habilidades de cibersegurança."
 msgstr "Keep learning and improving your cybersecurity skills."
 
-#: .\users\templates\users\home.html:54
+#: .\users\templates\users\home.html:63
 msgid "COMEÇAR AGORA"
 msgstr "START NOW"
+
+#: .\users\templates\users\home.html:154
+msgid "COMO FUNCIONA"
+msgstr "HOW IT WORKS"
+
+#: .\users\templates\users\home.html:160
+msgid "Regista-te"
+msgstr "Register"
+
+#: .\users\templates\users\home.html:161
+msgid "Cria a tua conta gratuitamente em segundos"
+msgstr "Create free account"
+
+#: .\users\templates\users\home.html:168
+msgid "Avalia o teu nível"
+msgstr "Assess your level"
+
+#: .\users\templates\users\home.html:169
+msgid "Quiz inicial para personalizar o percurso"
+msgstr "Initial quiz to personalize your journey"
+
+#: .\users\templates\users\home.html:176
+msgid "Pratica"
+msgstr "Practice"
+
+#: .\users\templates\users\home.html:177
+msgid ""
+"Simuladores e desafios reais que te vão tornar um verdadeiro cibersegurança"
+msgstr ""
+"Real-world simulators and challenges that will turn you into a true "
+"cybersecurity expert"
+
+#: .\users\templates\users\home.html:184
+msgid "Evolui"
+msgstr "Evolve"
+
+#: .\users\templates\users\home.html:185
+msgid "Acompanha o teu progresso e evolui constantemente"
+msgstr "Track your progress and constantly evolve"
+
+#: .\users\templates\users\home.html:192
+msgid "Treino e melhoria em segurança digital."
+msgstr "in phishing and digital security."
 
 #: .\users\templates\users\login.html:9
 msgid "Acesso"
@@ -1469,40 +1529,218 @@ msgstr "Access"
 msgid "Acesso à Plataforma"
 msgstr "Platform Access"
 
+#: .\users\templates\users\login.html:57
+#: .\users\templates\users\perfil.html:163
+msgid "Nome de Utilizador"
+msgstr "Username"
+
 #: .\users\templates\users\login.html:62
 msgid "Palavra-passe"
 msgstr "Password"
 
-#: .\users\templates\users\login.html:93
+#: .\users\templates\users\login.html:101
 msgid "Entrar Agora"
 msgstr "Login Now"
 
-#: .\users\templates\users\login.html:98
+#: .\users\templates\users\login.html:106
 msgid "Esqueci-me da palavra-passe"
 msgstr "Forgot password"
 
-#: .\users\templates\users\perfil.html:139
+#: .\users\templates\users\login.html:120
+msgid "Entrar com Google"
+msgstr "Login with Google"
 
+#: .\users\templates\users\perfil.html:8
+msgid "Perfil"
+msgstr "Profile"
+
+#: .\users\templates\users\perfil.html:42
+msgid "Avatar do Utilizador"
+msgstr "Username"
+
+#: .\users\templates\users\perfil.html:44
+msgid "Avatar do Google"
+msgstr "Login with Google"
+
+#: .\users\templates\users\perfil.html:46
+msgid "Avatar Padrão"
+msgstr "Default"
+
+#: .\users\templates\users\perfil.html:49
+msgid "Mudar Foto"
+msgstr "Change Photo"
+
+#: .\users\templates\users\perfil.html:57
+msgid "Escolhe o teu Avatar"
+msgstr "Choose your Avatar"
+
+#: .\users\templates\users\perfil.html:65
+msgid "Padrão 1"
+msgstr "Default"
+
+#: .\users\templates\users\perfil.html:69
+msgid "Padrão 2"
+msgstr "Default"
+
+#: .\users\templates\users\perfil.html:73
+msgid "Padrão 3"
+msgstr "Default"
+
+#: .\users\templates\users\perfil.html:77
+msgid "ou"
+msgstr "or"
+
+#: .\users\templates\users\perfil.html:81
+msgid "Carregar Foto Própria"
+msgstr "Upload your own Photo"
+
+#: .\users\templates\users\perfil.html:87
+msgid "Escolhe a tua Moldura"
+msgstr "Choose your Avatar"
+
+#: .\users\templates\users\perfil.html:100
+msgid "Ouro (Nv. 5)"
+msgstr "Gold (Lv. 5)"
+
+#: .\users\templates\users\perfil.html:108
+msgid "Elite (Nv. 10)"
+msgstr "Elite (Lv. 10)"
+
+#: .\users\templates\users\perfil.html:115
+msgid "Elite (30 Dias)"
+msgstr "Elite (30 Days)"
+
+#: .\users\templates\users\perfil.html:131
+#: .\users\templates\users\perfil.html:225
+#: .\users\templates\users\perfil.html:237
+msgid "Editar"
+msgstr "Edit Data"
+
+#: .\users\templates\users\perfil.html:155
+msgid "Guardar"
+msgstr "Save"
+
+#: .\users\templates\users\perfil.html:172
+msgid "Email"
+msgstr "Email:"
+
+#: .\users\templates\users\perfil.html:183
+msgid "1º Geral"
+msgstr "Global"
+
+#: .\users\templates\users\perfil.html:184
+msgid "2º Geral"
+msgstr "Global"
+
+#: .\users\templates\users\perfil.html:185
+msgid "3º Geral"
+msgstr "Global"
+
+#: .\users\templates\users\perfil.html:191
+msgid "1º Quiz"
+msgstr "Quiz"
+
+#: .\users\templates\users\perfil.html:192
+msgid "2º Quiz"
+msgstr "Quiz"
+
+#: .\users\templates\users\perfil.html:193
+msgid "3º Quiz"
+msgstr "Quiz"
+
+#: .\users\templates\users\perfil.html:199
+msgid "1º Simulador"
+msgstr "Phishing Simulator"
+
+#: .\users\templates\users\perfil.html:200
+msgid "2º Simulador"
+msgstr "Phishing Simulator"
+
+#: .\users\templates\users\perfil.html:201
+msgid "3º Simulador"
+msgstr "Phishing Simulator"
+
+#: .\users\templates\users\perfil.html:215
+msgid "Dados"
+msgstr "Data"
+
+#: .\users\templates\users\perfil.html:216
+msgid "As tuas informações pessoais"
+msgstr "Account Information"
+
+#: .\users\templates\users\perfil.html:224
+msgid "INSTITUIÇÃO"
+msgstr "INSTITUTION"
+
+#: .\users\templates\users\perfil.html:225
+msgid "Instituição"
+msgstr "Institution name:"
+
+#: .\users\templates\users\perfil.html:236
+msgid "ESCOLARIDADE"
+msgstr "EDUCATION LEVEL"
+
+#: .\users\templates\users\perfil.html:237
+msgid "Escolaridade"
+msgstr "Education"
+
+#: .\users\templates\users\perfil.html:252
+msgid "NÍVEL GERAL DE DEFESA"
+msgstr "GENERAL DEFENSE LEVEL"
+
+#: .\users\templates\users\perfil.html:265
+msgid "XP Totais"
+msgstr "Total XP"
+
+#: .\users\templates\users\perfil.html:275
 msgid "Conquistas de Cibersegurança"
 msgstr "Cybersecurity"
 
-#: .\users\templates\users\perfil.html:140
+#: .\users\templates\users\perfil.html:276
 msgid "Desbloqueadas"
 msgstr "Unlocked"
 
-#: .\users\templates\users\perfil.html:157
+#: .\users\templates\users\perfil.html:293
 msgid "Ainda não tens medalhas."
 msgstr "You don't have any medals yet."
 
-#: .\users\templates\users\perfil.html:158
+#: .\users\templates\users\perfil.html:294
 msgid "Completa treinos e protege a tua conta para as desbloqueares!"
 msgstr "Complete training sessions and protect your account to unlock them!"
 
-#: .\users\templates\users\perfil.html:179
-#: .\users\templates\users\perfil.html:201
+#: .\users\templates\users\perfil.html:308
+#: .\users\templates\users\perfil.html:330
+msgid "XP"
+msgstr "XP"
 
+#: .\users\templates\users\perfil.html:312
+msgid "Quizzes Realizados"
+msgstr "Quizzes Completed"
+
+#: .\users\templates\users\perfil.html:315
+#: .\users\templates\users\perfil.html:337
 msgid "Ver histórico"
 msgstr "My History"
+
+#: .\users\templates\users\perfil.html:320
+msgid "Precisão Quiz"
+msgstr "Quiz Accuracy"
+
+#: .\users\templates\users\perfil.html:325
+msgid "Nível Simulador"
+msgstr "Simulator Level"
+
+#: .\users\templates\users\perfil.html:334
+msgid "Simuladores Realizados"
+msgstr "Simulators Completed"
+
+#: .\users\templates\users\perfil.html:342
+msgid "Precisão Simulador"
+msgstr "Simulator Accuracy"
+
+#: .\users\templates\users\perfil.html:347
+msgid "Mapeamento de Vulnerabilidades (Erros por Tema)"
+msgstr "Vulnerability Mapping (Errors by Topic)"
 
 #: .\users\templates\users\registar.html:8
 msgid "Registo"
@@ -1541,11 +1779,11 @@ msgstr "Username:"
 msgid "Palavra-passe:"
 msgstr "Password:"
 
-#: .\users\templates\users\registar.html:96
+#: .\users\templates\users\registar.html:107
 msgid "Repetir palavra-passe:"
 msgstr "Repeat password:"
 
-#: .\users\templates\users\registar.html:101
+#: .\users\templates\users\registar.html:120
 msgid "Finalizar"
 msgstr "Finish"
 
@@ -1628,6 +1866,11 @@ msgstr "Login"
 msgid "Mensagem Enviada com Sucesso!"
 msgstr "Message Sent Successfully!"
 
+#: .\venv\Lib\site-packages\cloudinary\forms.py:55
+#: .\venv\Lib\site-packages\cloudinary\forms.py:124
+msgid "No file selected!"
+msgstr "No file was submitted."
+
 #: .\venv\Lib\site-packages\django\contrib\messages\apps.py:15
 msgid "Messages"
 msgstr "Messages"
@@ -1697,19 +1940,16 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\core\validators.py:279
 #: .\venv\Lib\site-packages\django\core\validators.py:287
 #: .\venv\Lib\site-packages\django\core\validators.py:316
-
 msgid "Enter a valid IPv4 address."
 msgstr "Enter a valid email address."
 
 #: .\venv\Lib\site-packages\django\core\validators.py:296
 #: .\venv\Lib\site-packages\django\core\validators.py:317
-
 msgid "Enter a valid IPv6 address."
 msgstr "Enter a valid email address."
 
 #: .\venv\Lib\site-packages\django\core\validators.py:308
 #: .\venv\Lib\site-packages\django\core\validators.py:315
-
 msgid "Enter a valid IPv4 or IPv6 address."
 msgstr "Enter a valid email address."
 
@@ -2059,7 +2299,8 @@ msgid "Value must be valid JSON."
 msgstr "Value must be valid JSON."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\related.py:919
-
+#, fuzzy, python-format
+#| msgid "%(model)s instance with %(field)s %(value)r does not exist."
 msgid "%(model)s instance with %(field)s %(value)r does not exist."
 msgstr "Not a valid choice for %(field)s."
 
@@ -2406,7 +2647,6 @@ msgid "Wed"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:19
-
 msgid "Thu"
 msgstr "Tuesday"
 
@@ -2455,7 +2695,6 @@ msgid "August"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:33
-
 msgid "September"
 msgstr "Decimal number"
 
@@ -2464,7 +2703,6 @@ msgid "October"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:35
-
 msgid "November"
 msgstr "Decimal number"
 
@@ -2489,12 +2727,10 @@ msgid "apr"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:43
-
 msgid "may"
 msgstr "Monday"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:44
-
 msgid "jun"
 msgstr "Sunday"
 
@@ -2623,7 +2859,6 @@ msgid "August"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:75
-
 msgctxt "alt. month"
 msgid "September"
 msgstr "Decimal number"
@@ -2634,7 +2869,6 @@ msgid "October"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:77
-
 msgctxt "alt. month"
 msgid "November"
 msgstr "Decimal number"
@@ -2819,6 +3053,8 @@ msgid "Directory indexes are not allowed here."
 msgstr "Null characters are not allowed."
 
 #: .\venv\Lib\site-packages\django\views\static.py:40
+#, fuzzy, python-format
+#| msgid "“%(path)s” does not exist"
 msgid "“%(path)s” does not exist"
 msgstr "“%(pk)s” is not a valid value."
 
@@ -2903,23 +3139,69 @@ msgstr ""
 msgid "Redirected but the response is missing a Location: header."
 msgstr ""
 
+#~ msgid "Usos hoje:"
+#~ msgstr "Uses today:"
+
+#~ msgid "Por favor, cola um texto mais longo para análise."
+#~ msgstr "Please paste a longer text for analysis."
+
+#~ msgid "Erro ao analisar: "
+#~ msgstr "Error analyzing: "
+
+#~ msgid "MISSÃO CONCLUÍDA"
+#~ msgstr "MISSION ACCOMPLISHED"
+
+#~ msgid "OBJETIVO ATUAL"
+#~ msgstr "CURRENT OBJECTIVE"
+
+#~ msgid "Completar Treino de Phishing"
+#~ msgstr "Phishing Simulator"
+
+#~ msgid "para evoluir"
+#~ msgstr "to level up"
+
+#~ msgid "Mural dos Campeões"
+#~ msgstr "Champions' Wall"
+
+#~ msgid "Descobre quem são os mestres da cibersegurança."
+#~ msgstr "Discover who the masters of cybersecurity are."
+
+#~ msgid ""
+#~ "Domínio Suspeito! O endereço do remetente não corresponde à entidade "
+#~ "oficial ou tem caracteres alterados."
+#~ msgstr ""
+#~ "Suspicious Domain! The sender's address does not match the official "
+#~ "entity or has altered characters."
+
+#~ msgid ""
+#~ "O assunto do e-mail é utilizado para criar um falso sentido de urgência "
+#~ "ou curiosidade."
+#~ msgstr ""
+#~ "The email subject is used to create a false sense of urgency or curiosity."
+
+#~ msgid "Voltar ao Perfil"
+#~ msgstr "Back to Profile"
+
+#~ msgid "Personaliza a tua identidade no Protege+"
+#~ msgstr "Customize your identity on Protege+"
+
+#~ msgid "Dados Académicos"
+#~ msgstr "Bank details exposed"
+
+#~ msgid "Ano Letivo / Nível de Ensino"
+#~ msgstr "School Year / Education Level"
+
+#~ msgid "Preferências"
+#~ msgstr "Preferences"
+
+#~ msgid "Idioma da Plataforma"
+#~ msgstr "Platform Access"
+
 #~ msgid "Ação imediata para incidentes ativos:"
 #~ msgstr "Immediate action for active incidents:"
 
-#~ msgid "AJUDA IMEDIATA"
-#~ msgstr "Immediate help"
-
-#~ msgid "CONTA COMPROMETIDA"
-#~ msgstr "ACCOUNT COMPROMISED"
-
-#~ msgid "SEGURANÇA BANCÁRIA"
-#~ msgstr "BANK SECURITY"
-
 #~ msgid "Reforça a tua segurança preventiva:"
 #~ msgstr "Strengthen your preventive security:"
-
-#~ msgid "PREVENÇÃO"
-#~ msgstr "PREVENTION"
 
 #~ msgid "MISSÃO"
 #~ msgstr "MISSION"
@@ -2941,12 +3223,6 @@ msgstr ""
 
 #~ msgid "Sim, quero desativar."
 #~ msgstr "Yes, I want to disable it."
-
-#~ msgid "Editar Dados"
-#~ msgstr "Edit Data"
-
-#~ msgid "Entrar com Google"
-#~ msgstr "Login with Google"
 
 #~ msgid "Enter a valid domain name."
 #~ msgstr "Enter a valid domain name."
@@ -2979,17 +3255,11 @@ msgstr ""
 #~ msgid "Aqui vais melhorar os teus conhecimentos"
 #~ msgstr "Here you will improve your knowledge"
 
-#~ msgid "em phishing e segurança digital."
-#~ msgstr "in phishing and digital security."
-
 #~ msgid "Parabéns!"
 #~ msgstr "Congratulations!"
 
 #~ msgid "Verifica o teu utilizador e palavra-passe."
 #~ msgstr "Check your username and password."
-
-#~ msgid "Criar conta gratuita"
-#~ msgstr "Create free account"
 
 #~ msgid "BEM-VINDO DE VOLTA!"
 #~ msgstr "WELCOME BACK!"

@@ -611,20 +611,57 @@ def simulador_final(request):
     indice = request.session.get('sim_indice', [])
     atual = request.session.get('sim_atual', 0)
 
-    #Avaliar o email atual antes de avançar
+    #Avalia o email atual antes de avançar
     email_jogado = emails.objects.get(id=indice[atual])
-    acertos = int(request.POST.get('acertos', 0))
+
+    acertos_str = request.POST.get('acertos', '0')
+    acertos = int(acertos_str) if acertos_str.isdigit() else 0
+
+
+    ids_clicados = request.POST.get('ids_clicados', '')
+    lista_cliques = [i.strip() for i in ids_clicados.split(',') if i.strip()]
+    total_cliques = len(lista_cliques)
+
     modo = request.session.get('sim_modo', 'detetive')
 
-    total_pistas_real = email_jogado.total_armadilhas + (2 if email_jogado.e_phishing else 0)
-    
     if modo == 'rapido':
         tipo_sim = 'classificacao'
+        total_pistas_real = email_jogado.total_armadilhas + (2 if email_jogado.e_phishing else 0)
         foi_sucesso = (acertos >= total_pistas_real) if total_pistas_real > 0 else True
+        
+        if total_pistas_real > 0:
+            precisao_atual = (acertos / total_pistas_real) * 100
+        else:
+            precisao_atual = 100.0
+            
+        #limita a 100% de acerto
+        precisao_atual = min(100.0, max(0.0, precisao_atual))
+
     else:
         tipo_sim = 'identificacao'
-        # No modo detetive, acertou se encontrou todas as armadilhas
-        foi_sucesso = (acertos == email_jogado.total_armadilhas) if email_jogado.e_phishing else True
+        total_pistas_real = email_jogado.total_armadilhas
+        
+        acertos_limpos = min(acertos, total_pistas_real)
+        #falsos positivos
+    
+        falsos_positivos = max(0, total_cliques - acertos_limpos)
+        
+        if total_pistas_real > 0:
+            precisao_base = (acertos_limpos / total_pistas_real) * 100.0
+        else:
+            # Se for um e-mail seguro, a base é 100%
+            precisao_base = 100.0
+        
+        #cada errada sao 10% de penalizaçoa
+        penalizacao = falsos_positivos * 10.0
+        precisao_atual = precisao_base - penalizacao
+        
+        precisao_atual = min(100.0, max(0.0, precisao_atual))
+        
+        if email_jogado.e_phishing:
+            foi_sucesso = (precisao_atual == 100.0)
+        else:
+            foi_sucesso = (falsos_positivos == 0)
         
         
     ResultadoSimulador.objects.create(
@@ -632,13 +669,9 @@ def simulador_final(request):
         email=email_jogado,
         tipo_simulacao=tipo_sim,
         acertou=foi_sucesso,
-        armadilhas_encontradas=acertos if tipo_sim == 'identificacao' else 0
+        armadilhas_encontradas=acertos_limpos if tipo_sim == 'identificacao' else 0,
+        cliques_utilizador = ",".join(lista_cliques)
     )
-    
-    if total_pistas_real > 0:
-        precisao_atual = (acertos / total_pistas_real) * 100
-    else:
-        precisao_atual = 100.0
 
     if precisao_atual == 100:
         pontos = 10
@@ -703,8 +736,31 @@ def simulador_final(request):
         messages.success(request, "DESBLOQUEASTE: Moldura de Ouro! Vai ao teu Perfil para a equipares.")
     
     perfil.save()
+
+
+
+
+
     emails_jogados = emails.objects.filter(id__in=indice)
     modo_jogado = request.session.get('sim_modo', 'detetive')
+    emails_detalhados=[]
+
+    resultados_sessao = ResultadoSimulador.objects.filter(
+        perfil=request.user.perfil
+    ).order_by('-id')[:quantidade_emails][::-1]
+    
+
+    for res in resultados_sessao:
+        em = res.email
+        em.acertos_reais = res.armadilhas_encontradas
+
+        total_cliques_hist = len([i for i in res.cliques_utilizador.split(',') if i])
+        em.falsos_positivos = max(0, total_cliques_hist - em.acertos_reais)
+
+        em.faltam = max(0, em.total_armadilhas - em.acertos_reais)
+        emails_detalhados.append(em)
+
+
     
     context = {
         'pontos_totais': pontos_totais,
@@ -716,7 +772,7 @@ def simulador_final(request):
         'subiu': subiu,
         'subiu_geral': subiu_geral,
         'nivel_geral': perfil.nivel_geral,
-        'emails_jogados': emails_jogados,
+        'emails_jogados': emails_detalhados,
         'modo': modo_jogado,
         'xp_necessario':pontos_necessarios
     }

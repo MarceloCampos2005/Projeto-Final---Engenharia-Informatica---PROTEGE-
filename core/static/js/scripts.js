@@ -171,6 +171,7 @@ function setDaltonismo(tipo) {
         guardarFiltroNoServidor('daltonismo', tipo);
     } else {
         localStorage.setItem('modoDaltonismo', tipo);
+        document.cookie = `filtro_daltonismo=${tipo}; path=/; max-age=31536000`;
     }
 
     document.getElementById('daltonismo-menu').classList.add('hidden');
@@ -188,6 +189,7 @@ function setContraste(tipo) {
         guardarFiltroNoServidor('contraste', tipo);
     } else {
         localStorage.setItem('modoContraste', tipo);
+        document.cookie = `filtro_contraste=${tipo}; path=/; max-age=31536000`;
     }
 
 
@@ -203,6 +205,9 @@ document.addEventListener('DOMContentLoaded', () => {
         //limpa a localstorage
         localStorage.removeItem('modoDaltonismo');
         localStorage.removeItem('modoContraste');
+
+        document.cookie = "filtro_daltonismo=; path=/; max-age=0";
+        document.cookie = "filtro_contraste=; path=/; max-age=0";
     } else {
         //se nao tiver login vai a localstorage buscar o filtro
         const daltSalvo = localStorage.getItem('modoDaltonismo');
@@ -822,6 +827,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const phishZones = document.querySelectorAll('.phish-zone');
     const contadorDisplay = document.getElementById('contador-pistas');
     const inputAcertos = document.getElementById('input-acertos');
+
+    const inputErros = document.getElementById('input-erros');
+    const inputIds = document.getElementById('input-ids-clicados');
+
     const btnFinalizar = document.getElementById('btn-finalizar');
     const formResultado = document.getElementById('form-resultado');
 
@@ -859,9 +868,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 // pistas selcionadas
                 let acertosReais = document.querySelectorAll('.phish-zone.selecionada[data-is-phishing="true"]').length;
 
+                let falsosPositivos = document.querySelectorAll('.phish-zone.selecionada:not([data-is-phishing="true"])').length;
+                const idsSelecionados = Array.from(document.querySelectorAll('.phish-zone.selecionada')).map(el => el.id).filter(id => id && id.trim() !== ""); // Garante que só pega os que têm ID
 
                 if (inputAcertos) {
                     inputAcertos.value = acertosReais;
+                }
+
+                if (inputErros) {
+                    inputErros.value = falsosPositivos;
+                }
+
+                if (inputIds) {
+                    inputIds.value = idsSelecionados.join(',');
                 }
 
                 //formulário
@@ -1393,20 +1412,20 @@ function imprimirPDF(idTema) {
 
             //header
             pdf.setFontSize(16);
-            pdf.setTextColor(28, 136, 20); 
+            pdf.setTextColor(28, 136, 20);
             pdf.setFont("helvetica", "bold");
             pdf.text("Protege+", 15, 15);
 
             //Subtitulo no header
             pdf.setFontSize(10);
-            pdf.setTextColor(100, 100, 100); 
+            pdf.setTextColor(100, 100, 100);
             pdf.setFont("helvetica", "normal");
             pdf.text("Documentação Oficial", pageWidth - 15, 15, { align: 'right' });
 
             //linha header
             pdf.setDrawColor(28, 136, 20);
             pdf.setLineWidth(0.5);
-            pdf.line(15, 18, pageWidth - 15, 18); 
+            pdf.line(15, 18, pageWidth - 15, 18);
 
 
             pdf.setDrawColor(220, 220, 220);
