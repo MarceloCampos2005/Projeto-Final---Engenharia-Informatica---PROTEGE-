@@ -8,8 +8,9 @@
     <title>{% trans "Segunda Chave" %} | Protege+</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'users/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
 </head>
-<body class="view-autenticacao">
+<body class="view-autenticacao {% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
 
     <div class="wrapper-split">
 

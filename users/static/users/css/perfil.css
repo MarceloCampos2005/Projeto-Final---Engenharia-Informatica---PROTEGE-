@@ -492,15 +492,6 @@ body.perf-view-ativa {
   transform: scale(1.05);
 }
 
-body.modo-escuro .inline-edit-btn {
-  color: #ffffff;
-}
-
-body.modo-escuro .inline-edit-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--p-acento);
-}
-
 .modal-edicao-input {
   width: 100%;
   padding: 12px;
@@ -817,75 +808,6 @@ body.modo-escuro .inline-edit-btn:hover {
   opacity: 0.9;
 }
 
-
-body.modo-escuro .perf-cartao-id,
-body.modo-escuro .perf-bloco-metrica {
-  background: rgba(0, 0, 0, 0.5) !important;
-  backdrop-filter: blur(15px) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4) !important;
-}
-
-body.modo-escuro .perf-bloco-metrica.destaque {
-  background: var(--p-primaria) !important;
-}
-
-body.modo-escuro .perf-nome-utilizador,
-body.modo-escuro .perf-dado-label,
-body.modo-escuro .perf-dado-valor,
-body.modo-escuro .perf-global-label,
-body.modo-escuro .perf-global-xp,
-body.modo-escuro .perf-bloco-metrica h3 {
-  color: #fff !important;
-}
-
-body.modo-escuro .perf-info-box {
-  background: rgba(0, 0, 0, 0.3) !important;
-  border-color: #333 !important;
-}
-
-body.modo-escuro .perf-info-linha {
-  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.modo-escuro .perf-medalha {
-  text-shadow: none;
-}
-
-body.modo-escuro .perf-link-historico {
-  color: #ffffff;
-}
-
-body.modo-escuro .perf-link-historico:hover {
-  color: var(--p-acento);
-}
-
-body.modo-escuro .perf-conquistas-box {
-  background: rgba(0, 0, 0, 0.5) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.modo-escuro .medalha-card {
-  background: linear-gradient(145deg, rgba(50, 50, 50, 0.8), rgba(20, 20, 20, 0.9));
-}
-
-body.modo-escuro .conquistas-header h3,
-body.modo-escuro .medalha-nome,
-body.modo-escuro .sem-medalhas {
-  color: white !important;
-}
-
-
-body.modo-escuro .modal-edicao-input {
-  background-color: #1e1e1e !important;
-  color: #fff !important;
-  border-color: #444 !important;
-}
-
-body.modo-escuro .modal-edicao-input:focus {
-  border-color: var(--p-acento) !important;
-}
-
 /*BOTÕES DO AVATAR*/
 
 .upload-section .btn-dashboard {
@@ -930,11 +852,6 @@ body.modo-escuro .modal-edicao-input:focus {
   box-shadow: 0 6px 15px rgba(37, 77, 26, 0.4);
 }
 
-body.modo-escuro .upload-section .btn-dashboard {
-  color: var(--p-acento);
-  background: rgba(32, 194, 20, 0.1);
-}
-
 .toast-msg.success {
   background: linear-gradient(135deg, #20c214, #1c8814);
   border: 1px solid #abf7a6;
@@ -968,39 +885,6 @@ body.modo-escuro .upload-section .btn-dashboard {
     opacity: 0;
   }
 }
-
-
-body.modo-escuro .perf-info-box {
-  background: rgba(20, 20, 20, 0.8) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.modo-escuro .perf-dado-grupo.box-style {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-body.modo-escuro .perf-dado-grupo.box-style:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-body.modo-escuro .perf-info-icon {
-  background: rgba(32, 194, 20, 0.2);
-}
-
-body.modo-escuro .perf-info-titles h3,
-body.modo-escuro .perf-dado-valor {
-  color: #fff !important;
-}
-
-body.modo-escuro .perf-info-titles p {
-  color: #aaa;
-}
-
-body.modo-escuro .perf-info-divider {
-  border-top-color: rgba(255, 255, 255, 0.1);
-}
-
 
 .moldura-base {
   border: 4px solid var(--p-neve);

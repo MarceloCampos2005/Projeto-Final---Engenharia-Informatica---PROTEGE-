@@ -24,10 +24,10 @@
                 <div class="auth-buttons">
                     <a href="{% url 'login' %}" class="btn-registar">{% trans "Entrar" %}</a>
                     <a href="{% url 'registar' %}" class="btn-registar">{% trans "Registar" %}</a>
-                    <a href="{% url 'home' %}" class="nav-link btn-voltar">← Voltar</a>
+                    <a href="{% url 'home' %}" class="nav-link btn-voltar">← {% trans "Voltar" %}</a>
                 </div>
                 {% else %}
-                <a href="{% url 'atividades:home2' %}" class="nav-link btn-voltar">← Voltar</a>
+                <a href="{% url 'atividades:home2' %}" class="nav-link btn-voltar">← {% trans "Voltar" %}</a>
                 {% endif %}
             </nav>
         </div>

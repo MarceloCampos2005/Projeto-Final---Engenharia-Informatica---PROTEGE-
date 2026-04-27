@@ -39,11 +39,11 @@
                 
                 <div class="perf-moldura-avatar {{ user.perfil.moldura_atual|default:'moldura-base' }}">
                     {% if user.perfil.avatar %}
-                        <img src="{{ user.perfil.avatar.url }}" alt="Avatar do Utilizador">
+                        <img src="{{ user.perfil.avatar.url }}" alt="{% trans 'Avatar do Utilizador' %}">
                     {% elif user.socialaccount_set.all %}
-                        <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="Avatar do Google" referrerpolicy="no-referrer">
+                        <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="{% trans 'Avatar do Google' %}" referrerpolicy="no-referrer">
                     {% else %}
-                        <img src="{% static 'users/images/' %}{{ user.perfil.avatar_padrao }}" alt="Avatar Padrão">
+                        <img src="{% static 'users/images/' %}{{ user.perfil.avatar_padrao }}" alt="{% trans 'Avatar Padrão' %}">
                     {% endif %}
 
                     <button type="button" class="perf-avatar-edit-btn" onclick="abrirModalAvatar()" title="{% trans 'Mudar Foto' %}">
@@ -62,19 +62,19 @@
                             <div class="avatar-grid">
                                 <label class="avatar-option">
                                     <input type="radio" name="avatar_padrao" value="avatar.png">
-                                    <img src="{% static 'users/images/avatar.png' %}" alt="Padrão 1">
+                                    <img src="{% static 'users/images/avatar.png' %}" alt="{% trans 'Padrão 1' %}">
                                 </label>
                                 <label class="avatar-option">
                                     <input type="radio" name="avatar_padrao" value="garoto.png">
-                                    <img src="{% static 'users/images/garoto.png' %}" alt="Padrão 2">
+                                    <img src="{% static 'users/images/garoto.png' %}" alt="{% trans 'Padrão 2' %}">
                                 </label>
                                 <label class="avatar-option">
                                     <input type="radio" name="avatar_padrao" value="bruxa.png">
-                                    <img src="{% static 'users/images/bruxa.png' %}" alt="Padrão 3">
+                                    <img src="{% static 'users/images/bruxa.png' %}" alt="{% trans 'Padrão 3' %}">
                                 </label>
                             </div>
 
-                            <div class="divider">ou</div>
+                            <div class="divider">{% trans "ou" %}</div>
 
                             <div class="upload-section">
                                 <label for="avatar-upload" class="btn-dashboard" style="cursor: pointer;">
@@ -90,14 +90,14 @@
                                 <label class="avatar-option">
                                     <input type="radio" name="moldura_escolhida" value="moldura-base" {% if user.perfil.moldura_atual == 'moldura-base' or not user.perfil.moldura_atual %}checked{% endif %}>
                                     <div class="perf-moldura-avatar moldura-base" style="width: 60px; height: 60px; margin: 0 auto; background: #e2e8f0; border-width: 3px;"></div>
-                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #4b5563;">Padrão</p>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #4b5563;">{% trans "Padrão" %}</p>
                                 </label>
 
                                 {% if user.perfil.nivel_geral >= 5 %}
                                 <label class="avatar-option">
                                     <input type="radio" name="moldura_escolhida" value="moldura-ouro" {% if user.perfil.moldura_atual == 'moldura-ouro' %}checked{% endif %}>
                                     <div class="perf-moldura-avatar moldura-ouro" style="width: 60px; height: 60px; margin: 0 auto; background: #e2e8f0; border-width: 3px;"></div>
-                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #b45309;">Ouro (Nv. 5)</p>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #b45309;">{% trans "Ouro (Nv. 5)" %}</p>
                                 </label>
                                 {% endif %}
 
@@ -105,14 +105,14 @@
                                 <label class="avatar-option">
                                     <input type="radio" name="moldura_escolhida" value="moldura-hacker" {% if user.perfil.moldura_atual == 'moldura-hacker' %}checked{% endif %}>
                                     <div class="perf-moldura-avatar moldura-hacker" style="width: 60px; height: 60px; margin: 0 auto; background: #1e293b; border-width: 3px;"></div>
-                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #16a34a;">Elite (Nv. 10)</p>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #16a34a;">{% trans "Elite (Nv. 10)" %}</p>
                                 </label>
                                 {% endif %}
                                 {% if user.perfil.streak_maximo >= 30 %}
                                 <label class="avatar-option">
                                     <input type="radio" name="moldura_escolhida" value="moldura-elite" {% if user.perfil.moldura_atual == 'moldura-elite' %}checked{% endif %}>
                                     <div class="perf-moldura-avatar moldura-elite" style="width: 60px; height: 60px; margin: 0 auto; background: #e2e8f0; border-width: 3px; border-radius: 50%;"></div>
-                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #bd1a92;">Elite (30 Dias)</p>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #bd1a92;">{% trans "Elite (30 Dias)" %}</p>
                                 </label>
                                 {% endif %}
                             </div>
@@ -180,25 +180,25 @@
                     
                     {% if rank_geral <= 3 %}
                         <div class="perf-medalha {% if rank_geral == 1 %}m-ouro{% elif rank_geral == 2 %}m-prata{% else %}m-bronze{% endif %}">
-                            {% if rank_geral == 1 %}🥇 1º Geral
-                            {% elif rank_geral == 2 %}🥈 2º Geral
-                            {% else %}🥉 3º Geral{% endif %}
+                            {% if rank_geral == 1 %}🥇 {% trans "1º Geral" %}
+                            {% elif rank_geral == 2 %}🥈 {% trans "2º Geral" %}
+                            {% else %}🥉 {% trans "3º Geral" %}{% endif %}
                         </div>
                     {% endif %}
 
                     {% if rank_quiz <= 3 %}
                         <div class="perf-medalha {% if rank_quiz == 1 %}m-ouro{% elif rank_quiz == 2 %}m-prata{% else %}m-bronze{% endif %}">
-                            {% if rank_quiz == 1 %}🥇 1º Quiz
-                            {% elif rank_quiz == 2 %}🥈 2º Quiz
-                            {% else %}🥉 3º Quiz{% endif %}
+                            {% if rank_quiz == 1 %}🥇 {% trans "1º Quiz" %}
+                            {% elif rank_quiz == 2 %}🥈 {% trans "2º Quiz" %}
+                            {% else %}🥉 {% trans "3º Quiz" %}{% endif %}
                         </div>
                     {% endif %}
 
                     {% if rank_simulador <= 3 %}
                         <div class="perf-medalha {% if rank_simulador == 1 %}m-ouro{% elif rank_simulador == 2 %}m-prata{% else %}m-bronze{% endif %}">
-                            {% if rank_simulador == 1 %}🥇 1º Simulador
-                            {% elif rank_simulador == 2 %}🥈 2º Simulador
-                            {% else %}🥉 3º Simulador{% endif %}
+                            {% if rank_simulador == 1 %}🥇 {% trans "1º Simulador" %}
+                            {% elif rank_simulador == 2 %}🥈 {% trans "2º Simulador" %}
+                            {% else %}🥉 {% trans "3º Simulador" %}{% endif %}
                         </div>
                     {% endif %}
                     
@@ -262,7 +262,7 @@
                         
                         <div style="text-align: right; margin-top: 8px;">
                             <span class="perf-global-xp" style="font-size: 0.85rem; font-weight: 700; color: #6b7280;">
-                                {{ user.perfil.xp_geral }} / {{xp_geral_necessario}} XP Totais
+                                {{ user.perfil.xp_geral }} / {{xp_geral_necessario}} {% trans "XP Totais" %}
                             </span>
                         </div>
                     </div>
@@ -305,7 +305,7 @@
                     <div class="perf-barra-mini-container">
                         <div class="perf-barra-mini-fill" style="width: calc(({{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }}) * 100%);"></div>
                     </div>
-                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }} XP</span>
+                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }} {% trans "XP" %}</span>
                 </div>
 
                 <div class="perf-bloco-metrica">
@@ -327,7 +327,7 @@
                     <div class="perf-barra-mini-container">
                         <div class="perf-barra-mini-fill" style="width: calc(({{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }}) * 100%);"></div>
                     </div>
-                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }} XP</span>
+                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }} {% trans "XP" %}</span>
                 </div>
 
                 <div class="perf-bloco-metrica">

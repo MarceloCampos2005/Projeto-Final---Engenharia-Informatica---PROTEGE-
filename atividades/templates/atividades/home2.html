@@ -208,9 +208,9 @@
                         <div class="streak-side-track">
                             <div class="streak-side-fill" style="width: {% widthratio user.perfil.streak_atual 30 100 %}%; max-width: 100%;"></div>
                             <div class="streak-side-checkpoints">
-                                <div class="ss-cp {% if user.perfil.streak_atual >= 7 %}reached{% endif %}" title="7 Dias - Avatar Aprendiz">7</div>
-                                <div class="ss-cp {% if user.perfil.streak_atual >= 15 %}reached{% endif %}" title="15 Dias - Medalha">15</div>
-                                <div class="ss-cp {% if user.perfil.streak_atual >= 30 %}reached{% endif %}" title="30 Dias - Avatar Ninja">30</div>
+                                <div class="ss-cp {% if user.perfil.streak_atual >= 7 %}reached{% endif %}" title="{% trans "7 Dias - Avatar Aprendiz" %}">7</div>
+                                <div class="ss-cp {% if user.perfil.streak_atual >= 15 %}reached{% endif %}" title="{% trans "15 Dias - Medalha" %}">15</div>
+                                <div class="ss-cp {% if user.perfil.streak_atual >= 30 %}reached{% endif %}" title="{% trans "30 Dias - Avatar Ninja" %}">30</div>
                             </div>
                         </div>
                     </div>
