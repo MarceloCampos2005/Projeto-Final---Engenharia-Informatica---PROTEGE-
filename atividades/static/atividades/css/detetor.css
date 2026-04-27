@@ -262,37 +262,3 @@ textarea:focus {
         padding: 15px;
     }
 }
-
-body.modo-escuro textarea {
-    background: #1e1e1e;
-    color: #ffffff;
-    border-color: #333;
-}
-
-body.modo-escuro .ia-card,
-body.modo-escuro .ia-result-card {
-    background: rgba(30, 30, 30, 0.6);
-    border-color: #333;
-}
-
-body.modo-escuro .ia-warning {
-    background: rgba(250, 176, 5, 0.1);
-    border-color: rgba(250, 176, 5, 0.4);
-    color: #fde047;
-}
-
-body.modo-escuro .result-conselho {
-    background: #1e1e1e;
-    color: #cbd5e1;
-    border-left-color: var(--ia-verde);
-}
-
-body.modo-escuro .btn-reset {
-    border-color: #333;
-    color: #94a3b8;
-}
-
-body.modo-escuro .btn-reset:hover {
-    background: #333;
-    color: white;
-}

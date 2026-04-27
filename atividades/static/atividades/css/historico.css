@@ -191,36 +191,6 @@ body {
   transform: scale(1.05);
 }
 
-body.modo-escuro .hist-card {
-  background: #1e1e1e !important;
-  border-color: #333 !important;
-}
-
-body.modo-escuro .hist-titulo,
-body.modo-escuro .hist-data,
-body.modo-escuro .hist-stat-val,
-body.modo-escuro .btn-voltar {
-  color: var(--d3-neve-pura) !important;
-}
-
-body.modo-escuro .hist-circulo-progresso {
-  background:
-    radial-gradient(closest-side, #1e1e1e 79%, transparent 80% 100%),
-    conic-gradient(var(--d3-neon-leaf) calc(var(--percent) * 1%), #333 0);
-}
-
-body.modo-escuro .hist-circulo-progresso span:first-child {
-  color: var(--d3-neve-pura) !important;
-}
-
-body.modo-escuro .hist-vazio p {
-  color: var(--d3-neve-pura) !important;
-}
-
-body.modo-escuro .hist-vazio {
-  background: rgba(30, 30, 30, 0.6) !important;
-  border-color: #333 !important;
-}
 
 .hist-circulo-progresso .hist-stat-label {
   font-size: 0.55rem;
@@ -363,17 +333,20 @@ body.modo-escuro .hist-vazio {
   box-shadow: 0 10px 30px rgba(239, 68, 68, 0.08);
 }
 
-body.modo-escuro .detalhe-info {
-  background: rgba(0, 0, 0, 0.2);
+.phish-zone[data-is-phishing="true"] {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  border-radius: 6px;
+  padding: 4px 8px !important;
+  margin: 2px 0 !important;
+  color: #b91c1c !important;
+  font-weight: 700 !important;
+  pointer-events: none;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.05);
 }
 
-body.modo-escuro .detalhe-pergunta,
-body.modo-escuro .detalhe-info p,
-body.modo-escuro .explicacao-box p {
-  color: var(--d3-neve-pura);
-}
-
-body.modo-escuro .explicacao-box {
-  background: rgba(255, 255, 255, 0.05);
-  border-left-color: var(--d3-neon-leaf);
+.email-wrapper-historico {
+  border-left: 5px solid #ef4444;
+  padding-left: 15px;
 }

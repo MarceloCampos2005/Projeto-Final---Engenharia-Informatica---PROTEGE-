@@ -353,50 +353,6 @@ body.doc-page {
 }
 
 
-body.modo-escuro .email-fake-card,
-body.modo-escuro .email-body {
-  background: #1e1e1e;
-  border-color: #333;
-  color: #e2e8f0;
-}
-
-body.modo-escuro .email-fake-card::before {
-  background: #2a2a2a;
-  color: #94a3b8;
-  border-bottom-color: #333;
-}
-
-body.modo-escuro .email-line {
-  border-bottom-color: #333;
-  color: #cbd5e1;
-}
-
-body.modo-escuro .email-line b {
-  color: #ffffff;
-}
-
-
-body.modo-escuro .password-tester-box {
-  background: #1e1e1e;
-  border-color: #333;
-  color: #e2e8f0;
-}
-
-body.modo-escuro .password-tester-box input {
-  background: #2a2a2a;
-  color: #ffffff;
-  border-color: #444;
-}
-
-body.modo-escuro .password-tester-box input:focus {
-  border-color: var(--verde-principal);
-}
-
-
-body.modo-escuro .termo-glossario {
-  background: rgba(251, 191, 36, 0.15);
-  color: #fde047;
-}
 
 .doc-card.tema-conteudo {
   background: rgba(255, 255, 255, 0.5) !important;

@@ -216,6 +216,7 @@ body.view-autenticacao {
   font-size: 1.05rem;
   transition: all 0.3s ease;
 }
+
 .caixa-texto-protege::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
@@ -243,6 +244,7 @@ body.view-autenticacao {
     background 0.2s,
     transform 0.1s;
 }
+
 .botao-acao-principal:hover {
   background-color: #1a3a11;
   transform: translateY(-2px);
@@ -275,6 +277,7 @@ body.view-autenticacao {
   text-transform: uppercase;
   font-weight: 700;
 }
+
 .btn-google {
   display: flex;
   align-items: center;
@@ -343,6 +346,7 @@ body.view-autenticacao {
   font-size: 0.95rem;
   opacity: 0.9;
 }
+
 .atalho-link:hover {
   opacity: 1;
   text-decoration: underline;
@@ -357,37 +361,28 @@ body.view-autenticacao {
 }
 
 @keyframes abanar {
+
   0%,
   100% {
     transform: translateX(0);
   }
+
   25% {
     transform: translateX(-5px);
   }
+
   75% {
     transform: translateX(5px);
   }
 }
 
-body.modo-escuro .wrapper-split {
-  background-color: #1a1a1a !important;
-}
-body.modo-escuro .ala-principal-direita {
-  background-color: #2c2c2c !important;
-}
-body.modo-escuro .cabecalho-form,
-body.modo-escuro .logotipo-superior .nome-marca-estilizado,
-body.modo-escuro .btn-exit-login {
-  color: white !important;
-}
-body.modo-escuro .btn-exit-login {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-}
+
 
 @media (max-width: 480px) {
   .header-navegacao-login {
     padding: 1.5rem;
   }
+
   .logotipo-superior .nome-marca-estilizado {
     display: none;
   }
@@ -405,6 +400,7 @@ body.modo-escuro .btn-exit-login {
   font-size: 1.05rem;
   transition: all 0.3s ease;
 }
+
 .agrupamento-input input:focus {
   background-color: rgba(255, 255, 255, 0.35);
   border-color: var(--neve);

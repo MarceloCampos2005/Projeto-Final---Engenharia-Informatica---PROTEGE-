@@ -12,6 +12,7 @@ from .forms import EditarPerfilForm
 from django.db import transaction 
 from django.utils import translation
 from django_otp import user_has_device
+from django.shortcuts import get_object_or_404, redirect, render
 import json
 from django.db.models import Count, Q
 from atividades.models import HistoricoQuiz 
@@ -363,3 +364,70 @@ def sincronizar_preferencias_pos_login(sender, request, user, **kwargs):
             
     except Exception as e:
         print(f"Erro ao sincronizar preferências no login: {e}")
+
+
+@login_required
+def toggle_privacidade(request):
+    if request.method == 'POST':
+        perfil = request.user.perfil
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            # Inverte o estado
+            perfil.perfil_publico = not perfil.perfil_publico
+            perfil.save()
+            return JsonResponse({'status': 'sucesso', 'is_public': perfil.perfil_publico})
+            
+        perfil.perfil_publico = 'perfil_publico' in request.POST
+        perfil.save()
+        
+        if perfil.perfil_publico:
+            messages.success(request, "O teu perfil está agora PÚBLICO!")
+        else:
+            messages.success(request, "O teu perfil está agora PRIVADO!")
+            
+    return redirect('perfil')
+
+
+@login_required
+def perfil_publico(request, username):
+    user_alvo = get_object_or_404(User, username=username)
+    perfil_alvo = user_alvo.perfil
+
+    # Verifica se quem está a ver pode aceder aos dados
+    acesso_permitido = perfil_alvo.perfil_publico or request.user == user_alvo
+
+    context = {
+        'perfil_alvo': perfil_alvo,
+        'user_alvo': user_alvo,
+        'acesso_permitido': acesso_permitido, 
+    }
+
+    #so procura com permissao
+    if acesso_permitido:
+        #procura perguntas erradas no historico pa meter no grafico
+        erros_por_tema = HistoricoQuiz.objects.filter(
+            resultado_quiz__perfil=perfil_alvo,
+            foi_correta=False
+        ).values('pergunta__tema').annotate(total_erros=Count('id'))
+
+        #separa dados em 2 listas po chart ler
+        labels = []
+        dados = []
+        for item in erros_por_tema:
+            labels.append(item['pergunta__tema'].capitalize())
+            dados.append(item['total_erros'])
+
+        #mete dados vazios se o utilizador nao tiver erros
+        if not labels:
+            labels = ['Phishing', 'Senhas', 'MFA', 'Privacidade', 'Dispositivos', 'Redes']
+            dados = [0, 0, 0, 0, 0, 0]
+
+        #converte listas python em strings json
+        context['labels_grafico'] = json.dumps(labels)
+        context['dados_grafico'] = json.dumps(dados)
+
+        #calcula o axm das barras de xp
+        context['xp_necessario_quiz'] = perfil_alvo.nivel_quiz * 30
+        context['xp_necessario_simulador'] = perfil_alvo.nivel_simulador * 30
+        context['xp_geral_necessario'] = perfil_alvo.nivel_geral * 100
+
+    return render(request, 'users/perfil_publico.html', context)

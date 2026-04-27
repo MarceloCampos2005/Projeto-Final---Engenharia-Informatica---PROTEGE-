@@ -103,18 +103,22 @@ def home2(request):
         
         #Verifica se o utilizador tem o dispositivo MFA configurado
         mfa_ativo = user_has_device(request.user)
-        medalha_mfa = None
-        if mfa_ativo:
-            try:
-                #tenta encontrar a medalha
-                medalha_mfa = Conquista.objects.get(codigo='mfa_ativo')
-                #ve se o utilizador já tem esta medalha
-                ja_tem_medalha = perfil.conquistas.filter(id=medalha_mfa.id).exists()
-                
-            except Conquista.DoesNotExist:
-                print("Aviso: Criar medalha com código 'mfa_ativo' no Painel Admin!")
 
-        if mfa_ativo and not ja_tem_medalha and medalha_mfa:
+        medalha_mfa = None
+        ja_tem_medalha_mfa = False
+        try:
+            #tenta encontrar a medalha
+            medalha_mfa = Conquista.objects.get(codigo='mfa_ativo')
+            #ve se o utilizador já tem esta medalha
+            ja_tem_medalha_mfa = perfil.conquistas.filter(id=medalha_mfa.id).exists()
+                
+        except Conquista.DoesNotExist:
+            print("Aviso: Criar medalha com código 'mfa_ativo' no Painel Admin!")
+
+        mostrar_aviso_mfa = (not mfa_ativo) and  (not ja_tem_medalha_mfa)
+
+
+        if mfa_ativo and not ja_tem_medalha_mfa and medalha_mfa:
             perfil.conquistas.add(medalha_mfa)
             perfil.xp_geral += 50
             messages.success(request, f"Parabéns ganhaste 50 XP por ativar o MFA! Ganhaste a medalha: {medalha_mfa.nome}!")
@@ -146,7 +150,7 @@ def home2(request):
         'mfa_ativo': mfa_ativo,
         'xp_ganho': xp_ganho,
         'meta':30,
-        'ja_tem_medalha_mfa': ja_tem_medalha_mfa
+        'mostrar_aviso_mfa': mostrar_aviso_mfa
     })
     
     return response

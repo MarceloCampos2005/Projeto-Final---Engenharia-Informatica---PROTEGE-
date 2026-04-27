@@ -2,28 +2,34 @@
 {% load i18n %}
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% trans "Perfil" %} | Protege+</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="{% static 'users/css/perfil.css' %}">
     <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="perf-view-ativa {% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
+<body
+    class="perf-view-ativa {% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}"
+    data-authenticated="{{ user.is_authenticated|lower }}">
 
     {% if messages %}
-        <div id="toast-container" style="position: fixed; top: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;">
-            {% for message in messages %}
-                <div class="toast-msg {{ message.tags }}" style="padding: 16px 24px; border-radius: 16px; color: white; font-weight: 800; font-size: 0.95rem; box-shadow: 0 15px 30px rgba(0,0,0,0.2); animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;">
-                    {% if message.tags == 'success' %}✅{% else %}⚠️{% endif %} 
-                    {{ message }}
-                </div>
-            {% endfor %}
+    <div id="toast-container"
+        style="position: fixed; top: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;">
+        {% for message in messages %}
+        <div class="toast-msg {{ message.tags }}"
+            style="padding: 16px 24px; border-radius: 16px; color: white; font-weight: 800; font-size: 0.95rem; box-shadow: 0 15px 30px rgba(0,0,0,0.2); animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;">
+            {% if message.tags == 'success' %}✅{% else %}⚠️{% endif %}
+            {{ message }}
         </div>
+        {% endfor %}
+    </div>
     {% endif %}
 
     <header class="perf-topo-nav">
@@ -34,19 +40,42 @@
 
     <div id="content-wrapper">
         <main class="perf-corpo-central">
-            
+
             <section class="perf-cartao-id">
-                
+                <form id="form-privacidade" style="width: 100%;">
+                    {% csrf_token %}
+                    <div class="privacy-wrapper">
+                        <span class="privacy-label" id="texto-privacidade">
+                            {% if user.perfil.perfil_publico %}
+                            🌍 {% trans "Perfil Público" %}
+                            {% else %}
+                            🔒 {% trans "Perfil Privado" %}
+                            {% endif %}
+                        </span>
+                        <label class="toggle-switch" title="{% trans 'Permite que outros vejam as tuas estatísticas' %}">
+                            <input type="checkbox" id="checkbox-privacidade" name="perfil_publico"
+                                data-url="{% url 'toggle_privacidade' %}"
+                                data-text-pub="🌍 {% trans 'Perfil Público' %}"
+                                data-text-priv="🔒 {% trans 'Perfil Privado' %}" 
+                                {% if user.perfil.perfil_publico %}checked{% endif %}>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </form>
+
                 <div class="perf-moldura-avatar {{ user.perfil.moldura_atual|default:'moldura-base' }}">
                     {% if user.perfil.avatar %}
-                        <img src="{{ user.perfil.avatar.url }}" alt="Avatar do Utilizador">
+                    <img src="{{ user.perfil.avatar.url }}" alt="{% trans 'Avatar do Utilizador' %}">
                     {% elif user.socialaccount_set.all %}
-                        <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="Avatar do Google" referrerpolicy="no-referrer">
+                    <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="{% trans 'Avatar do Google' %}"
+                        referrerpolicy="no-referrer">
                     {% else %}
-                        <img src="{% static 'users/images/' %}{{ user.perfil.avatar_padrao }}" alt="Avatar Padrão">
+                    <img src="{% static 'users/images/' %}{{ user.perfil.avatar_padrao }}"
+                        alt="{% trans 'Avatar Padrão' %}">
                     {% endif %}
 
-                    <button type="button" class="perf-avatar-edit-btn" onclick="abrirModalAvatar()" title="{% trans 'Mudar Foto' %}">
+                    <button type="button" class="perf-avatar-edit-btn" onclick="abrirModalAvatar()"
+                        title="{% trans 'Mudar Foto' %}">
                         📷
                     </button>
                 </div>
@@ -55,379 +84,438 @@
                     <div class="modal-content">
                         <button type="button" class="close-modal" onclick="fecharModalAvatar()">×</button>
                         <h3>{% trans "Escolhe o teu Avatar" %}</h3>
-                        
-                        <form method="POST" action="{% url 'atualizar_avatar' %}" enctype="multipart/form-data" id="form-avatar">
+
+                        <form method="POST" action="{% url 'atualizar_avatar' %}" enctype="multipart/form-data"
+                            id="form-avatar">
                             {% csrf_token %}
-                            
+
                             <div class="avatar-grid">
                                 <label class="avatar-option">
                                     <input type="radio" name="avatar_padrao" value="avatar.png">
-                                    <img src="{% static 'users/images/avatar.png' %}" alt="Padrão 1">
+                                    <img src="{% static 'users/images/avatar.png' %}" alt="{% trans 'Padrão 1' %}">
                                 </label>
                                 <label class="avatar-option">
                                     <input type="radio" name="avatar_padrao" value="garoto.png">
-                                    <img src="{% static 'users/images/garoto.png' %}" alt="Padrão 2">
+                                    <img src="{% static 'users/images/garoto.png' %}" alt="{% trans 'Padrão 2' %}">
                                 </label>
                                 <label class="avatar-option">
                                     <input type="radio" name="avatar_padrao" value="bruxa.png">
-                                    <img src="{% static 'users/images/bruxa.png' %}" alt="Padrão 3">
+                                    <img src="{% static 'users/images/bruxa.png' %}" alt="{% trans 'Padrão 3' %}">
                                 </label>
                             </div>
 
-                            <div class="divider">ou</div>
+                            <div class="divider">{% trans "ou" %}</div>
 
                             <div class="upload-section">
                                 <label for="avatar-upload" class="btn-dashboard" style="cursor: pointer;">
                                     {% trans "Carregar Foto Própria" %}
                                 </label>
-                                <input type="file" id="avatar-upload" name="avatar_custom" accept="image/*" class="hidden" onchange="mostrarNomeFicheiro()">
+                                <input type="file" id="avatar-upload" name="avatar_custom" accept="image/*"
+                                    class="hidden" onchange="mostrarNomeFicheiro()">
                                 <span id="nome-ficheiro" class="file-name"></span>
                             </div>
 
                             <div class="divider">{% trans "Escolhe a tua Moldura" %}</div>
 
                             <div class="avatar-grid" style="margin-bottom: 25px; align-items: end;">
+                                
                                 <label class="avatar-option">
-                                    <input type="radio" name="moldura_escolhida" value="moldura-base" {% if user.perfil.moldura_atual == 'moldura-base' or not user.perfil.moldura_atual %}checked{% endif %}>
+                                    <input type="radio" name="moldura_escolhida" value="moldura-base" 
+                                        {% if user.perfil.moldura_atual == 'moldura-base' or not user.perfil.moldura_atual %}
+                                            checked
+                                        {% endif %}>
                                     <div class="perf-moldura-avatar moldura-base" style="width: 60px; height: 60px; margin: 0 auto; background: #e2e8f0; border-width: 3px;"></div>
-                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #4b5563;">Padrão</p>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #4b5563;">{% trans "Padrão" %}</p>
                                 </label>
 
                                 {% if user.perfil.nivel_geral >= 5 %}
                                 <label class="avatar-option">
-                                    <input type="radio" name="moldura_escolhida" value="moldura-ouro" {% if user.perfil.moldura_atual == 'moldura-ouro' %}checked{% endif %}>
+                                    <input type="radio" name="moldura_escolhida" value="moldura-ouro" 
+                                        {% if user.perfil.moldura_atual == 'moldura-ouro' %}
+                                            checked
+                                        {% endif %}>
                                     <div class="perf-moldura-avatar moldura-ouro" style="width: 60px; height: 60px; margin: 0 auto; background: #e2e8f0; border-width: 3px;"></div>
-                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #b45309;">Ouro (Nv. 5)</p>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #b45309;">{% trans "Ouro (Nv. 5)" %}</p>
                                 </label>
                                 {% endif %}
 
                                 {% if user.perfil.nivel_geral >= 10 %}
                                 <label class="avatar-option">
-                                    <input type="radio" name="moldura_escolhida" value="moldura-hacker" {% if user.perfil.moldura_atual == 'moldura-hacker' %}checked{% endif %}>
+                                    <input type="radio" name="moldura_escolhida" value="moldura-hacker" 
+                                        {% if user.perfil.moldura_atual == 'moldura-hacker' %}
+                                            checked
+                                        {% endif %}>
                                     <div class="perf-moldura-avatar moldura-hacker" style="width: 60px; height: 60px; margin: 0 auto; background: #1e293b; border-width: 3px;"></div>
-                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #16a34a;">Elite (Nv. 10)</p>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #16a34a;">{% trans "Elite (Nv. 10)" %}</p>
                                 </label>
                                 {% endif %}
+
                                 {% if user.perfil.streak_maximo >= 30 %}
                                 <label class="avatar-option">
-                                    <input type="radio" name="moldura_escolhida" value="moldura-elite" {% if user.perfil.moldura_atual == 'moldura-elite' %}checked{% endif %}>
+                                    <input type="radio" name="moldura_escolhida" value="moldura-elite" 
+                                        {% if user.perfil.moldura_atual == 'moldura-elite' %}
+                                            checked
+                                        {% endif %}>
                                     <div class="perf-moldura-avatar moldura-elite" style="width: 60px; height: 60px; margin: 0 auto; background: #e2e8f0; border-width: 3px; border-radius: 50%;"></div>
-                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #bd1a92;">Elite (30 Dias)</p>
+                                    <p style="font-size: 0.75rem; margin-top: 8px; font-weight: bold; color: #bd1a92;">{% trans "Elite (30 Dias)" %}</p>
                                 </label>
                                 {% endif %}
+
                             </div>
 
-                            <button type="submit" class="btn-action-primary save-btn" style="width: 100%; border: none; cursor: pointer;">
+                            <button type="submit" class="btn-action-primary save-btn"
+                                style="width: 100%; border: none; cursor: pointer;">
                                 {% trans "Guardar Alterações" %}
                             </button>
                         </form>
                     </div>
                 </div>
-                
+
                 <div id="modal-edicao-dinamico" class="modal-overlay hidden">
                     <div class="modal-content" style="max-width: 320px; padding: 25px;">
                         <button type="button" class="close-modal" onclick="fecharModalDinamico()">×</button>
-                        
-                        <h3 id="modal-titulo-dinamico" style="color: #254d1a; margin-bottom: 20px; font-size: 1.3rem;">{% trans "Editar" %}</h3>
-                        
+
+                        <h3 id="modal-titulo-dinamico" style="color: #254d1a; margin-bottom: 20px; font-size: 1.3rem;">
+                            {% trans "Editar" %}</h3>
+
                         <form method="POST" action="{% url 'editar_perfil' %}">
                             {% csrf_token %}
-                            
-                            <div id="bloco-username" class="campo-edicao-dinamico" style="display: none; text-align: left;">
-                                <input type="text" name="username" id="input-username" value="{{ user.username }}" style="width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #e5e7eb; outline: none; box-sizing: border-box; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">
-                            </div>
-                            
-                            <div id="bloco-email" class="campo-edicao-dinamico" style="display: none; text-align: left;">
-                                <input type="email" name="email" id="input-email" value="{{ user.email }}" style="width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #e5e7eb; outline: none; box-sizing: border-box; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">
-                            </div>
-                            
-                            <div id="bloco-instituicao" class="campo-edicao-dinamico" style="display: none; text-align: left;">
-                                <input type="text" name="instituicao" id="input-instituicao" value="{{ user.perfil.instituicao }}" style="width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #e5e7eb; outline: none; box-sizing: border-box; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">
+
+                            <div id="bloco-username" class="campo-edicao-dinamico"
+                                style="display: none; text-align: left;">
+                                <input type="text" name="username" id="input-username" value="{{ user.username }}"
+                                    style="width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #e5e7eb; outline: none; box-sizing: border-box; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">
                             </div>
 
-                            <div id="bloco-ano_letivo" class="campo-edicao-dinamico" style="display: none; text-align: left;">
-                                <input type="text" name="ano_letivo" id="input-ano_letivo" value="{{ user.perfil.ano_letivo }}" style="width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #e5e7eb; outline: none; box-sizing: border-box; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">
+                            <div id="bloco-email" class="campo-edicao-dinamico"
+                                style="display: none; text-align: left;">
+                                <input type="email" name="email" id="input-email" value="{{ user.email }}"
+                                    style="width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #e5e7eb; outline: none; box-sizing: border-box; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">
                             </div>
-                            
+
+                            <div id="bloco-instituicao" class="campo-edicao-dinamico"
+                                style="display: none; text-align: left;">
+                                <input type="text" name="instituicao" id="input-instituicao"
+                                    value="{{ user.perfil.instituicao }}"
+                                    style="width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #e5e7eb; outline: none; box-sizing: border-box; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">
+                            </div>
+
+                            <div id="bloco-ano_letivo" class="campo-edicao-dinamico"
+                                style="display: none; text-align: left;">
+                                <input type="text" name="ano_letivo" id="input-ano_letivo"
+                                    value="{{ user.perfil.ano_letivo }}"
+                                    style="width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #e5e7eb; outline: none; box-sizing: border-box; font-family: 'Inter', sans-serif; font-size: 1rem; color: #333;">
+                            </div>
+
                             <input type="hidden" name="lingua" value="{{ user.perfil.lingua }}">
-                            
-                            <button type="submit" style="margin-top: 20px; width: 100%; border: none; cursor: pointer; padding: 12px; border-radius: 12px; background: #1c8814; color: white; font-weight: 800; font-size: 1rem; box-shadow: 0 4px 10px rgba(28, 136, 20, 0.3);">
+
+                            <button type="submit"
+                                style="margin-top: 20px; width: 100%; border: none; cursor: pointer; padding: 12px; border-radius: 12px; background: #1c8814; color: white; font-weight: 800; font-size: 1rem; box-shadow: 0 4px 10px rgba(28, 136, 20, 0.3);">
                                 {% trans "Guardar" %} 💾
                             </button>
                         </form>
                     </div>
                 </div>
-                
+
                 <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin-top: 15px;">
                     <h2 class="perf-nome-utilizador" style="margin: 0;">{{ user.username }}</h2>
-                    <button type="button" class="inline-edit-btn" onclick="abrirEdicao('username', '{% trans 'Nome de Utilizador' %}')" title="{% trans 'Editar Dados' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                    <button type="button" class="inline-edit-btn"
+                        onclick="abrirEdicao('username', '{% trans 'Nome de Utilizador' %}')"
+                        title="{% trans 'Editar Dados' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" width="16" height="16">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </button>
                 </div>
 
-                <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 2rem;">
+                <div
+                    style="display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 2rem;">
                     <span class="perf-email-pill" style="margin: 0;">{{ user.email }}</span>
-                    <button type="button" class="inline-edit-btn" onclick="abrirEdicao('email', '{% trans 'Email' %}')" title="{% trans 'Editar Dados' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                    <button type="button" class="inline-edit-btn" onclick="abrirEdicao('email', '{% trans 'Email' %}')"
+                        title="{% trans 'Editar Dados' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" width="16" height="16">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </button>
                 </div>
 
                 <div class="perf-medalhas-container">
-                    
-                    {% if rank_geral <= 3 %}
-                        <div class="perf-medalha {% if rank_geral == 1 %}m-ouro{% elif rank_geral == 2 %}m-prata{% else %}m-bronze{% endif %}">
-                            {% if rank_geral == 1 %}🥇 1º Geral
-                            {% elif rank_geral == 2 %}🥈 2º Geral
-                            {% else %}🥉 3º Geral{% endif %}
-                        </div>
-                    {% endif %}
 
-                    {% if rank_quiz <= 3 %}
-                        <div class="perf-medalha {% if rank_quiz == 1 %}m-ouro{% elif rank_quiz == 2 %}m-prata{% else %}m-bronze{% endif %}">
-                            {% if rank_quiz == 1 %}🥇 1º Quiz
-                            {% elif rank_quiz == 2 %}🥈 2º Quiz
-                            {% else %}🥉 3º Quiz{% endif %}
-                        </div>
-                    {% endif %}
-
-                    {% if rank_simulador <= 3 %}
-                        <div class="perf-medalha {% if rank_simulador == 1 %}m-ouro{% elif rank_simulador == 2 %}m-prata{% else %}m-bronze{% endif %}">
-                            {% if rank_simulador == 1 %}🥇 1º Simulador
-                            {% elif rank_simulador == 2 %}🥈 2º Simulador
-                            {% else %}🥉 3º Simulador{% endif %}
-                        </div>
-                    {% endif %}
-                    
+                    {% if rank_geral <= 3 %} <div
+                        class="perf-medalha {% if rank_geral == 1 %}m-ouro{% elif rank_geral == 2 %}m-prata{% else %}m-bronze{% endif %}">
+                        {% if rank_geral == 1 %}🥇 {% trans "1º Geral" %}
+                        {% elif rank_geral == 2 %}🥈 {% trans "2º Geral" %}
+                        {% else %}🥉 {% trans "3º Geral" %}{% endif %}
                 </div>
+                {% endif %}
 
-                <div class="perf-info-box">
-    
-                    <div class="perf-info-header">
-                        <div class="perf-info-header-left">
-                            <div class="perf-info-icon">
-                                🎓
-                            </div>
-                            <div class="perf-info-titles">
-                                <h3>{% trans "Dados" %}</h3>
-                                <p>{% trans "As tuas informações pessoais" %}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="perf-info-grid">
-                        <div class="perf-dado-grupo box-style">
-                            <div class="dado-header">
-                                <span class="perf-dado-label">{% trans "INSTITUIÇÃO" %}</span>
-                                <button type="button" class="inline-edit-btn" onclick="abrirEdicao('instituicao', '{% trans 'Instituição' %}')" title="{% trans 'Editar' %}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <span class="perf-dado-valor">{{ user.perfil.instituicao|default:"Não definido" }}</span>
-                        </div>
-                        
-                        <div class="perf-dado-grupo box-style">
-                            <div class="dado-header">
-                                <span class="perf-dado-label">{% trans "ESCOLARIDADE" %}</span>
-                                <button type="button" class="inline-edit-btn" onclick="abrirEdicao('ano_letivo', '{% trans 'Escolaridade' %}')" title="{% trans 'Editar' %}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <span class="perf-dado-valor">{{ user.perfil.ano_letivo|default:"Não definido" }}</span>
-                        </div>
-                    </div>
-
-                    <hr class="perf-info-divider">
-
-                    <div class="perf-global-progresso">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; width: 100%;">
-                            <span class="perf-global-label" style="font-weight: 800; color: #254d1a; font-size: 0.9rem; letter-spacing: 0.5px;">
-                                🏆 {% trans "NÍVEL GERAL DE DEFESA" %}
-                            </span>
-                            <span style="font-size: 1.1rem; font-weight: 900; color: #1c8814; background: rgba(32, 194, 20, 0.15); padding: 5px 12px; border-radius: 12px; border: 1px solid rgba(32, 194, 20, 0.3);">
-                                {% trans "Nível" %} {{ user.perfil.nivel_geral }}
-                            </span>
-                        </div>
-                        
-                        <div class="perf-barra-global-container">
-                            <div class="perf-barra-global-fill" style="width: calc(({{ user.perfil.xp_geral }} / {{xp_geral_necessario}}) * 100%);"></div>
-                        </div>
-                        
-                        <div style="text-align: right; margin-top: 8px;">
-                            <span class="perf-global-xp" style="font-size: 0.85rem; font-weight: 700; color: #6b7280;">
-                                {{ user.perfil.xp_geral }} / {{xp_geral_necessario}} XP Totais
-                            </span>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-            
-            <section class="perf-conquistas-box">
-                <div class="conquistas-header">
-                    <h3 class="serif-title" style="font-size: 2.2rem; margin-bottom: 0;">{% trans "Conquistas de Cibersegurança" %}</h3>
-                    <span class="conquistas-contador">{{ user.perfil.conquistas.count }} {% trans "Desbloqueadas" %}</span>
-                </div>
-                
-                <div class="medalhas-grid">
-                    {% for medalha in user.perfil.conquistas.all %}
-                        <div class="medalha-card tooltip-trigger">
-                            <div class="medalha-icon-big">{{ medalha.icone }}</div>
-                            <h4 class="medalha-nome">{{ medalha.nome }}</h4>
-                            
-                            <div class="tooltip-content">
-                                <span class="tooltip-titulo">{{ medalha.nome }}</span>
-                                <p>{{ medalha.descricao }}</p>
-                            </div>
-                        </div>
-                    {% empty %}
-                        <div class="sem-medalhas">
-                            <div style="font-size: 3rem; opacity: 0.5; margin-bottom: 10px;">🛡️</div>
-                            <p><strong>{% trans "Ainda não tens medalhas." %}</strong></p>
-                            <p style="font-size: 0.9rem; opacity: 0.7;">{% trans "Completa treinos e protege a tua conta para as desbloqueares!" %}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            </section>
-
-            <section class="perf-grid-estatisticas">
-                
-                <div class="perf-bloco-metrica destaque">
-                    <h3>{% trans "Nível Quiz" %}</h3>
-                    <span class="perf-valor-num">{{ user.perfil.nivel_quiz }}</span>
-                    <div class="perf-barra-mini-container">
-                        <div class="perf-barra-mini-fill" style="width: calc(({{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }}) * 100%);"></div>
-                    </div>
-                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }} XP</span>
-                </div>
-
-                <div class="perf-bloco-metrica">
-                    <h3>{% trans "Quizzes Realizados" %}</h3>
-                    <span class="perf-valor-num">{{ user.perfil.quizzes_realizados }}</span>
-                    <a href="{% url 'atividades:historico' %}" class="perf-link-historico">
-                        {% trans "Ver histórico" %} ➔
-                    </a>
-                </div>
-
-                <div class="perf-bloco-metrica">
-                    <h3>{% trans "Precisão Quiz" %}</h3>
-                    <span class="perf-valor-num">{{ user.perfil.precisao_media }}%</span>
-                </div>
-
-                <div class="perf-bloco-metrica destaque">
-                    <h3>{% trans "Nível Simulador" %}</h3>
-                    <span class="perf-valor-num">{{ user.perfil.nivel_simulador }}</span>
-                    <div class="perf-barra-mini-container">
-                        <div class="perf-barra-mini-fill" style="width: calc(({{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }}) * 100%);"></div>
-                    </div>
-                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }} XP</span>
-                </div>
-
-                <div class="perf-bloco-metrica">
-                    <h3>{% trans "Simuladores Realizados" %}</h3>
-                    <span class="perf-valor-num">{{ user.perfil.simuladores_realizados }}</span>
-                    <a href="{% url 'atividades:historico' %}" class="perf-link-historico">
-                        {% trans "Ver histórico" %} ➔
-                    </a>
-                </div>
-
-                <div class="perf-bloco-metrica">
-                    <h3>{% trans "Precisão Simulador" %}</h3>
-                    <span class="perf-valor-num">{{ user.perfil.precisao_media_simulador }}%</span>
-                </div>
-
-                <div class="perf-bloco-metrica" style="grid-column: 1 / -1; min-height: 350px;">
-                    <h3>{% trans "Mapeamento de Vulnerabilidades (Erros por Tema)" %}</h3>
-                    <div style="position: relative; height: 300px; width: 100%; display: flex; justify-content: center; align-items: center;">
-                        <canvas id="graficoVulnerabilidades"></canvas>
-                    </div>
-                </div>
-
-            </section>
-        </main>
+                {% if rank_quiz <= 3 %} <div
+                    class="perf-medalha {% if rank_quiz == 1 %}m-ouro{% elif rank_quiz == 2 %}m-prata{% else %}m-bronze{% endif %}">
+                    {% if rank_quiz == 1 %}🥇 {% trans "1º Quiz" %}
+                    {% elif rank_quiz == 2 %}🥈 {% trans "2º Quiz" %}
+                    {% else %}🥉 {% trans "3º Quiz" %}{% endif %}
     </div>
+    {% endif %}
 
-    {% include 'partials/footer_acessibilidade.html' %}
+    {% if rank_simulador <= 3 %} <div
+        class="perf-medalha {% if rank_simulador == 1 %}m-ouro{% elif rank_simulador == 2 %}m-prata{% else %}m-bronze{% endif %}">
+        {% if rank_simulador == 1 %}🥇 {% trans "1º Simulador" %}
+        {% elif rank_simulador == 2 %}🥈 {% trans "2º Simulador" %}
+        {% else %}🥉 {% trans "3º Simulador" %}{% endif %}
+        </div>
+        {% endif %}
 
-    <script src="{% static 'js/scripts.js' %}"></script>
-    <script>
-        // Funções para o modal e para o grafico dart
-        function abrirEdicao(campoId, tituloNome) {
-            const todosCampos = document.querySelectorAll('.campo-edicao-dinamico');
-            todosCampos.forEach(div => div.style.display = 'none');
-            
-            document.getElementById('bloco-' + campoId).style.display = 'block';
-            document.getElementById('modal-titulo-dinamico').innerText = "Editar " + tituloNome;
-            document.getElementById('modal-edicao-dinamico').classList.remove('hidden');
-            
-            setTimeout(() => {
-                document.getElementById('input-' + campoId).focus();
-            }, 100);
-        }
+        </div>
 
-        function fecharModalDinamico() {
-            document.getElementById('modal-edicao-dinamico').classList.add('hidden');
-        }
+        <div class="perf-info-box">
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const labelsStr = '{{ labels_grafico|safe }}';
-            const dadosStr = '{{ dados_grafico|safe }}';
-            
-            const canvas = document.getElementById('graficoVulnerabilidades');
-            
-            if (canvas && labelsStr && dadosStr) {
-                const labels = JSON.parse(labelsStr);
-                const dataErros = JSON.parse(dadosStr);
-                const ctx = canvas.getContext('2d');
-                
-                new Chart(ctx, {
-                    type: 'radar', 
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Vulnerabilidades (Erros)',
-                            data: dataErros,
-                            backgroundColor: 'rgba(255, 75, 75, 0.2)',
-                            borderColor: 'rgba(255, 75, 75, 1)',
-                            pointBackgroundColor: 'rgba(255, 75, 75, 1)',
-                            borderWidth: 2,
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            r: {
-                                angleLines: { color: 'rgba(37, 77, 26, 0.2)' }, 
-                                grid: { color: 'rgba(37, 77, 26, 0.2)' }, 
-                                pointLabels: { 
-                                    color: '#254d1a', 
-                                    font: { size: 12, weight: 'bold', family: 'Inter' } 
-                                },
-                                ticks: { display: false } 
-                            }
+            <div class="perf-info-header">
+                <div class="perf-info-header-left">
+                    <div class="perf-info-icon">
+                        🎓
+                    </div>
+                    <div class="perf-info-titles">
+                        <h3>{% trans "Dados" %}</h3>
+                        <p>{% trans "As tuas informações pessoais" %}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="perf-info-grid">
+                <div class="perf-dado-grupo box-style">
+                    <div class="dado-header">
+                        <span class="perf-dado-label">{% trans "INSTITUIÇÃO" %}</span>
+                        <button type="button" class="inline-edit-btn"
+                            onclick="abrirEdicao('instituicao', '{% trans 'Instituição' %}')"
+                            title="{% trans 'Editar' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" width="16" height="16">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="perf-dado-valor">{{ user.perfil.instituicao|default:"Não definido" }}</span>
+                </div>
+
+                <div class="perf-dado-grupo box-style">
+                    <div class="dado-header">
+                        <span class="perf-dado-label">{% trans "ESCOLARIDADE" %}</span>
+                        <button type="button" class="inline-edit-btn"
+                            onclick="abrirEdicao('ano_letivo', '{% trans 'Escolaridade' %}')"
+                            title="{% trans 'Editar' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" width="16" height="16">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="perf-dado-valor">{{ user.perfil.ano_letivo|default:"Não definido" }}</span>
+                </div>
+            </div>
+
+            <hr class="perf-info-divider">
+
+            <div class="perf-global-progresso">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; width: 100%;">
+                    <span class="perf-global-label"
+                        style="font-weight: 800; color: #254d1a; font-size: 0.9rem; letter-spacing: 0.5px;">
+                        🏆 {% trans "NÍVEL GERAL DE DEFESA" %}
+                    </span>
+                    <span
+                        style="font-size: 1.1rem; font-weight: 900; color: #1c8814; background: rgba(32, 194, 20, 0.15); padding: 5px 12px; border-radius: 12px; border: 1px solid rgba(32, 194, 20, 0.3);">
+                        {% trans "Nível" %} {{ user.perfil.nivel_geral }}
+                    </span>
+                </div>
+
+                <div class="perf-barra-global-container">
+                    <div class="perf-barra-global-fill"
+                        style="width: calc(({{ user.perfil.xp_geral }} / {{xp_geral_necessario}}) * 100%);"></div>
+                </div>
+
+                <div style="text-align: right; margin-top: 8px;">
+                    <span class="perf-global-xp" style="font-size: 0.85rem; font-weight: 700; color: #6b7280;">
+                        {{ user.perfil.xp_geral }} / {{xp_geral_necessario}} {% trans "XP Totais" %}
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        </section>
+
+        <section class="perf-conquistas-box">
+            <div class="conquistas-header">
+                <h3 class="serif-title" style="font-size: 2.2rem; margin-bottom: 0;">{% trans "Conquistas de Cibersegurança" %}</h3>
+                <span class="conquistas-contador">{{ user.perfil.conquistas.count }} {% trans "Desbloqueadas" %}</span>
+            </div>
+
+            <div class="medalhas-grid">
+                {% for medalha in user.perfil.conquistas.all %}
+                <div class="medalha-card tooltip-trigger">
+                    <div class="medalha-icon-big">{{ medalha.icone }}</div>
+                    <h4 class="medalha-nome">{{ medalha.nome }}</h4>
+
+                    <div class="tooltip-content">
+                        <span class="tooltip-titulo">{{ medalha.nome }}</span>
+                        <p>{{ medalha.descricao }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="sem-medalhas">
+                    <div style="font-size: 3rem; opacity: 0.5; margin-bottom: 10px;">🛡️</div>
+                    <p><strong>{% trans "Ainda não tens medalhas." %}</strong></p>
+                    <p style="font-size: 0.9rem; opacity: 0.7;">{% trans "Completa treinos e protege a tua conta para as
+                        desbloqueares!" %}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="perf-grid-estatisticas">
+
+            <div class="perf-bloco-metrica destaque">
+                <h3>{% trans "Nível Quiz" %}</h3>
+                <span class="perf-valor-num">{{ user.perfil.nivel_quiz }}</span>
+                <div class="perf-barra-mini-container">
+                    <div class="perf-barra-mini-fill"
+                        style="width: calc(({{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }}) * 100%);">
+                    </div>
+                </div>
+                <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }} {% trans
+                    "XP" %}</span>
+            </div>
+
+            <div class="perf-bloco-metrica">
+                <h3>{% trans "Quizzes Realizados" %}</h3>
+                <span class="perf-valor-num">{{ user.perfil.quizzes_realizados }}</span>
+                <a href="{% url 'atividades:historico' %}" class="perf-link-historico">
+                    {% trans "Ver histórico" %} ➔
+                </a>
+            </div>
+
+            <div class="perf-bloco-metrica">
+                <h3>{% trans "Precisão Quiz" %}</h3>
+                <span class="perf-valor-num">{{ user.perfil.precisao_media }}%</span>
+            </div>
+
+            <div class="perf-bloco-metrica destaque">
+                <h3>{% trans "Nível Simulador" %}</h3>
+                <span class="perf-valor-num">{{ user.perfil.nivel_simulador }}</span>
+                <div class="perf-barra-mini-container">
+                    <div class="perf-barra-mini-fill"
+                        style="width: calc(({{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }}) * 100%);">
+                    </div>
+                </div>
+                <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }}
+                    {% trans "XP" %}</span>
+            </div>
+
+            <div class="perf-bloco-metrica">
+                <h3>{% trans "Simuladores Realizados" %}</h3>
+                <span class="perf-valor-num">{{ user.perfil.simuladores_realizados }}</span>
+                <a href="{% url 'atividades:historico' %}" class="perf-link-historico">
+                    {% trans "Ver histórico" %} ➔
+                </a>
+            </div>
+
+            <div class="perf-bloco-metrica">
+                <h3>{% trans "Precisão Simulador" %}</h3>
+                <span class="perf-valor-num">{{ user.perfil.precisao_media_simulador }}%</span>
+            </div>
+
+            <div class="perf-bloco-metrica" style="grid-column: 1 / -1; min-height: 350px;">
+                <h3>{% trans "Mapeamento de Vulnerabilidades (Erros por Tema)" %}</h3>
+                <div
+                    style="position: relative; height: 300px; width: 100%; display: flex; justify-content: center; align-items: center;">
+                    <canvas id="graficoVulnerabilidades"></canvas>
+                </div>
+            </div>
+
+        </section>
+        </main>
+        </div>
+
+        {% include 'partials/footer_acessibilidade.html' %}
+
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <script>
+            // Funções para o modal e para o grafico dart
+            function abrirEdicao(campoId, tituloNome) {
+                const todosCampos = document.querySelectorAll('.campo-edicao-dinamico');
+                todosCampos.forEach(div => div.style.display = 'none');
+
+                document.getElementById('bloco-' + campoId).style.display = 'block';
+                document.getElementById('modal-titulo-dinamico').innerText = "Editar " + tituloNome;
+                document.getElementById('modal-edicao-dinamico').classList.remove('hidden');
+
+                setTimeout(() => {
+                    document.getElementById('input-' + campoId).focus();
+                }, 100);
+            }
+
+            function fecharModalDinamico() {
+                document.getElementById('modal-edicao-dinamico').classList.add('hidden');
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const labelsStr = '{{ labels_grafico|safe }}';
+                const dadosStr = '{{ dados_grafico|safe }}';
+
+                const canvas = document.getElementById('graficoVulnerabilidades');
+
+                if (canvas && labelsStr && dadosStr) {
+                    const labels = JSON.parse(labelsStr);
+                    const dataErros = JSON.parse(dadosStr);
+                    const ctx = canvas.getContext('2d');
+
+                    new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Vulnerabilidades (Erros)',
+                                data: dataErros,
+                                backgroundColor: 'rgba(255, 75, 75, 0.2)',
+                                borderColor: 'rgba(255, 75, 75, 1)',
+                                pointBackgroundColor: 'rgba(255, 75, 75, 1)',
+                                borderWidth: 2,
+                            }]
                         },
-                        plugins: { 
-                            legend: { display: false },
-                            tooltip: {
-                                backgroundColor: 'rgba(37, 77, 26, 0.9)', 
-                                titleFont: { size: 14 },
-                                bodyFont: { size: 14 },
-                                padding: 12,
-                                cornerRadius: 8
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                r: {
+                                    angleLines: { color: 'rgba(37, 77, 26, 0.2)' },
+                                    grid: { color: 'rgba(37, 77, 26, 0.2)' },
+                                    pointLabels: {
+                                        color: '#254d1a',
+                                        font: { size: 12, weight: 'bold', family: 'Inter' }
+                                    },
+                                    ticks: { display: false }
+                                }
+                            },
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    backgroundColor: 'rgba(37, 77, 26, 0.9)',
+                                    titleFont: { size: 14 },
+                                    bodyFont: { size: 14 },
+                                    padding: 12,
+                                    cornerRadius: 8
+                                }
                             }
                         }
-                    }
-                });
-            }
-        });
-    </script>
+                    });
+                }
+            });
+        </script>
 </body>
+
 </html>

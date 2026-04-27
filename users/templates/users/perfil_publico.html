@@ -1,0 +1,168 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Perfil de" %} {{ user_alvo.username }} | Protege+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'users/css/perfil.css' %}">
+    <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body
+    class="perf-view-ativa {% if request.user.is_authenticated and request.user.perfil %}{{ request.user.perfil.filtro_daltonismo }} {{ request.user.perfil.filtro_contraste }}{% endif %}">
+
+    <header class="perf-topo-nav">
+        <a href="{% url 'atividades:leaderboard' %}" class="perf-btn-retroceder">
+            <span>←</span> {% trans "Voltar à Leaderboard" %}
+        </a>
+    </header>
+
+    <div id="content-wrapper">
+        <main class="perf-corpo-central">
+
+            <section class="perf-cartao-id">
+                <div class="perf-moldura-avatar {{ perfil_alvo.moldura_atual|default:'moldura-base' }}">
+                    {% if perfil_alvo.avatar %}
+                    <img src="{{ perfil_alvo.avatar.url }}" alt="Avatar">
+                    {% else %}
+                    <img src="{% static 'users/images/' %}{{ perfil_alvo.avatar_padrao }}" alt="Avatar">
+                    {% endif %}
+                </div>
+
+                <h2 class="perf-nome-utilizador" style="margin-top: 20px;">{{ user_alvo.username }}</h2>
+
+                <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem;">
+                    {% if perfil_alvo.perfil_publico %}
+                    <p class="perf-email-pill" style="background: rgba(28, 136, 20, 0.1); color: #1c8814; margin: 0; display: flex; align-items: center; gap: 6px;">
+                        <img src="{% static 'users/images/planeta-terra.png' %}" alt="Público" style="width: 18px; height: 18px; object-fit: contain;"> 
+                        {% trans "Perfil Público" %}
+                    </p>
+                    {% else %}
+                    <p class="perf-email-pill" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; margin: 0; display: flex; align-items: center; gap: 6px;">
+                        <img src="{% static 'users/images/cadeado.png' %}" alt="Privado" style="width: 18px; height: 18px; object-fit: contain;">
+                        {% trans "Perfil Privado" %}
+                    </p>
+                    {% endif %}
+
+                    {% if user_alvo == request.user and not perfil_alvo.perfil_publico %}
+                    <p class="perf-email-pill" style="background: #fef3c7; color: #92400e; margin: 0; font-size: 0.75rem; display: flex; align-items: center; gap: 6px;">
+                        <img src="{% static 'users/images/aviso.png' %}" alt="Aviso" style="width: 16px; height: 16px; object-fit: contain;">
+                        {% trans "Só tu podes ver isto" %}
+                    </p>
+                    {% endif %}
+                </div>
+
+                {% if acesso_permitido %}
+                <div class="perf-info-grid">
+                    <div class="perf-dado-grupo box-style">
+                        <span class="perf-dado-label">{% trans "INSTITUIÇÃO" %}</span>
+                        <span class="perf-dado-valor">{{ perfil_alvo.instituicao|default:"-" }}</span>
+                    </div>
+                    <div class="perf-dado-grupo box-style">
+                        <span class="perf-dado-label">{% trans "ESCOLARIDADE" %}</span>
+                        <span class="perf-dado-valor">{{ perfil_alvo.ano_letivo|default:"-" }}</span>
+                    </div>
+                </div>
+
+                <hr class="perf-info-divider">
+
+                <div class="perf-global-progresso">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <span class="perf-global-label">🏆 {% trans "NÍVEL DE DEFESA" %}</span>
+                        <span class="perf-badge-nivel">{% trans "Nível" %} {{ perfil_alvo.nivel_geral }}</span>
+                    </div>
+                    <div class="perf-barra-global-container">
+                        <div class="perf-barra-global-fill"
+                            style="width: calc(({{ perfil_alvo.xp_geral }} / {{ xp_geral_necessario }}) * 100%);"></div>
+                    </div>
+                </div>
+                {% else %}
+                <div
+                    style="text-align: center; padding: 40px 20px; background: rgba(0,0,0,0.03); border-radius: 16px; border: 2px dashed #d1d5db; margin-top: 30px;">
+                    <div style="opacity: 0.6; margin-bottom: 15px; display: flex; justify-content: center;">
+                        <img src="{% static 'users/images/cadeado.png' %}" alt="Acesso Restrito" style="width: 64px; height: 64px; object-fit: contain;">
+                    </div>
+                    <h3 style="color: #374151; font-size: 1.5rem; margin-bottom: 10px;">{% trans "Acesso Restrito" %}
+                    </h3>
+                    <p style="color: #6b7280; max-width: 300px; margin: 0 auto; line-height: 1.5;">
+                        {% trans "Este jogador optou por manter as suas estatísticas e dados de treino privados." %}
+                    </p>
+                </div>
+                {% endif %}
+            </section>
+
+            {% if acesso_permitido %}
+            <section class="perf-grid-estatisticas">
+                <div class="perf-bloco-metrica destaque">
+                    <h3>{% trans "Nível Quiz" %}</h3>
+                    <span class="perf-valor-num">{{ perfil_alvo.nivel_quiz }}</span>
+                </div>
+                <div class="perf-bloco-metrica">
+                    <h3>{% trans "Quizzes Realizados" %}</h3>
+                    <span class="perf-valor-num">{{ perfil_alvo.quizzes_realizados }}</span>
+                </div>
+                <div class="perf-bloco-metrica">
+                    <h3>{% trans "Precisão Quiz" %}</h3>
+                    <span class="perf-valor-num">{{ perfil_alvo.precisao_media }}%</span>
+                </div>
+
+                <div class="perf-bloco-metrica destaque">
+                    <h3>{% trans "Nível Simulador" %}</h3>
+                    <span class="perf-valor-num">{{ perfil_alvo.nivel_simulador }}</span>
+                </div>
+                <div class="perf-bloco-metrica">
+                    <h3>{% trans "Simuladores Realizados" %}</h3>
+                    <span class="perf-valor-num">{{ perfil_alvo.simuladores_realizados }}</span>
+                </div>
+                <div class="perf-bloco-metrica">
+                    <h3>{% trans "Precisão Simulador" %}</h3>
+                    <span class="perf-valor-num">{{ perfil_alvo.precisao_media_simulador }}%</span>
+                </div>
+
+                <div class="perf-bloco-metrica" style="grid-column: 1 / -1; min-height: 350px;">
+                    <h3>{% trans "Mapeamento de Vulnerabilidades de" %} {{ user_alvo.username }}</h3>
+                    <div style="height: 300px;">
+                        <canvas id="graficoPublico"></canvas>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('graficoPublico').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: {{ labels_grafico| safe }},
+            datasets: [{
+                label: '{% trans "Vulnerabilidades (Erros)" %}',
+                data: {{ dados_grafico| safe }},
+            backgroundColor: 'rgba(255, 75, 75, 0.2)',
+            borderColor: 'rgba(255, 75, 75, 1)',
+            borderWidth: 2
+                    }]
+                },
+            options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: { suggestMin: 0, ticks: { display: false } }
+            }
+        }
+            });
+        });
+    </script>
+</body>
+
+</html>

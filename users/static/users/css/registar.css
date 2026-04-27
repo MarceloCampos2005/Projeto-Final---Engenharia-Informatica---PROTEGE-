@@ -287,23 +287,6 @@ body.view-autenticacao {
   display: none !important;
 }
 
-
-body.modo-escuro .wrapper-split {
-  background-color: #1a1a1a !important;
-  color: white !important;
-}
-body.modo-escuro .ala-principal-direita {
-  background-color: #2c2c2c !important;
-}
-body.modo-escuro .cabecalho-form,
-body.modo-escuro .logotipo-superior .nome-marca-estilizado,
-body.modo-escuro .btn-exit-login {
-  color: white !important;
-}
-body.modo-escuro .btn-exit-login {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
 @media (max-width: 480px) {
   .header-navegacao-login {
     padding: 1.5rem;

@@ -1194,126 +1194,6 @@ a.dropdown-item {
 
 /*Acessibilidade*/
 
-/* Painel de Missões e XP */
-body.modo-escuro .mission-panel {
-  background: rgba(30, 30, 30, 0.8);
-  border-color: #333;
-}
-
-body.modo-escuro .mission-task {
-  color: var(--d3-neve-pura);
-}
-
-body.modo-escuro .mission-level {
-  background: #333;
-  color: #e2e8f0;
-}
-
-body.modo-escuro .xp-bar-bg {
-  background-color: #333;
-}
-
-/* Dropdown do Perfil */
-body.modo-escuro .dropdown-menu {
-  background: rgba(30, 30, 30, 0.85);
-  border-color: #444;
-}
-
-body.modo-escuro .dropdown-username,
-body.modo-escuro .dropdown-item {
-  color: #e2e8f0;
-}
-
-body.modo-escuro .dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-}
-
-body.modo-escuro .divider {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-body.modo-escuro .dropdown-label {
-  color: #94a3b8;
-}
-
-body.modo-escuro .streak-side-panel {
-  background: linear-gradient(to right, rgba(200, 70, 50, 0.2), rgba(200, 100, 50, 0.2));
-  border-color: rgba(255, 126, 95, 0.2);
-}
-
-body.modo-escuro .streak-side-dicas {
-  background: #422006;
-  color: #fcd34d;
-}
-
-body.modo-escuro .ss-cp {
-  background: #1e1e1e;
-  border-color: #4b5563;
-  color: #9ca3af;
-}
-
-body.modo-escuro .mfa-achievement-alert.compact {
-  background: rgba(200, 150, 0, 0.15);
-  border-color: rgba(200, 150, 0, 0.5);
-}
-
-body.modo-escuro .section-divider .shape-fill {
-  fill: #1e1e1e !important;
-}
-
-
-body.modo-escuro .threat-item {
-  background: #1e1e1e;
-  border-color: #333;
-
-}
-
-body.modo-escuro .threat-title {
-  color: var(--d3-neve-pura);
-}
-
-body.modo-escuro .solution-banner {
-  background: #1e1e1e;
-  border: 1px solid #333;
-}
-
-body.modo-escuro .sol-card {
-  background: rgba(40, 40, 40, 0.8);
-  border-color: #555;
-}
-
-body.modo-escuro .sol-card h3 {
-  color: var(--d3-neve-pura);
-}
-
-body.modo-escuro .sol-card p {
-  color: #cbd5e1;
-}
-
-body.modo-escuro .solution-footer-text {
-  color: #94a3b8;
-}
-
-body.modo-escuro {
-  background-color: #121212 !important;
-}
-
-body.modo-escuro #content-wrapper,
-body.modo-escuro .home-info-section {
-  background-color: transparent !important;
-}
-
-body.modo-escuro .section-divider .shape-fill {
-  fill: #121212 !important;
-}
-
-body.modo-escuro .serif-title,
-body.modo-escuro .hero-subtitle,
-body.modo-escuro .threat-title {
-  color: #ffffff !important;
-}
-
 
 #content-wrapper {
   filter: inherit !important;
@@ -1333,20 +1213,7 @@ body.modo-escuro .threat-title {
 }
 
 
-body.modo-escuro .section-divider .shape-fill {
-  fill: #121212 !important;
-}
 
-
-body.modo-escuro .solution-banner {
-  background: #1e1e1e !important;
-  border: 1px solid #333;
-}
-
-body.modo-escuro .threat-item {
-  background: #1e1e1e !important;
-  border-color: #444 !important;
-}
 
 
 .toast-msg.success {
@@ -1376,10 +1243,6 @@ body.modo-escuro .threat-item {
   animation: slideInRight 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-body.modo-escuro .toast-item {
-  background: #1e1e1e;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-}
 
 .toast-content {
   display: flex;
@@ -1424,10 +1287,6 @@ body.modo-escuro .toast-item {
   animation: slideInRight 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-body.modo-escuro .toast-item {
-  background: #1e1e1e;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-}
 
 .toast-content {
   display: flex;
@@ -1446,10 +1305,6 @@ body.modo-escuro .toast-item {
   font-weight: 700;
   font-size: 0.95rem;
   flex-grow: 1;
-}
-
-body.modo-escuro .toast-text {
-  color: #ffffff;
 }
 
 .toast-close {

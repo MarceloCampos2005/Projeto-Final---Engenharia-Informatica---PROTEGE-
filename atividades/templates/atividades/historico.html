@@ -31,7 +31,7 @@
                     {% for res in resultados %}
                     <div class="hist-card">
                         <div class="hist-card-topo">
-                            <span class="hist-tag">Nível {{ res.nivel }}</span>
+                            <span class="hist-tag">{% trans "Nível" %} {{ res.nivel }}</span>
                             <span class="hist-data">{{ res.data_conclusao|date:"d/m/Y" }}</span>
                         </div>
                         
@@ -71,14 +71,14 @@
                     <div class="hist-card">
                         <div class="hist-card-topo">
                             <span class="hist-tag" style="background: #b45309;">
-                                {% if sim.tipo_simulacao == 'classificacao' %}Rápido{% else %}Detetive{% endif %}
+                                {% if sim.tipo_simulacao == 'classificacao' %}{% trans "Rápido" %}{% else %}{% trans "Detetive" %}{% endif %}
                             </span>
                             <span class="hist-data">{{ sim.data_conclusao|date:"d/m/Y H:i" }}</span>
                         </div>
                         
                         <div class="hist-stats" style="flex-direction: column; align-items: flex-start; gap: 10px;">
                             <strong style="color: var(--d3-verde-noite); font-size: 1.1rem;">
-                                {{ sim.email.assunto|truncatechars:35 }}
+                                {{ sim.email.assunto|striptags|truncatechars:35 }}
                             </strong>
                             
                             {% if sim.acertou %}

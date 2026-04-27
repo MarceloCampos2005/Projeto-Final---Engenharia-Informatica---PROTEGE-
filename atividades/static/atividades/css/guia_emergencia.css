@@ -383,57 +383,6 @@
     }
 }
 
-body.modo-escuro .passos-container {
-    background: rgba(30, 30, 30, 0.6);
-    border-color: #333;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-}
-
-body.modo-escuro .passos-header-wrapper {
-    border-bottom-color: #333;
-}
-
-body.modo-escuro .step-item {
-    background: #1e1e1e;
-    border-color: #333;
-    color: #e2e8f0;
-}
-
-body.modo-escuro .step-item:hover {
-    background: #2a2a2a;
-}
-
-body.modo-escuro .mode-btn {
-    background: #1e1e1e;
-    color: #e2e8f0;
-    border-color: #4b5563;
-}
-
-body.modo-escuro .mode-btn:hover:not(.active) {
-    background: #333;
-}
-
-body.modo-escuro #btn-emergencia.active {
-    background: #ef4444;
-    border-color: #ef4444;
-}
-
-body.modo-escuro #btn-mitigacao.active {
-    background: var(--d3-neon-leaf);
-    border-color: var(--d3-neon-leaf);
-    color: #000;
-}
-
-body.modo-escuro .btn-fechar {
-    background: #333;
-    color: #e2e8f0;
-}
-
-body.modo-escuro .btn-fechar:hover {
-    background: #ef4444;
-    color: white;
-}
-
 
 #titulo-incidente {
     color: #ff4b4b;
@@ -456,15 +405,4 @@ body.modo-escuro .btn-fechar:hover {
 #painel-passos.tema-verde .step-item:hover {
     border-color: #1c8814;
     box-shadow: 0 8px 20px rgba(28, 136, 20, 0.1);
-}
-
-/* Tema Verde no Modo Escuro */
-body.modo-escuro #painel-passos.tema-verde #titulo-incidente {
-    color: var(--d3-neon-leaf, #20c214);
-}
-
-body.modo-escuro #painel-passos.tema-verde .step-item::before {
-    background: var(--d3-neon-leaf, #20c214);
-    color: #000;
-    box-shadow: 0 4px 10px rgba(32, 194, 20, 0.3);
 }

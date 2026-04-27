@@ -13,4 +13,6 @@ urlpatterns = [
     path('atualizar-avatar/', views.atualizar_avatar, name='atualizar_avatar'),
     path('desativar-mfa-seguro/', views.desativar_mfa_seguro, name='desativar_mfa_seguro'),
     path('mfa/account/two_factor/setup/complete/', views.mfa_sucesso_redirect, name='mfa_sucesso_redirect'),
+    path('perfil/privacidade/', views.toggle_privacidade, name='toggle_privacidade'),
+    path('jogador/<str:username>/', views.perfil_publico, name='perfil_publico'),
 ]

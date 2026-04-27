@@ -1519,3 +1519,61 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+
+
+// Aguarda que a página carregue completamente
+document.addEventListener('DOMContentLoaded', function () {
+
+    const checkboxPrivacidade = document.getElementById('checkbox-privacidade');
+
+    //garante que este js so corre na pag do perfil
+    if (checkboxPrivacidade) {
+        checkboxPrivacidade.addEventListener('change', function () {
+            //guarda estado do botao
+            const isChecked = this.checked;
+
+            //vai buscar token de seguranca
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            const textoLabel = document.getElementById('texto-privacidade');
+
+        
+            const urlToggle = this.getAttribute('data-url');
+            const textoPublico = this.getAttribute('data-text-pub');
+            const textoPrivado = this.getAttribute('data-text-priv');
+
+            //Muda instantaneamente o estado do perfil
+            if (isChecked) {
+                textoLabel.innerHTML = textoPublico;
+            } else {
+                textoLabel.innerHTML = textoPrivado;
+            }
+
+            //pedido ajax para guardar a escolha do utilizador
+            fetch(urlToggle, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Erro na rede ao tentar alterar a privacidade");
+                    }
+                    return response.json();
+                })
+                .catch(error => {
+                    console.error('Erro ao guardar privacidade:', error);
+
+                
+                    //se der erro ou falhar volta ao estado inicial
+                    this.checked = !isChecked;
+                    if (!isChecked) {
+                        textoLabel.innerHTML = textoPublico;
+                    } else {
+                        textoLabel.innerHTML = textoPrivado;
+                    }
+                });
+        });
+    }
+});
