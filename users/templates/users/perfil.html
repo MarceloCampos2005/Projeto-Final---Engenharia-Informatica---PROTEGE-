@@ -65,13 +65,11 @@
 
                 <div class="perf-moldura-avatar {{ user.perfil.moldura_atual|default:'moldura-base' }}">
                     {% if user.perfil.avatar %}
-                    <img src="{{ user.perfil.avatar.url }}" alt="{% trans 'Avatar do Utilizador' %}">
+                        <img src="{{ user.perfil.avatar.url }}" alt="{% trans 'Avatar do Utilizador' %}">
                     {% elif user.socialaccount_set.all %}
-                    <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="{% trans 'Avatar do Google' %}"
-                        referrerpolicy="no-referrer">
+                        <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="{% trans 'Avatar do Google' %}" referrerpolicy="no-referrer">
                     {% else %}
-                    <img src="{% static 'users/images/' %}{{ user.perfil.avatar_padrao }}"
-                        alt="{% trans 'Avatar Padrão' %}">
+                        <img src="{% static 'users/images/' %}{{ user.perfil.avatar_padrao }}" alt="{% trans 'Avatar Padrão' %}">
                     {% endif %}
 
                     <button type="button" class="perf-avatar-edit-btn" onclick="abrirModalAvatar()"
@@ -244,278 +242,258 @@
                 </div>
 
                 <div class="perf-medalhas-container">
+                    
+                    {% if rank_geral <= 3 %}
+                        <div class="perf-medalha {% if rank_geral == 1 %}m-ouro{% elif rank_geral == 2 %}m-prata{% else %}m-bronze{% endif %}">
+                            {% if rank_geral == 1 %}🥇 {% trans "1º Geral" %}
+                            {% elif rank_geral == 2 %}🥈 {% trans "2º Geral" %}
+                            {% else %}🥉 {% trans "3º Geral" %}{% endif %}
+                        </div>
+                    {% endif %}
 
-                    {% if rank_geral <= 3 %} <div
-                        class="perf-medalha {% if rank_geral == 1 %}m-ouro{% elif rank_geral == 2 %}m-prata{% else %}m-bronze{% endif %}">
-                        {% if rank_geral == 1 %}🥇 {% trans "1º Geral" %}
-                        {% elif rank_geral == 2 %}🥈 {% trans "2º Geral" %}
-                        {% else %}🥉 {% trans "3º Geral" %}{% endif %}
+                    {% if rank_quiz <= 3 %}
+                        <div class="perf-medalha {% if rank_quiz == 1 %}m-ouro{% elif rank_quiz == 2 %}m-prata{% else %}m-bronze{% endif %}">
+                            {% if rank_quiz == 1 %}🥇 {% trans "1º Quiz" %}
+                            {% elif rank_quiz == 2 %}🥈 {% trans "2º Quiz" %}
+                            {% else %}🥉 {% trans "3º Quiz" %}{% endif %}
+                        </div>
+                    {% endif %}
+
+                    {% if rank_simulador <= 3 %}
+                        <div class="perf-medalha {% if rank_simulador == 1 %}m-ouro{% elif rank_simulador == 2 %}m-prata{% else %}m-bronze{% endif %}">
+                            {% if rank_simulador == 1 %}🥇 {% trans "1º Simulador" %}
+                            {% elif rank_simulador == 2 %}🥈 {% trans "2º Simulador" %}
+                            {% else %}🥉 {% trans "3º Simulador" %}{% endif %}
+                        </div>
+                    {% endif %}
+                    
                 </div>
-                {% endif %}
 
-                {% if rank_quiz <= 3 %} <div
-                    class="perf-medalha {% if rank_quiz == 1 %}m-ouro{% elif rank_quiz == 2 %}m-prata{% else %}m-bronze{% endif %}">
-                    {% if rank_quiz == 1 %}🥇 {% trans "1º Quiz" %}
-                    {% elif rank_quiz == 2 %}🥈 {% trans "2º Quiz" %}
-                    {% else %}🥉 {% trans "3º Quiz" %}{% endif %}
-    </div>
-    {% endif %}
-
-    {% if rank_simulador <= 3 %} <div
-        class="perf-medalha {% if rank_simulador == 1 %}m-ouro{% elif rank_simulador == 2 %}m-prata{% else %}m-bronze{% endif %}">
-        {% if rank_simulador == 1 %}🥇 {% trans "1º Simulador" %}
-        {% elif rank_simulador == 2 %}🥈 {% trans "2º Simulador" %}
-        {% else %}🥉 {% trans "3º Simulador" %}{% endif %}
-        </div>
-        {% endif %}
-
-        </div>
-
-        <div class="perf-info-box">
-
-            <div class="perf-info-header">
-                <div class="perf-info-header-left">
-                    <div class="perf-info-icon">
-                        🎓
+                <div class="perf-info-box">
+    
+                    <div class="perf-info-header">
+                        <div class="perf-info-header-left">
+                            <div class="perf-info-icon">
+                                🎓
+                            </div>
+                            <div class="perf-info-titles">
+                                <h3>{% trans "Dados" %}</h3>
+                                <p>{% trans "As tuas informações pessoais" %}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="perf-info-titles">
-                        <h3>{% trans "Dados" %}</h3>
-                        <p>{% trans "As tuas informações pessoais" %}</p>
+
+                    <div class="perf-info-grid">
+                        <div class="perf-dado-grupo box-style">
+                            <div class="dado-header">
+                                <span class="perf-dado-label">{% trans "INSTITUIÇÃO" %}</span>
+                                <button type="button" class="inline-edit-btn" onclick="abrirEdicao('instituicao', '{% trans 'Instituição' %}')" title="{% trans 'Editar' %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="perf-dado-valor">{{ user.perfil.instituicao|default:"Não definido" }}</span>
+                        </div>
+                        
+                        <div class="perf-dado-grupo box-style">
+                            <div class="dado-header">
+                                <span class="perf-dado-label">{% trans "ESCOLARIDADE" %}</span>
+                                <button type="button" class="inline-edit-btn" onclick="abrirEdicao('ano_letivo', '{% trans 'Escolaridade' %}')" title="{% trans 'Editar' %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="perf-dado-valor">{{ user.perfil.ano_letivo|default:"Não definido" }}</span>
+                        </div>
+                    </div>
+
+                    <hr class="perf-info-divider">
+
+                    <div class="perf-global-progresso">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; width: 100%;">
+                            <span class="perf-global-label" style="font-weight: 800; color: #254d1a; font-size: 0.9rem; letter-spacing: 0.5px;">
+                                🏆 {% trans "NÍVEL GERAL DE DEFESA" %}
+                            </span>
+                            <span style="font-size: 1.1rem; font-weight: 900; color: #1c8814; background: rgba(32, 194, 20, 0.15); padding: 5px 12px; border-radius: 12px; border: 1px solid rgba(32, 194, 20, 0.3);">
+                                {% trans "Nível" %} {{ user.perfil.nivel_geral }}
+                            </span>
+                        </div>
+                        
+                        <div class="perf-barra-global-container">
+                            <div class="perf-barra-global-fill" style="width: calc(({{ user.perfil.xp_geral }} / {{xp_geral_necessario}}) * 100%);"></div>
+                        </div>
+                        
+                        <div style="text-align: right; margin-top: 8px;">
+                            <span class="perf-global-xp" style="font-size: 0.85rem; font-weight: 700; color: #6b7280;">
+                                {{ user.perfil.xp_geral }} / {{xp_geral_necessario}} {% trans "XP Totais" %}
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            
+            <section class="perf-conquistas-box">
+                <div class="conquistas-header">
+                    <h3 class="serif-title" style="font-size: 2.2rem; margin-bottom: 0;">{% trans "Conquistas de Cibersegurança" %}</h3>
+                    <span class="conquistas-contador">{{ user.perfil.conquistas.count }} {% trans "Desbloqueadas" %}</span>
+                </div>
+                
+                <div class="medalhas-grid">
+                    {% for medalha in user.perfil.conquistas.all %}
+                        <div class="medalha-card tooltip-trigger">
+                            <div class="medalha-icon-big">{{ medalha.icone }}</div>
+                            <h4 class="medalha-nome">{{ medalha.nome }}</h4>
+                            
+                            <div class="tooltip-content">
+                                <span class="tooltip-titulo">{{ medalha.nome }}</span>
+                                <p>{{ medalha.descricao }}</p>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="sem-medalhas">
+                            <div style="font-size: 3rem; opacity: 0.5; margin-bottom: 10px;">🛡️</div>
+                            <p><strong>{% trans "Ainda não tens medalhas." %}</strong></p>
+                            <p style="font-size: 0.9rem; opacity: 0.7;">{% trans "Completa treinos e protege a tua conta para as desbloqueares!" %}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="perf-grid-estatisticas">
+                
+                <div class="perf-bloco-metrica destaque">
+                    <h3>{% trans "Nível Quiz" %}</h3>
+                    <span class="perf-valor-num">{{ user.perfil.nivel_quiz }}</span>
+                    <div class="perf-barra-mini-container">
+                        <div class="perf-barra-mini-fill" style="width: calc(({{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }}) * 100%);"></div>
+                    </div>
+                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }} {% trans "XP" %}</span>
+                </div>
+
+                <div class="perf-bloco-metrica">
+                    <h3>{% trans "Quizzes Realizados" %}</h3>
+                    <span class="perf-valor-num">{{ user.perfil.quizzes_realizados }}</span>
+                    <a href="{% url 'atividades:historico' %}" class="perf-link-historico">
+                        {% trans "Ver histórico" %} ➔
+                    </a>
+                </div>
+
+                <div class="perf-bloco-metrica">
+                    <h3>{% trans "Precisão Quiz" %}</h3>
+                    <span class="perf-valor-num">{{ user.perfil.precisao_media }}%</span>
+                </div>
+
+                <div class="perf-bloco-metrica destaque">
+                    <h3>{% trans "Nível Simulador" %}</h3>
+                    <span class="perf-valor-num">{{ user.perfil.nivel_simulador }}</span>
+                    <div class="perf-barra-mini-container">
+                        <div class="perf-barra-mini-fill" style="width: calc(({{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }}) * 100%);"></div>
+                    </div>
+                    <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }} {% trans "XP" %}</span>
+                </div>
+
+                <div class="perf-bloco-metrica">
+                    <h3>{% trans "Simuladores Realizados" %}</h3>
+                    <span class="perf-valor-num">{{ user.perfil.simuladores_realizados }}</span>
+                    <a href="{% url 'atividades:historico' %}" class="perf-link-historico">
+                        {% trans "Ver histórico" %} ➔
+                    </a>
+                </div>
+
+                <div class="perf-bloco-metrica">
+                    <h3>{% trans "Precisão Simulador" %}</h3>
+                    <span class="perf-valor-num">{{ user.perfil.precisao_media_simulador }}%</span>
+                </div>
+
+                <div class="perf-bloco-metrica" style="grid-column: 1 / -1; min-height: 350px;">
+                    <h3>{% trans "Mapeamento de Vulnerabilidades (Erros por Tema)" %}</h3>
+                    <div style="position: relative; height: 300px; width: 100%; display: flex; justify-content: center; align-items: center;">
+                        <canvas id="graficoVulnerabilidades"></canvas>
                     </div>
                 </div>
-            </div>
 
-            <div class="perf-info-grid">
-                <div class="perf-dado-grupo box-style">
-                    <div class="dado-header">
-                        <span class="perf-dado-label">{% trans "INSTITUIÇÃO" %}</span>
-                        <button type="button" class="inline-edit-btn"
-                            onclick="abrirEdicao('instituicao', '{% trans 'Instituição' %}')"
-                            title="{% trans 'Editar' %}">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" width="16" height="16">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                            </svg>
-                        </button>
-                    </div>
-                    <span class="perf-dado-valor">{{ user.perfil.instituicao|default:"Não definido" }}</span>
-                </div>
-
-                <div class="perf-dado-grupo box-style">
-                    <div class="dado-header">
-                        <span class="perf-dado-label">{% trans "ESCOLARIDADE" %}</span>
-                        <button type="button" class="inline-edit-btn"
-                            onclick="abrirEdicao('ano_letivo', '{% trans 'Escolaridade' %}')"
-                            title="{% trans 'Editar' %}">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" width="16" height="16">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                            </svg>
-                        </button>
-                    </div>
-                    <span class="perf-dado-valor">{{ user.perfil.ano_letivo|default:"Não definido" }}</span>
-                </div>
-            </div>
-
-            <hr class="perf-info-divider">
-
-            <div class="perf-global-progresso">
-                <div
-                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; width: 100%;">
-                    <span class="perf-global-label"
-                        style="font-weight: 800; color: #254d1a; font-size: 0.9rem; letter-spacing: 0.5px;">
-                        🏆 {% trans "NÍVEL GERAL DE DEFESA" %}
-                    </span>
-                    <span
-                        style="font-size: 1.1rem; font-weight: 900; color: #1c8814; background: rgba(32, 194, 20, 0.15); padding: 5px 12px; border-radius: 12px; border: 1px solid rgba(32, 194, 20, 0.3);">
-                        {% trans "Nível" %} {{ user.perfil.nivel_geral }}
-                    </span>
-                </div>
-
-                <div class="perf-barra-global-container">
-                    <div class="perf-barra-global-fill"
-                        style="width: calc(({{ user.perfil.xp_geral }} / {{xp_geral_necessario}}) * 100%);"></div>
-                </div>
-
-                <div style="text-align: right; margin-top: 8px;">
-                    <span class="perf-global-xp" style="font-size: 0.85rem; font-weight: 700; color: #6b7280;">
-                        {{ user.perfil.xp_geral }} / {{xp_geral_necessario}} {% trans "XP Totais" %}
-                    </span>
-                </div>
-            </div>
-
-        </div>
-        </section>
-
-        <section class="perf-conquistas-box">
-            <div class="conquistas-header">
-                <h3 class="serif-title" style="font-size: 2.2rem; margin-bottom: 0;">{% trans "Conquistas de Cibersegurança" %}</h3>
-                <span class="conquistas-contador">{{ user.perfil.conquistas.count }} {% trans "Desbloqueadas" %}</span>
-            </div>
-
-            <div class="medalhas-grid">
-                {% for medalha in user.perfil.conquistas.all %}
-                <div class="medalha-card tooltip-trigger">
-                    <div class="medalha-icon-big">{{ medalha.icone }}</div>
-                    <h4 class="medalha-nome">{{ medalha.nome }}</h4>
-
-                    <div class="tooltip-content">
-                        <span class="tooltip-titulo">{{ medalha.nome }}</span>
-                        <p>{{ medalha.descricao }}</p>
-                    </div>
-                </div>
-                {% empty %}
-                <div class="sem-medalhas">
-                    <div style="font-size: 3rem; opacity: 0.5; margin-bottom: 10px;">🛡️</div>
-                    <p><strong>{% trans "Ainda não tens medalhas." %}</strong></p>
-                    <p style="font-size: 0.9rem; opacity: 0.7;">{% trans "Completa treinos e protege a tua conta para as
-                        desbloqueares!" %}</p>
-                </div>
-                {% endfor %}
-            </div>
-        </section>
-
-        <section class="perf-grid-estatisticas">
-
-            <div class="perf-bloco-metrica destaque">
-                <h3>{% trans "Nível Quiz" %}</h3>
-                <span class="perf-valor-num">{{ user.perfil.nivel_quiz }}</span>
-                <div class="perf-barra-mini-container">
-                    <div class="perf-barra-mini-fill"
-                        style="width: calc(({{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }}) * 100%);">
-                    </div>
-                </div>
-                <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_quiz }} / {{ xp_necessario_quiz }} {% trans
-                    "XP" %}</span>
-            </div>
-
-            <div class="perf-bloco-metrica">
-                <h3>{% trans "Quizzes Realizados" %}</h3>
-                <span class="perf-valor-num">{{ user.perfil.quizzes_realizados }}</span>
-                <a href="{% url 'atividades:historico' %}" class="perf-link-historico">
-                    {% trans "Ver histórico" %} ➔
-                </a>
-            </div>
-
-            <div class="perf-bloco-metrica">
-                <h3>{% trans "Precisão Quiz" %}</h3>
-                <span class="perf-valor-num">{{ user.perfil.precisao_media }}%</span>
-            </div>
-
-            <div class="perf-bloco-metrica destaque">
-                <h3>{% trans "Nível Simulador" %}</h3>
-                <span class="perf-valor-num">{{ user.perfil.nivel_simulador }}</span>
-                <div class="perf-barra-mini-container">
-                    <div class="perf-barra-mini-fill"
-                        style="width: calc(({{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }}) * 100%);">
-                    </div>
-                </div>
-                <span class="perf-xp-texto">{{ user.perfil.pontuacao_total_simulador }} / {{ xp_necessario_simulador }}
-                    {% trans "XP" %}</span>
-            </div>
-
-            <div class="perf-bloco-metrica">
-                <h3>{% trans "Simuladores Realizados" %}</h3>
-                <span class="perf-valor-num">{{ user.perfil.simuladores_realizados }}</span>
-                <a href="{% url 'atividades:historico' %}" class="perf-link-historico">
-                    {% trans "Ver histórico" %} ➔
-                </a>
-            </div>
-
-            <div class="perf-bloco-metrica">
-                <h3>{% trans "Precisão Simulador" %}</h3>
-                <span class="perf-valor-num">{{ user.perfil.precisao_media_simulador }}%</span>
-            </div>
-
-            <div class="perf-bloco-metrica" style="grid-column: 1 / -1; min-height: 350px;">
-                <h3>{% trans "Mapeamento de Vulnerabilidades (Erros por Tema)" %}</h3>
-                <div
-                    style="position: relative; height: 300px; width: 100%; display: flex; justify-content: center; align-items: center;">
-                    <canvas id="graficoVulnerabilidades"></canvas>
-                </div>
-            </div>
-
-        </section>
+            </section>
         </main>
-        </div>
+    </div>
 
-        {% include 'partials/footer_acessibilidade.html' %}
+    {% include 'partials/footer_acessibilidade.html' %}
 
-        <script src="{% static 'js/scripts.js' %}"></script>
-        <script>
-            // Funções para o modal e para o grafico dart
-            function abrirEdicao(campoId, tituloNome) {
-                const todosCampos = document.querySelectorAll('.campo-edicao-dinamico');
-                todosCampos.forEach(div => div.style.display = 'none');
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+        // Funções para o modal e para o grafico dart
+        function abrirEdicao(campoId, tituloNome) {
+            const todosCampos = document.querySelectorAll('.campo-edicao-dinamico');
+            todosCampos.forEach(div => div.style.display = 'none');
 
-                document.getElementById('bloco-' + campoId).style.display = 'block';
-                document.getElementById('modal-titulo-dinamico').innerText = "Editar " + tituloNome;
-                document.getElementById('modal-edicao-dinamico').classList.remove('hidden');
+            document.getElementById('bloco-' + campoId).style.display = 'block';
+            document.getElementById('modal-titulo-dinamico').innerText = "Editar " + tituloNome;
+            document.getElementById('modal-edicao-dinamico').classList.remove('hidden');
 
-                setTimeout(() => {
-                    document.getElementById('input-' + campoId).focus();
-                }, 100);
-            }
+            setTimeout(() => {
+                document.getElementById('input-' + campoId).focus();
+            }, 100);
+        }
 
-            function fecharModalDinamico() {
-                document.getElementById('modal-edicao-dinamico').classList.add('hidden');
-            }
+        function fecharModalDinamico() {
+            document.getElementById('modal-edicao-dinamico').classList.add('hidden');
+        }
 
-            document.addEventListener('DOMContentLoaded', function () {
-                const labelsStr = '{{ labels_grafico|safe }}';
-                const dadosStr = '{{ dados_grafico|safe }}';
+        document.addEventListener('DOMContentLoaded', function () {
+            const labelsStr = '{{ labels_grafico|safe }}';
+            const dadosStr = '{{ dados_grafico|safe }}';
 
-                const canvas = document.getElementById('graficoVulnerabilidades');
+            const canvas = document.getElementById('graficoVulnerabilidades');
 
-                if (canvas && labelsStr && dadosStr) {
-                    const labels = JSON.parse(labelsStr);
-                    const dataErros = JSON.parse(dadosStr);
-                    const ctx = canvas.getContext('2d');
+            if (canvas && labelsStr && dadosStr) {
+                const labels = JSON.parse(labelsStr);
+                const dataErros = JSON.parse(dadosStr);
+                const ctx = canvas.getContext('2d');
 
-                    new Chart(ctx, {
-                        type: 'radar',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Vulnerabilidades (Erros)',
-                                data: dataErros,
-                                backgroundColor: 'rgba(255, 75, 75, 0.2)',
-                                borderColor: 'rgba(255, 75, 75, 1)',
-                                pointBackgroundColor: 'rgba(255, 75, 75, 1)',
-                                borderWidth: 2,
-                            }]
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Vulnerabilidades (Erros)',
+                            data: dataErros,
+                            backgroundColor: 'rgba(255, 75, 75, 0.2)',
+                            borderColor: 'rgba(255, 75, 75, 1)',
+                            pointBackgroundColor: 'rgba(255, 75, 75, 1)',
+                            borderWidth: 2,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: { color: 'rgba(37, 77, 26, 0.2)' },
+                                grid: { color: 'rgba(37, 77, 26, 0.2)' },
+                                pointLabels: {
+                                    color: '#254d1a',
+                                    font: { size: 12, weight: 'bold', family: 'Inter' }
+                                },
+                                ticks: { display: false }
+                            }
                         },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            scales: {
-                                r: {
-                                    angleLines: { color: 'rgba(37, 77, 26, 0.2)' },
-                                    grid: { color: 'rgba(37, 77, 26, 0.2)' },
-                                    pointLabels: {
-                                        color: '#254d1a',
-                                        font: { size: 12, weight: 'bold', family: 'Inter' }
-                                    },
-                                    ticks: { display: false }
-                                }
-                            },
-                            plugins: {
-                                legend: { display: false },
-                                tooltip: {
-                                    backgroundColor: 'rgba(37, 77, 26, 0.9)',
-                                    titleFont: { size: 14 },
-                                    bodyFont: { size: 14 },
-                                    padding: 12,
-                                    cornerRadius: 8
-                                }
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(37, 77, 26, 0.9)',
+                                titleFont: { size: 14 },
+                                bodyFont: { size: 14 },
+                                padding: 12,
+                                cornerRadius: 8
                             }
                         }
-                    });
-                }
-            });
-        </script>
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
