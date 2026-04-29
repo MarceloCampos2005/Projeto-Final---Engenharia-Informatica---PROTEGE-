@@ -39,6 +39,7 @@ def home2(request):
     mfa_ativo = False
     xp_ganho = 0
     ja_tem_medalha_mfa = False
+    mostrar_aviso_mfa = False
     if request.user.is_authenticated:
 
 
