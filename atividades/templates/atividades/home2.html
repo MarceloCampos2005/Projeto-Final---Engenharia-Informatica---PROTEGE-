@@ -39,90 +39,7 @@
         {% endfor %}
     </div>
     {% endif %}
-    <header class="header-main-dashboard">
-        <div class="header-pill-container">
-            <div class="header-pill-dashboard">
-                <a href="{% url 'atividades:home2' %}" class="brand">
-                    <div class="brand-icon">🛡️</div>
-                    <span class="brand-name">Protege+</span>
-                </a>
-
-                <nav class="header-nav">
-                    <div class="lang-pill">
-                        <a href="{% url 'atividades:mudar_lingua' 'pt' %}" class="lang-btn {% if user.perfil.lingua == 'pt' %}active{% endif %}">
-                            <img src="{% static 'users/images/portugal.png' %}" alt="PT"> PT
-                        </a>
-                        <span class="lang-divider">|</span>
-                        <a href="{% url 'atividades:mudar_lingua' 'en' %}" class="lang-btn {% if user.perfil.lingua == 'en' %}active{% endif %}">
-                            <img src="{% static 'users/images/inglaterra.png' %}" alt="EN"> EN
-                        </a>
-                    </div>
-                    
-                    <a href="{% url 'sobrenos' %}" class="nav-link-text">{% trans "Sobre Nós" %}</a>
-                    
-                    <div class="auth-buttons">
-                        <a href="{% url 'atividades:sabermais' %}" class="btn-dashboard">{% trans "Quero Aprender!" %}</a>
-                        <a href="{% url 'atividades:quiz_setup' %}" class="btn-dashboard">{% trans "QUIZ" %}</a>
-                        <a href="{% url 'atividades:simulador_setup' %}" class="btn-dashboard">{% trans "SIMULADOR" %}</a>
-                    </div>
-                </nav>
-            </div>
-
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <div class="profile-area">
-                    <button id="btn-avatar-trigger" type="button" class="btn-avatar-trigger {{ user.perfil.moldura_atual|default:'moldura-base' }}">
-                        {% if user.perfil.avatar %}
-                            <img src="{{ user.perfil.avatar.url }}" alt="Avatar do Utilizador" style="object-fit: cover;">
-                        {% elif user.socialaccount_set.all %}
-                            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="Avatar do Google" referrerpolicy="no-referrer" style="object-fit: cover;">
-                        {% else %}
-                            <img src="{% static 'users/images/' %}{{ user.perfil.avatar_padrao }}" alt="Avatar Padrão" style="object-fit: cover;">
-                        {% endif %}
-
-                    </button>
-                    
-                    <div id="perfil-menu" class="dropdown-menu hidden">
-                        <div class="dropdown-header">
-                            <p class="dropdown-label">{% trans "UTILIZADOR" %}</p>
-                            <h3 class="dropdown-username">{{ user.username }}</h3>
-                        </div>
-                        <ul class="dropdown-list">
-                            <li><a href="{% url 'perfil' %}" class="dropdown-item">👤 {% trans "Ver Perfil" %}</a></li>
-                            <li><a href="{% url 'atividades:historico' %}" class="dropdown-item">📜 {% trans "Histórico" %}</a></li>
-                            
-                            <li>
-                                <a href="{% if mfa_ativo %}{% url 'two_factor:profile' %}{% else %}{% url 'two_factor:setup' %}{% endif %}" class="dropdown-item mfa-item">
-                                    <span>{% trans "Segurança (MFA)" %}</span>
-                                    {% if mfa_ativo %}
-                                        <span class="mfa-badge status-on">ON</span>
-                                    {% else %}
-                                        <span class="mfa-badge status-off">OFF</span>
-                                    {% endif %}
-                                </a>
-                            </li>
-                            
-                            {% if user.is_superuser %}
-                            <li><a href="{% url 'admin:index' %}" class="dropdown-item">⚙️ {% trans "Painel Admin" %}</a></li>
-                            {% endif %}
-                            
-                            <li class="divider"></li>
-                            <li>
-                                <a href="javascript:void(0);" 
-                                onclick="fazerLogout('{% url 'logout' %}')" 
-                                class="dropdown-item exit">
-                                🚪 {% trans "Terminar Sessão" %}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <a href="{% url 'atividades:leaderboard' %}" class="btn-avatar-trigger" style="display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 2rem; background: #ffffff80;" title="{% trans 'Ver Tabela de Classificação' %}">
-                    🏆
-                </a>
-            </div>
-        </div>
-    </header>
+    {% include 'partials/header_main.html' %}
 
     <div id="content-wrapper">
         
@@ -137,8 +54,9 @@
                     {% trans "Pronto para os desafios de hoje?" %}
                 </p>
 
-                <a href="{% url 'atividades:guia_emergencia' %}" class="btn-emergencia-dashboard pulse-glow">
-                    <span class="pulse-icon">🚨</span> {% trans "Em caso de ataque!" %}
+                <a href="{% url 'atividades:guia_emergencia' %}" class="btn-emergencia-dashboard pulse-glow" style="display: inline-flex; align-items: center; gap:10px; text-decoration: none;">
+                    <img src ="{% static 'users/images/aviso.png' %}"  class="pulse-icon" alt="Alerta" style="width: 24px; height: 24px; margin: 0;">
+                    {% trans "Em caso de ataque!" %}
                 </a>
             </div>
 
@@ -201,17 +119,32 @@
 
                     <div class="streak-side-panel">
                         <div class="streak-side-header">
-                            <span class="streak-side-fire">🔥 {{ user.perfil.streak_atual }} {% trans "Dias Seguidos" %}</span>
-                            <span class="streak-side-dicas" title="{% trans 'Dicas para os Quizzes' %}">💡 {{ user.perfil.dicas_disponiveis }}</span>
+                            <span class="streak-side-fire">
+                                <img src="{% static 'users/images/fogo.png' %}" style="width:16px; margin-right:5px;">
+                                {% trans "Streak Ativa" %}
+                            </span>
+                            <span class="streak-side-dicas">
+                                <img src="{% static 'users/images/lampada.png' %}" style="width:16px; margin-right:5px;">
+                                {{ user.perfil.dicas_disponiveis }}
+                            </span>
                         </div>
                         
                         <div class="streak-side-track">
-                            <div class="streak-side-fill" style="width: {% widthratio user.perfil.streak_atual 30 100 %}%; max-width: 100%;"></div>
-                            <div class="streak-side-checkpoints">
-                                <div class="ss-cp {% if user.perfil.streak_atual >= 7 %}reached{% endif %}" title="{% trans "7 Dias - Avatar Aprendiz" %}">7</div>
-                                <div class="ss-cp {% if user.perfil.streak_atual >= 15 %}reached{% endif %}" title="{% trans "15 Dias - Medalha" %}">15</div>
-                                <div class="ss-cp {% if user.perfil.streak_atual >= 30 %}reached{% endif %}" title="{% trans "30 Dias - Avatar Ninja" %}">30</div>
+                            <div class="streak-side-fill" style="width: {% widthratio user.perfil.streak_atual 30 100 %}%;">
+                                <div class="streak-bubble">{{ user.perfil.streak_atual }}</div>
                             </div>
+                        </div>
+                        <div class="streak-footer-text" style="color: #6b7280; font-size: 0.9rem; text-align: center;">
+                            {% if user.perfil.streak_maximo < 15 %}
+                                {% trans "Próximo prémio: Medalha aos 15 dias!" %}
+                                
+                            {% elif user.perfil.streak_maximo < 30 %}
+                                {% trans "Próximo prémio: Moldura Elite aos 30 dias!" %}
+                                
+                            {% else %}
+                                {% trans "Dica grátis a cada 2 dias seguidos!" %}
+                                
+                            {% endif %}
                         </div>
                     </div>
 
@@ -250,9 +183,15 @@
 
                 <div class="threats-glitch-grid">
                     <div class="threat-item">
-                        <div class="threat-alert-tag">❗ {% trans "ALERTA SISTEMA" %}</div>
+                        <div class="threat-alert-tag" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            <img src="{%static 'users/images/exclamacao.png' %}" alt="Atencao" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; margin-bottom: 2px;">
+                            <span>{% trans "ALERTA SISTEMA" %}</span>
+                        </div>
+                        
                         <div class="threat-content">
-                            <div style="font-size: 40px; margin-bottom: 10px">🎣</div>
+                            <div style="margin-bottom: 15px; display: flex; align-items: center; justify-content: start;">
+                                <img src="{% static 'users/images/phishing.png' %}" alt="Phishing" style="width: 45px; height: 45px; margin: 0;">
+                            </div>
                             <h3 class="threat-title">Phishing</h3>
                             <p>{% trans "Emails e mensagens falsas desenhadas para roubar a tua identidade digital." %}
                             </p>
@@ -261,9 +200,17 @@
                     </div>
 
                     <div class="threat-item">
-                        <div class="threat-alert-tag">❗ {% trans "CRÍTICO" %}</div>
+                        <div class="threat-alert-tag" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            <img src="{%static 'users/images/exclamacao.png' %}" alt="Atencao" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; margin-bottom: 2px;">
+                            <span>{% trans "CRÍTICO" %}</span>
+                        </div>
+                        
+                        
+                        
                         <div class="threat-content">
-                            <div style="font-size: 40px; margin-bottom: 10px">💳</div>
+                            <div style="margin-bottom: 15px; display: flex; align-items: center; justify-content: start;">
+                                <img src="{% static 'users/images/cartao.png' %}" alt="{% trans 'Cartao' %}" style="width: 45px; height: 45px; margin: 0;">
+                            </div>
                             <h3 class="threat-title">{% trans "Dados Bancários" %}</h3>
                             <p>{% trans "O roubo de cartões e acessos bancários através de clones perfeitos de sites."%}</p>
                         </div>
@@ -271,9 +218,15 @@
                     </div>
 
                     <div class="threat-item">
-                        <div class="threat-alert-tag">❗ {% trans "VULNERÁVEL" %}</div>
+                        <div class="threat-alert-tag" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            <img src="{%static 'users/images/exclamacao.png' %}" alt="{% trans 'Atencao' %}" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; margin-bottom: 2px;">
+                            <span>{% trans "VULNERÁVEL" %}</span>
+
+                        </div>
                         <div class="threat-content">
-                            <div style="font-size: 40px; margin-bottom: 10px">🧠</div>
+                            <div style="margin-bottom: 15px; display: flex; align-items: center; justify-content: start;">
+                                <img src="{% static 'users/images/cerebro.png' %}" alt="{% trans 'Cerebro' %}" style="width: 45px; height: 45px; margin: 0;">
+                            </div>
                             <h3 class="threat-title">{% trans "Engenharia Social" %}</h3>
                             <p>{% trans "A arte de enganar pessoas para que entreguem segredos por livre vontade." %}
                             </p>
@@ -289,18 +242,24 @@
                     </h2>
                     <div class="solution-grid">
                         <div class="sol-card" onclick="focarNoHeader('quiz')" style="cursor: pointer;">
-                            <div class="sol-icon">🎯</div>
+                            <div class="sol-icon" style=" display: flex; align-items: center; justify-content:center;">
+                                <img src="{% static 'users/images/alvo.png' %}" alt="Quiz" style="width: 24px; height: 24px; margin: 0;">
+                            </div>
                             <h3>{% trans "Quizzes" %}</h3>
                             <p>{% trans "Questões interativas para testares o teu nível de conhecimento atual." %}</p>
                         </div>
                         <div class="sol-card" onclick="focarNoHeader('simulador')" style="cursor: pointer;">
-                            <div class="sol-icon">🛡️</div>
+                            <div class="sol-icon" style=" display: flex; align-items: center; justify-content:center;">
+                                <img src="{% static 'users/images/escudo.png' %}" alt="Quiz" style="width: 24px; height: 24px; margin: 0;">
+                            </div>
                             <h3>{% trans "Simuladores" %}</h3>
                             <p>{% trans "Cenários reais de phishing para treinares o teu olho clínico sem riscos." %}
                             </p>
                         </div>
                         <div class="sol-card" onclick="focarNoHeader('aprender')" style="cursor: pointer;">
-                            <div class="sol-icon">🚀</div>
+                            <div class="sol-icon" style=" display: flex; align-items: center; justify-content:center;">
+                                <img src="{% static 'users/images/foguete.png' %}" alt="Quiz" style="width: 24px; height: 24px; margin: 0;">
+                            </div>
                             <h3>{% trans "Blindagem" %}</h3>
                             <p>{% trans "Melhoria contínua das tuas defesas digitais contra novos ataques." %}</p>
                         </div>

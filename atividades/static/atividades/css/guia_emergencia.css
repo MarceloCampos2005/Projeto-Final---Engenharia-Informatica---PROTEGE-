@@ -60,13 +60,20 @@
 }
 
 .btn-voltar {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 700;
-    padding: 8px 16px;
-    border-radius: 20px;
-    background: #1c8814;
-    transition: 0.3s;
+    background-color: rgba(28, 136, 20, 0.3) !important;
+    border: 2px solid #1c8814 !important;
+    padding: 8px 16px !important;
+    border-radius: 25px !important;
+    font-weight: 700 !important;
+    color: #254d1a !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-voltar:hover {
+    background-color: #1c8814 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
 }
 
 .btn-registar {

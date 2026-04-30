@@ -390,3 +390,37 @@ p, li, .dica-box, .checklist-box, .password-tester-box, .email-fake-card, .doc-c
 #pdf-area {
   padding-bottom: 20px;
 }
+
+.footer-flutuante {
+  position: relative;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: max-content;
+  max-width: 90vw;
+}
+
+.footer-pill {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 10px 24px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4b5563;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  text-align: center;
+}
+
+.footer-pill .footer-brand {
+  color: var(--dark-green, #254d1a);
+  font-weight: 900;
+  font-style: italic;
+}

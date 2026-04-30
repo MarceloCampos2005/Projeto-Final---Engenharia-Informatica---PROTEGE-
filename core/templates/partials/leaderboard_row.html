@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static %}
 <div class="lb-row {% if jogador.user == request.user %}is-me{% endif %}">
     <div class="lb-rank">#{{ forloop.counter }}</div>
     <div class="lb-av">
@@ -8,7 +9,9 @@
         <a href="{% url 'perfil_publico' jogador.user.username %}" class="lb-link-perfil">
             {{ jogador.user.username }}
             {% if not jogador.perfil_publico %}
-                <span class="icon-privado" title="{% trans 'Perfil Privado' %}">🔒</span>
+                <span class="icon-privado" title="{% trans 'Perfil Privado' %}">
+                    <img src="{% static 'users/images/cadeado.png' %}" alt="{% trans 'Privado' %}" style="width: 14px; height: 14px; vertical-align: middle; margin-bottom: 2px;">
+                </span>
             {% endif %}
         </a>
         {% if jogador.user == request.user %}<span class="lb-you-badge">{% trans "Tu" %}</span>{% endif %}

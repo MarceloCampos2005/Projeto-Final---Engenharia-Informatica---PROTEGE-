@@ -11,31 +11,14 @@
 
 <body class="bg-dashboard {% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
 
-    <header class="header-main">
-        <div class="header-pill">
-            <a href="{% if user.is_authenticated %}{% url 'atividades:home2' %}{% else %}{% url 'home' %}{% endif %}" class="brand">
-                <div class="brand-icon">🛡️</div>
-                <span class="brand-name">Protege+</span>
-            </a>
-
-            <nav class="nav-menu">
-                {% if not user.is_authenticated %}
-                <div class="auth-buttons">
-                    <a href="{% url 'login' %}" class="btn-registar">{% trans "Entrar" %}</a>
-                    <a href="{% url 'registar' %}" class="btn-registar">{% trans "Registar" %}</a>
-                </div>
-                {% else %}
-                <a href="javascript:history.go(-1)" class="nav-link btn-voltar">← {% trans "Voltar" %}</a>
-                {% endif %}
-            </nav>
-        </div>
-    </header>
+    {% include 'partials/header_guia_mais.html' %}
 
     <div id="content-wrapper">
         <main class="main-guia-container">
             
             <header class="doc-header" style="text-align: center;">
-                <h1 class="serif-title">🚨 {% trans "Centro de Resposta Rápida" %}</h1>
+                <h1 class="serif-title">
+                    {% trans "Centro de Resposta Rápida" %}</h1>
             </header>
             
             <p class="section-subtitle" style="text-align: center; margin-bottom: 30px;">
@@ -44,10 +27,10 @@
 
             <div class="selector-container">
                 <button onclick="switchMode('emergencia')" id="btn-emergencia" class="mode-btn active">
-                    🚨 {% trans "Estou sob ataque agora!" %}
+                    {% trans "Estou sob ataque agora!" %}
                 </button>
                 <button onclick="switchMode('mitigacao')" id="btn-mitigacao" class="mode-btn">
-                    🛡️ {% trans "Quero prevenir ataques" %}
+                    {% trans "Quero prevenir ataques" %}
                 </button>
             </div>
 
@@ -98,7 +81,7 @@
                     
                     <div class="threat-item threat-mitigacao" onclick="mostrarInstrucoes('{% if user.is_authenticated %}mfa{% else %}banco_vazio{% endif %}'); document.getElementById('painel-passos').classList.add('tema-verde');">
                         <div class="threat-header">
-                            <span class="threat-alert-tag tag-green">🛡️ {% trans "PREVENÇÃO" %}</span>
+                            <span class="threat-alert-tag tag-green">{% trans "PREVENÇÃO" %}</span>
                             <span class="click-icon">➔</span>
                         </div>
                         <div class="threat-content">
@@ -110,7 +93,7 @@
 
                     <div class="threat-item threat-mitigacao" onclick="mostrarInstrucoes('{% if user.is_authenticated %}gestor{% else %}banco_vazio{% endif %}'); document.getElementById('painel-passos').classList.add('tema-verde');">
                         <div class="threat-header">
-                            <span class="threat-alert-tag tag-green">🛡️ {% trans "PREVENÇÃO" %}</span>
+                            <span class="threat-alert-tag tag-green">{% trans "PREVENÇÃO" %}</span>
                             <span class="click-icon">➔</span>
                         </div>
                         <div class="threat-content">
@@ -122,14 +105,14 @@
 
                     <div class="threat-item threat-mitigacao" onclick="mostrarInstrucoes('{% if user.is_authenticated %}updates{% else %}banco_vazio{% endif %}'); document.getElementById('painel-passos').classList.add('tema-verde');">
                         <div class="threat-header">
-                            <span class="threat-alert-tag tag-green">🛡️ {% trans "PREVENÇÃO" %}</span>
+                            <span class="threat-alert-tag tag-green">{% trans "PREVENÇÃO" %}</span>
                             <span class="click-icon">➔</span>
                         </div>
                         <div class="threat-content">
                             <h3 class="threat-title">{% trans "Atualizações Frequentes" %}</h3>
                             <p>{% trans "Mantém o sistema e apps atualizados para fechar falhas de segurança conhecidas." %}</p>
                         </div>
-                        <div class="threat-status">{% trans "ESTADO: SISTEMA PATCHEADO" %}</div>
+                        <div class="threat-status">{% trans "ESTADO: SISTEMA ATUALIZADO" %}</div>
                     </div>
 
                 </div>

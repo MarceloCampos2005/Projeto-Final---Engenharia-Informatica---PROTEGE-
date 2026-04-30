@@ -15,19 +15,7 @@
   
   <body class="doc-page {% if user.is_authenticated and user.perfil %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
     
-    <header class="header-main">
-        <div class="header-pill">
-            <a href="{% url 'atividades:home2' %}" class="brand" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                <div class="brand-icon">🛡️</div>
-                <span class="brand-name" style="color: #1c8814; font-weight: 900; font-style: italic; font-size: 24px;">Protege+</span>
-            </a>
-
-            <nav class="nav-menu">
-                <a href="javascript:history.go(-1)" class="btn-voltar" style="text-decoration: none;">← {% trans "Voltar" %}</a>
-            </nav>
-        </div>
-    </header>
-
+    {% include 'partials/header_guia_mais.html' %}
     <div id="content-wrapper">
       
       <main class="doc-container">
@@ -69,8 +57,14 @@
         </section>
       </main>
 
-      <footer class="footer-protege">
-        <p>&copy; 2026 Protege+ - {% trans "A tua segurança em primeiro lugar." %}</p>
+      <footer class="footer-flutuante" >
+            <div class="footer-pill" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px;">
+                <span class="footer-brand" style=" display: inline-flex; align-items: center; justify-content:center; gap: 5px">
+                    <img src="{% static 'users/images/escudo.png' %}" alt="{%trans 'Protege+' %}" style="width: 24px; height: 24px; margin: 0;">
+                    <strong>Protege+</strong>
+                </span>
+                <span>&copy; {% now "Y" %} — {% trans "Treino e melhoria em segurança digital." %}</span>
+            </div>
       </footer>
       
     </div> 

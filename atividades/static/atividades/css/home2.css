@@ -203,7 +203,7 @@ img {
   height: 4rem;
   background: #ffffff80;
   border-radius: 50%;
-  border: 3px solid var(--d3-neve-pura);
+  border: 3px solid var(--d3-botao-acao);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   overflow: hidden;
@@ -1104,21 +1104,18 @@ a.dropdown-item {
 
 .streak-side-track {
   position: relative;
-  background: rgba(0, 0, 0, 0.05);
-  height: 8px;
+  height: 12px;
+  background: #e0e0e0;
   border-radius: 10px;
-  width: 90%;
-  margin: 0 auto;
+  margin: 20px 0;
 }
 
 .streak-side-fill {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   height: 100%;
-  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  background: linear-gradient(90deg, #ff8c00, #ff4500);
   border-radius: 10px;
-  transition: width 1s ease-in-out;
+  transition: width 0.5s ease-in-out;
 }
 
 .streak-side-checkpoints {
@@ -1128,6 +1125,30 @@ a.dropdown-item {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.streak-bubble {
+  position: absolute;
+  right: -15px;
+  top: -25px;
+  background: #ff4500;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.streak-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #ff4500;
 }
 
 .ss-cp {

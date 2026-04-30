@@ -32,6 +32,7 @@ load_dotenv(override=True)
 #o translation.activate(lang) faz com que o django use o ficheiro .po para a lingua
 @never_cache
 @vary_on_cookie # Evita que o browser mostre a versão em cache da língua errada
+@login_required
 def home2(request):
     #Definir a língua padrão 
     lang = 'pt'
@@ -610,15 +611,19 @@ def simulador(request):
 
 @login_required
 def simulador_final(request):
+    #evita acessos diretos
     if request.method != 'POST' or 'sim_indice' not in request.session:
         return redirect('atividades:home2')
 
+
+    #recuperadados de sessao
     indice = request.session.get('sim_indice', [])
     atual = request.session.get('sim_atual', 0)
 
     #Avalia o email atual antes de avançar
     email_jogado = emails.objects.get(id=indice[atual])
 
+    #dadso submitos pelo user
     acertos_str = request.POST.get('acertos', '0')
     acertos = int(acertos_str) if acertos_str.isdigit() else 0
 
@@ -629,8 +634,11 @@ def simulador_final(request):
 
     modo = request.session.get('sim_modo', 'detetive')
 
+
+    #calculo da pontuçao e percisao
     if modo == 'rapido':
         tipo_sim = 'classificacao'
+        #modo rapido so diz se e phishing ou seguro
         total_pistas_real = email_jogado.total_armadilhas + (2 if email_jogado.e_phishing else 0)
         foi_sucesso = (acertos >= total_pistas_real) if total_pistas_real > 0 else True
         
@@ -644,7 +652,9 @@ def simulador_final(request):
 
     else:
         tipo_sim = 'identificacao'
+        #modo detetive edentica armadilhas
         total_pistas_real = email_jogado.total_armadilhas
+        
         
         acertos_limpos = min(acertos, total_pistas_real)
         #falsos positivos
@@ -663,12 +673,13 @@ def simulador_final(request):
         
         precisao_atual = min(100.0, max(0.0, precisao_atual))
         
+        #
         if email_jogado.e_phishing:
             foi_sucesso = (precisao_atual == 100.0)
         else:
             foi_sucesso = (falsos_positivos == 0)
         
-        
+    #regista na bd
     ResultadoSimulador.objects.create(
         perfil=request.user.perfil,
         email=email_jogado,
@@ -678,6 +689,7 @@ def simulador_final(request):
         cliques_utilizador = ",".join(lista_cliques)
     )
 
+    #atribui pontos
     if precisao_atual == 100:
         pontos = 10
     elif precisao_atual >= 70:
@@ -698,6 +710,7 @@ def simulador_final(request):
     if novo_atual < len(indice):
         return redirect('atividades:simulador')
 
+
     perfil = request.user.perfil
     quantidade_emails = len(indice)
     pontos_totais = request.session.get('sim_pontuacao', 0)
@@ -712,7 +725,7 @@ def simulador_final(request):
     subiu = False
     pontos_necessarios = perfil.nivel_simulador * 30
 
-
+    #subir de nivel no simulador
     while perfil.pontuacao_total_simulador >= pontos_necessarios:
         perfil.pontuacao_total_simulador -= pontos_necessarios
         perfil.nivel_simulador += 1
@@ -721,6 +734,7 @@ def simulador_final(request):
 
         pontos_necessarios = perfil.nivel_simulador * 30
 
+    #subir nivel geral
     xp_geral_ganho = pontos_totais * 3 
     perfil.xp_geral += xp_geral_ganho
     subiu_geral = False
@@ -745,11 +759,12 @@ def simulador_final(request):
 
 
 
-
+    #dados para mostrar no ecra
     emails_jogados = emails.objects.filter(id__in=indice)
     modo_jogado = request.session.get('sim_modo', 'detetive')
     emails_detalhados=[]
 
+    #resultados guardados
     resultados_sessao = ResultadoSimulador.objects.filter(
         perfil=request.user.perfil
     ).order_by('-id')[:quantidade_emails][::-1]
@@ -851,11 +866,14 @@ def quiz_setup(request):
 
 @require_POST
 def analisar_phishing_ia(request):
+    #verifica sessao
     if not request.user.is_authenticated:
         return JsonResponse({
             'erro': 'A tua sessão de 30 minutos expirou. Por favor, faz login novamente para usares a IA.'
         }, status=401)
     try:
+        #configura o cliente da ia
+        #aponta para o base_url da groq
         cliente_ia = OpenAI(
         api_key=os.environ.get("GROQ_API_KEY"),
         base_url="https://api.groq.com/openai/v1"
@@ -863,7 +881,9 @@ def analisar_phishing_ia(request):
         
         perfil = request.user.perfil
         hoje = timezone.now().date()
-        
+
+
+        #reset diario
         if perfil.data_ultima_analise_ia != hoje:
             perfil.analises_ia_hoje = 0
             perfil.data_ultima_analise_ia = hoje
@@ -876,9 +896,14 @@ def analisar_phishing_ia(request):
                 'erro': f'Já atingiste o limite de {LIMITE_DIARIO} análises por dia. Volta amanhã!'
             }, status=429)
 
+
+
+        #daods de entrada
+        #carrega json do js no frontend
         data = json.loads(request.body)
         texto_email = data.get('texto_email', '')
         
+        #valida se nao ta a branco
         if not texto_email.strip():
             return JsonResponse({'erro': 'O texto do e-mail está vazio.'}, status=400)
 
@@ -903,10 +928,14 @@ def analisar_phishing_ia(request):
             response_format={"type": "json_object"} 
         )
 
+        #pos processamento e atualizar bd
         texto_resposta = resposta.choices[0].message.content.strip()
         resultado_json = json.loads(texto_resposta)
+        #tira 1 credito
         perfil.analises_ia_hoje += 1
         perfil.save()
+
+        #mostra n de usos restantes
         resultado_json['usos_restantes'] = LIMITE_DIARIO - perfil.analises_ia_hoje
         
         return JsonResponse(resultado_json)
