@@ -14,31 +14,9 @@
 
 <body class="view-autenticacao {% if user.is_authenticated %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
 
-    <header class="header-navegacao-login">
-        <a href="{% url 'home' %}" class="logotipo-superior">
-            <div class="emblema-marca">🛡️</div>
-            <span class="nome-marca-estilizado">Protege+</span>
-        </a>
-
-        <a href="javascript:history.back()" class="btn-exit-login">
-            <span>←</span> {% trans "Voltar" %}
-        </a>
-    </header>
-
+    {%include 'partials/header_auth.html'%}
     <div id="content-wrapper">
         <div class="wrapper-split">
-            <aside class="ala-lateral-esquerda">
-                <a href="{% url 'home' %}" class="link-logotipo">
-                    <div class="emblema-marca">🛡️</div>
-                    <span class="nome-marca-estilizado">Protege+</span>
-                </a>
-                
-                <div class="zona-personagem">
-                    <img src="{% static 'users/images/avatar_perfil.png' %}" alt="Protege+" class="img-personagem">
-                </div>
-                <div></div> 
-            </aside>
-
             <main class="ala-principal-direita">
                 <div class="modulo-login">
                     <h2 class="cabecalho-form">

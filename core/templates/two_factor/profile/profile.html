@@ -31,18 +31,22 @@
         <div class="security-card">
             <h1 class="title">{% trans "Definições MFA" %}</h1>
             
-            <div class="status-badge">✅ {% trans "CONTA BLINDADA" %}</div>
+            <div class="status-badge">
+                <img src="{% static 'users/images/check.png' %}" alt="" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; margin-bottom: 2px;"> 
+                {% trans "CONTA Protegida" %}</div>
             
             <p class="description">
                 {% trans "A tua conta está atualmente protegida pela Autenticação de Dois Fatores. Tens uma camada extra de segurança contra intrusos." %}
             </p>
             
             <a href="{% url 'two_factor:backup_tokens' %}" class="btn-action">
-                📜 {% trans "Códigos de Reserva" %}
+                <img src="{% static 'users/images/historia.png' %}" alt="" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; margin-bottom: 2px;">
+                {% trans "Códigos de Reserva" %}
             </a>
             
             <button onclick="abrirPopup()" class="btn-action btn-danger">
-                ⚠️ {% trans "Desativar MFA" %}
+                <img src="{%static 'users/images/aviso.png' %}" alt="" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; margin-bottom: 2px;">
+                {% trans "Desativar MFA" %}
             </button>
             
             <a href="{% url 'atividades:home2' %}" class="back-link">
@@ -53,7 +57,7 @@
 
     <div id="popupDesativar" class="modal-overlay">
         <div class="modal-card">
-            <div style="font-size: 3.5rem; margin-bottom: 10px;">🚨</div>
+            <div style="font-size: 3.5rem; margin-bottom: 10px;"></div>
             <h2 class="title">{% trans "Atenção!" %}</h2>
             
             <p class="description" style="margin-bottom: 20px;">

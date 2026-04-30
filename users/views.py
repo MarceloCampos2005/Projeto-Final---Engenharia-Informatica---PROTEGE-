@@ -21,6 +21,7 @@ from django.contrib import messages
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django.contrib.auth.signals import user_logged_in
 from django.conf import settings
+from users.models import Conquista
 
 
 
@@ -62,6 +63,8 @@ def perfil(request):
     xp_necessario_geral = perfil_user.nivel_geral * 100
 
 
+    todas_as_conquistas = Conquista.objects.all()
+    conquistas_user = perfil_user.conquistas.all()
     context = {
         'labels_grafico': json.dumps(labels), # Passa para JSON string
         'dados_grafico': json.dumps(dados),   # Passa para JSON string
@@ -70,7 +73,9 @@ def perfil(request):
         'rank_simulador':rank_simulador,
         'xp_necessario_quiz': xp_necessario_quiz,
         'xp_necessario_simulador': xp_necessario_simulador,
-        'xp_geral_necessario': xp_necessario_geral
+        'xp_geral_necessario': xp_necessario_geral,
+        'todas_as_conquistas': todas_as_conquistas,
+        'conquistas_user': conquistas_user,
     }
     return render(request, 'users/perfil.html', context)
 
@@ -79,6 +84,7 @@ def home(request):
     if request.user.is_authenticated:
         logout(request)
 
+    #ativa ligua
     lang = request.LANGUAGE_CODE
     translation.activate(lang)
     return render(request, 'users/home.html')
@@ -90,14 +96,17 @@ def registar(request):
     if request.method == 'POST':
         dados = request.POST
         
+        #confirma se as palavras passe sao iguais
         if dados.get('password') != dados.get('confirm_password'):
             messages.error(request, "As palavras-passe não coincidem!")
             return render(request, 'users/registar.html')
         
+        #verifica na bd se o nome ja existe
         if User.objects.filter(username=dados.get('username')).exists():
             messages.error(request, "Este nome de utilizador já está em uso.")
             return render(request, 'users/registar.html')
         
+        #idade = 0 se nao for numero ou nao preencher
         try:
             idade_certa = int(dados.get('idade', 0))
         except (ValueError, TypeError):
@@ -105,6 +114,8 @@ def registar(request):
 
 
         try:
+
+            #cria user e perfil em bloco, se um der erro o outro nao e criado
             with transaction.atomic():
                 user = User.objects.create_user(
                     username=dados.get('username'),
@@ -113,6 +124,7 @@ def registar(request):
                 )
                 
     
+                #cria o perfil ligado ao user
                 perfil, created = Perfil.objects.get_or_create(user=user)
                 
           
@@ -214,6 +226,7 @@ def criar_perfil_utilizador_social(sender, instance, created, **kwargs):
 
 @login_required
 def editar_perfil(request):
+    #a logica so acontece ao submeter o form
     if request.method == 'POST':
         novo_username = request.POST.get('username')
         novo_email = request.POST.get('email')
@@ -333,7 +346,9 @@ def mfa_sucesso_redirect(request):
 def sincronizar_preferencias_pos_login(sender, request, user, **kwargs):
 
     try:
+        #vai biscar o perfil
         perfil = user.perfil
+        #se a lingua ou filtro mudar do home para o home2 altera
         mudou_algo = False
 
         #sincroniza lingua
@@ -370,6 +385,8 @@ def sincronizar_preferencias_pos_login(sender, request, user, **kwargs):
 def toggle_privacidade(request):
     if request.method == 'POST':
         perfil = request.user.perfil
+
+        #ve se o pedido e ajax, nao recarrega a pag
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             # Inverte o estado
             perfil.perfil_publico = not perfil.perfil_publico
@@ -389,6 +406,7 @@ def toggle_privacidade(request):
 
 @login_required
 def perfil_publico(request, username):
+    #apanha o nome por url se existir
     user_alvo = get_object_or_404(User, username=username)
     perfil_alvo = user_alvo.perfil
 

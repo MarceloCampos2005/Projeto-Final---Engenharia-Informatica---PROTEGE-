@@ -338,25 +338,42 @@
             <section class="perf-conquistas-box">
                 <div class="conquistas-header">
                     <h3 class="serif-title" style="font-size: 2.2rem; margin-bottom: 0;">{% trans "Conquistas de Cibersegurança" %}</h3>
-                    <span class="conquistas-contador">{{ user.perfil.conquistas.count }} {% trans "Desbloqueadas" %}</span>
+                    <span class="conquistas-contador">{{ conquistas_user.count }} / {{ todas_as_conquistas.count}} {% trans "Desbloqueadas" %}</span>
                 </div>
                 
                 <div class="medalhas-grid">
-                    {% for medalha in user.perfil.conquistas.all %}
-                        <div class="medalha-card tooltip-trigger">
-                            <div class="medalha-icon-big">{{ medalha.icone }}</div>
-                            <h4 class="medalha-nome">{{ medalha.nome }}</h4>
-                            
-                            <div class="tooltip-content">
-                                <span class="tooltip-titulo">{{ medalha.nome }}</span>
-                                <p>{{ medalha.descricao }}</p>
+                    {% for medalha in todas_as_conquistas %}
+            
+                        {% if medalha in conquistas_user %}
+                            <div class="medalha-card tooltip-trigger">
+                                <div class="medalha-icon-big">{{ medalha.icone }}</div>
+                                <h4 class="medalha-nome">{{ medalha.nome }}</h4>
+                                
+                                <div class="tooltip-content">
+                                    <span class="tooltip-titulo">{{ medalha.nome }}</span>
+                                    <p>{{ medalha.descricao }}</p>
+                                </div>
                             </div>
-                        </div>
+                        {% else %}
+                            <div class="medalha-card tooltip-trigger">
+                                <div style="filter: grayscale(100%); opacity: 0.4;">
+                                    <div class="medalha-icon-big">
+                                        <img src="{% static 'users/images/cadeado.png' %} " alt="{% trans 'Bloqueado' %}" style="width: 40px; height: 40px;">
+                                    </div>
+                                    <h4 class="medalha-nome">{% trans "Bloqueado" %}</h4>
+                                </div>
+                                
+                                <div class="tooltip-content">
+                                    <span class="tooltip-titulo">{% trans "Recompensa Secreta" %}</span>
+                                    <p>{% trans "Continua a jogar e a proteger a tua conta para descobrires como desbloquear!" %}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                        
                     {% empty %}
-                        <div class="sem-medalhas">
+                        <div class="sem-medalhas" style="grid-column: 1 / -1; text-align: center; padding: 40px 0;">
                             <div style="font-size: 3rem; opacity: 0.5; margin-bottom: 10px;">🛡️</div>
-                            <p><strong>{% trans "Ainda não tens medalhas." %}</strong></p>
-                            <p style="font-size: 0.9rem; opacity: 0.7;">{% trans "Completa treinos e protege a tua conta para as desbloqueares!" %}</p>
+                            <p><strong>{% trans "Ainda não existem medalhas no sistema." %}</strong></p>
                         </div>
                     {% endfor %}
                 </div>

@@ -644,13 +644,3 @@ img {
   font-style: italic;
 }
 
-body.modo-escuro .footer-pill {
-  background: rgba(30, 30, 30, 0.85);
-  color: #d1d5db;
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-}
-
-body.modo-escuro .footer-pill .footer-brand {
-  color: var(--bright-green, #20c214);
-}

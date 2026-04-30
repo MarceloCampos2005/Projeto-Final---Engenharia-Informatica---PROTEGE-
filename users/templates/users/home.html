@@ -14,44 +14,7 @@
 
 <body class="bg-home {% if user.is_authenticated %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
 
-    <header class="header-main">
-        <div class="header-pill">
-            <div class="header-left">
-                <a href="{% url 'home' %}" class="brand">
-                    <div class="brand-icon">🛡️</div>
-                    <span class="brand-name">Protege+</span>
-                </a>
-            </div>
-
-            <nav class="header-nav">
-                {% get_current_language as LANGUAGE_CODE %}
-
-                <form action="{% url 'set_language' %}" method="post" style="margin: 0;">
-                    {% csrf_token %}
-                    <input name="next" type="hidden" value="{{ request.get_full_path }}">
-                    
-                    <div class="lang-pill">
-                        <button type="submit" name="language" value="pt" class="lang-btn {% if LANGUAGE_CODE == 'pt' %}active{% endif %}">
-                            <img src="{% static 'users/images/portugal.png' %}" alt="PT"> PT
-                        </button>
-                        
-                        <span class="lang-divider">|</span>
-                        
-                        <button type="submit" name="language" value="en" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
-                            <img src="{% static 'users/images/inglaterra.png' %}" alt="EN"> EN
-                        </button>
-                    </div>
-                </form>
-                
-                <a href="{% url 'sobrenos' %}" class="nav-link-text">{% trans "Sobre Nós" %}</a>
-                
-                <div class="auth-buttons">
-                    <a id="btn-entrar-topo" href="{% url 'login' %}" class="btn-registar">{% trans "ENTRAR" %}</a>
-                    <a id="btn-registar-topo" href="{% url 'registar' %}" class="btn-registar">{% trans "REGISTAR" %}</a>
-                </div>
-            </nav>
-        </div>
-    </header>
+    {% include 'partials/header_main.html' %}
 
     <div id="content-wrapper">
         <main class="hero">
@@ -85,7 +48,12 @@
                 
                 <div class="threats-glitch-grid">
                         <div class="threat-item scroll-hidden slide-left delay-1">
-                        <div class="threat-alert-tag">❗ {% trans "ALERTA SISTEMA" %}</div>
+                        <div class="threat-alert-tag" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            <img src="{%static 'users/images/exclamacao.png' %}" alt="Atencao" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; margin-bottom: 2px;">
+                            <span>{% trans "ALERTA SISTEMA" %}</span>
+                        </div>
+
+
                         <div class="threat-content">
                             <h3 class="threat-title">Phishing</h3>
                             <p>{% trans "Emails e mensagens falsas desenhadas para roubar a tua identidade digital." %}</p>
@@ -94,7 +62,12 @@
                     </div>
 
                     <div class="threat-item scroll-hidden slide-left delay-2">
-                        <div class="threat-alert-tag">❗ {% trans "CRÍTICO" %}</div>
+                        <div class="threat-alert-tag" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            <img src="{%static 'users/images/exclamacao.png' %}" alt="Atencao" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; margin-bottom: 2px;">
+                            <span>{% trans "CRÍTICO" %}</span>
+
+                        </div>
+
                         <div class="threat-content">
                             <h3 class="threat-title">{% trans "Dados Bancários" %}</h3>
                             <p>{% trans "O roubo de cartões e acessos bancários através de clones perfeitos de sites." %}</p>
@@ -103,7 +76,10 @@
                     </div>
 
                     <div class="threat-item scroll-hidden slide-left delay-3">
-                        <div class="threat-alert-tag">❗ {% trans "VULNERÁVEL" %}</div>
+                        <div class="threat-alert-tag" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            <img src="{%static 'users/images/exclamacao.png' %}" alt="Atencao" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; margin-bottom: 2px;">
+                            <span>{% trans "VULNERÁVEL" %}</span>
+                        </div>
                         <div class="threat-content">
                             <h3 class="threat-title">{% trans "Engenharia Social" %}</h3>
                             <p>{% trans "A arte de enganar pessoas para que entreguem segredos por livre vontade." %}</p>
@@ -119,17 +95,23 @@
                     
                     <div class="solution-grid">
                         <div class="sol-card scroll-hidden slide-up delay-3" onclick="focarNoHeader()" style="cursor: pointer;">
-                            <div class="sol-icon">🎯</div>
+                            <div class="sol-icon" style=" display: flex; align-items: center; justify-content:center;">
+                                <img src="{% static 'users/images/alvo.png' %}" alt="Quiz" style="width: 24px; height: 24px; margin: 0;">
+                            </div>
                             <h3>{% trans "Quizzes" %}</h3>
                             <p>{% trans "Questões interativas para testares o teu nível de conhecimento atual." %}</p>
                         </div>
                         <div class="sol-card scroll-hidden slide-up delay-4" onclick="focarNoHeader()" style="cursor: pointer;">
-                            <div class="sol-icon">🛡️</div>
+                            <div class="sol-icon" style=" display: flex; align-items: center; justify-content:center;">
+                                <img src="{% static 'users/images/escudo.png' %}" alt="Quiz" style="width: 24px; height: 24px; margin: 0;">
+                            </div>
                             <h3>{% trans "Simuladores" %}</h3>
                             <p>{% trans "Cenários reais de phishing para treinares o teu olho clínico sem riscos." %}</p>
                         </div>
                         <div class="sol-card scroll-hidden slide-up delay-5" onclick="focarNoHeader()" style="cursor: pointer;">
-                            <div class="sol-icon" >🚀</div>
+                            <div class="sol-icon" style=" display: flex; align-items: center; justify-content:center;">
+                                <img src="{% static 'users/images/foguete.png' %}" alt="Quiz" style="width: 24px; height: 24px; margin: 0;">
+                            </div>
                             <h3>{% trans "Blindagem" %}</h3>
                             <p>{% trans "Melhoria contínua das tuas defesas digitais contra novos ataques." %}</p>
                         </div>
@@ -188,12 +170,15 @@
             </div>
         </section>
         <footer class="footer-flutuante scroll-hidden scale-up delay-4" >
-            <div class="footer-pill">
-                <span class="footer-brand">🛡️ Protege+</span> &copy; {% now "Y" %} — {% trans "Treino e melhoria em segurança digital." %}
+            <div class="footer-pill" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px;">
+                <span class="footer-brand" style=" display: inline-flex; align-items: center; justify-content:center; gap: 5px">
+                    <img src="{% static 'users/images/escudo.png' %}" alt="{%trans 'Protege+' %}" style="width: 24px; height: 24px; margin: 0;">
+                    <strong>Protege+</strong>
+                </span>
+                <span>&copy; {% now "Y" %} — {% trans "Treino e melhoria em segurança digital." %}</span>
             </div>
         </footer>
     </div> 
-    
     {% include 'partials/footer_acessibilidade.html' %}
     <canvas id="fundo-cibernetico"></canvas>
     <script src="{% static 'js/scripts.js' %}"></script>

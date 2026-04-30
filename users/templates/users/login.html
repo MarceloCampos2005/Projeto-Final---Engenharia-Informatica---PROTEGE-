@@ -13,31 +13,9 @@
 </head>
 <body class="view-autenticacao {% if user.is_authenticated %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
 
-    <header class="header-navegacao-login">
-        <a href="{% url 'home' %}" class="logotipo-superior">
-            <div class="emblema-marca">🛡️</div>
-            <span class="nome-marca-estilizado">Protege+</span>
-        </a>
-
-        <a href="{% url 'home' %}" class="btn-exit-login">
-            <span>←</span> {% trans "Voltar" %}
-        </a>
-    </header>
-
+    {%include 'partials/header_auth.html'%}
     <div id="content-wrapper">
         <div class="wrapper-split">
-            <aside class="ala-lateral-esquerda">
-                <a href="{% url 'home' %}" class="link-logotipo">
-                    <div class="emblema-marca">🛡️</div>
-                    <span class="nome-marca-estilizado">Protege+</span>
-                </a>
-                
-                <div class="zona-personagem">
-                    <img src="{% static 'users/images/avatar_perfil.png' %}" alt="Protege+" class="img-personagem">
-                </div>
-                <div></div> 
-            </aside>
-
             <main class="ala-principal-direita">
                 <div class="modulo-login">
                     <h2 class="cabecalho-form">
@@ -61,7 +39,7 @@
                             <div class="agrupamento-input">
                                 <label class="etiqueta-input">{% trans "Palavra-passe" %}</label>
                                 <div class="password-wrapper" style="position: relative; display: flex; align-items: center;">
-                                    <input type="password" name="auth-password" id="id_password"  placeholder="ex:P4ssw0rd@!" class="caixa-texto-protege" style="width: 100%; padding-right: 45px;">
+                                    <input type="password" name="auth-password" id="id_password"  placeholder="••••••••••••••" class="caixa-texto-protege" style="width: 100%; padding-right: 45px;">
                                     
                                     <img src="{% static 'users/images/olho.png' %}" 
                                         class="toggle-password-img" 
@@ -105,6 +83,14 @@
                             <a href="{% url 'account_reset_password' %}" class="atalho-link">
                                 {% trans "Esqueci-me da palavra-passe" %}
                             </a>
+
+                            <span style="font-size:0.9rem; display: inline-flex; gap: 6px; align-items: baseline; gap: 6px; margin-top: 8px;">
+                                <span style="color: white;">{%trans "Ainda não tens conta?" %}</span>
+                                <a href="{% url 'registar' %}" class="atalho-link" style="font-size: 0.9rem; font-style:normal; font-weight: 700; text-decoration: underline; color: white;">
+                                    {%trans "Regista-te Aqui!" %}
+                                </a>
+                            </span>
+
                         </div>
                         {% endif %}
                     </form>

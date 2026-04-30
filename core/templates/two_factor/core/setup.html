@@ -68,7 +68,7 @@
                                class="token-input" inputmode="numeric" pattern="[0-9]*">
                                
                         {% if wizard.form.token.errors %}
-                            <div class="error-msg">⚠️ {% trans "Código inválido. Tenta novamente." %}</div>
+                            <div class="error-msg">{% trans "Código inválido. Tenta novamente." %}</div>
                         {% endif %}
                     {% else %}
                         <div class="hidden-fields">
@@ -85,7 +85,7 @@
                         
                         <button type="submit" class="btn-action" style="flex: 2;">
                             {% if wizard.steps.current == 'generator' %}
-                                {% trans "Ativar Agora" %} ✅
+                                {% trans "Ativar Agora" %}
                             {% else %}
                                 {% trans "Avançar" %} →
                             {% endif %}

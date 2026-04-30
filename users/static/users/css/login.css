@@ -94,9 +94,6 @@ body.view-autenticacao {
   background-color: var(--musgo-suave);
 }
 
-.ala-lateral-esquerda {
-  display: none !important;
-}
 
 @media (min-width: 1024px) {
   .ala-lateral-esquerda {
@@ -142,11 +139,6 @@ body.view-autenticacao {
   font-size: 1.7rem;
 }
 
-.zona-personagem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .img-personagem {
   width: 100%;
