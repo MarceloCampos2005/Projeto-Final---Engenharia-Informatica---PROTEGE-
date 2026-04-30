@@ -1,0 +1,133 @@
+{% load static %}
+{% load i18n %}
+
+{% if user.is_authenticated %}
+    <header class="header-main-dashboard">
+        <div class="header-pill-container">
+            <div class="header-pill-dashboard">
+                <a href="{% url 'atividades:home2' %}" class="brand">
+                    <div class="brand-icon" style="display:flex; align-items: center; justify-content: center;">
+                        <img src="{% static 'users/images/escudo.png' %}" alt="{% trans 'Protege+' %}" style="width: 24px; height: 24px; margin: 0;">
+                    </div>
+                    <span class="brand-name">Protege+</span>
+                </a>
+
+                <nav class="header-nav">
+                    <div class="lang-pill">
+                        <a href="{% url 'atividades:mudar_lingua' 'pt' %}" class="lang-btn {% if user.perfil.lingua == 'pt' %}active{% endif %}">
+                            <img src="{% static 'users/images/portugal.png' %}" alt="PT"> PT
+                        </a>
+                        <span class="lang-divider">|</span>
+                        <a href="{% url 'atividades:mudar_lingua' 'en' %}" class="lang-btn {% if user.perfil.lingua == 'en' %}active{% endif %}">
+                            <img src="{% static 'users/images/inglaterra.png' %}" alt="EN"> EN
+                        </a>
+                    </div>
+                    
+                    <a href="{% url 'sobrenos' %}" class="nav-link-text">{% trans "Sobre Nós" %}</a>
+                    
+                    <div class="auth-buttons">
+                        <a href="{% url 'atividades:sabermais' %}" class="btn-dashboard">{% trans "Quero Aprender!" %}</a>
+                        <a href="{% url 'atividades:quiz_setup' %}" class="btn-dashboard">{% trans "QUIZ" %}</a>
+                        <a href="{% url 'atividades:simulador_setup' %}" class="btn-dashboard">{% trans "SIMULADOR" %}</a>
+                    </div>
+                </nav>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="profile-area">
+                    <button id="btn-avatar-trigger" type="button" class="btn-avatar-trigger {{ user.perfil.moldura_atual|default:'moldura-base' }}">
+                        {% if user.perfil.avatar %}
+                            <img src="{{ user.perfil.avatar.url }}" alt="Avatar" style="object-fit: cover;">
+                        {% elif user.socialaccount_set.all %}
+                            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="Avatar" referrerpolicy="no-referrer" style="object-fit: cover;">
+                        {% else %}
+                            <img src="{% static 'users/images/' %}{{ user.perfil.avatar_padrao }}" alt="Avatar" style="object-fit: cover;">
+                        {% endif %}
+                    </button>
+                    
+                    <div id="perfil-menu" class="dropdown-menu hidden">
+                        <div class="dropdown-header">
+                            <p class="dropdown-label">{% trans "UTILIZADOR" %}</p>
+                            <h3 class="dropdown-username">{{ user.username }}</h3>
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="{% url 'perfil' %}" class="dropdown-item" style="display: flex; align-items: center; gap: 8px">
+                                <img src="{% static 'users/images/perfil.png' %}" alt="{%trans 'Perfil' %}" style="width: 18px; height: 18px;margin: 0;">
+                                {% trans "Ver Perfil" %}</a></li>
+                            <li>
+                                <a href="{% url 'atividades:historico' %}" class="dropdown-item" style="display: flex; align-items: center; gap: 8px">
+                                    <img src="{% static 'users/images/historia.png' %}" alt="{%trans 'Historico' %}" style="width: 18px; height: 18px;margin: 0;">
+                                    {% trans "Histórico" %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% if mfa_ativo %}{% url 'two_factor:profile' %}{% else %}{% url 'two_factor:setup' %}{% endif %}" class="dropdown-item mfa-item">
+                                    <span>{% trans "Segurança (MFA)" %}</span>
+                                    {% if mfa_ativo %}
+                                        <span class="mfa-badge status-on">ON</span>
+                                    {% else %}
+                                        <span class="mfa-badge status-off">OFF</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                            {% if user.is_superuser %}
+                            <li><a href="{% url 'admin:index' %}" class="dropdown-item" style="display: flex; align-items: center; gap: 8px;">
+                                <img src="{% static 'users/images/admin.png' %}" alt="{%trans 'Admin' %}" style="width: 18px; height: 18px; margin: 0;">
+                                {% trans "Painel Admin" %}</a></li>
+                            {% endif %}
+                            <li class="divider"></li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="fazerLogout('{% url 'logout' %}')" class="dropdown-item exit" style="display: flex; align-items: center; gap: 8px;">
+                                    <img src="{% static 'users/images/logout.png' %}" alt="{%trans 'Sair' %}" style="width: 18px; height: 18px;margin: 0;">
+                                    {% trans "Terminar Sessão" %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="{% url 'atividades:leaderboard' %}" class="btn-avatar-trigger" style="display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 2rem; background: #ffffff80;" title="{% trans 'Ver Tabela' %}">
+                    <img src="{% static 'users/images/podio.png'%}" alt="{%trans 'Leaderboard' %}" style="width: 32px; height: 32px; margin: 0;">
+                </a>
+            </div>
+        </div>
+    </header>
+
+{% else %}
+    <header class="header-main">
+        <div class="header-pill">
+            <div class="header-left">
+                <a href="{% url 'home' %}" class="brand">
+                    <div class="brand-icon" style="display:flex; align-items: center; justify-content: center;">
+                        <img src="{% static 'users/images/escudo.png' %}" alt="{% trans 'Protege+' %}" style="width: 24px; height: 24px; margin: 0;">
+                    </div>
+                    <span class="brand-name">Protege+</span>
+                </a>
+            </div>
+
+            <nav class="header-nav">
+                {% get_current_language as LANGUAGE_CODE %}
+                <form action="{% url 'set_language' %}" method="post" style="margin: 0;">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                    <div class="lang-pill">
+                        <button type="submit" name="language" value="pt" class="lang-btn {% if LANGUAGE_CODE == 'pt' %}active{% endif %}">
+                            <img src="{% static 'users/images/portugal.png' %}" alt="PT"> PT
+                        </button>
+                        <span class="lang-divider">|</span>
+                        <button type="submit" name="language" value="en" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
+                            <img src="{% static 'users/images/inglaterra.png' %}" alt="EN"> EN
+                        </button>
+                    </div>
+                </form>
+                
+                <a href="{% url 'sobrenos' %}" class="nav-link-text">{% trans "Sobre Nós" %}</a>
+                
+                <div class="auth-buttons">
+                    <a id="btn-entrar-topo" href="{% url 'login' %}" class="btn-registar">{% trans "ENTRAR" %}</a>
+                    <a id="btn-registar-topo" href="{% url 'registar' %}" class="btn-registar">{% trans "REGISTAR" %}</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+{% endif %}

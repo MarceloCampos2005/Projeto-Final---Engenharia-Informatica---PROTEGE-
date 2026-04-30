@@ -1,0 +1,23 @@
+{% load i18n %}
+{% load static %}
+<header class="header-main">
+    <div class="header-pill">
+        <a href="{% if user.is_authenticated %}{% url 'atividades:home2' %}{% else %}{% url 'home' %}{% endif %}" class="brand">
+            <div class="brand-icon" style="display:flex; align-items: center; justify-content: center;">
+                <img src="{% static 'users/images/escudo.png' %}" alt="{% trans 'Protege+' %}" style="width: 24px; height: 24px; margin: 0;">
+            </div>
+            <span class="brand-name">Protege+</span>
+        </a>
+
+        <nav class="nav-menu">
+            {% if not user.is_authenticated %}
+            <div class="auth-buttons">
+                <a href="{% url 'login' %}" class="btn-registar">{% trans "Entrar" %}</a>
+                <a href="{% url 'registar' %}" class="btn-registar">{% trans "Registar" %}</a>
+            </div>
+            {% else %}
+            <a href="javascript:history.go(-1)" class="btn-voltar">← {% trans "Voltar" %}</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
