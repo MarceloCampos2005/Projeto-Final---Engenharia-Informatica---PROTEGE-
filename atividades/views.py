@@ -542,7 +542,7 @@ def simulador_setup(request):
     perfil = request.user.perfil
     nivel_necessario = 3
 
-    detetive_desbloqueado = perfil.nivel_quiz >= nivel_necessario
+    detetive_desbloqueado = perfil.nivel_simulador >= nivel_necessario
 
     context={
         'detetive_desbloqueado': detetive_desbloqueado,
