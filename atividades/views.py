@@ -465,11 +465,11 @@ def quiz_final(request):
     perfil.save()
 
     #limpa a  para depois comecar na pergunta 1 e com pontuacao 0 e respostas vazias
-    del request.session['quiz_indice']
-    del request.session['pergunta_atual']
-    del request.session['pontuacao']
-    del request.session['respostas_utilizador']
-    del request.session['quiz_bonus_xp']
+    # Limpa a sessão no final de forma segura (não dá erro se o user fizer F5)
+    chaves_para_apagar = ['quiz_indice', 'pergunta_atual', 'pontuacao', 'respostas_utilizador', 'quiz_bonus_xp']
+    for chave in chaves_para_apagar:
+        if chave in request.session:
+            del request.session[chave]
 
     #vai mostar no html 
     return render(request, 'atividades/quiz_final.html',{
@@ -538,7 +538,18 @@ def detalhe_simulador(request, resultado_id):
     
 @login_required
 def simulador_setup(request):
-    return render(request, 'atividades/simulador_setup.html')
+
+    perfil = request.user.perfil
+    nivel_necessario = 3
+
+    detetive_desbloqueado = perfil.nivel_quiz >= nivel_necessario
+
+    context={
+        'detetive_desbloqueado': detetive_desbloqueado,
+        'nivel_necessario': nivel_necessario,
+        'nivel_atual': perfil.nivel_quiz}
+
+    return render(request, 'atividades/simulador_setup.html', context)
 
 #meter o utilizador a poder escolher se quer analisar email ou detetar o phishing
 @login_required
@@ -552,6 +563,11 @@ def preparar_simulador(request):
 
             lingua = request.user.perfil.lingua
             nivel = request.user.perfil.nivel_simulador
+            nivel_necessario = 3
+
+            if modo == 'detetive' and nivel < nivel_necessario:
+                messages.error(request, f"Modo Bloqueado! Precisas do nivel {nivel_necessario} no simulador para poderes jogar!")
+                return redirect('atividades:simulador_setup')
 
             #vai buscar os emails
             lista_emails = list(emails.objects.filter(lingua=lingua, nivel_dificuldade__lte = nivel))
@@ -639,13 +655,13 @@ def simulador_final(request):
     if modo == 'rapido':
         tipo_sim = 'classificacao'
         #modo rapido so diz se e phishing ou seguro
-        total_pistas_real = email_jogado.total_armadilhas + (2 if email_jogado.e_phishing else 0)
-        foi_sucesso = (acertos >= total_pistas_real) if total_pistas_real > 0 else True
-        
-        if total_pistas_real > 0:
-            precisao_atual = (acertos / total_pistas_real) * 100
+        if acertos > 0:
+            precisao_atual = 100
+            foi_sucesso= True
         else:
-            precisao_atual = 100.0
+            precisao_atual = 0.0
+            foi_sucesso = False
+
             
         #limita a 100% de acerto
         precisao_atual = min(100.0, max(0.0, precisao_atual))
@@ -685,7 +701,7 @@ def simulador_final(request):
         email=email_jogado,
         tipo_simulacao=tipo_sim,
         acertou=foi_sucesso,
-        armadilhas_encontradas=acertos_limpos if tipo_sim == 'identificacao' else 0,
+        armadilhas_encontradas=acertos_limpos if tipo_sim == 'detetive' else 0,
         cliques_utilizador = ",".join(lista_cliques)
     )
 
@@ -714,12 +730,16 @@ def simulador_final(request):
     perfil = request.user.perfil
     quantidade_emails = len(indice)
     pontos_totais = request.session.get('sim_pontuacao', 0)
-    media_precisao = request.session.get('sim_soma_precisao', 0) / quantidade_emails
+
+    soma_bruta_precisao = request.session.get('sim_soma_precisao',0)
+
+    media_precisao = soma_bruta_precisao / quantidade_emails
+
     nivel_antigo = perfil.nivel_geral
 
     # Atualizar Perfil
     perfil.simuladores_realizados += quantidade_emails
-    perfil.soma_percentagens_simulador += media_precisao
+    perfil.soma_percentagens_simulador += soma_bruta_precisao
     perfil.pontuacao_total_simulador += pontos_totais
     
     subiu = False
@@ -773,6 +793,7 @@ def simulador_final(request):
     for res in resultados_sessao:
         em = res.email
         em.acertos_reais = res.armadilhas_encontradas
+        em.acertou = res.acertou
 
         total_cliques_hist = len([i for i in res.cliques_utilizador.split(',') if i])
         em.falsos_positivos = max(0, total_cliques_hist - em.acertos_reais)

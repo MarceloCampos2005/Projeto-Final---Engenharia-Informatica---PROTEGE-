@@ -1012,7 +1012,6 @@ window.avaliarEmail = function (escolhaDoUtilizador) {
     simRespondido = true;
 
     let acertou = false;
-
     if (escolhaDoUtilizador === 'phishing' && ePhishingReal) {
         acertou = true;
     } else if (escolhaDoUtilizador === 'seguro' && !ePhishingReal) {
@@ -1021,11 +1020,7 @@ window.avaliarEmail = function (escolhaDoUtilizador) {
 
     const inputAcertos = document.getElementById('input-acertos');
 
-    if (acertou) {
-        inputAcertos.value = totalPistasView;
-    } else {
-        inputAcertos.value = 0;
-    }
+    inputAcertos.value = acertou ? "1" : "0";
 
     const btnClicado = escolhaDoUtilizador === 'phishing'
         ? document.querySelector('.btn-phish')

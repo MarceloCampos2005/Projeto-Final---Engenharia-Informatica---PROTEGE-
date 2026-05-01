@@ -76,8 +76,9 @@
                     {% endif %}
                     <div style="background: #ffffff; padding: 15px 20px; border-radius: 12px; margin-bottom: 15px; font-size: 0.95rem; border-left: 5px solid #254d1a;">
     
+                    {% if modo == 'detetive' %}
                         <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
-                            <span><strong>{% trans "Zonas Selecionadas:" %}</strong> {{ email.acertos_reais|add:email.falsos_positivos }} (Total de Armadilhas no e-mail: {{ email.total_armadilhas }})</span>
+                            <span><strong>{% trans "Zonas Selecionadas:" %}</strong> {{ email.acertos_reais|add:email.falsos_positivos }} ({% trans "Total de Armadilhas" %}: {{ email.total_armadilhas }})</span>
                             
                             {% if email.falsos_positivos > 0 %}
                                 <span style="color: #b45309; background: #fff7ed; padding: 2px 10px; border-radius: 8px; font-weight: 600; border: 1px solid #fed7aa;">
@@ -89,22 +90,38 @@
                         <p style="margin: 12px 0 0 0; font-weight: 500; color: #334155;">
                             {% if email.acertos_reais == email.total_armadilhas and email.falsos_positivos == 0 %}
                                 <strong style="color: #16a34a;">{% trans "Excelente!" %}</strong> {% trans "Identificaste todos os perigos sem cometer erros." %}
-                            
                             {% else %}
-                                
                                 {% if email.acertos_reais < email.total_armadilhas %}
-                                    <strong style="color: #dc2626;">{% trans "Atenção:" %}</strong> {% trans "Identificaste apenas" %} {{ email.acertos_reais }}, {% trans "faltaram encontrar" %} {{ email.faltam }} {% trans "armadilha(s)." %} {% trans "Verifica os detalhes abaixo." %}
+                                    <strong style="color: #dc2626;">{% trans "Atenção:" %}</strong> {% trans "Identificaste apenas" %} {{ email.acertos_reais }}, {% trans "faltaram encontrar" %} {{ email.faltam }} {% trans "armadilha(s)." %}
                                 {% else %}
                                     <strong style="color: #16a34a;">{% trans "Boa," %}</strong> {% trans "encontraste todas as armadilhas!" %}
                                 {% endif %}
                                 
                                 {% if email.falsos_positivos > 0 %}
-                                    <br><strong style="color: #b45309;">{% trans "Mas," %}</strong> {% trans "clicaste em zonas seguras por engano, o que baixou a tua pontuação." %}
+                                    <br><strong style="color: #b45309;">{% trans "Mas," %}</strong> {% trans "clicaste em zonas seguras por engano." %}
                                 {% endif %}
-                                
                             {% endif %}     
                         </p>
-                    </div>
+
+                    {% else %}
+                        <p style="margin: 0; font-weight: 500; color: #334155;">
+                            {% if email.acertou %}
+                                <strong style="color: #16a34a;">{% trans "Excelente!" %}</strong> {% trans "Classificaste este e-mail corretamente." %}
+                            {% else %}
+                                <strong style="color: #dc2626;">{% trans "Oops!" %}</strong> {% trans "A tua classificação para este e-mail estava errada." %}
+                            {% endif %}
+                        </p>
+                    {% endif %} 
+
+                    <br>
+                    <span style="font-size: 0.9em; color: #64748b; margin-top: 5px; display: inline-block;">
+                        {% if email.e_phishing %}
+                            {% trans "Este e-mail continha armadilhas reais. Revê o conteúdo abaixo para as identificares." %}
+                        {% else %}
+                            {% trans "Este e-mail era legítimo. Analisa os detalhes para entenderes por que era seguro." %}
+                        {% endif %}
+                    </span>
+                </div>
 
                     <div style="background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #cbd5e1; margin-bottom: 15px;">
     

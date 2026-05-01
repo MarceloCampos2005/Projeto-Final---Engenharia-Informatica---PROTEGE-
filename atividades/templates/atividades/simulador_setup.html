@@ -35,17 +35,32 @@
                 {% csrf_token %}
 
                 <div class="qs-modos-grid">
-                    <label class="qs-modo-card">
-                        <input type="radio" name="modo_simulador" value="detetive" checked>
+                    {% if detetive_desbloqueado %}
+                        <label class="qs-modo-card">
+                            <input type="radio" name="modo_simulador" value="detetive" checked>
+                            <div class="qs-card-content">
+                                <div class="qs-card-icon">🔍</div>
+                                <h3>{% trans "Modo Detetive" %}</h3>
+                                <p>{% trans "Analisa o email e encontra as armadilhas." %}</p>
+                            </div>
+                        </label>
+                    {% else %}
+
+                    <label class="qs-modo-card bloqueada "style="opacity: 0.6; cursor: not-allowed; position: relative;">
+                        <input type="radio" name="modo_simulador" value="detetive" disabled>
                         <div class="qs-card-content">
-                            <div class="qs-card-icon">🔍</div>
+                            <div class="qs-card-icon" style="filter: grayscale(1)">🔒</div>
                             <h3>{% trans "Modo Detetive" %}</h3>
                             <p>{% trans "Analisa o email e encontra as armadilhas." %}</p>
+                            <div style="margin-top: 10px; font-size: 0.85rem; color: #ef4444; font-weight: bold; background: #fee2e2; padding: 6px 12px; border-radius: 8px; display: inline-block;">
+                                {% trans "Desbloqueia no Nível" %} {{ nivel_necessario }}
+                            </div>
                         </div>
                     </label>
+                    {% endif %}
 
                     <label class="qs-modo-card">
-                        <input type="radio" name="modo_simulador" value="rapido">
+                        <input type="radio" name="modo_simulador" value="rapido" {% if not detetive_desbloqueado %}checked{% endif %}>
                         <div class="qs-card-content">
                             <div class="qs-card-icon">⚡</div>
                             <h3>{% trans "Decisão Rápida" %}</h3>
@@ -69,7 +84,7 @@
                             </div>
                         </div>
 
-                        <div id="zona-temporizador" class="hidden">
+                        <div id="zona-temporizador" class="{% if detetive_desbloqueado %}hidden{% endif %}">
                             <label class="checkbox-container" style="display: flex; align-items: center; gap: 10px; cursor: pointer; justify-content: center;">
                                 <input type="checkbox" name="com_tempo" id="check-temporizador" style="width: 20px; height: 20px; cursor: pointer;">
                                 <span style="font-weight: 600; color: var(--d3-verde-noite); display: flex; align-items: center;">
