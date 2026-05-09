@@ -1621,7 +1621,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const zonas = document.querySelectorAll('.phish-zone');
 
             zonas.forEach(zona => {
-                const isPhishing = zona.getAttribute('data-is-phishing') === 'true';
+                const isPhishing = (zona.getAttribute('data-is-phishing') || '').trim().toLowerCase() === 'true';
                 const foiClicada = cliquesArray.includes(zona.id);
 
                 //Aplica as classes CSS dependendo se ele clicou ou não

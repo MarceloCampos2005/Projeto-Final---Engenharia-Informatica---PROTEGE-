@@ -81,10 +81,10 @@
                 
                 <div style="background: #f3f4f6; padding: 1.5rem; border-bottom: 1px solid #e5e7eb;">
                     <p style="margin-bottom: 0.5rem; font-size: 1.1rem;">
-                        <strong>{% trans "Assunto:" %}</strong> {{ resultado.email.assunto_traduzido |striptags }}
+                        <strong>{% trans "Assunto:" %}</strong> {{ resultado.email.assunto_traduzido |safe }}
                     </p>
                     <p style="color: #6b7280; font-size: 0.95rem;">
-                        <strong>{% trans "De:" %}</strong> {{ resultado.email.remetente|striptags }}
+                        <strong>{% trans "De:" %}</strong> {{ resultado.email.remetente|safe }}
                     </p>
                 </div>
                 
