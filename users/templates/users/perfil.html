@@ -64,16 +64,18 @@
                 </form>
 
                 <div class="perf-moldura-avatar {{ user.perfil.moldura_atual|default:'moldura-base' }}">
+    
                     {% if user.perfil.avatar %}
                         <img src="{{ user.perfil.avatar.url }}" alt="{% trans 'Avatar do Utilizador' %}">
-                    {% elif user.socialaccount_set.all %}
+                        
+                    {% elif user.socialaccount_set.all and user.perfil.avatar_padrao == 'avatar.png' %}
                         <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="{% trans 'Avatar do Google' %}" referrerpolicy="no-referrer">
+                        
                     {% else %}
                         <img src="{% static 'users/images/' %}{{ user.perfil.avatar_padrao }}" alt="{% trans 'Avatar Padrão' %}">
                     {% endif %}
 
-                    <button type="button" class="perf-avatar-edit-btn" onclick="abrirModalAvatar()"
-                        title="{% trans 'Mudar Foto' %}">
+                    <button type="button" class="perf-avatar-edit-btn" onclick="abrirModalAvatar()" title="{% trans 'Mudar Foto' %}">
                         📷
                     </button>
                 </div>

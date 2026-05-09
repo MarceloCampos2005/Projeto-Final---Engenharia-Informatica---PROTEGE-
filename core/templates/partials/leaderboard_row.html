@@ -2,9 +2,17 @@
 {% load static %}
 <div class="lb-row {% if jogador.user == request.user %}is-me{% endif %}">
     <div class="lb-rank">#{{ forloop.counter }}</div>
+    
     <div class="lb-av">
-        {% if jogador.avatar %}<img src="{{ jogador.avatar.url }}">{% else %}{{ jogador.user.username|slice:":2"|upper }}{% endif %}
+        {% if jogador.avatar %}
+            <img src="{{ jogador.avatar.url }}">
+        {% elif jogador.user.socialaccount_set.all and jogador.avatar_padrao == 'avatar.png' %}
+            <img src="{{ jogador.user.socialaccount_set.all.0.get_avatar_url }}" referrerpolicy="no-referrer">
+        {% else %}
+            <img src="{% static 'users/images/' %}{{ jogador.avatar_padrao|default:'avatar.png' }}">
+        {% endif %}
     </div>
+
     <div class="lb-uname">
         <a href="{% url 'perfil_publico' jogador.user.username %}" class="lb-link-perfil">
             {{ jogador.user.username }}

@@ -43,7 +43,15 @@
                         {% if top_geral|length >= 2 %}
                         <div class="podium-item p2">
                             <div class="podium-avatar-wrap">
-                                <div class="podium-avatar">{% if top_geral.1.avatar %}<img src="{{ top_geral.1.avatar.url }}">{% else %}{{ top_geral.1.user.username|slice:":2"|upper }}{% endif %}</div>
+                                <div class="podium-avatar">
+                                    {% if top_geral.1.avatar %}
+                                        <img src="{{ top_geral.1.avatar.url }}">
+                                    {% elif top_geral.1.user.socialaccount_set.all and top_geral.1.avatar_padrao == 'avatar.png' %}
+                                        <img src="{{ top_geral.1.user.socialaccount_set.all.0.get_avatar_url }}" referrerpolicy="no-referrer">
+                                    {% else %}
+                                        <img src="{% static 'users/images/' %}{{ top_geral.1.avatar_padrao|default:'avatar.png' }}">
+                                    {% endif %}
+                                </div>
                                 <div class="podium-medal medal-silver">2</div>
                             </div>
                             <div class="podium-name">
@@ -64,7 +72,15 @@
                         {% if top_geral|length >= 1 %}
                         <div class="podium-item p1">
                             <div class="podium-avatar-wrap">
-                                <div class="podium-avatar">{% if top_geral.0.avatar %}<img src="{{ top_geral.0.avatar.url }}">{% else %}{{ top_geral.0.user.username|slice:":2"|upper }}{% endif %}</div>
+                                <div class="podium-avatar">
+                                    {% if top_geral.0.avatar %}
+                                        <img src="{{ top_geral.0.avatar.url }}">
+                                    {% elif top_geral.0.user.socialaccount_set.all and top_geral.0.avatar_padrao == 'avatar.png' %}
+                                        <img src="{{ top_geral.0.user.socialaccount_set.all.0.get_avatar_url }}" referrerpolicy="no-referrer">
+                                    {% else %}
+                                        <img src="{% static 'users/images/' %}{{ top_geral.0.avatar_padrao|default:'avatar.png' }}">
+                                    {% endif %}
+                                </div>
                                 <div class="podium-medal medal-gold">1</div>
                             </div>
                             <div class="podium-name">
@@ -85,7 +101,15 @@
                         {% if top_geral|length >= 3 %}
                         <div class="podium-item p3">
                             <div class="podium-avatar-wrap">
-                                <div class="podium-avatar">{% if top_geral.2.avatar %}<img src="{{ top_geral.2.avatar.url }}">{% else %}{{ top_geral.2.user.username|slice:":2"|upper }}{% endif %}</div>
+                                <div class="podium-avatar">
+                                    {% if top_geral.2.avatar %}
+                                        <img src="{{ top_geral.2.avatar.url }}">
+                                    {% elif top_geral.2.user.socialaccount_set.all and top_geral.2.avatar_padrao == 'avatar.png' %}
+                                        <img src="{{ top_geral.2.user.socialaccount_set.all.0.get_avatar_url }}" referrerpolicy="no-referrer">
+                                    {% else %}
+                                        <img src="{% static 'users/images/' %}{{ top_geral.2.avatar_padrao|default:'avatar.png' }}">
+                                    {% endif %}
+                                </div>
                                 <div class="podium-medal medal-bronze">3</div>
                             </div>
                             <div class="podium-name">

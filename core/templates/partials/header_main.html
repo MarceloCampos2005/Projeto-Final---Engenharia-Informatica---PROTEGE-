@@ -38,8 +38,10 @@
                     <button id="btn-avatar-trigger" type="button" class="btn-avatar-trigger {{ user.perfil.moldura_atual|default:'moldura-base' }}">
                         {% if user.perfil.avatar %}
                             <img src="{{ user.perfil.avatar.url }}" alt="Avatar" style="object-fit: cover;">
-                        {% elif user.socialaccount_set.all %}
+                            
+                        {% elif user.socialaccount_set.all and user.perfil.avatar_padrao == 'avatar.png' %}
                             <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="Avatar" referrerpolicy="no-referrer" style="object-fit: cover;">
+                            
                         {% else %}
                             <img src="{% static 'users/images/' %}{{ user.perfil.avatar_padrao }}" alt="Avatar" style="object-fit: cover;">
                         {% endif %}
