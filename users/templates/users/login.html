@@ -98,7 +98,7 @@
                     
                     {% if wizard.steps.current == 'auth' %}
                         <div class="social-login-container">
-                            <div class="divisor-linha"><span>ou</span></div>
+                            <div class="divisor-linha"><span>{% trans "ou" %}</span></div>
                         
                             <a href="{% provider_login_url 'google' %}" class="btn-google">
                                 <div class="google-icon-wrapper">

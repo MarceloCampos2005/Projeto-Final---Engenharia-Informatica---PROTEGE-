@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modo Rápido - Protege+</title>
+    <title>{% trans "Modo Rápido - Protege+" %}</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,900&family=Instrument+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -34,7 +34,7 @@
              data-timer="{% if timer %}true{% else %}false{% endif %}">
             
             <div class="sim-header">
-                <h2>Modo Rápido ⚡</h2>
+                <h2>{% trans "Modo Rápido" %} ⚡</h2>
                 <span class="badge-progresso">E-mail {{ numero }} de {{ total }}</span>
             </div>
 
@@ -46,8 +46,8 @@
 
             <div class="email-display">
                 <div class="email-header">
-                    <p><strong>De:</strong> {{ email.remetente|safe }}</p>
-                    <p><strong>Assunto:</strong> {{ email.assunto|safe }}</p>
+                    <p><strong>{% trans "De" %}:</strong> {{ email.remetente|safe }}</p>
+                    <p><strong>{% trans Assunto %}:</strong> {{ email.assunto|safe }}</p>
                 </div>
                 <div class="email-body">
                     {{ email.corpo|safe }}
@@ -56,10 +56,10 @@
 
             <div class="sim-actions">
                 <button class="btn-decisao btn-phish" onclick="avaliarEmail('phishing')">
-                    <i class="fas fa-biohazard"></i> É Phishing!
+                    <i class="fas fa-biohazard"></i> {% trans "É Phishing!" %}
                 </button>
                 <button class="btn-decisao btn-safe" onclick="avaliarEmail('seguro')">
-                    <i class="fas fa-shield-alt"></i> É Seguro!
+                    <i class="fas fa-shield-alt"></i> {% trans "É Seguro!" %}
                 </button>
             </div>
 

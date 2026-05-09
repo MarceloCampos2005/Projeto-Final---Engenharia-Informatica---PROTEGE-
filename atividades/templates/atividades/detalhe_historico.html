@@ -31,15 +31,15 @@
                         <span class="hist-icon">{% if item.foi_correta %}✅ {% trans "Correta" %}{% else %}❌ {% trans "Errada" %}{% endif %}</span>
                     </div>
                     
-                    <p class="detalhe-pergunta"><strong>{{ item.pergunta.pergunta }}</strong></p>
+                    <p class="detalhe-pergunta"><strong>{{ item.pergunta_txt }}</strong></p>
                     
                     <div class="detalhe-info">
-                        <p><strong>{% trans "A tua escolha:" %}</strong> <span class="badge-escolha">{{ item.texto_escolha.texto }}</span></p>
-                        <p><strong>{% trans "Resposta certa:" %}</strong> <span class="badge-certa">{{ item.texto_correta.texto }}</span></p>
+                        <p><strong>{% trans "A tua escolha:" %}</strong> <span class="badge-escolha">{{ item.escolha_txt }}</span></p>
+                        <p><strong>{% trans "Resposta certa:" %}</strong> <span class="badge-certa">{{ item.correta_txt }}</span></p>
                     </div>
 
                     <div class="explicacao-box">
-                        <p><em>{{ item.pergunta.explicacao }}</em></p>
+                        <p><em>{{ item.explicacao_txt }}</em></p>
                     </div>
                 </div>
                 {% endfor %}

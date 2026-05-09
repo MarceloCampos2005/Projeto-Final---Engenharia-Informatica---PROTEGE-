@@ -25,7 +25,6 @@ from users.models import Conquista
 
 
 
-
 @login_required
 def perfil(request):
     perfil_user = request.user.perfil
@@ -150,6 +149,17 @@ def registar(request):
 
 def sobrenos(request):
 
+    if request.user.is_authenticated:
+        # Se tem login, usamos a língua do perfil dele
+        lang = request.user.perfil.lingua
+    else:
+        # Se é visitante, tentamos ler a língua do cookie. 
+        # Se não houver cookie, usamos a língua padrão
+        lang = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME, settings.LANGUAGE_CODE)
+    
+    # Ativa a língua para esta página
+    translation.activate(lang)
+
     popup = False
 
     #quando o utilizdor entre na sobre nos o metodo e get e ignora o if, so entra no if quando ele carrega no enviar mensagem
@@ -202,27 +212,14 @@ def logout_view(request):
         lingua = getattr(request.user.perfil, 'lingua', 'pt')
 
     response = redirect('home')
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lingua, max_age=2592000)
     response.set_cookie('django_language', lingua) #guarda a lingua no cookie antes do logout assim fica na sessao e o utilizador vai estar na mesma lingua 
     logout(request)
     #messages.info(request, "Sessão terminada com sucesso.")
     return response
 
 
-
-@receiver(post_save, sender=User)
-def criar_perfil_utilizador_social(sender, instance, created, **kwargs):
-    if created:
-        #quando inicio sessao com o google o prefil ficava sem idade, instituicao e ano loetivo, assim se entrar co google mete definicoes dfault
-        Perfil.objects.get_or_create(
-            user=instance,
-            defaults={
-                'filtro_daltonismo': 'normal',
-                'filtro_contraste': 'normal',
-                'instituicao': 'Não definida',
-                'ano_letivo': 'Não definido',
-                'idade': 0
-           }
-        )
+  
 
 @login_required
 def editar_perfil(request):
@@ -372,10 +369,10 @@ def sincronizar_preferencias_pos_login(sender, request, user, **kwargs):
         # Se algo mudou, guarda no Perfil e ativa a tradução imediatamente
         if mudou_algo:
             perfil.save()
+
             
         # Garante que a sessão atual do user tem a lingua certa
         translation.activate(perfil.lingua)
-        request.session[translation.LANGUAGE_SESSION_KEY] = perfil.lingua
             
     except Exception as e:
         print(f"Erro ao sincronizar preferências no login: {e}")
@@ -385,6 +382,7 @@ def sincronizar_preferencias_pos_login(sender, request, user, **kwargs):
 def toggle_privacidade(request):
     if request.method == 'POST':
         perfil = request.user.perfil
+        
 
         #ve se o pedido e ajax, nao recarrega a pag
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -410,6 +408,9 @@ def perfil_publico(request, username):
     user_alvo = get_object_or_404(User, username=username)
     perfil_alvo = user_alvo.perfil
 
+    lang = request.user.perfil.lingua
+    translation.activate(lang)
+    
     # Verifica se quem está a ver pode aceder aos dados
     acesso_permitido = perfil_alvo.perfil_publico or request.user == user_alvo
 

@@ -25,8 +25,9 @@ from django.views.decorators.http import require_POST
 from dotenv import load_dotenv
 from openai import OpenAI
 from django.views.decorators.cache import never_cache
-
+from .models import ResultadoSimulador
 load_dotenv(override=True)
+from django.utils.translation import get_language, gettext as _
 
 #verifica se o utilizador tem login feito, se tiver vai ao perfil dele ver qual a lingua guardada e ativa, senao tenta ler um cookie da sessao
 #o translation.activate(lang) faz com que o django use o ficheiro .po para a lingua
@@ -195,7 +196,7 @@ def preparar_quiz(request):
             if x in request.session:
                 del request.session[x]
         
-        lingua = request.user.perfil.lingua
+        lingua = translation.get_language()
         nivel = request.user.perfil.nivel_quiz
 
         #buscar as perguntas, o quiz bonus da 2xp se for escolhido o modo aleatorio
@@ -234,8 +235,6 @@ def preparar_quiz(request):
 
 @login_required
 def quiz(request):
-    lang = request.session.get('django_language', 'pt')
-    translation.activate(lang)
     
     #se nao houver indice na sessao, vai a bd buscar perguntas do nivel do utilizador
     if 'quiz_indice' not in request.session:
@@ -461,7 +460,8 @@ def quiz_final(request):
     else:
         perfil.quizzes_perfeitos_consecutivos = 0
 
-
+    tem_bonus = request.session.get('quiz_bonus_xp', False)
+    pontos_finais = pontos + 2 if tem_bonus else pontos
     perfil.save()
 
     #limpa a  para depois comecar na pergunta 1 e com pontuacao 0 e respostas vazias
@@ -479,6 +479,8 @@ def quiz_final(request):
         'xp_atual': perfil.pontuacao_total_quiz,
         'nivel_atual': perfil.nivel_quiz,
         'subiu': subiu,
+        'xp_quiz_para_proximo': perfil.nivel_quiz * 30,
+        'pontos_reais': pontos_finais,
 
         'subiu_geral': subiu_geral,
         'xp_ganho': xp_ganho,
@@ -509,6 +511,10 @@ def historico_atividades(request):
 
 @login_required
 def detalhe_historico(request, resultado_id):
+    lang = request.user.perfil.lingua
+    translation.activate(lang)
+
+    
     #procura o resultado garantindo que pertence ao utilizador atual
     resultado = ResultadoQuiz.objects.get(id=resultado_id, perfil=request.user.perfil)
     
@@ -519,18 +525,30 @@ def detalhe_historico(request, resultado_id):
     for item in respostas:
         item.texto_escolha = item.pergunta.opcoes.filter(letra=item.escolha_utilizador).first()
         item.texto_correta = item.pergunta.opcoes.filter(letra=item.pergunta.resposta_correta).first()
-    
+
+        item.pergunta_txt = _(item.pergunta.pergunta)
+        item.explicacao_txt = _(item.pergunta.explicacao)
+        
+        if item.texto_escolha:
+            item.escolha_txt = _(item.texto_escolha.texto)
+        if item.texto_correta:
+            item.correta_txt = _(item.texto_correta.texto)
+            
     return render(request, 'atividades/detalhe_historico.html', {
         'resultado': resultado,
         'respostas': respostas
     })
 
-from .models import ResultadoSimulador
+
 
 @login_required
 def detalhe_simulador(request, resultado_id):
+
+    lang = request.user.perfil.lingua
+    translation.activate(lang)
     resultado = ResultadoSimulador.objects.get(id=resultado_id, perfil=request.user.perfil)
-    
+    resultado.email.assunto_traduzido = _(resultado.email.assunto)
+    resultado.email.corpo_traduzido = _(resultado.email.corpo)
     return render(request, 'atividades/detalhe_simulador.html', {
         'resultado': resultado
     })
@@ -643,6 +661,9 @@ def simulador_final(request):
     acertos_str = request.POST.get('acertos', '0')
     acertos = int(acertos_str) if acertos_str.isdigit() else 0
 
+    erros_str = request.POST.get('falsos_positivos', '0')
+    falsos_positivos = int (erros_str) if erros_str.isdigit() else 0
+
 
     ids_clicados = request.POST.get('ids_clicados', '')
     lista_cliques = [i.strip() for i in ids_clicados.split(',') if i.strip()]
@@ -674,9 +695,7 @@ def simulador_final(request):
         
         acertos_limpos = min(acertos, total_pistas_real)
         #falsos positivos
-    
-        falsos_positivos = max(0, total_cliques - acertos_limpos)
-        
+            
         if total_pistas_real > 0:
             precisao_base = (acertos_limpos / total_pistas_real) * 100.0
         else:
@@ -701,7 +720,7 @@ def simulador_final(request):
         email=email_jogado,
         tipo_simulacao=tipo_sim,
         acertou=foi_sucesso,
-        armadilhas_encontradas=acertos_limpos if tipo_sim == 'detetive' else 0,
+        armadilhas_encontradas=acertos_limpos if tipo_sim == 'identificacao' else 0,
         cliques_utilizador = ",".join(lista_cliques)
     )
 
@@ -795,8 +814,14 @@ def simulador_final(request):
         em.acertos_reais = res.armadilhas_encontradas
         em.acertou = res.acertou
 
-        total_cliques_hist = len([i for i in res.cliques_utilizador.split(',') if i])
-        em.falsos_positivos = max(0, total_cliques_hist - em.acertos_reais)
+        if res.tipo_simulacao == 'identificacao':
+            if res.acertou and res.armadilhas_encontradas == em.total_armadilhas:
+                em.falsos_positivos = 0
+            else:
+                total_cliques_hist = len([i for i in res.cliques_utilizador.split(',') if i])
+                em.falsos_positivos = max(0, total_cliques_hist - em.acertos_reais)
+        else:
+            em.falsos_positivos = 0
 
         em.faltam = max(0, em.total_armadilhas - em.acertos_reais)
         emails_detalhados.append(em)
@@ -865,6 +890,8 @@ def sabermais(request):
 
 @login_required
 def leaderboard(request):
+    lang = request.session.get('django_language', 'pt')
+    translation.activate(lang)
     top_geral = Perfil.objects.select_related('user').order_by('-nivel_geral', '-xp_geral')
     top_quiz = Perfil.objects.select_related('user').order_by('-nivel_quiz', '-pontuacao_total_quiz')
     top_simulador = Perfil.objects.select_related('user').order_by('-nivel_simulador', '-pontuacao_total_simulador')
@@ -890,7 +917,7 @@ def analisar_phishing_ia(request):
     #verifica sessao
     if not request.user.is_authenticated:
         return JsonResponse({
-            'erro': 'A tua sessão de 30 minutos expirou. Por favor, faz login novamente para usares a IA.'
+            'erro': _('A tua sessão de 30 minutos expirou. Por favor, faz login novamente para usares a IA.')
         }, status=401)
     try:
         #configura o cliente da ia
@@ -914,7 +941,7 @@ def analisar_phishing_ia(request):
         LIMITE_DIARIO = 5
         if perfil.analises_ia_hoje >= LIMITE_DIARIO:
             return JsonResponse({
-                'erro': f'Já atingiste o limite de {LIMITE_DIARIO} análises por dia. Volta amanhã!'
+                'erro': _('Já atingiste o limite de %(limite)s análises por dia. Volta amanhã!') % {'limite': LIMITE_DIARIO}
             }, status=429)
 
 
@@ -926,7 +953,14 @@ def analisar_phishing_ia(request):
         
         #valida se nao ta a branco
         if not texto_email.strip():
-            return JsonResponse({'erro': 'O texto do e-mail está vazio.'}, status=400)
+            return JsonResponse({'erro': _('O texto do e-mail está vazio.')}, status=400)
+        
+        idioma_atual = get_language()
+        
+        if idioma_atual == 'en':
+            regra_idioma = "IMPORTANT: Write the 'motivos' and 'conselho' fields in English. However, for the system to work, you MUST keep the exact Portuguese words for 'status' and 'risco'."
+        else:
+            regra_idioma = "IMPORTANTE: Escreve todos os campos em Português de Portugal."
 
         # Prompt exigindo JSON
         prompt = f"""
@@ -936,7 +970,7 @@ def analisar_phishing_ia(request):
         "risco": (escreve "alto", "medio" ou "baixo"),
         "motivos": (uma lista com 2 ou 3 frases do porquê),
         "conselho": (uma frase direta do que fazer).
-        
+        {regra_idioma}
         E-mail a analisar:
         "{texto_email}"
         """
@@ -963,7 +997,7 @@ def analisar_phishing_ia(request):
 
     except Exception as e:
         print(f"ERRO REAL NO TERMINAL (GROQ): {e}")
-        return JsonResponse({'erro': 'Erro técnico na IA. Vê o terminal.'}, status=500)
+        return JsonResponse({'erro': _('Erro técnico na IA. Tenta novamente mais tarde.')}, status=500)
 
 
 def detetor_ia(request):

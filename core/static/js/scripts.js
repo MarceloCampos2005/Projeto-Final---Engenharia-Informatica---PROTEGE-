@@ -495,6 +495,9 @@ function mostrarTema(idTema) {
     const info = baseConhecimento[idTema];
     const container = document.getElementById('conteudo-dinamico');
 
+    const trad_descarregar = gettext("Descarregar PDF");
+    const trad_dica = gettext("Dica:");
+
     if (info) {
         container.innerHTML = `
             <div style="animation: popIn 0.3s ease-out; "id="pdf-area">
@@ -502,7 +505,7 @@ function mostrarTema(idTema) {
                 
                 <article class="doc-card tema-conteudo" style="position: relative;">
                     <div class="no-pdf" style="position: absolute; top: 30px; right: 30px; z-index: 99;">
-                        <button onclick="imprimirPDF('${idTema}')" title="${gettext("Descarregar PDF")}" style="background-color: rgba(28, 136, 20, 0.1); cursor: pointer; border: none; width: 45px; height: 45px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; transition: all 0.3s ease;" 
+                        <button onclick="imprimirPDF('${idTema}')" title="${trad_descarregar}" style="background-color: rgba(28, 136, 20, 0.1); cursor: pointer; border: none; width: 45px; height: 45px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; transition: all 0.3s ease;" 
                             onmouseover="this.style.background='#1c8814'; this.querySelector('img').style.filter='brightness(0) invert(1)';" 
                             onmouseout="this.style.background='rgba(28, 136, 20, 0.1)'; this.querySelector('img').style.filter='none';"> 
                             
@@ -522,7 +525,7 @@ function mostrarTema(idTema) {
                     </div>
 
                     <div class="dica-box" style="margin-top: 30px; background: rgba(76,175,80,0.1); border-left: 6px solid var(--verde-principal); padding: 20px; border-radius: 0 20px 20px 0;">
-                        <strong>💡 ${gettext("Dica:")}</strong> ${info.dica}
+                        <strong>💡 ${trad_dica}</strong> ${info.dica}
                     </div>
                 </article>
             </div>
@@ -866,9 +869,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
 
                 // pistas selcionadas
-                let acertosReais = document.querySelectorAll('.phish-zone.selecionada[data-is-phishing="true"]').length;
+                let acertosReais = 0;
+                let falsosPositivos = 0;
 
-                let falsosPositivos = document.querySelectorAll('.phish-zone.selecionada:not([data-is-phishing="true"])').length;
+                document.querySelectorAll('.phish-zone.selecionada').forEach(zona => {
+                    // Lê o atributo, tira os espaços e mete em minúsculas para não haver falhas
+                    let isPhishing = zona.getAttribute('data-is-phishing');
+                    
+                    if (isPhishing && isPhishing.trim().toLowerCase() === 'true') {
+                        acertosReais++;
+                    } else {
+                        falsosPositivos++;
+                    }
+                });
                 const idsSelecionados = Array.from(document.querySelectorAll('.phish-zone.selecionada')).map(el => el.id).filter(id => id && id.trim() !== ""); // Garante que só pega os que têm ID
 
                 if (inputAcertos) {
@@ -1092,7 +1105,7 @@ if (btnAnalisar) {
     btnAnalisar.addEventListener('click', async () => {
         const texto = textArea.value.trim();
         if (texto.length < 10) {
-            alert("Por favor, cola um texto mais longo para análise.");
+            alert(gettext("Por favor, cola um texto mais longo para análise."));
             return;
         }
 
@@ -1121,9 +1134,27 @@ if (btnAnalisar) {
 
             if (data.erro) throw new Error(data.erro);
 
+            const lang = document.documentElement.lang || 'pt';
+
+            //Dicionários de tradução
+            const traducoesRisco = {
+                'pt': { 'alto': 'ALTO', 'medio': 'MÉDIO', 'baixo': 'BAIXO' },
+                'en': { 'alto': 'HIGH', 'medio': 'MEDIUM', 'baixo': 'LOW' }
+            };
+
+            const traducoesStatus = {
+                'pt': { 'phishing': 'PHISHING', 'seguro': 'SEGURO' },
+                'en': { 'phishing': 'PHISHING', 'seguro': 'SAFE' }
+            };
+
+            //Pega na tradução (se o idioma não existir no dicionário, usa o original)
+            // O uso de ? (optional chaining) evita erros caso a língua não seja 'pt' nem 'en'
+            const riscoTraduzido = traducoesRisco[lang]?.[data.risco] || data.risco.toUpperCase();
+            const statusTraduzido = traducoesStatus[lang]?.[data.status] || data.status.toUpperCase();
+
             //Preencher Resultados
-            document.getElementById('result-status-text').innerText = data.status.toUpperCase();
-            document.getElementById('result-risco').innerText = data.risco.toUpperCase();
+            document.getElementById('result-status-text').innerText = statusTraduzido;
+            document.getElementById('result-risco').innerText = riscoTraduzido;
             document.getElementById('result-risco').className = `risco-badge risk-${data.risco}`;
             document.getElementById('result-conselho-text').innerText = data.conselho;
 

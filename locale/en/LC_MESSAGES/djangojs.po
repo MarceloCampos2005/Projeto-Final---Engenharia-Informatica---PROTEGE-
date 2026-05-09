@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Protege+ JS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-02 00:14+0100\n"
+"POT-Creation-Date: 2026-05-09 02:17+0100\n"
 "PO-Revision-Date: 2026-03-09 22:55+0000\n"
 "Last-Translator: Gemini\n"
 "Language-Team: English\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\core\static\js\scripts.js:232
+#: .\core\static\js\scripts.js:237
 msgid "Cliquei num link ou descarreguei algo:"
 msgstr "I clicked a link or downloaded something:"
 
-#: .\core\static\js\scripts.js:234
+#: .\core\static\js\scripts.js:239
 msgid "Desliga a Internet (Wi-Fi ou Dados) imediatamente."
 msgstr "Disconnect the Internet (Wi-Fi or Data) immediately."
 
-#: .\core\static\js\scripts.js:235
+#: .\core\static\js\scripts.js:240
 msgid "Não introduzas mais nenhuma palavra-passe nesse dispositivo."
 msgstr "Do not enter any more passwords on this device."
 
-#: .\core\static\js\scripts.js:236
+#: .\core\static\js\scripts.js:241
 msgid "Corre um antivírus completo para verificar se há malware."
 msgstr "Run a full antivirus scan to check for malware."
 
-#: .\core\static\js\scripts.js:237
+#: .\core\static\js\scripts.js:242
 msgid ""
 "Se meteste dados num site, muda a password original noutro dispositivo "
 "seguro."
@@ -41,135 +41,135 @@ msgstr ""
 "If you entered data on a site, change the original password on another "
 "secure device."
 
-#: .\core\static\js\scripts.js:241
+#: .\core\static\js\scripts.js:246
 msgid "Perdi o acesso ou detetei login estranho:"
 msgstr "I lost access or detected a strange login:"
 
-#: .\core\static\js\scripts.js:243
+#: .\core\static\js\scripts.js:248
 msgid "Tenta fazer 'Reset Password' imediatamente."
 msgstr "Try to 'Reset Password' immediately."
 
-#: .\core\static\js\scripts.js:244
+#: .\core\static\js\scripts.js:249
 msgid "Usa a opção 'Terminar sessão em todos os dispositivos'."
 msgstr "Use the 'Logout from all devices' option."
 
-#: .\core\static\js\scripts.js:245
+#: .\core\static\js\scripts.js:250
 msgid "Ativa a Autenticação de Dois Fatores (2FA)."
 msgstr "Enable Two-Factor Authentication (2FA)."
 
-#: .\core\static\js\scripts.js:246
+#: .\core\static\js\scripts.js:251
 msgid "Verifica se o teu email de recuperação foi alterado."
 msgstr "Check if your recovery email has been changed."
 
-#: .\core\static\js\scripts.js:250
+#: .\core\static\js\scripts.js:255
 msgid "Exposição de Cartão ou MBWay:"
 msgstr "Card or MBWay exposure:"
 
-#: .\core\static\js\scripts.js:252
+#: .\core\static\js\scripts.js:257
 msgid "Liga para a linha de cancelamento do teu banco (disponível 24h)."
 msgstr "Call your bank's cancellation line (available 24h)."
 
-#: .\core\static\js\scripts.js:253
+#: .\core\static\js\scripts.js:258
 msgid "Bloqueia o cartão temporariamente através da App do banco."
 msgstr "Temporarily block the card through the bank's App."
 
-#: .\core\static\js\scripts.js:254
+#: .\core\static\js\scripts.js:259
 msgid "Verifica o extrato por movimentos que não reconheças."
 msgstr "Check the statement for movements you don't recognize."
 
-#: .\core\static\js\scripts.js:255
+#: .\core\static\js\scripts.js:260
 msgid "Faz queixa na polícia se houver roubo de dinheiro efetivo."
 msgstr "File a police report if there is actual money theft."
 
-#: .\core\static\js\scripts.js:259
+#: .\core\static\js\scripts.js:264
 msgid "Como configurar a Autenticação de Dois Fatores (MFA):"
 msgstr "How to setup Multi-Factor Authentication (MFA):"
 
-#: .\core\static\js\scripts.js:261
+#: .\core\static\js\scripts.js:266
 msgid ""
 "Instala uma App de autenticação (ex: Google Authenticator ou Bitwarden)."
 msgstr ""
 "Install an authentication App (e.g. Google Authenticator or Bitwarden)."
 
-#: .\core\static\js\scripts.js:262
+#: .\core\static\js\scripts.js:267
 msgid "Acede às definições de segurança da tua conta (E-mail, Redes Sociais)."
 msgstr "Access the security settings of your account (Email, Social Networks)."
 
-#: .\core\static\js\scripts.js:263
+#: .\core\static\js\scripts.js:268
 msgid "Escolhe 'Autenticação de 2 Passos' e faz scan do código QR fornecido."
 msgstr "Choose '2-Step Authentication' and scan the provided QR code."
 
-#: .\core\static\js\scripts.js:264
+#: .\core\static\js\scripts.js:269
 msgid "Guarda os códigos de recuperação num local físico seguro (fora do PC)."
 msgstr "Keep recovery codes in a safe physical place (off the PC)."
 
-#: .\core\static\js\scripts.js:268
+#: .\core\static\js\scripts.js:273
 msgid "Configurar um Gestor de Passwords:"
 msgstr "Setting up a Password Manager:"
 
-#: .\core\static\js\scripts.js:270
+#: .\core\static\js\scripts.js:275
 msgid "Escolhe um gestor fiável (ex: Bitwarden, 1Password ou Keepass)."
 msgstr "Choose a reliable manager (e.g. Bitwarden, 1Password or Keepass)."
 
-#: .\core\static\js\scripts.js:271
+#: .\core\static\js\scripts.js:276
 msgid "Cria uma 'Master Password' longa e memorizável."
 msgstr "Create a long, memorable 'Master Password'."
 
-#: .\core\static\js\scripts.js:272
+#: .\core\static\js\scripts.js:277
 msgid "Importa ou guarda as tuas passwords atuais no cofre cifrado."
 msgstr "Import or save your current passwords in the encrypted vault."
 
-#: .\core\static\js\scripts.js:273
+#: .\core\static\js\scripts.js:278
 msgid "Ativa a extensão do navegador para preenchimento automático seguro."
 msgstr "Enable the browser extension for secure autofill."
 
-#: .\core\static\js\scripts.js:277
+#: .\core\static\js\scripts.js:282
 msgid "Manter o Sistema Protegido:"
 msgstr "Keeping the System Protected:"
 
-#: .\core\static\js\scripts.js:279
+#: .\core\static\js\scripts.js:284
 msgid "Ativa as 'Atualizações Automáticas' no Windows ou macOS."
 msgstr "Enable 'Automatic Updates' on Windows or macOS."
 
-#: .\core\static\js\scripts.js:280
+#: .\core\static\js\scripts.js:285
 msgid "Verifica regularmente as atualizações na App Store ou Play Store."
 msgstr "Regularly check for updates in the App Store or Play Store."
 
-#: .\core\static\js\scripts.js:281
+#: .\core\static\js\scripts.js:286
 msgid ""
 "Reinicia o dispositivo após grandes atualizações para aplicar os patches."
 msgstr "Restart the device after major updates to apply patches."
 
-#: .\core\static\js\scripts.js:282
+#: .\core\static\js\scripts.js:287
 msgid "Remove programas que já não usas e que podem ter falhas de segurança."
 msgstr "Remove programs you no longer use that may have security flaws."
 
-#: .\core\static\js\scripts.js:286 .\core\static\js\scripts.js:293
-#: .\core\static\js\scripts.js:301
+#: .\core\static\js\scripts.js:291 .\core\static\js\scripts.js:298
+#: .\core\static\js\scripts.js:306
 msgid "Tens alguma dúvida?"
 msgstr "Do you have any questions?"
 
-#: .\core\static\js\scripts.js:288 .\core\static\js\scripts.js:295
-#: .\core\static\js\scripts.js:303
+#: .\core\static\js\scripts.js:293 .\core\static\js\scripts.js:300
+#: .\core\static\js\scripts.js:308
 msgid ""
 "Para nos enviares uma mensagem e obteres suporte personalizado, precisas de "
 "ter sessão iniciada."
 msgstr ""
 "To send us a message and get personalized support, you need to be logged in."
 
-#: .\core\static\js\scripts.js:323
+#: .\core\static\js\scripts.js:328
 msgid "Escolhe o incidente que aconteceu para saberes o que fazer agora:"
 msgstr "Choose the incident that happened to know what to do now:"
 
-#: .\core\static\js\scripts.js:329
+#: .\core\static\js\scripts.js:334
 msgid "Segue estes conselhos para reforçar a tua segurança preventiva:"
 msgstr "Follow this advice to reinforce your preventative security:"
 
-#: .\core\static\js\scripts.js:378
+#: .\core\static\js\scripts.js:383
 msgid "Phishing e Engenharia Social"
 msgstr "Phishing and Social Engineering"
 
-#: .\core\static\js\scripts.js:380
+#: .\core\static\js\scripts.js:385
 msgid ""
 "O Phishing é a espinha dorsal da maioria dos ataques cibernéticos modernos. "
 "Trata-se de uma técnica de manipulação que utiliza comunicações fraudulentas "
@@ -234,30 +234,31 @@ msgstr ""
 "the internet, run an antivirus and change your passwords from <i>another</i> "
 "secure device."
 
-#: .\core\static\js\scripts.js:384
+#: .\core\static\js\scripts.js:389
 msgid "Repara no 'rn' em vez de 'm'. Isto chama-se Typosquatting!"
 msgstr "Notice the 'rn' instead of 'm'. This is called Typosquatting!"
 
-#: .\core\static\js\scripts.js:385
+#: .\core\static\js\scripts.js:390
 msgid "Os atacantes usam o medo para te fazer agir sem pensar."
 msgstr "Attackers use fear to make you act without thinking."
 
-#: .\core\static\js\scripts.js:385
+#: .\core\static\js\scripts.js:390
 msgid "URGENTE: Conta Bloqueada!"
 msgstr "URGENT: Account Locked!"
 
-#: .\core\static\js\scripts.js:387
+#: .\core\static\js\scripts.js:392
 msgid "Caro utilizador, detetámos algo estranho."
 msgstr "Dear user, we detected something unusual."
 
-#: .\core\static\js\scripts.js:388
+#: .\core\static\js\scripts.js:393
 msgid "Clique no botão abaixo para evitar a perda de dados."
 msgstr "Click the button below to prevent data loss."
 
-#: .\core\static\js\scripts.js:389
+#: .\core\static\js\scripts.js:394
 msgid "Link real: http://hack-site.ru/roubo"
 msgstr "Real link: http://hack-site.ru/theft"
-#: .\core\static\js\scripts.js:394
+
+#: .\core\static\js\scripts.js:399
 msgid ""
 "Sempre que receberes uma mensagem urgente, aplica a regra dos 5 segundos. "
 "Respira, não cliques. Contacta a entidade pelo número oficial que tens no "
@@ -267,11 +268,11 @@ msgstr ""
 "don't click. Contact the entity using the official number on your physical "
 "card or by manually typing the address in the browser."
 
-#: .\core\static\js\scripts.js:398
+#: .\core\static\js\scripts.js:403
 msgid "Gestão de Identidade e Senhas"
 msgstr "Identity and Password Management"
 
-#: .\core\static\js\scripts.js:400
+#: .\core\static\js\scripts.js:405
 msgid ""
 "As palavras-passe são as chaves da tua casa digital, mas na era da "
 "computação de alta performance, senhas curtas ou previsíveis são "
@@ -323,18 +324,19 @@ msgstr ""
 "cryptographic keys generated on your phone, validated by your biometrics, "
 "making credential phishing mathematically impossible."
 
-#: .\core\static\js\scripts.js:402
+#: .\core\static\js\scripts.js:407
 msgid "Testador de Força (Simulação)"
 msgstr "Strength Tester (Simulation)"
 
-#: .\core\static\js\scripts.js:403
+#: .\core\static\js\scripts.js:408
 msgid "Digita uma senha..."
 msgstr "Type a password..."
 
-#: .\core\static\js\scripts.js:408
+#: .\core\static\js\scripts.js:413
 msgid "Digita para ver a resistência."
 msgstr "Type to see the strength."
-#: .\core\static\js\scripts.js:411
+
+#: .\core\static\js\scripts.js:416
 msgid ""
 "Adota o método das 'Passphrases' para a tua Master Password: junta quatro "
 "palavras aleatórias com símbolos. Exemplo: 'Cadeira#Elefante%Pizza$Porto'. "
@@ -346,11 +348,11 @@ msgstr ""
 "'Have I Been Pwned' website to see if your email has been involved in data "
 "breaches."
 
-#: .\core\static\js\scripts.js:415
+#: .\core\static\js\scripts.js:420
 msgid "Autenticação Multi-Fator (MFA/2FA)"
 msgstr "Multi-Factor Authentication (MFA/2FA)"
 
-#: .\core\static\js\scripts.js:417
+#: .\core\static\js\scripts.js:422
 msgid ""
 "A Autenticação Multi-Fator (MFA) é a diferença entre perderes uma conta ou "
 "bloqueares um hacker à porta. Ela parte do princípio que a senha (algo que "
@@ -400,7 +402,7 @@ msgstr ""
 "exhaustion. If you receive a login prompt you didn't request, always click "
 "'Reject' and change the password immediately!"
 
-#: .\core\static\js\scripts.js:418
+#: .\core\static\js\scripts.js:423
 msgid ""
 "Guarda os 'Códigos de Backup' (Backup Codes) que os sites te dão quando "
 "ativas o MFA. Imprime-os e guarda-os numa gaveta segura. Se perderes o "
@@ -411,11 +413,11 @@ msgstr ""
 "and keep them in a safe drawer. If you lose your phone tomorrow, those codes "
 "are the only way to get back into your accounts."
 
-#: .\core\static\js\scripts.js:422
+#: .\core\static\js\scripts.js:427
 msgid "Privacidade, Cookies e Pegada Digital"
 msgstr "Privacy, Cookies, and Digital Footprint"
 
-#: .\core\static\js\scripts.js:424
+#: .\core\static\js\scripts.js:429
 msgid ""
 "A privacidade online não é sobre 'não ter nada a esconder', mas sim sobre "
 "ter o poder de decidir quem acede, lucra e te manipula com os teus dados. "
@@ -462,7 +464,7 @@ msgstr ""
 "for access to your microphone, contact list, and location, refuse! If the "
 "product is free, the real product is your data."
 
-#: .\core\static\js\scripts.js:425
+#: .\core\static\js\scripts.js:430
 msgid ""
 "Faz auditorias regulares às tuas redes sociais: coloca os perfis em modo "
 "privado e limita quem pode ver o teu histórico. Usa extensões como o 'uBlock "
@@ -474,11 +476,11 @@ msgstr ""
 "trackers and never log into sites via 'Login with Facebook/Google' buttons "
 "unless you fully trust them."
 
-#: .\core\static\js\scripts.js:429
+#: .\core\static\js\scripts.js:434
 msgid "Malware: Ameaças e Software Malicioso"
 msgstr "Malware: Threats and Malicious Software"
 
-#: .\core\static\js\scripts.js:431
+#: .\core\static\js\scripts.js:436
 msgid ""
 "Malware (Malicious Software) é o termo que abrange qualquer código criado "
 "para danificar, bloquear, roubar ou espiar sistemas informáticos. O que "
@@ -528,23 +530,24 @@ msgstr ""
 "computer suddenly gets slow, fans spinning up without you doing anything "
 "(sign of hidden cryptocurrency mining), battery lasting very little, "
 "constant pop-ups, or the browser homepage changing by itself."
-#: .\core\static\js\scripts.js:433
+
+#: .\core\static\js\scripts.js:438
 msgid "Checklist de Proteção"
 msgstr "Protection Checklist"
 
-#: .\core\static\js\scripts.js:434
+#: .\core\static\js\scripts.js:439
 msgid "Sistema Operativo Atualizado"
 msgstr "Updated Operating System"
 
-#: .\core\static\js\scripts.js:435
+#: .\core\static\js\scripts.js:440
 msgid "Antivírus Ativo"
 msgstr "Active Antivirus"
 
-#: .\core\static\js\scripts.js:436
+#: .\core\static\js\scripts.js:441
 msgid "Não descarregar software pirata"
 msgstr "Do not download pirated software"
 
-#: .\core\static\js\scripts.js:439
+#: .\core\static\js\scripts.js:444
 msgid ""
 "A prevenção é tudo. Mantém o teu sistema operativo (Windows, macOS, Android, "
 "iOS) sempre atualizado na última versão. As atualizações não trazem apenas "
@@ -555,11 +558,11 @@ msgstr ""
 "Android, iOS) always updated to the latest version. Updates don't just bring "
 "new designs, they close the code flaws that hackers use to inject malware."
 
-#: .\core\static\js\scripts.js:443
+#: .\core\static\js\scripts.js:448
 msgid "Segurança de Redes, VPN e Criptografia"
 msgstr "Network Security, VPN, and Cryptography"
 
-#: .\core\static\js\scripts.js:445
+#: .\core\static\js\scripts.js:450
 msgid ""
 "A Internet é uma autoestrada pública. Sem proteção, os teus dados (senhas, e-"
 "mails, conversas) viajam em 'texto limpo', podendo ser lidos por qualquer "
@@ -609,7 +612,7 @@ msgstr ""
 "disable old protocols, and always use WPA2 or WPA3 encryption for the Wi-Fi "
 "network."
 
-#: .\core\static\js\scripts.js:446
+#: .\core\static\js\scripts.js:451
 msgid ""
 "Desativa a funcionalidade do teu telemóvel de se ligar automaticamente a "
 "redes Wi-Fi conhecidas. Além disso, se precisares de aceder ao banco na rua, "
@@ -620,11 +623,11 @@ msgstr ""
 "networks. Also, if you need to access your bank on the street, it is much "
 "safer to use your Mobile Data (4G/5G) than a restaurant's Wi-Fi network."
 
-#: .\core\static\js\scripts.js:450
+#: .\core\static\js\scripts.js:455
 msgid "Proteção de Dispositivos e Higiene Digital"
 msgstr "Device Protection and Digital Hygiene"
 
-#: .\core\static\js\scripts.js:452
+#: .\core\static\js\scripts.js:457
 msgid ""
 "De nada valem senhas complexas se o teu dispositivo físico for roubado ou "
 "comprometido. A segurança começa no hardware e nas práticas de manutenção "
@@ -674,7 +677,7 @@ msgstr ""
 "(secure wipe with factory reset). Just deleting files and emptying the trash "
 "does not permanently delete them.</li></ul>"
 
-#: .\core\static\js\scripts.js:453
+#: .\core\static\js\scripts.js:458
 msgid ""
 "Tapa a tua webcam com um autocolante ou protetor deslizante. Bloqueia o ecrã "
 "instantaneamente quando te levantas numa biblioteca ou escritório (Usa o "
@@ -685,17 +688,284 @@ msgstr ""
 "when you get up in a library or office (Use the shortcut Win + L on Windows, "
 "or Ctrl + Cmd + Q on Mac). The time it takes to get water is enough for them "
 "to install something malicious on your machine."
-#: .\core\static\js\scripts.js:528
-msgid "Fraca: Um hacker demora segundos."
+
+#: .\core\static\js\scripts.js:461
+msgid "Ameaças com Inteligência Artificial"
+msgstr "Threats with Artificial Intelligence"
+
+#: .\core\static\js\scripts.js:463
+msgid ""
+"A Inteligência Artificial (IA) revolucionou o mundo, mas também armou os "
+"cibercriminosos com ferramentas de nível militar. O que antes exigia "
+"conhecimentos técnicos avançados, agora pode ser automatizado por algoritmos "
+"em segundos.<br><br><b>Como a IA está a ser usada contra ti:</"
+"b><ul><li><b>Phishing Perfeito:</b> Esquece os e-mails com erros "
+"ortográficos do passado. Ferramentas como o ChatGPT (ou variantes maliciosas "
+"criadas por hackers) permitem criar e-mails falsos indetetáveis, escritos em "
+"português perfeito e com um tom altamente persuasivo.</li><li><b>Clonagem de "
+"Voz (Vishing com IA):</b> Bastam 3 a 5 segundos de áudio retirados de um "
+"vídeo teu no Instagram ou TikTok para a IA clonar a tua voz com uma precisão "
+"assustadora. Os burlões usam isto para ligar aos teus familiares a chorar, "
+"dizendo que tiveram um acidente e precisam de dinheiro por MB WAY.</"
+"li><li><b>Deepfakes de Vídeo:</b> Vídeos manipulados de figuras públicas, "
+"políticos ou mesmo do CEO de uma empresa a recomendar falsos investimentos "
+"em criptomoedas ou a ordenar transferências urgentes a funcionários.</"
+"li><li><b>Malware Mutante:</b> Código malicioso escrito e reescrito por IA "
+"que altera a sua própria assinatura digital constantemente para escapar aos "
+"radares dos antivírus tradicionais.</li></ul><br><b>A Defesa na Era da IA:</"
+"b> Nunca confies apenas no que vês num ecrã ou ouves num telefonema. O "
+"ceticismo digital é a tua maior arma. Se algo parece demasiado urgente ou "
+"apela a emoções fortes (medo, ganância), faz uma pausa."
+msgstr ""
+"Artificial Intelligence (AI) has revolutionized the world, but it has also "
+"armed cybercriminals with military-grade tools. What once required advanced "
+"technical knowledge can now be automated by algorithms in seconds."
+"<br><br><b>How AI is being used against you:</b><ul><li><b>Perfect Phishing:"
+"</b> Forget the typo-ridden emails of the past. Tools like ChatGPT (or "
+"malicious variants created by hackers) allow for the creation of "
+"undetectable fake emails, written in perfect English and with a highly "
+"persuasive tone.</li><li><b>Voice Cloning (AI Vishing):</b> Just 3 to 5 "
+"seconds of audio taken from one of your videos on Instagram or TikTok is "
+"enough for AI to clone your voice with frightening accuracy. Scammers use "
+"this to call your relatives crying, saying they've had an accident and need "
+"money urgently.</li><li><b>Video Deepfakes:</b> Manipulated videos of public "
+"figures, politicians, or even a company's CEO recommending fake crypto "
+"investments or ordering urgent transfers to employees.</li><li><b>Mutant "
+"Malware:</b> Malicious code written and rewritten by AI that constantly "
+"changes its own digital signature to escape traditional antivirus radar.</"
+"li></ul><br><b>Defense in the AI Era:</b> Never trust only what you see on a "
+"screen or hear on a phone call. Digital skepticism is your greatest weapon. "
+"If something seems too urgent or appeals to strong emotions (fear, greed), "
+"take a pause."
+
+#: .\core\static\js\scripts.js:464
+msgid ""
+"Cria uma 'Palavra-Passe Familiar' (Uma palavra de segurança). Se alguém te "
+"ligar de um número estranho a pedir ajuda urgente com a voz de um familiar "
+"teu, pede essa palavra. Se a pessoa do outro lado não souber ou inventar "
+"desculpas, desliga imediatamente."
+msgstr ""
+"Create a 'Family Password' (A safety word). If someone calls you from a "
+"strange number asking for urgent help with the voice of a relative of yours, "
+"ask for that word. If the person on the other side doesn't know it or makes "
+"excuses, hang up immediately."
+
+#: .\core\static\js\scripts.js:468
+msgid "Engenharia Social e Manipulação"
+msgstr "Social Engineering and Manipulation"
+
+#: .\core\static\js\scripts.js:470
+msgid ""
+"A Engenharia Social é a arte de 'hackear' os seres humanos em vez de "
+"computadores. Os sistemas de segurança atuais são extremamente robustos, por "
+"isso é muito mais fácil e barato para um atacante enganar-te para que sejas "
+"tu a abrir-lhe a porta.<br><br><b>Táticas de Manipulação:</"
+"b><ul><li><b>Pretexting:</b> O atacante cria um cenário falso. O exemplo "
+"clássico é a 'Fraude da Microsoft', onde te ligam a dizer que o teu PC está "
+"infetado e pedem que instales um programa de acesso remoto (como AnyDesk ou "
+"TeamViewer) para 'te ajudar'. Assim que instalas, eles controlam o teu banco."
+"</li><li><b>Baiting (O Isco):</b> Explora a curiosidade natural humana. Um "
+"hacker deixa uma pen USB propositadamente no parque de estacionamento da tua "
+"empresa com o rótulo 'Salários_Direção_2026.xls'. Quem a encontrar e a ligar "
+"ao computador vai infetar a rede instantaneamente em silêncio.</"
+"li><li><b>Quid Pro Quo:</b> Oferecer um benefício falso em troca dos teus "
+"dados. Exemplos: 'Preencha este inquérito para ganhar um iPhone novo' ou "
+"falsas ofertas de emprego de luxo no LinkedIn que pedem as tuas informações "
+"bancárias antecipadamente.</li><li><b>Tailgating (Segurança Física):</b> Uma "
+"técnica onde uma pessoa sem autorização segue um funcionário legítimo num "
+"edifício seguro. O atacante aproxima-se com caixas pesadas nas mãos para "
+"forçar a empatia humana e fazer com que o funcionário lhe segure a porta, "
+"burlando a entrada com cartão.</li></ul>"
+msgstr ""
+"Social Engineering is the art of 'hacking' humans instead of computers. "
+"Modern security systems are extremely robust, so it is much easier and "
+"cheaper for an attacker to trick you into opening the door for them."
+"<br><br><b>Manipulation Tactics:</b><ul><li><b>Pretexting:</b> The attacker "
+"creates a false scenario. A classic example is the 'Microsoft Fraud', where "
+"they call you saying your PC is infected and ask you to install a remote "
+"access program (such as AnyDesk or TeamViewer) to 'help you'. Once you "
+"install it, they control your bank account.</li><li><b>Baiting:</b> Exploits "
+"natural human curiosity. A hacker purposely leaves a USB drive in your "
+"company's parking lot labeled 'Management_Salaries_2026.xls'. Anyone who "
+"finds it and plugs it into a computer will instantly infect the network "
+"silently.</li><li><b>Quid Pro Quo:</b> Offering a fake benefit in exchange "
+"for your data. Examples: 'Fill out this survey to win a new iPhone' or fake "
+"luxury job offers on LinkedIn that ask for your bank information upfront.</"
+"li><li><b>Tailgating (Physical Security):</b> A technique where an "
+"unauthorized person follows a legitimate employee into a secure building. "
+"The attacker approaches with heavy boxes in their hands to force human "
+"empathy and have the employee hold the door, bypassing badge entry.</li></ul>"
+
+#: .\core\static\js\scripts.js:471
+msgid ""
+"Nunca aceites ajuda técnica (por telefone ou e-mail) que não solicitaste "
+"primeiro. Bancos, operadoras de telecomunicações, Microsoft ou Polícia NUNCA "
+"te vão ligar a pedir senhas, códigos de SMS ou para instalares aplicações de "
+"suporte remoto."
+msgstr ""
+"Never accept technical help (by phone or email) that you did not request "
+"first. Banks, telecom operators, Microsoft, or the Police will NEVER call "
+"you asking for passwords, SMS codes, or to install remote support "
+"applications."
+
+#: .\core\static\js\scripts.js:475
+msgid "Backups e Recuperação de Desastres"
+msgstr "Backups and Disaster Recovery"
+
+#: .\core\static\js\scripts.js:477
+msgid ""
+"Existem apenas dois tipos de pessoas no mundo informático: as que já "
+"perderam dados importantes e as que ainda vão perder. Seja por um ataque de "
+"Ransomware, por roubo do portátil, ou uma falha de hardware, uma cópia de "
+"segurança (backup) limpa é a tua única salvação.<br><br><b>Sincronização NÃO "
+"É Backup:</b><br>Muitas pessoas acham que ter o Google Drive, OneDrive ou "
+"iCloud ativado no PC é ter um backup. <b>Isto é falso!</b> Estas ferramentas "
+"são plataformas de 'sincronização'. Se um vírus corromper os teus ficheiros "
+"locais, essa alteração é sincronizada imediatamente para a nuvem, destruindo "
+"também a cópia que lá estava.<br><br><b>A Estratégia Invencível (A Regra "
+"3-2-1):</b><ul><li><b>3 Cópias:</b> Mantém sempre 3 cópias dos teus "
+"ficheiros essenciais (o original + 2 backups).</li><li><b>2 Suportes:</b> "
+"Usa formatos físicos diferentes (ex: o disco do teu PC + um Disco Rígido "
+"Externo USB).</li><li><b>1 Cópia Offsite:</b> Guarda uma cópia fora da tua "
+"casa/escritório (numa nuvem segura que mantenha um histórico de versões, ou "
+"um disco na casa dos teus pais). Isto garante que não perdes tudo em caso de "
+"incêndio ou assalto à tua casa.</li></ul><br><b>O Perigo Oculto dos Backups "
+"Locais:</b> Os malwares de Ransomware modernos procuram ativamente por "
+"discos externos ou pens USB ligadas ao PC para encriptar esses dados também."
+msgstr ""
+"There are only two types of people in the computing world: those who have "
+"already lost important data and those who are going to. Whether from a "
+"Ransomware attack, laptop theft, or hardware failure, a clean backup is your "
+"only salvation.<br><br><b>Synchronization is NOT Backup:</b><br>Many people "
+"think that having Google Drive, OneDrive, or iCloud activated on their PC is "
+"a backup. <b>This is false!</b> These tools are 'synchronization' platforms. "
+"If a virus corrupts your local files, that change is immediately "
+"synchronized to the cloud, destroying the copy that was there as well."
+"<br><br><b>The Invincible Strategy (The 3-2-1 Rule):</b><ul><li><b>3 Copies:"
+"</b> Always keep 3 copies of your essential files (the original + 2 backups)."
+"</li><li><b>2 Medias:</b> Use different physical formats (e.g., your PC's "
+"drive + an External USB Hard Drive).</li><li><b>1 Offsite Copy:</b> Keep a "
+"copy outside your home/office (in a secure cloud that maintains a version "
+"history, or a drive at your parents' house). This ensures you don't lose "
+"everything in case of fire or burglary.</li></ul><br><b>The Hidden Danger of "
+"Local Backups:</b> Modern Ransomware malware actively looks for external "
+"drives or USB sticks connected to the PC to encrypt that data as well."
+
+#: .\core\static\js\scripts.js:479
+msgid "A Regra de Ouro do Restauro"
+msgstr "The Golden Rule of Restoration"
+
+#: .\core\static\js\scripts.js:480
+msgid ""
+"Um backup que nunca foi testado é apenas uma esperança. Tenta restaurar "
+"ficheiros aleatórios do teu disco externo a cada 6 meses para garantir que o "
+"disco não avariou e que o processo funciona."
+msgstr ""
+"A backup that has never been tested is just a hope. Try restoring random "
+"files from your external drive every 6 months to ensure the drive hasn't "
+"failed and that the process works."
+
+#: .\core\static\js\scripts.js:483
+msgid ""
+"Desliga sempre o teu disco externo (cabo USB) assim que a cópia de segurança "
+"terminar. Um disco de backup só é 100% à prova de hackers se estiver "
+"desligado fisicamente da corrente e do computador."
+msgstr ""
+"Always disconnect your external drive (USB cable) as soon as the backup is "
+"finished. A backup drive is only 100% hacker-proof if it is physically "
+"disconnected from power and the computer."
+
+#: .\core\static\js\scripts.js:487
+msgid "Compras Online e Segurança Financeira"
+msgstr "Online Shopping and Financial Security"
+
+#: .\core\static\js\scripts.js:489
+msgid ""
+"O e-commerce e as plataformas de classificados são convenientes, mas são "
+"também o principal campo de caça para o roubo de dados financeiros. Proteger "
+"o teu dinheiro é tão importante como proteger as tuas senhas."
+"<br><br><b>Identificar Lojas Fraudulentas (Scam Stores):</"
+"b><ul><li><b>Preços Mirabolantes:</b> Se aquele smartphone, PS5 ou "
+"sapatilhas de marca estão com 70% de desconto num site desconhecido, é burla "
+"garantida.</li><li><b>Falta de Informação Legal:</b> Lojas legítimas têm de "
+"exibir NIF, morada física, Política de Devolução e Termos e Condições. Se o "
+"único contacto for um formulário web genérico, sai do site.</"
+"li><li><b>Anúncios Falsos nas Redes Sociais:</b> Cuidado extremo com "
+"anúncios patrocinados no Instagram, Facebook ou TikTok. É muito fácil e "
+"barato para um criminoso criar uma loja visualmente perfeita no Shopify, "
+"pagar anúncios, recolher milhares de euros em 48 horas e desaparecer.</li></"
+"ul><br><b>A Higiene no Pagamento:</b> Nunca guardes os detalhes do teu "
+"cartão de crédito real (número e CVV) na base de dados de uma loja online. "
+"Se a loja for invadida no mês seguinte, os teus dados vazam com ela."
+"<br><br><b>O Escudo dos Cartões Virtuais (MB WAY / Revolut):</b> A melhor "
+"defesa financeira é a virtualização. Usa ferramentas para gerar um 'Cartão "
+"Virtual de Utilização Única' com o limite exato do produto que vais comprar. "
+"Assim que a compra for feita, o cartão expira e autodestrói-se. Mesmo que a "
+"loja seja pirata, não conseguem tirar de lá nem mais um cêntimo."
+msgstr ""
+"E-commerce and classifieds platforms are convenient, but they are also the "
+"main hunting ground for financial data theft. Protecting your money is as "
+"important as protecting your passwords.<br><br><b>Identifying Scam Stores:</"
+"b><ul><li><b>Incredible Prices:</b> If that smartphone, PS5, or branded "
+"sneakers are 70% off on an unknown site, it's a guaranteed scam.</"
+"li><li><b>Lack of Legal Information:</b> Legitimate stores must display NIF "
+"(Tax ID), physical address, Return Policy, and Terms and Conditions. If the "
+"only contact is a generic web form, leave the site.</li><li><b>Fake Social "
+"Media Ads:</b> Extreme caution with sponsored ads on Instagram, Facebook, or "
+"TikTok. It is very easy and cheap for a criminal to create a visually "
+"perfect store on Shopify, pay for ads, collect thousands of euros in 48 "
+"hours, and disappear.</li></ul><br><b>Payment Hygiene:</b> Never save your "
+"real credit card details (number and CVV) in an online store's database. If "
+"the store is hacked the following month, your data leaks with it."
+"<br><br><b>The Shield of Virtual Cards (MB WAY / Revolut):</b> The best "
+"financial defense is virtualization. Use tools to generate a 'Single-Use "
+"Virtual Card' with the exact limit of the product you're going to buy. Once "
+"the purchase is made, the card expires and self-destructs. Even if the store "
+"is fake, they can't take another cent."
+
+#: .\core\static\js\scripts.js:490
+msgid ""
+"Nas compras entre particulares (OLX, Vinted, Facebook Marketplace), nunca "
+"aceites sair do chat oficial da plataforma para o WhatsApp. O MB WAY NUNCA "
+"pede o teu PIN de acesso para 'receberes' dinheiro. Se te pedirem o PIN, "
+"estão a tentar aceder à tua conta bancária."
+msgstr ""
+"In purchases between individuals (OLX, Vinted, Facebook Marketplace), never "
+"agree to leave the platform's official chat for WhatsApp. MB WAY NEVER asks "
+"for your access PIN to 'receive' money. If they ask for your PIN, they are "
+"trying to access your bank account."
+
+#: .\core\static\js\scripts.js:498
+msgid "Descarregar PDF"
+msgstr "Download PDF"
+
+#: .\core\static\js\scripts.js:499
+msgid "Dica:"
+msgstr "Tip"
+
+#: .\core\static\js\scripts.js:576
+msgid "Escreve para testar a força."
+msgstr "Write to test strength"
+
+#: .\core\static\js\scripts.js:591
+msgid "Fraca: Um hacker descobre isto em segundos."
 msgstr "Weak: A hacker would take seconds."
 
-#: .\core\static\js\scripts.js:531
+#: .\core\static\js\scripts.js:594
 msgid "Média: Melhor, mas ainda vulnerável."
 msgstr "Medium: Better, but still vulnerable."
 
-#: .\core\static\js\scripts.js:534
+#: .\core\static\js\scripts.js:597
 msgid "Forte: Levaria séculos para ser descoberta!"
 msgstr "Strong: It would take centuries to be discovered!"
+
+#: .\core\static\js\scripts.js:1098
+msgid "Por favor, cola um texto mais longo para análise."
+msgstr "Please paste a longer text for analysis."
+
+#: .\core\static\js\scripts.js:1183
+msgid "Erro ao analisar: "
+msgstr "Error parsing:"
 
 #~ msgid "Fazer Login Agora"
 #~ msgstr "Login Now"

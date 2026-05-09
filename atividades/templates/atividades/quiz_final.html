@@ -46,17 +46,17 @@
                     </p>
                     
                     <p style="font-size: 1.1rem; color: #4b5563; margin: 0.5rem 0;">
-                        {% trans "Ganhaste" %} <strong style="color: var(--d3-neon-leaf); font-size: 1.3rem;">+{{ xp_ganho }} XP</strong>!
+                        {% trans "Ganhaste" %} <strong style="color: var(--d3-neon-leaf); font-size: 1.3rem;">+{{pontos_reais}} {% trans "Pontos" %}</strong>!
                     </p>
                     
                     <div class="xp-progress-wrapper" style="width: 100%; max-width: 300px; margin: 1rem auto 0.5rem;">
                         <div style="width: 100%; background-color: rgba(37, 77, 26, 0.1); border-radius: 50px; height: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.5);">
-                            <div style="width: {% widthratio xp_geral_atual xp_para_proximo 100 %}%; background-color: var(--d3-neon-leaf); height: 100%; transition: width 1s ease-in-out;"></div>
+                            <div style="width: {% widthratio xp_atual xp_quiz_para_proximo 100 %}%; background-color: var(--d3-neon-leaf); height: 100%; transition: width 1s ease-in-out;"></div>
                         </div>
                     </div>
-                    
+
                     <p style="font-size: 0.85rem; font-weight: 700; color: #6b7280;">
-                        {{ xp_geral_atual }} / {{ xp_para_proximo }} XP {% trans "para o próximo nível" %}
+                        {{ xp_atual }} / {{ xp_quiz_para_proximo }} {% trans "Pontos para o próximo Nível Quiz" %}
                     </p>
                 </div>
             </div>
@@ -72,31 +72,50 @@
         </main>
 
         {% if subiu %}
-        <div class="overlay" id="popup-quiz"> <div class="popup-card">
-                <div class="popup-icon">✅</div>
-                <h2 class="popup-title">{% trans "Subiste de Nível!" %}</h2>
-                <p class="popup-text">{% trans "Desbloqueaste um novo nível de dificuldade no Quiz." %}</p>
-                <button onclick="document.getElementById('popup-quiz').style.display='none'" class="btn-continue">{% trans "Fechar" %}</button>
+        <div class="overlay-moderno" id="popup-quiz"> 
+            <div class="popup-card-moderno" style="border-top: 8px solid var(--d3-neon-leaf, #22c55e);">
+                <div style="font-size: 4.5rem; margin-bottom: 1rem; animation: floatIcon 3s ease-in-out infinite;">
+                    🚀
+                </div>
+                <h2 style="color: #1e293b; font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem; letter-spacing: -0.5px;">
+                    {% trans "SUBISTE DE NÍVEL!" %}
+                </h2>
+                <p style="color: #64748b; font-size: 1.1rem; line-height: 1.5; margin-bottom: 1.8rem;">
+                    {% trans "Desbloqueaste um novo nível de dificuldade no Quiz. O teu conhecimento está a descolar!" %}
+                </p>
+                <button onclick="document.getElementById('popup-quiz').style.display='none'" class="btn-moderno" style="background: var(--d3-neon-leaf, #22c55e); color: white; box-shadow: 0 10px 20px -5px rgba(34, 197, 94, 0.5);">
+                    {% trans "Continuar" %}
+                </button>
             </div>
         </div>
         {% endif %}
 
         {% if subiu_geral %}
-        <div class="overlay" id="popup-geral">
-            <div class="popup-card" style="border-color: #ffd700;">
-                <div class="popup-icon" style="animation: bounce 1s infinite;">🌟</div>
-                <h2 class="popup-title" style="color: #d4af37;">{% trans "Subida de Nível!" %}</h2>
-                <p class="popup-text">
-                    {% trans "Parabéns! O teu esforço compensou e atingiste o" %} <strong>{% trans "Nível" %} {{ nivel_geral }}</strong> {% trans "Geral de Cibersegurança!" %}
+        <div class="overlay-moderno" id="popup-geral">
+            <div class="popup-card-moderno" style="background: linear-gradient(to bottom, #fffbea, #ffffff); border: 2px solid #fbbf24; box-shadow: 0 0 40px rgba(251, 191, 36, 0.3);">
+                
+                <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 100px; height: 100px; background: rgba(251, 191, 36, 0.4); filter: blur(30px); border-radius: 50%;"></div>
+                
+                <div style="font-size: 5rem; margin-bottom: 0.5rem; position: relative; animation: bounce 2s infinite;">
+                    🏆
+                </div>
+                
+                <h2 style="color: #b45309; font-size: 2.2rem; font-weight: 900; margin-bottom: 0.5rem; text-shadow: 1px 1px 0px rgba(251,191,36,0.3);">
+                    {% trans "NOVO NÍVEL GERAL!" %}
+                </h2>
+                <p style="color: #78350f; font-size: 1.15rem; margin-bottom: 2rem;">
+                    {% trans "Parabéns! O teu esforço compensou e atingiste o" %} 
+                    <strong style="background: #fef3c7; padding: 4px 10px; border-radius: 8px; font-size: 1.3rem; color: #b45309; border: 1px solid #fde68a;">
+                        {% trans "Nível" %} {{ nivel_geral }}
+                    </strong> 
+                    <br> {% trans "de Cibersegurança!" %}
                 </p>
-                <button onclick="document.getElementById('popup-geral').style.display='none'" class="btn-continue" style="background: #d4af37;">
+                <button onclick="document.getElementById('popup-geral').style.display='none'" class="btn-moderno" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.5);">
                     {% trans "Incrível!" %}
                 </button>
             </div>
         </div>
         {% endif %}
-    </div>
-
     {% include 'partials/footer_acessibilidade.html' %}
 
     <script src="{% static 'js/scripts.js' %}"></script>
