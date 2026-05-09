@@ -81,26 +81,38 @@
                                 {{ sim.email.assunto|striptags|truncatechars:35 }}
                             </strong>
                             
-                            {% if sim.acertou %}
-                                <span style="color: var(--d3-neon-leaf); font-weight: 800; font-size: 1.2rem;">
-                                    ✅ {% trans "Decisão Correta" %}
-                                </span>
+                            {% if sim.tipo_simulacao == 'identificacao' %}
+                                {% if sim.armadilhas_encontradas == sim.email.total_armadilhas %}
+                                    <span style="color: var(--d3-neon-leaf); font-weight: 800; font-size: 1.2rem;">
+                                        🌟 {% trans "Detetive Perfeito" %} ({{ sim.armadilhas_encontradas }}/{{ sim.email.total_armadilhas }})
+                                    </span>
+                                {% elif sim.armadilhas_encontradas > 0 %}
+                                    <span style="color: #ca8a04; font-weight: 800; font-size: 1.2rem;">
+                                        ⚠️ {% trans "Faltaram Algumas" %} ({{ sim.armadilhas_encontradas }}/{{ sim.email.total_armadilhas }})
+                                    </span>
+                                {% else %}
+                                    <span style="color: var(--d3-perigo); font-weight: 800; font-size: 1.2rem;">
+                                        ❌ {% trans "Zero Armadilhas" %} (0/{{ sim.email.total_armadilhas }})
+                                    </span>
+                                {% endif %}
+
                             {% else %}
-                                <span style="color: var(--d3-perigo); font-weight: 800; font-size: 1.2rem;">
-                                    ❌ {% trans "Caíste na Armadilha" %}
-                                </span>
+                                {% if sim.acertou %}
+                                    <span style="color: var(--d3-neon-leaf); font-weight: 800; font-size: 1.2rem;">
+                                        ✅ {% trans "Decisão Correta" %}
+                                    </span>
+                                {% else %}
+                                    <span style="color: var(--d3-perigo); font-weight: 800; font-size: 1.2rem;">
+                                        ❌ {% trans "Caíste na Armadilha" %}
+                                    </span>
+                                {% endif %}
                             {% endif %}
                             
-                            {% if sim.tipo_simulacao == 'identificacao' %}
-                                <span class="hist-stat-label">
-                                    {% trans "Armadilhas Encontradas:" %} {{ sim.armadilhas_encontradas }}/{{ sim.email.total_armadilhas }}
-                                </span>
-                            {% endif %}
-                            <div class="hist-footer">
-                            <a href="{% url 'atividades:detalhe_simulador' sim.id %}" class="btn-detalhes">
-                                {% trans "Rever Questões" %}
-                            </a>
-                        </div>
+                            <div class="hist-footer" style="margin-top: auto; width: 100%;">
+                                <a href="{% url 'atividades:detalhe_simulador' sim.id %}" class="btn-detalhes">
+                                    {% trans "Rever Detalhes" %}
+                                </a>
+                            </div>
                         </div>
                     </div>
                     {% endfor %}

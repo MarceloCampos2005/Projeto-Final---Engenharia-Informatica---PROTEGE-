@@ -350,3 +350,25 @@ body {
   border-left: 5px solid #ef4444;
   padding-left: 15px;
 }
+
+
+.hist-view .phish-zone.armadilha-encontrada {
+  background-color: #16a34a !important;
+  color: white !important;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.hist-view .phish-zone.armadilha-falsa {
+  background-color: #f97316 !important;
+  color: white !important;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+
+.hist-view .phish-zone.armadilha-esquecida {
+  background-color: #fee2e2 !important;
+  color: #991b1b !important;
+  border-bottom: 2px solid #ef4444;
+}

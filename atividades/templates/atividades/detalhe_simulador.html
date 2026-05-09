@@ -22,14 +22,24 @@
             <h1 class="hist-titulo">{% trans "Análise do Email" %}</h1>
         </header>
 
-        <main class="hist-container">
-            <div class="hist-card {% if resultado.acertou %}border-correto{% else %}border-errado{% endif %}" style="margin-bottom: 2rem;">
+        <main class="hist-container" id="dados-historico" data-tipo="{{ resultado.tipo_simulacao }}" data-cliques="{{ resultado.cliques_utilizador|default:'' }}">
+            <div class="hist-card {% if resultado.tipo_simulacao == 'identificacao' %}{% if resultado.armadilhas_encontradas == resultado.email.total_armadilhas %}border-correto{% elif resultado.armadilhas_encontradas > 0 %}border-aviso{% else %}border-errado{% endif %}{% else %}{% if resultado.acertou %}border-correto{% else %}border-errado{% endif %}{% endif %}" style="margin-bottom: 2rem;">
                 <div class="hist-card-topo">
                     <span class="hist-tag" style="background: #b45309;">
                         {% if resultado.tipo_simulacao == 'classificacao' %}Modo Rápido{% else %}Modo Detetive{% endif %}
                     </span>
-                    <span class="hist-icon" style="font-size: 1.5rem;">
-                        {% if resultado.acertou %}✅ {% trans "Análise Correta" %}{% else %}❌ {% trans "Caíste na Armadilha" %}{% endif %}
+                    <span class="hist-icon" style="font-size: 1.2rem; font-weight: bold;">
+                        {% if resultado.tipo_simulacao == 'identificacao' %}
+                            {% if resultado.armadilhas_encontradas == resultado.email.total_armadilhas %}
+                                🌟 {% trans "Detetive Perfeito!" %}
+                            {% elif resultado.armadilhas_encontradas > 0 %}
+                                ⚠️ {% trans "Atenção Parcial" %}
+                            {% else %}
+                                ❌ {% trans "Zero Armadilhas" %}
+                            {% endif %}
+                        {% else %}
+                            {% if resultado.acertou %}✅ {% trans "Análise Correta" %}{% else %}❌ {% trans "Caíste na Armadilha" %}{% endif %}
+                        {% endif %}
                     </span>
                 </div>
                 
@@ -41,14 +51,31 @@
                     </p>
                     
                     {% if resultado.tipo_simulacao == 'identificacao' and resultado.email.e_phishing %}
-                    <p><strong>{% trans "O teu desempenho:" %}</strong> 
-                        Encontraste {{ resultado.armadilhas_encontradas }} de {{ resultado.email.total_armadilhas }} armadilhas.
+                    <p style="margin-top: 10px; font-size: 1.1rem;"><strong>{% trans "O teu desempenho:" %}</strong> 
+                        <span style="color: {% if resultado.armadilhas_encontradas == resultado.email.total_armadilhas %}#16a34a{% elif resultado.armadilhas_encontradas > 0 %}#ca8a04{% else %}#dc2626{% endif %}; font-weight: bold;">
+                            Encontraste {{ resultado.armadilhas_encontradas }} de {{ resultado.email.total_armadilhas }} armadilhas.
+                        </span>
                     </p>
                     {% endif %}
                 </div>
             </div>
-
-            <h2 class="hist-titulo" style="font-size: 1.2rem; margin-bottom: 1rem;">📧 {% trans "Email Original" %}</h2>
+            {% if resultado.tipo_simulacao == 'identificacao' %}
+            <div style="background: white; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; border: 1px solid #e5e7eb; display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.9rem; color: #4b5563;">
+                <strong style="color: #111827; margin-right: 5px;">{% trans "Legenda:" %}</strong>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="display: inline-block; width: 14px; height: 14px; background-color: #16a34a; border-radius: 3px;"></span>
+                    <span>{% trans "Armadilha Encontrada" %}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="display: inline-block; width: 14px; height: 14px; background-color: #f97316; border-radius: 3px;"></span>
+                    <span>{% trans "Falso Positivo (Era Seguro)" %}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="display: inline-block; width: 14px; height: 14px; background-color: #fee2e2; border-bottom: 2px solid #ef4444; border-radius: 3px;"></span>
+                    <span>{% trans "Passou Despercebido" %}</span>
+                </div>
+            </div>
+            {% endif %}
                 
             <div class="hist-card" style="background: white; border-radius: 10px; padding: 0; overflow: hidden; color: #333;">
                 

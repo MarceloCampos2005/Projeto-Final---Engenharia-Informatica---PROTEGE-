@@ -875,7 +875,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelectorAll('.phish-zone.selecionada').forEach(zona => {
                     // Lê o atributo, tira os espaços e mete em minúsculas para não haver falhas
                     let isPhishing = zona.getAttribute('data-is-phishing');
-                    
+
                     if (isPhishing && isPhishing.trim().toLowerCase() === 'true') {
                         acertosReais++;
                     } else {
@@ -1221,17 +1221,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //funcao para o registar, nao dar para avancar sem ter tudo preenchido
 function validarEAvancar(passoAtual, proximoPasso) {
-    
+
     const stepDiv = document.getElementById('step' + passoAtual);
-    
+
     const inputs = stepDiv.querySelectorAll('input');
-    
+
     let tudoValido = true;
     for (let input of inputs) {
         if (!input.checkValidity()) {
             input.reportValidity();
             tudoValido = false;
-            break; 
+            break;
         }
     }
 
@@ -1505,7 +1505,7 @@ function fecharToast(botao) {
     if (toast) {
         toast.style.animation = 'slideOutRight 0.4s ease forwards';
 
-        
+
         setTimeout(() => {
             toast.remove();
         }, 400);
@@ -1562,7 +1562,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             const textoLabel = document.getElementById('texto-privacidade');
 
-        
+
             const urlToggle = this.getAttribute('data-url');
             const textoPublico = this.getAttribute('data-text-pub');
             const textoPrivado = this.getAttribute('data-text-priv');
@@ -1591,7 +1591,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 .catch(error => {
                     console.error('Erro ao guardar privacidade:', error);
 
-                
+
                     //se der erro ou falhar volta ao estado inicial
                     this.checked = !isChecked;
                     if (!isChecked) {
@@ -1601,5 +1601,42 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
         });
+    }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const dadosHistorico = document.getElementById('dados-historico');
+
+    //corre se estivermos na página do detalhe do simulador
+    if (dadosHistorico) {
+        //Lê as variáveis que o Django lá deixou
+        const tipoSimulacao = dadosHistorico.getAttribute('data-tipo');
+        const cliquesStr = dadosHistorico.getAttribute('data-cliques');
+
+        if (tipoSimulacao === 'identificacao') {
+            const cliquesArray = cliquesStr.split(',').map(id => id.trim());
+
+            //Procura todas as zonas de phishing no texto do email
+            const zonas = document.querySelectorAll('.phish-zone');
+
+            zonas.forEach(zona => {
+                const isPhishing = zona.getAttribute('data-is-phishing') === 'true';
+                const foiClicada = cliquesArray.includes(zona.id);
+
+                //Aplica as classes CSS dependendo se ele clicou ou não
+                if (foiClicada) {
+                    if (isPhishing) {
+                        zona.classList.add('armadilha-encontrada'); 
+                    } else {
+                        zona.classList.add('armadilha-falsa'); 
+                    }
+                } else {
+                    if (isPhishing) {
+                        zona.classList.add('armadilha-esquecida'); 
+                    }
+                }
+            });
+        }
     }
 });
