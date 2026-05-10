@@ -38,10 +38,13 @@ def home2(request):
     #Definir a língua padrão 
     lang = 'pt'
     hoje = timezone.now().date()
+    hoje_str=str(hoje)
     mfa_ativo = False
     xp_ganho = 0
     ja_tem_medalha_mfa = False
     mostrar_aviso_mfa = False
+    data_cookie = None 
+    xp_inicial = 0
     if request.user.is_authenticated:
 
 
@@ -53,7 +56,14 @@ def home2(request):
             request.session[settings.LANGUAGE_COOKIE_NAME] = lang
             request.session['_language'] = lang
 
-        
+        data_cookie = request.COOKIES.get('data_referencia')
+        xp_inicial_cookie = request.COOKIES.get('xp_inicial')
+
+
+        if data_cookie != hoje_str or xp_inicial_cookie is None:
+            xp_inicial = perfil.pontuacao_total_quiz
+        else:
+            xp_inicial = int(xp_inicial_cookie)
 
         if perfil.ultima_recompensa != hoje:
             ontem = hoje - timedelta(days=1)
@@ -90,19 +100,9 @@ def home2(request):
             messages.success(request, msg)
             perfil.ultima_recompensa = hoje
 
-    #para saber se a data é de hoje ou ontem
-        hoje_str = str(hoje)
-        if request.session.get('data_referencia') != hoje_str:
-            request.session['xp_inicial']=perfil.pontuacao_total_quiz
-            request.session['data_referencia'] = hoje_str
-
-
-        xp_inicial = request.session.get('xp_inicial', perfil.pontuacao_total_quiz)
-        xp_ganho= perfil.pontuacao_total_quiz - xp_inicial
-
+        xp_ganho = perfil.pontuacao_total_quiz - xp_inicial
         if xp_ganho < 0:
-            xp_ganho = perfil.pontuacao_total_quiz
-            request.session['xp_inicial'] = 0
+            xp_ganho = 0
         
         #Verifica se o utilizador tem o dispositivo MFA configurado
         mfa_ativo = user_has_device(request.user)
@@ -156,7 +156,14 @@ def home2(request):
         'mostrar_aviso_mfa': mostrar_aviso_mfa
     })
     
+
+    if request.user.is_authenticated and data_cookie != hoje_str:
+        response.set_cookie('data_referencia', hoje_str, max_age=86400)
+        response.set_cookie('xp_inicial', str(xp_inicial), max_age=86400)
+
     return response
+    
+    
 
 @login_required
 @require_http_methods(["POST"])
