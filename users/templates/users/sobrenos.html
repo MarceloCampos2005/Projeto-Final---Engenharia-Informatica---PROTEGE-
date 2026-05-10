@@ -12,7 +12,19 @@
     <link rel="stylesheet" href="{% static 'css/acessibilidade.css' %}">
 </head>
 <body class="{% if user.is_authenticated %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
-
+    <script>
+        (function() {
+            var contrasteSalvo = localStorage.getItem('modoContraste');
+            var daltonismoSalvo = localStorage.getItem('modoDaltonismo');
+            
+            if (contrasteSalvo && contrasteSalvo !== 'normal') {
+                document.body.classList.add(contrasteSalvo);
+            }
+            if (daltonismoSalvo && daltonismoSalvo !== 'normal') {
+                document.body.classList.add(daltonismoSalvo);
+            }
+        })();
+    </script>
     <header class="header-main">
         <div class="header-pill">
             <a href="" class="brand">

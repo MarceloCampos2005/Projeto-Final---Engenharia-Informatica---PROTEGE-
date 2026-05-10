@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-09 16:52+0100\n"
+"POT-Creation-Date: 2026-05-10 00:49+0100\n"
 "PO-Revision-Date: 2026-02-17 17:15+0000\n"
 "Last-Translator: Gemini\n"
 "Language-Team: English\n"
@@ -55,42 +55,70 @@ msgstr "Simulator Accuracy"
 msgid "Análise do Email"
 msgstr "Email Analysis"
 
-#: .\atividades\templates\atividades\detalhe_simulador.html:32
+#: .\atividades\templates\atividades\detalhe_simulador.html:34
+
+msgid "Detetive Perfeito!"
+msgstr "Detective Mode"
+
+#: .\atividades\templates\atividades\detalhe_simulador.html:36
+
+msgid "Atenção Parcial"
+msgstr "Attention!"
+
+#: .\atividades\templates\atividades\detalhe_simulador.html:38
+#: .\atividades\templates\atividades\historico.html:95
+msgid "Zero Armadilhas"
+msgstr "trap(s)."
+
+#: .\atividades\templates\atividades\detalhe_simulador.html:41
 msgid "Análise Correta"
 msgstr "Correct"
 
-#: .\atividades\templates\atividades\detalhe_simulador.html:32
-#: .\atividades\templates\atividades\historico.html:90
+#: .\atividades\templates\atividades\detalhe_simulador.html:41
+#: .\atividades\templates\atividades\historico.html:106
 msgid "Caíste na Armadilha"
 msgstr "You Fell for the Trap"
 
-#: .\atividades\templates\atividades\detalhe_simulador.html:37
+#: .\atividades\templates\atividades\detalhe_simulador.html:47
 msgid "Tipo de Email:"
 msgstr "Your Email"
 
-#: .\atividades\templates\atividades\detalhe_simulador.html:39
+#: .\atividades\templates\atividades\detalhe_simulador.html:49
 msgid "Phishing Malicioso"
 msgstr "Phishing"
 
-#: .\atividades\templates\atividades\detalhe_simulador.html:39
+#: .\atividades\templates\atividades\detalhe_simulador.html:49
 msgid "Email Seguro"
 msgstr "Safe Email"
 
-#: .\atividades\templates\atividades\detalhe_simulador.html:44
+#: .\atividades\templates\atividades\detalhe_simulador.html:54
 msgid "O teu desempenho:"
 msgstr "Your performance:"
 
-#: .\atividades\templates\atividades\detalhe_simulador.html:51
-msgid "Email Original"
-msgstr "Original Email"
+#: .\atividades\templates\atividades\detalhe_simulador.html:64
+msgid "Legenda:"
+msgstr ""
 
-#: .\atividades\templates\atividades\detalhe_simulador.html:57
+#: .\atividades\templates\atividades\detalhe_simulador.html:67
+
+msgid "Armadilha Encontrada"
+msgstr "Traps Found:"
+
+#: .\atividades\templates\atividades\detalhe_simulador.html:71
+msgid "Falso Positivo (Era Seguro)"
+msgstr ""
+
+#: .\atividades\templates\atividades\detalhe_simulador.html:75
+msgid "Passou Despercebido"
+msgstr ""
+
+#: .\atividades\templates\atividades\detalhe_simulador.html:84
 #: .\atividades\templates\atividades\simulador.html:38
 #: .\atividades\templates\atividades\simulador_final.html:133
 msgid "Assunto:"
 msgstr "Subject:"
 
-#: .\atividades\templates\atividades\detalhe_simulador.html:60
+#: .\atividades\templates\atividades\detalhe_simulador.html:87
 #: .\atividades\templates\atividades\simulador.html:31
 #: .\atividades\templates\atividades\simulador_final.html:130
 msgid "De:"
@@ -301,8 +329,8 @@ msgstr "Quiz Review"
 #: .\atividades\templates\atividades\historico.html:34
 #: .\atividades\templates\atividades\home2.html:74
 #: .\atividades\templates\atividades\quiz_final.html:109
-#: .\core\templates\partials\leaderboard_row.html:19
-#: .\users\templates\users\perfil.html:320
+#: .\core\templates\partials\leaderboard_row.html:27
+#: .\users\templates\users\perfil.html:322
 #: .\users\templates\users\perfil_publico.html:79
 msgid "Nível"
 msgstr "Level"
@@ -316,7 +344,6 @@ msgid "Precisão"
 msgstr "Quiz Accuracy"
 
 #: .\atividades\templates\atividades\historico.html:53
-#: .\atividades\templates\atividades\historico.html:101
 msgid "Rever Questões"
 msgstr "Review Questions"
 
@@ -340,19 +367,29 @@ msgstr "Fast"
 msgid "Detetive"
 msgstr "Detective Mode"
 
-#: .\atividades\templates\atividades\historico.html:86
+#: .\atividades\templates\atividades\historico.html:87
+
+msgid "Detetive Perfeito"
+msgstr "Detective Mode"
+
+#: .\atividades\templates\atividades\historico.html:91
+msgid "Faltaram Algumas"
+msgstr ""
+
+#: .\atividades\templates\atividades\historico.html:102
 msgid "Decisão Correta"
 msgstr "Correct"
 
-#: .\atividades\templates\atividades\historico.html:96
-msgid "Armadilhas Encontradas:"
-msgstr "Traps Found:"
+#: .\atividades\templates\atividades\historico.html:113
 
-#: .\atividades\templates\atividades\historico.html:110
+msgid "Rever Detalhes"
+msgstr "Review Questions"
+
+#: .\atividades\templates\atividades\historico.html:122
 msgid "Ainda não analisaste nenhum email."
 msgstr "You haven't completed any quiz yet. Start now!"
 
-#: .\atividades\templates\atividades\historico.html:111
+#: .\atividades\templates\atividades\historico.html:123
 msgid "Abrir Simulador"
 msgstr "Simulator Accuracy"
 
@@ -568,7 +605,7 @@ msgid "Analisar Email com IA"
 msgstr "Analyze Email with AI"
 
 #: .\atividades\templates\atividades\leaderboard.html:10
-#: .\core\templates\partials\header_main.html:90
+#: .\core\templates\partials\header_main.html:92
 msgid "Leaderboard"
 msgstr "Dashboard"
 
@@ -589,25 +626,25 @@ msgstr "Quiz"
 msgid "Simulador"
 msgstr "Phishing Simulator"
 
-#: .\atividades\templates\atividades\leaderboard.html:53
-#: .\atividades\templates\atividades\leaderboard.html:74
-#: .\atividades\templates\atividades\leaderboard.html:95
-#: .\atividades\templates\atividades\leaderboard.html:125
-#: .\atividades\templates\atividades\leaderboard.html:146
-#: .\atividades\templates\atividades\leaderboard.html:167
-#: .\atividades\templates\atividades\leaderboard.html:197
-#: .\atividades\templates\atividades\leaderboard.html:218
-#: .\atividades\templates\atividades\leaderboard.html:239
-#: .\core\templates\partials\leaderboard_row.html:12
+#: .\atividades\templates\atividades\leaderboard.html:61
+#: .\atividades\templates\atividades\leaderboard.html:90
+#: .\atividades\templates\atividades\leaderboard.html:119
+#: .\atividades\templates\atividades\leaderboard.html:149
+#: .\atividades\templates\atividades\leaderboard.html:170
+#: .\atividades\templates\atividades\leaderboard.html:191
+#: .\atividades\templates\atividades\leaderboard.html:229
+#: .\atividades\templates\atividades\leaderboard.html:258
+#: .\atividades\templates\atividades\leaderboard.html:287
+#: .\core\templates\partials\leaderboard_row.html:20
 #: .\users\templates\users\perfil.html:52
 #: .\users\templates\users\perfil.html:59
 #: .\users\templates\users\perfil_publico.html:49
 msgid "Perfil Privado"
 msgstr " Private Profile"
 
-#: .\atividades\templates\atividades\leaderboard.html:109
-#: .\atividades\templates\atividades\leaderboard.html:181
-#: .\atividades\templates\atividades\leaderboard.html:253
+#: .\atividades\templates\atividades\leaderboard.html:133
+#: .\atividades\templates\atividades\leaderboard.html:205
+#: .\atividades\templates\atividades\leaderboard.html:301
 msgid "Ainda não há dados suficientes."
 msgstr "Not enough data yet."
 
@@ -714,7 +751,7 @@ msgid "Nível Geral"
 msgstr "General Level"
 
 #: .\atividades\templates\atividades\quiz_final.html:45
-#: .\users\templates\users\perfil.html:385
+#: .\users\templates\users\perfil.html:387
 #: .\users\templates\users\perfil_publico.html:104
 msgid "Nível Quiz"
 msgstr "Quiz Level"
@@ -729,8 +766,7 @@ msgid "Pontos"
 msgstr "Points"
 
 #: .\atividades\templates\atividades\quiz_final.html:59
-#, fuzzy
-#| msgid "para o próximo nível"
+
 msgid "Pontos para o próximo Nível Quiz"
 msgstr "to the next level"
 
@@ -744,22 +780,19 @@ msgid "Voltar ao Início"
 msgstr "Back to Home"
 
 #: .\atividades\templates\atividades\quiz_final.html:81
-#, fuzzy
-#| msgid "PARABÉNS! SUBISTE PARA O NÍVEL"
+
 msgid "SUBISTE DE NÍVEL!"
 msgstr "CONGRATULATIONS! YOU REACHED LEVEL"
 
 #: .\atividades\templates\atividades\quiz_final.html:84
-#, fuzzy
-#| msgid "Desbloqueaste um novo nível de dificuldade no Quiz."
+
 msgid ""
 "Desbloqueaste um novo nível de dificuldade no Quiz. O teu conhecimento está "
 "a descolar!"
 msgstr "You unlocked a new Quiz difficulty level."
 
 #: .\atividades\templates\atividades\quiz_final.html:104
-#, fuzzy
-#| msgid "NÍVEL GERAL DE DEFESA"
+
 msgid "NOVO NÍVEL GERAL!"
 msgstr "GENERAL DEFENSE LEVEL"
 
@@ -768,8 +801,7 @@ msgid "Parabéns! O teu esforço compensou e atingiste o"
 msgstr "Congratulations! Your effort paid off and you reached"
 
 #: .\atividades\templates\atividades\quiz_final.html:111
-#, fuzzy
-#| msgid "Cibersegurança"
+
 msgid "de Cibersegurança!"
 msgstr "Cybersecurity"
 
@@ -906,7 +938,7 @@ msgstr "Read the content before taking the Quiz to ensure a maximum score!"
 #: .\atividades\templates\atividades\sabermais.html:63
 #: .\core\templates\partials\header_guia_mais.html:7
 #: .\core\templates\partials\header_main.html:10
-#: .\core\templates\partials\header_main.html:102
+#: .\core\templates\partials\header_main.html:104
 #: .\users\templates\users\home.html:175
 msgid "Protege+"
 msgstr "The Protege+ Team"
@@ -1359,7 +1391,7 @@ msgstr "Accessibility"
 #: .\core\templates\base.html:30 .\core\templates\base.html:41
 #: .\core\templates\partials\footer_acessibilidade.html:8
 #: .\core\templates\partials\footer_acessibilidade.html:19
-#: .\users\templates\users\perfil.html:126
+#: .\users\templates\users\perfil.html:128
 msgid "Padrão"
 msgstr "Default"
 
@@ -1423,7 +1455,7 @@ msgid "Registar"
 msgstr "Register"
 
 #: .\core\templates\partials\header_main.html:26
-#: .\core\templates\partials\header_main.html:124
+#: .\core\templates\partials\header_main.html:126
 #: .\users\templates\users\sobrenos.html:8
 msgid "Sobre Nós"
 msgstr "About Us"
@@ -1440,64 +1472,64 @@ msgstr "QUIZ"
 msgid "SIMULADOR"
 msgstr "SIMULATOR"
 
-#: .\core\templates\partials\header_main.html:50
+#: .\core\templates\partials\header_main.html:52
 msgid "UTILIZADOR"
 msgstr "USER"
 
-#: .\core\templates\partials\header_main.html:55
+#: .\core\templates\partials\header_main.html:57
 #: .\users\templates\users\perfil.html:9
 msgid "Perfil"
 msgstr "Profile"
 
-#: .\core\templates\partials\header_main.html:56
+#: .\core\templates\partials\header_main.html:58
 msgid "Ver Perfil"
 msgstr "View Profile"
 
-#: .\core\templates\partials\header_main.html:59
+#: .\core\templates\partials\header_main.html:61
 msgid "Historico"
 msgstr "History"
 
-#: .\core\templates\partials\header_main.html:60
+#: .\core\templates\partials\header_main.html:62
 msgid "Histórico"
 msgstr "History"
 
-#: .\core\templates\partials\header_main.html:65
+#: .\core\templates\partials\header_main.html:67
 msgid "Segurança (MFA)"
 msgstr "Security (MFA)"
 
-#: .\core\templates\partials\header_main.html:75
+#: .\core\templates\partials\header_main.html:77
 msgid "Admin"
 msgstr "Admin"
 
-#: .\core\templates\partials\header_main.html:76
+#: .\core\templates\partials\header_main.html:78
 msgid "Painel Admin"
 msgstr "Admin Panel"
 
-#: .\core\templates\partials\header_main.html:81
+#: .\core\templates\partials\header_main.html:83
 msgid "Sair"
 msgstr "Exit"
 
-#: .\core\templates\partials\header_main.html:82
+#: .\core\templates\partials\header_main.html:84
 msgid "Terminar Sessão"
 msgstr "Logout"
 
-#: .\core\templates\partials\header_main.html:89
+#: .\core\templates\partials\header_main.html:91
 msgid "Ver Tabela"
 msgstr "View Profile"
 
-#: .\core\templates\partials\header_main.html:127
+#: .\core\templates\partials\header_main.html:129
 msgid "ENTRAR"
 msgstr "LOGIN"
 
-#: .\core\templates\partials\header_main.html:128
+#: .\core\templates\partials\header_main.html:130
 msgid "REGISTAR"
 msgstr "REGISTER"
 
-#: .\core\templates\partials\leaderboard_row.html:13
+#: .\core\templates\partials\leaderboard_row.html:21
 msgid "Privado"
 msgstr "Privacy"
 
-#: .\core\templates\partials\leaderboard_row.html:17
+#: .\core\templates\partials\leaderboard_row.html:25
 msgid "Tu"
 msgstr "Tuesday"
 
@@ -30620,13 +30652,13 @@ msgid "Editar Perfil"
 msgstr "Edit Profile"
 
 #: .\users\templates\users\editar_perfil.html:11
-#: .\users\templates\users\perfil.html:222
-#: .\users\templates\users\perfil.html:235
+#: .\users\templates\users\perfil.html:224
+#: .\users\templates\users\perfil.html:237
 msgid "Editar Dados"
 msgstr "Edit Data"
 
 #: .\users\templates\users\editar_perfil.html:20
-#: .\users\templates\users\perfil.html:166
+#: .\users\templates\users\perfil.html:168
 msgid "Guardar Alterações"
 msgstr "Save Changes"
 
@@ -30698,9 +30730,13 @@ msgid "Acesso à Plataforma"
 msgstr "Platform Access"
 
 #: .\users\templates\users\login.html:35
-#: .\users\templates\users\perfil.html:221
+#: .\users\templates\users\perfil.html:223
 msgid "Nome de Utilizador"
 msgstr "Username"
+
+#: .\users\templates\users\login.html:36
+msgid "Ex:Joao123"
+msgstr ""
 
 #: .\users\templates\users\login.html:40
 msgid "Palavra-passe"
@@ -30723,7 +30759,7 @@ msgid "Regista-te Aqui!"
 msgstr "Register"
 
 #: .\users\templates\users\login.html:101
-#: .\users\templates\users\perfil.html:105
+#: .\users\templates\users\perfil.html:107
 msgid "ou"
 msgstr "or"
 
@@ -30741,204 +30777,204 @@ msgstr "Public Profile"
 msgid "Permite que outros vejam as tuas estatísticas"
 msgstr "Allow others to see your statistics"
 
-#: .\users\templates\users\perfil.html:68
+#: .\users\templates\users\perfil.html:69
 msgid "Avatar do Utilizador"
 msgstr "Username"
 
-#: .\users\templates\users\perfil.html:70
+#: .\users\templates\users\perfil.html:72
 msgid "Avatar do Google"
 msgstr "Login with Google"
 
-#: .\users\templates\users\perfil.html:72
+#: .\users\templates\users\perfil.html:75
 msgid "Avatar Padrão"
 msgstr "Default"
 
-#: .\users\templates\users\perfil.html:76
+#: .\users\templates\users\perfil.html:78
 msgid "Mudar Foto"
 msgstr "Change Photo"
 
-#: .\users\templates\users\perfil.html:84
+#: .\users\templates\users\perfil.html:86
 msgid "Escolhe o teu Avatar"
 msgstr "Choose your Avatar"
 
-#: .\users\templates\users\perfil.html:93
+#: .\users\templates\users\perfil.html:95
 msgid "Padrão 1"
 msgstr "Default"
 
-#: .\users\templates\users\perfil.html:97
+#: .\users\templates\users\perfil.html:99
 msgid "Padrão 2"
 msgstr "Default"
 
-#: .\users\templates\users\perfil.html:101
+#: .\users\templates\users\perfil.html:103
 msgid "Padrão 3"
 msgstr "Default"
 
-#: .\users\templates\users\perfil.html:109
+#: .\users\templates\users\perfil.html:111
 msgid "Carregar Foto Própria"
 msgstr "Upload your own Photo"
 
-#: .\users\templates\users\perfil.html:116
+#: .\users\templates\users\perfil.html:118
 msgid "Escolhe a tua Moldura"
 msgstr "Choose your Avatar"
 
-#: .\users\templates\users\perfil.html:136
+#: .\users\templates\users\perfil.html:138
 msgid "Ouro (Nv. 5)"
 msgstr "Gold (Lv. 5)"
 
-#: .\users\templates\users\perfil.html:147
+#: .\users\templates\users\perfil.html:149
 msgid "Elite (Nv. 10)"
 msgstr "Elite (Lv. 10)"
 
-#: .\users\templates\users\perfil.html:158
+#: .\users\templates\users\perfil.html:160
 msgid "Elite (30 Dias)"
 msgstr "Elite (30 Days)"
 
-#: .\users\templates\users\perfil.html:177
-#: .\users\templates\users\perfil.html:290
-#: .\users\templates\users\perfil.html:302
+#: .\users\templates\users\perfil.html:179
+#: .\users\templates\users\perfil.html:292
+#: .\users\templates\users\perfil.html:304
 msgid "Editar"
 msgstr "Edit Data"
 
-#: .\users\templates\users\perfil.html:212
+#: .\users\templates\users\perfil.html:214
 msgid "Guardar"
 msgstr "Save"
 
-#: .\users\templates\users\perfil.html:234
+#: .\users\templates\users\perfil.html:236
 msgid "Email"
 msgstr "Email:"
 
-#: .\users\templates\users\perfil.html:248
+#: .\users\templates\users\perfil.html:250
 msgid "1º Geral"
 msgstr "Global"
 
-#: .\users\templates\users\perfil.html:249
+#: .\users\templates\users\perfil.html:251
 msgid "2º Geral"
 msgstr "Global"
 
-#: .\users\templates\users\perfil.html:250
+#: .\users\templates\users\perfil.html:252
 msgid "3º Geral"
 msgstr "Global"
 
-#: .\users\templates\users\perfil.html:256
+#: .\users\templates\users\perfil.html:258
 msgid "1º Quiz"
 msgstr "Quiz"
 
-#: .\users\templates\users\perfil.html:257
+#: .\users\templates\users\perfil.html:259
 msgid "2º Quiz"
 msgstr "Quiz"
 
-#: .\users\templates\users\perfil.html:258
+#: .\users\templates\users\perfil.html:260
 msgid "3º Quiz"
 msgstr "Quiz"
 
-#: .\users\templates\users\perfil.html:264
+#: .\users\templates\users\perfil.html:266
 msgid "1º Simulador"
 msgstr "Phishing Simulator"
 
-#: .\users\templates\users\perfil.html:265
+#: .\users\templates\users\perfil.html:267
 msgid "2º Simulador"
 msgstr "Phishing Simulator"
 
-#: .\users\templates\users\perfil.html:266
+#: .\users\templates\users\perfil.html:268
 msgid "3º Simulador"
 msgstr "Phishing Simulator"
 
-#: .\users\templates\users\perfil.html:280
+#: .\users\templates\users\perfil.html:282
 msgid "Dados"
 msgstr "Data"
 
-#: .\users\templates\users\perfil.html:281
+#: .\users\templates\users\perfil.html:283
 msgid "As tuas informações pessoais"
 msgstr "Account Information"
 
-#: .\users\templates\users\perfil.html:289
+#: .\users\templates\users\perfil.html:291
 #: .\users\templates\users\perfil_publico.html:64
 msgid "INSTITUIÇÃO"
 msgstr "INSTITUTION"
 
-#: .\users\templates\users\perfil.html:290
+#: .\users\templates\users\perfil.html:292
 msgid "Instituição"
 msgstr "Institution name:"
 
-#: .\users\templates\users\perfil.html:301
+#: .\users\templates\users\perfil.html:303
 #: .\users\templates\users\perfil_publico.html:68
 msgid "ESCOLARIDADE"
 msgstr "EDUCATION LEVEL"
 
-#: .\users\templates\users\perfil.html:302
+#: .\users\templates\users\perfil.html:304
 msgid "Escolaridade"
 msgstr "Education"
 
-#: .\users\templates\users\perfil.html:317
+#: .\users\templates\users\perfil.html:319
 msgid "NÍVEL GERAL DE DEFESA"
 msgstr "GENERAL DEFENSE LEVEL"
 
-#: .\users\templates\users\perfil.html:330
+#: .\users\templates\users\perfil.html:332
 msgid "XP Totais"
 msgstr "Total XP"
 
-#: .\users\templates\users\perfil.html:340
+#: .\users\templates\users\perfil.html:342
 msgid "Conquistas de Cibersegurança"
 msgstr "Cybersecurity"
 
-#: .\users\templates\users\perfil.html:341
+#: .\users\templates\users\perfil.html:343
 msgid "Desbloqueadas"
 msgstr "Unlocked"
 
-#: .\users\templates\users\perfil.html:361
 #: .\users\templates\users\perfil.html:363
+#: .\users\templates\users\perfil.html:365
 msgid "Bloqueado"
 msgstr "Unlocked"
 
-#: .\users\templates\users\perfil.html:367
+#: .\users\templates\users\perfil.html:369
 msgid "Recompensa Secreta"
 msgstr "Secret Reward"
 
-#: .\users\templates\users\perfil.html:368
+#: .\users\templates\users\perfil.html:370
 msgid ""
 "Continua a jogar e a proteger a tua conta para descobrires como desbloquear!"
 msgstr "Complete training sessions and protect your account to unlock them!"
 
-#: .\users\templates\users\perfil.html:376
+#: .\users\templates\users\perfil.html:378
 msgid "Ainda não existem medalhas no sistema."
 msgstr "You don't have any medals yet."
 
-#: .\users\templates\users\perfil.html:390
-#: .\users\templates\users\perfil.html:412
+#: .\users\templates\users\perfil.html:392
+#: .\users\templates\users\perfil.html:414
 msgid "XP"
 msgstr "XP"
 
-#: .\users\templates\users\perfil.html:394
+#: .\users\templates\users\perfil.html:396
 #: .\users\templates\users\perfil_publico.html:108
 msgid "Quizzes Realizados"
 msgstr "Quizzes Completed"
 
-#: .\users\templates\users\perfil.html:397
-#: .\users\templates\users\perfil.html:419
+#: .\users\templates\users\perfil.html:399
+#: .\users\templates\users\perfil.html:421
 msgid "Ver histórico"
 msgstr "My History"
 
-#: .\users\templates\users\perfil.html:402
+#: .\users\templates\users\perfil.html:404
 #: .\users\templates\users\perfil_publico.html:112
 msgid "Precisão Quiz"
 msgstr "Quiz Accuracy"
 
-#: .\users\templates\users\perfil.html:407
+#: .\users\templates\users\perfil.html:409
 #: .\users\templates\users\perfil_publico.html:117
 msgid "Nível Simulador"
 msgstr "Simulator Level"
 
-#: .\users\templates\users\perfil.html:416
+#: .\users\templates\users\perfil.html:418
 #: .\users\templates\users\perfil_publico.html:121
 msgid "Simuladores Realizados"
 msgstr "Simulators Completed"
 
-#: .\users\templates\users\perfil.html:424
+#: .\users\templates\users\perfil.html:426
 #: .\users\templates\users\perfil_publico.html:125
 msgid "Precisão Simulador"
 msgstr "Simulator Accuracy"
 
-#: .\users\templates\users\perfil.html:429
+#: .\users\templates\users\perfil.html:431
 msgid "Mapeamento de Vulnerabilidades (Erros por Tema)"
 msgstr "Vulnerability Mapping (Errors by Topic)"
 
@@ -30989,9 +31025,18 @@ msgstr "Sign up and try it out!"
 msgid "Email:"
 msgstr "Email:"
 
+#: .\users\templates\users\registar.html:40
+
+msgid "Endereço de Email"
+msgstr "Email Address"
+
 #: .\users\templates\users\registar.html:43
 msgid "Nome da instituição:"
 msgstr "Institution name:"
+
+#: .\users\templates\users\registar.html:44
+msgid "Nome da Escola / Trabalho"
+msgstr "School / Job name"
 
 #: .\users\templates\users\registar.html:46
 #: .\users\templates\users\registar.html:60
@@ -31002,17 +31047,34 @@ msgstr "Next"
 msgid "Idade:"
 msgstr "Age:"
 
+#: .\users\templates\users\registar.html:52
+msgid "A tua Idade"
+msgstr "Your Age"
+
 #: .\users\templates\users\registar.html:55
 msgid "Nível de escolaridade:"
 msgstr "Education Level:"
+
+#: .\users\templates\users\registar.html:56
+msgid "Ex: Licenciado"
+msgstr "Ex: Graduated"
 
 #: .\users\templates\users\registar.html:66
 msgid "Nome de utilizador:"
 msgstr "Username:"
 
+#: .\users\templates\users\registar.html:67
+msgid "Como te queres chamar?"
+msgstr "What do you want to be called?"
+
 #: .\users\templates\users\registar.html:70
 msgid "Palavra-passe:"
 msgstr "Password:"
+
+#: .\users\templates\users\registar.html:72
+
+msgid "Cria uma senha"
+msgstr "Creat a password:"
 
 #: .\users\templates\users\registar.html:77
 msgid "Pelo menos 8 caracteres"
@@ -31033,6 +31095,10 @@ msgstr "A special character (@$!%%*?)"
 
 #: .\users\templates\users\registar.html:85
 msgid "Repetir palavra-passe:"
+msgstr "Repeat password:"
+
+#: .\users\templates\users\registar.html:87
+msgid "Repete a senha"
 msgstr "Repeat password:"
 
 #: .\users\templates\users\registar.html:98
@@ -31117,6 +31183,9 @@ msgstr "Login"
 #: .\users\templates\users\sobrenos.html:97
 msgid "Mensagem Enviada com Sucesso!"
 msgstr "Message Sent Successfully!"
+
+#~ msgid "Email Original"
+#~ msgstr "Original Email"
 
 #~ msgid "Subida de Nível!"
 #~ msgstr "Level Up!"

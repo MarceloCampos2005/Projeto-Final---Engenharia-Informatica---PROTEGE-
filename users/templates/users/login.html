@@ -14,6 +14,19 @@
 <body class="view-autenticacao {% if user.is_authenticated %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
 
     {%include 'partials/header_auth.html'%}
+    <script>
+        (function() {
+            var contrasteSalvo = localStorage.getItem('modoContraste');
+            var daltonismoSalvo = localStorage.getItem('modoDaltonismo');
+            
+            if (contrasteSalvo && contrasteSalvo !== 'normal') {
+                document.body.classList.add(contrasteSalvo);
+            }
+            if (daltonismoSalvo && daltonismoSalvo !== 'normal') {
+                document.body.classList.add(daltonismoSalvo);
+            }
+        })();
+    </script>
     <div id="content-wrapper">
         <div class="wrapper-split">
             <main class="ala-principal-direita">
@@ -33,7 +46,7 @@
                         {% if wizard.steps.current == 'auth' %}
                             <div class="agrupamento-input">
                                 <label class="etiqueta-input">{% trans "Nome de Utilizador" %}</label>
-                                <input type="text" name="auth-username" placeholder="ex: joao_seguro" class="caixa-texto-protege" autofocus>
+                                <input type="text" name="auth-username" placeholder="{% trans 'Ex:Joao123' %}" class="caixa-texto-protege" autofocus>
                             </div>
 
                             <div class="agrupamento-input">

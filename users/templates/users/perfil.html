@@ -90,14 +90,23 @@
                             {% csrf_token %}
 
                             <div class="avatar-grid">
+                                {% if user.socialaccount_set.all %}
                                 <label class="avatar-option">
                                     <input type="radio" name="avatar_padrao" value="avatar.png">
+                                    <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="{% trans 'Google' %}" referrerpolicy="no-referrer" style="border-radius: 50%;">
+                                </label>
+                                {% endif %}
+
+                                <label class="avatar-option">
+                                    <input type="radio" name="avatar_padrao" value="cinza.png">
                                     <img src="{% static 'users/images/avatar.png' %}" alt="{% trans 'Padrão 1' %}">
                                 </label>
+
                                 <label class="avatar-option">
                                     <input type="radio" name="avatar_padrao" value="garoto.png">
                                     <img src="{% static 'users/images/garoto.png' %}" alt="{% trans 'Padrão 2' %}">
                                 </label>
+
                                 <label class="avatar-option">
                                     <input type="radio" name="avatar_padrao" value="bruxa.png">
                                     <img src="{% static 'users/images/bruxa.png' %}" alt="{% trans 'Padrão 3' %}">

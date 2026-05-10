@@ -15,6 +15,18 @@
 <body class="bg-home {% if user.is_authenticated %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
 
     {% include 'partials/header_main.html' %}
+    <script>
+        (function() {
+            var contrasteSalvo = localStorage.getItem('modoContraste');
+            var daltonismoSalvo = localStorage.getItem('modoDaltonismo');
+            if (contrasteSalvo && contrasteSalvo !== 'normal') {
+                document.body.classList.add(contrasteSalvo);
+            }
+            if (daltonismoSalvo && daltonismoSalvo !== 'normal') {
+                document.body.classList.add(daltonismoSalvo);
+            }
+        })();
+    </script>
 
     <div id="content-wrapper">
         <main class="hero">
