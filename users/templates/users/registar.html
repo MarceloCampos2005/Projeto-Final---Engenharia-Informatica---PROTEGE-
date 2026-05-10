@@ -15,6 +15,20 @@
 <body class="view-autenticacao {% if user.is_authenticated %}{{ user.perfil.filtro_daltonismo }} {{ user.perfil.filtro_contraste }}{% endif %}" data-authenticated="{{ user.is_authenticated|lower }}">
 
     {%include 'partials/header_auth.html'%}
+    
+    <script>
+        (function() {
+            var contrasteSalvo = localStorage.getItem('modoContraste');
+            var daltonismoSalvo = localStorage.getItem('modoDaltonismo');
+            
+            if (contrasteSalvo && contrasteSalvo !== 'normal') {
+                document.body.classList.add(contrasteSalvo);
+            }
+            if (daltonismoSalvo && daltonismoSalvo !== 'normal') {
+                document.body.classList.add(daltonismoSalvo);
+            }
+        })();
+    </script>
     <div id="content-wrapper">
         <div class="wrapper-split">
             <main class="ala-principal-direita">
