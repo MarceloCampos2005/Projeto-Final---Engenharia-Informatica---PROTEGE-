@@ -30,7 +30,9 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    'protegemais.pt',
+    'www.protegemais.pt'
 ]
 render_host = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if render_host:
@@ -41,6 +43,8 @@ if render_host:
     
 CSRF_TRUSTED_ORIGINS = [
     'https://projeto-final-engenharia-informatica.onrender.com',
+    'https://protegemais.pt',
+    'https://www.protegemais.pt',
 ]
 USE_I18N = True
 USE_L10N = True
